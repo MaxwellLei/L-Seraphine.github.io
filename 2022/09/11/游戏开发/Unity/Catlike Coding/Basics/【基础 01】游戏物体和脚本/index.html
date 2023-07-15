@@ -1,0 +1,603 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【基础 01】游戏物体和脚本 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="游戏物体和脚本 前排说明：关于本教程目录导航以及说明：猫式教程  本篇任务：创建一个钟表，你将会学到：  使用基本物体创建一个钟表 编写一个C#脚本 通过转动指针来显示时间 为指针做一个动画  这是 Unity 教程的第一篇，在这篇学习中，我们将创建一个简单的时钟并编写一些组件使其显示当前时间。你不需要有任何 Unity 的经验，但是你需要有一定的 Windows 窗口使用能力。 在文章最后我会放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【基础 01】游戏物体和脚本">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2001%E3%80%91%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93%E5%92%8C%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="游戏物体和脚本 前排说明：关于本教程目录导航以及说明：猫式教程  本篇任务：创建一个钟表，你将会学到：  使用基本物体创建一个钟表 编写一个C#脚本 通过转动指针来显示时间 为指针做一个动画  这是 Unity 教程的第一篇，在这篇学习中，我们将创建一个简单的时钟并编写一些组件使其显示当前时间。你不需要有任何 Unity 的经验，但是你需要有一定的 Windows 窗口使用能力。 在文章最后我会放">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf73478fb4.webp">
+<meta property="article:published_time" content="2022-09-11T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:02:51.201Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf73478fb4.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2001%E3%80%91%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93%E5%92%8C%E8%84%9A%E6%9C%AC/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【基础 01】游戏物体和脚本',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:02:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf73478fb4.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【基础 01】游戏物体和脚本</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-11T15:30:01.000Z" title="发表于 2022-09-11 23:30:01">2022-09-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:02:51.201Z" title="更新于 2023-07-14 21:02:51">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/">Unity</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike-Coding/">Catlike Coding</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike-Coding/Basics/">Basics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>33分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【基础 01】游戏物体和脚本"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="游戏物体和脚本"><a href="#游戏物体和脚本" class="headerlink" title="游戏物体和脚本"></a>游戏物体和脚本</h1><blockquote>
+<p><strong>前排说明：关于本教程目录导航以及说明：<a href="httpss://www.helloseraphine.top/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/%E7%8C%AB%E5%BC%8F%E6%95%99%E7%A8%8B/">猫式教程</a></strong></p>
+</blockquote>
+<p>本篇任务：<strong>创建一个钟表</strong>，你将会学到：</p>
+<ul>
+<li>使用基本物体创建一个钟表</li>
+<li>编写一个<code>C#</code>脚本</li>
+<li>通过转动指针来显示时间</li>
+<li>为指针做一个动画</li>
+</ul>
+<p>这是 Unity 教程的第一篇，在这篇学习中，我们将创建一个简单的时钟并编写一些组件使其显示当前时间。你不需要有任何 Unity 的经验，但是你需要有一定的 Windows 窗口使用能力。</p>
+<p><strong>在文章最后我会放出本文原文的 PDF （注：英文原作者的），以及教程项目的仓库（代码仓库）</strong>。</p>
+<p>本教程使用<code>Unity 2020.3.6f1</code>编写，我采用 <code>Unity 2020.3.38f1c1</code> 来翻译复刻编写。 </p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf742a37e5.png" alt="image-20220911093047113" style="zoom:80%;" />
+
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>开始使用 Unity 之前，你需要先创建一个项目。</p>
+<h2 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h2><p>当你需要打开 Unity 的时候，需要通过 Unity Hub 启动器来完成 Unity 的版本安装和启动，你可以通过 Unity Hub 来创建或者打开，安装 Unity 等一系列操作。</p>
+<p>【<strong>如何选择 Unity 版本？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Untiy 每年会发布多个新版本，并且有两个并行的发布时间表。分别是：最稳定和最安全的是 LTS 版本。</span><br><span class="line">LTS 代码会被官方长期支持并且每两年进行一次更新。此教程内容使用 LTS 版本。</span><br><span class="line">最高版本的 Unity 是开发分支的版本，它引入了新功能并可能删除了旧的功能；这些版本并不如 LTS 版本可靠，并且每个版本仅支持</span><br></pre></td></tr></table></figure>
+
+<p>有时候该教程会包含一些疑问和回答，就如同上面所示的那样，在网页默认是不展开的，你可以通过单击来展开查看，<strong>需要注意的是：由于我的博客并没有原作者的展开栏一样的功能，所以我采用代码框来代替</strong>。</p>
+<p>当你创建一个新项目的时候，你可以选择对应的 Unity 版本和项目模板。本例中，我们将采用标准的 3D模板。创建完成后，它会被添加到 Unity Hub 的项目列表中，并且会在对应版本的 Unity 编辑器中打开。</p>
+<p>【<strong>我可以使用不同的渲染管道（Render Pipeline）创建项目吗？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以的，区别在于不同的项目默认场景中所拥有的东西不一样。</span><br></pre></td></tr></table></figure>
+
+<h2 id="编辑器布局"><a href="#编辑器布局" class="headerlink" title="编辑器布局"></a>编辑器布局</h2><p>如果你是第一次使用 Unity 编辑器，那么你的编辑器布局（Editor Layout）可能是如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf74824496.png" alt="image-20220911095311839" style="zoom:80%;" />
+
+<p>默认的布局包含了我们所需要使用窗口，你也可以通过拖动来重新布局自定义窗口布局。你还可以打开或者关闭对应的窗口。每个窗口都可以通过其右上角的三个点来访问其窗口配置选项。</p>
+<p>你也可以通过 Unity 编辑器的右上角 <code>Layout</code>（布局） 下拉菜单来切换已经配置好的布局，你也可以通过它来保存当前布局。</p>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>Unity 的功能是模块化的，除了核心功能之外，还有一些额外的包（Packages）会被下载并包含在你的项目中。默认的 3D模板项目会包含如下的几个包，你可以在你的 <code>Project</code>（项目）窗口下查看到 <code>Packages</code>（包）：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf74c90fba.png" alt="image-20220911100102092" style="zoom:80%;" />
+
+<p>你可以通过<code>Priject</code>（项目）窗口右上角的“眼睛”按钮来隐藏显示这些<code>Packages</code>（包），这只是为了减少编辑器的视觉混乱，并不会真的对项目的<code>Packages</code>（包）做任何处理，仅仅是隐藏了。在“眼睛”按钮旁边的数值表示了项目中含有多少个<code>Packages</code>（包）。</p>
+<p>当然你也可以通过包管理器（Package Manager）来对项目中的包进行控制，包管理器（Package Manager）可以通过 Window &#x2F; Package Manager 来进入。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf751067e8.png" alt="image-20220911100643989" style="zoom:80%;" />
+
+<p>这些包为 Unity 提供了一些额外的功能，例如：Visual Studio 编辑器（Visual Studio Code Editor）添加了用于编写代码的 Visual Studio 编辑器（Visual Studio Code Editor）的集成。本实例并不需要使用其他包所提供的功能，仅保留 Visual Studio 编辑器的包，其他的我将其全部删除，这是因为我使用 Visual Studio 编辑器来编写代码。如果你使用不同的编辑器，则需要包含其他的集成包。</p>
+<p>删除包最简单的办法就是使用包管理器（Package Manager），使用工具栏限制包列表为：在本项目中的（In Project），然后一次选择一个包，并使用右下角的删除（Remove）按钮。Unity 将会在每次删除后进行重编译，因此需要等待几秒钟才能完成该过程。</p>
+<p>删除除了 Visual Studio 编辑器（Visual Studio Code Editor）之外的其他包后，我的项目窗口留下了三个可见包：Custom NUnit，Test FrameWork 和 Visual Studio Editor 。除了Visual Studio 编辑器（Visual Studio Code Editor）其他两个包存在是因为 Visual Studio 编辑器（Visual Studio Code Editor）依赖于这些包。</p>
+<p>你可以通过项目设置（Project Settings）来让依赖项在包管理器（Package Manger）中可见，项目设置（Project Settings）在 <em>Edit&#x2F;Project Settings 然后选择 Package Manager 类型，在其中的 Advanced Settings 下启用，Show Dependencies</em>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf756a7fe7.png" alt="image-20220911102906069" style="zoom:80%;" />
+
+<h2 id="色彩空间"><a href="#色彩空间" class="headerlink" title="色彩空间"></a>色彩空间</h2><p>现在渲染通常使用线性色彩空间（Linear color space）来完成，但是 Unity 依旧默认配置为使用伽马色彩空间（Gamma color space）。为了获得最佳的视觉效果，<em>请在 Player 类别中，打开 Other Settings 面板，找到 Rendering 部分，确保 Color Space 被设定为 Linear</em> 。Unity 会弹出警告说这个操作可能会需要比较长的时间，点击确认即可。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf75bb2312.png" alt="image-20220911103552295" style="zoom:80%;" />
+
+<p>【<strong>现在还有必要使用伽马色彩空间（Gamma color space）吗？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">仅当你需要针对旧硬件或者旧图形 API 的时候使用。</span><br><span class="line">OpenGL ES2.0 和 WebGL 1.0 不支持线性空间，此外，在旧的一些移动设备上来说，伽马可能渲染会比线性空间要块一些。</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例场景"><a href="#示例场景" class="headerlink" title="示例场景"></a>示例场景</h2><p>在刚刚创建的新项目中会包含一个名称为示例场景（<em>Sample Scene</em>）的场景，默认是打开的。你可以通过 <em>Assets&#x2F;Scenes</em> 路径来找到它。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7605cd20.png" alt="image-20220911104203043" style="zoom:80%;" />
+
+<p>默认情况下，项目窗口使用两列布局，你可以通过右上角三个点的配置菜单来切换到单列布局。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf76461442.png" alt="image-20220911104257858" style="zoom:80%;" />
+
+<p>示例场景（<em>Sample Scene</em>）包含一个主摄像机（<em>Main Camera</em>）和一个定向光源（<em>Directional Light</em>）。这些是游戏对象，它们陈列在场景下的层次结构窗口中。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7685cf3f.png" alt="image-20220911104609982" style="zoom:80%;" />
+
+<p>你可以通过层次结构窗口（<em>Hierarchy</em>）或者场景窗口来选择游戏对象，摄像机场景图标看起来像是老式胶片相机，而定向光源图标看起来像是太阳。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf76c5246a.png" alt="image-20220911104740048" style="zoom:80%;" />
+
+<p>【<strong>如何进行场景漫游（navigate the scene）</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你可以使用 alt 键或者鼠标右键结合鼠标移动来旋转视图</span><br><span class="line">你还可以使用方向键来移动视角位置，通过鼠标滚轮键进行缩放</span><br><span class="line">此外，你可以通过 F 键将视图聚焦到选定的游戏对象上</span><br></pre></td></tr></table></figure>
+
+<p>当一个物体（<em>Object</em>）被选中时，它的详细信息会显示在检查器（<em>Inspector</em>）窗口中，我们会在需要的时候来使用它。我们不需要对摄像机和灯光进行参数修改，因此我们可以通过层次结构窗口（<em>Hierarchy</em>）中单击它们左侧的眼睛图标来讲它们在场景中隐藏，这个图标默认是不可见的，只有我们的鼠标悬停在其上面的时候才会出现。这样做纯粹是为了减少场景窗口中的视觉混乱。</p>
+<p>【<strong>眼睛图标旁边的手型图标有用？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在眼睛图标旁边的列是一个手势形状的列。默认情况下，该图标也是不可见的，只有鼠标悬停在上面才会显示。</span><br><span class="line">当手势图标被激活的时候，你就无法在场景窗口中选中物体了，只有在层级面板（Hierarchy）来选择物体。</span><br></pre></td></tr></table></figure>
+
+<h1 id="构建一个简单的时钟"><a href="#构建一个简单的时钟" class="headerlink" title="构建一个简单的时钟"></a>构建一个简单的时钟</h1><p>到目前为止，我们完成了项目设置，现在来正式开始创建我们的时钟了。</p>
+<h2 id="创建游戏对象"><a href="#创建游戏对象" class="headerlink" title="创建游戏对象"></a>创建游戏对象</h2><p>我们需要一个游戏物体（game object）来表示时钟。我们讲会从最简单的游戏物体开始，你可以通过 <em>GameObject&#x2F;Create Empty</em> 来创建一个空物体。你也可以通过鼠标右键层次结构面板（<em>Hierarchy</em>）来打开该选项进行创建，或者使用层次结构面板（<em>Hierarchy</em>）左上角的加号来创建，这样就会讲游戏物体添加到了场景中。</p>
+<p>你现在可以看到它已经存在并显示在了层次结构面板（<em>Hierarchy</em>）中，并且层次结构面板（<em>Hierarchy</em>）标有星号（*），它表示这该场景有着未保存的更改。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf771ba2c0.png" alt="image-20220911153907458" style="zoom:80%;" />
+
+<p>选中该物体，在 Inspector 面板中就会显示物体的详细信息，在它的顶部是一个带有物体名称和一些配置选项。默认情况下该物体是已启用的，非静态（Static），未标记并且位于默认图层上的，这些配置都很好，除了它的名字，现在来将它的名称改为 Clock 。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf775de10f.png" alt="image-20220911154733754" style="zoom:80%;" />
+
+<p>在它的名称下方是物体的组件（Component）列表。默认所以物体都会拥有一个 Transform 组件。它控制了游戏物体的位置（Position），旋转（Rotation）和缩放（Scale）。现在确保 Clock 物体的位置和旋转值为 0 ，其缩放应该统一为 1 （即不缩放，1 倍原始大小）。</p>
+<p>【<strong>那么二维物体呢？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在 2D 即二维编写程序的时候，你可以忽略其中一个维度。</span><br><span class="line">专门用于 2D 物体（如 UI 元素）通常有一个 RectTransform 来代替，它是一个专门的 Transform 组件</span><br></pre></td></tr></table></figure>
+
+<p>因为游戏物体是一个空物体，所以它在场景中本身是不可见的。但是，在游戏物体的位置（世界中心位置）可以看到物体的操作工具。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf77a1f817.png" alt="image-20220911155524971" style="zoom:80%;" />
+
+<p>【<strong>为什么选中 Clock 物体后看不到操作工具？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作工具位于 Scene（场景）窗口中，而不是 Game（游戏）窗口中</span><br></pre></td></tr></table></figure>
+
+<p>可以通过编辑器工具栏左上角的按钮控制不同操作工具处于活动状态。这些工具也可以通过快捷键<kbd>Q</kbd>，<kbd>W</kbd>，<kbd>E</kbd>，<kbd>R</kbd>，<kbd>T</kbd> 和 <kbd>Y</kbd> 来激活。该工具栏最右侧的按钮是用来启用我们自定义的编辑器工具。默认情况下移动工具处于活动状态（启用状态）。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf77ec97e7.png" alt="image-20220911155928408" style="zoom:80%;" />
+
+<p>工具栏右侧的另外三个按钮，分别影响物体对象的中心点，物体坐标系以及物体吸附。</p>
+<blockquote>
+<p>其动态使用效果可以查看<a href="httpss://blog.csdn.net/Liyager/article/details/120671179">Unity 工具栏功能介绍</a></p>
+</blockquote>
+<h2 id="创建时钟的表面"><a href="#创建时钟的表面" class="headerlink" title="创建时钟的表面"></a>创建时钟的表面</h2><p>虽然我们创建了一个时钟物体，但是我们并没有创建任何实际物体。我们必须向其添加 3D 模型，以便于渲染一些东西。Unity 中默认给我们提供了一些用来构建简单时钟的简单物体。现在来通过 <em>GameObject&#x2F; 3D Object &#x2F; Cylinder</em> 场景中添加一个圆柱体，添加完成后请确保其的 Transform 和我们的 Clock 物体有相同的值。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf782c7d95.png" alt="image-20220911160847342" style="zoom:80%;" />
+
+<p>新创建的物体比之前的空物体多了三个组件（Component）。首先，它拥有一个 Mesh Filter，其中包含对圆柱体网格的引用。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf78733bb5.png" alt="image-20220911161236700" style="zoom:80%;" />
+
+<p>第二个是 Mesh Renderer。该组件（Component）的目的是确保物体网格会倍渲染。同时它还确定了所使用的材质，即该物体所使用的默认材质。该材质也会被显示在组件列表的最下方。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf78b40e91.png" alt="image-20220911161422280" style="zoom:80%;" />
+
+<p>第三个组件是 Capsule Collider ，用于 3D 物理。该对象表示一个圆柱体，但是它缺拥有一个胶囊碰撞体，因为 Unity 没有原始圆柱体碰撞体。现在我们将这个组件删除即可，因为我们不需要它，如果你希望在 Clock 使用物理学，最好使用 Mesh Collider 组件。你可以通过组件右上角三个点来删除组件。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf78f304e9.png" alt="image-20220911161814332" style="zoom:80%;" />
+
+<p>现在我们将圆柱体变成钟表的底面。这是通过减少其 Y 轴缩放比例分量来实现的。将其降低到 0.2 ；现在来将其 X 和 Z 轴的缩放分量扩大到 10 来获得一个比较大的钟表底面。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf792afe0e.png" alt="image-20220911162105818" style="zoom:80%;" />
+
+<p>我们的时钟应该是竖直站立或者悬挂在墙上的，而目前是平放的。我们可以将圆柱体旋转 $\frac{1}{4}$ 圈来解决这个问题。在 Unity 中，X 轴指向右侧，Y轴指向上方，Z轴指向前方。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf79727805.png" alt="image-20220911162516873" style="zoom:80%;" />
+
+<p>现在来将圆柱体名称更改为 Face，它代表了 Clock（时钟）的表面，是其一部分。我们可以通过将其拖动到 Clock 层级下方来实现其父子关系。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf79c0dac6.png" alt="image-20220911162716377" style="zoom:80%;" />
+
+<p>子物体受制于父物体的变换，这意味着如果改变 Clock 物体的位置，Face 也会倍改变位置。旋转和缩放也是如此。你可以通过如此来制作复杂的对象层次结构。</p>
+<h2 id="创建时钟时间标识"><a href="#创建时钟时间标识" class="headerlink" title="创建时钟时间标识"></a>创建时钟时间标识</h2><p>时钟外侧往往有时间标识用来指示时间，现在我们来使用 12 块来表示 12 小时制的时间。</p>
+<p>通过添加一个立方体（Cube）物体到场景中，并命名其为 Hour Indicator 12 ，使其成为 Clock 物体的子对象，其层级顺序无关紧要。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf79fcdef7.png" alt="image-20220911163058758" style="zoom:80%;" />
+
+<p>然后将其进行为下图设置，使其成为一个扁平的物体。将其移动到 Face（钟表表面）上以指示 12 小时，同时移除它的 Box Collider 组件。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7a317024.png" alt="image-20220911163317496" style="zoom:80%;" />
+
+<p>由于时间标识器的颜色和表面颜色相近以至于很难看到。现在我们来对它创建一个单独的材质。通过 <em>Assets&#x2F; Create &#x2F; Material</em> 或者项目窗口（Project）右上角的加号来创建。这里我们创建了一个材质资源，并将其命名为 Hour Indicator 。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7a7dcc0f.png" alt="image-20220911163729567" style="zoom:80%;" />
+
+<p>现在来选中材质然后单击其颜色，这样会打开一个颜色弹出窗口，该窗口提供了不同颜色的选择方式，我选择了深灰色，对应 16 进制的 494949 。我们不使用 Alpha 通道，所以它的值不需要设置。然后保持材质的其他属性不变即可。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7abe0180.png" alt="image-20220911164032363" style="zoom:80%;" />
+
+<p>【<strong>什么是 Albedo（反射率&#x2F;漫反射率）？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Albedo 是一个拉丁词语，它的意思是 Whiteness (白色程度)</span><br><span class="line">它表示物体被白光照亮某物时的某物颜色。</span><br></pre></td></tr></table></figure>
+
+<p>现在你可以通过将材质拖动到 场景（Scene）中或者层级窗口（Hierarchy）中的物体上来执行为物体赋予新的材质。你也可以在物体的 Mesh Renderer 组件的 Materials 属性改变其指向为你所指定的材质。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7afcb60e.png" alt="image-20220911164657105" style="zoom:80%;" />
+
+<h2 id="十二小时时间标识"><a href="#十二小时时间标识" class="headerlink" title="十二小时时间标识"></a>十二小时时间标识</h2><p>现在来复制 12 小时标识器，增加6，12，3，9小时标识，3，9小时标识其 X 位置应该为 4 和 -4。Y 轴的位置应该是 0 。另外它们的 Z 旋转设置为 90 ，这样它们就会旋转 $\frac{1}{4}$ 圈。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7b368d09.png" alt="image-20220911165741792" style="zoom:80%;" />
+
+<p>然后复制创建另外的标识物体，这次要设置的是 1 标识，要将其 Y 位置设置为 3.464，并选择其 Z 轴旋转为 -30 .然后复制创建 2 小时标识，交互其 X 和 Y 轴的数值，然后将 Z 轴旋转加倍到 -60 。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7b73e1e0.png" alt="image-20220911165931200" style="zoom:80%;" />
+
+<p>【<strong>这些数值都是从哪里来的？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">每小时沿着 Z 轴顺时针旋转 30°。在这种情况下，我们可以通过三角函数，30°的正弦为 1/2，其余弦为 2分之根号3，我们按照其距离中心为 4来计算，最终得到 X 为 2，Y为 2根号3，即约等于3.364。</span><br><span class="line">对于旋转为 60°来说，只需要交互其正弦和余弦即可。</span><br></pre></td></tr></table></figure>
+
+<p>现在来复制其他小时标识，来完成 12 小时时间标识。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7bb3d6d4.png" alt="image-20220911170344215" style="zoom:80%;" />
+
+<h2 id="创建指针"><a href="#创建指针" class="headerlink" title="创建指针"></a>创建指针</h2><p>接下来创建时钟指针，现在来从小时指针开始。再次复制 Hour Indicator 12 并命名为 Hours Arm 。然后创建一个 Clock Arm 的材质来赋给 Hours Arm 使用。在该材质，我创建其为纯黑色，即十六进制的 000000。然后将其 X 比例减小到 0.3，将其 Y 比例增加到 2.5 。然后将其 Y 位置改为 0.75，使其指向 12 小时标识，同时也让其位置超过中心位置向下一点，这样使得其在旋转的时候拥有一点配重的感觉。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7bf7a3b8.png" alt="image-20220911171610682" style="zoom:80%;" />
+
+<p>时针的旋转需要围绕时钟的中心，但是现在如果改变其 Z 旋转，只会使其围绕自己的中心旋转。</p>
+<p><video src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/PicGo/Rotating Clock Arm Itself.webm" controls="" width="50%" ></video></p>
+<p>发生如上情况是因为旋转是相对于游戏物体的本地位置。要创建适当的旋转，我们必须引入一个轴并旋转该轴对象。所以创建一个新的空物体，并将其命名为 Hours Arm Pivot 并确保其位置和旋转为 0，且其缩放比例为 1 。然后使 Hours Arm 成为 Hours Arm Pivot 的子物体。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7c6c91bc.png" alt="image-20220911172437344" style="zoom:80%;" />
+
+<p>现在来尝试转动时针轴，如果你在场景（Scene）视图中进行此操作，<strong>请确保工具栏右侧第一个按钮的设置为 Pivot 而不是 Center</strong>。</p>
+<p><video src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/PicGo/Rotating Clock Arm Pivot.webm" controls="" width="50%" ></video></p>
+<p>复制Hours Arm Pivot两次分别创建一个 Minutes Arm Pivot（分针）和一个 Seconds Arm Pivot（秒针）并相应的重命名它们，包括其包含的子物体。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7cc50fc1.png" alt="image-20220911185055710" style="zoom:80%;" />
+
+<p>然后分别调整 Minutes Arm（分针）的值为如下图所示，需要注意的是：这些值是针对分针来说的，而不是其轴点。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7d022d73.png" alt="image-20220911185204949" style="zoom:80%;" />
+
+<p>接下来是调整Seconds Arm（秒针）值如下：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7d3c8dab.png" alt="image-20220911185309837" style="zoom:80%;" />
+
+<p>最后为秒针创建一个特殊颜色的材质来区别其他指针，我采用深红色，即十六进制的 B30000。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7d732681.png" alt="image-20220911185645927" style="zoom:80%;" />
+
+<p>在完成时钟场景的构建后，就是保存场景的好时机，你可以通过<em>File &#x2F; Save</em>或者其指定的键盘快捷键来完成保存。</p>
+<p>同时，时刻保持你的项目资源文件夹整洁是一个好习惯，所以我们会为材质创建一个<em>Materials</em>的文件夹用来存放我们为时钟创建的各种材质。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7dad033c.png" alt="image-20220911190029217" style="zoom:80%;" />
+
+<h1 id="时钟动画"><a href="#时钟动画" class="headerlink" title="时钟动画"></a>时钟动画</h1><p>现在我们创建的时钟仅仅是个物体，它并不会自己进行转动，需要我们对其进行动画处理，我们必须通过脚本来进行定义其行为，即为物体添加自定义组件（Component）。</p>
+<h2 id="C-脚本"><a href="#C-脚本" class="headerlink" title="C# 脚本"></a>C# 脚本</h2><p>通过 <em>Assets &#x2F; Create &#x2F;C# Scripts</em> 并命名为 Clock。C# 是用于 Unity 脚本的编程语言，其发音为 C-Sharp。现在我们来创建一个 <em>Scripts</em> 文件夹来存放我们创建的脚本，来保持项目资源文件夹的整洁。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7de6d739.png" alt="image-20220911190400650" style="zoom:80%;" />
+
+<p>当我们选中脚本后，在检查器（Inspector）面板会显示其内容。但是要编辑其内容，我们必须通过代码编辑器来完成。你可以通过按键 Open 进行编辑，也可以在项目文件面板双击对应的脚本。Unity 会通过首选项配置的编辑器打开选中的脚本。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7e241077.png" alt="image-20220911190729550" style="zoom:80%;" />
+
+<h2 id="定义新组件类型"><a href="#定义新组件类型" class="headerlink" title="定义新组件类型"></a>定义新组件类型</h2><p>在你的代码编辑器加载脚本后，首先删除标准模板代码，因为我们将从头开始创建组件类型（Type）。</p>
+<p>一个空的脚本文件没有定义任何东西。我们通过定义 Clock 类型，这样我们就可以在 Unity 中创建多个这样的组件。即使我们在本教程中仅仅使用这一个时钟。</p>
+<p>在 C# 中，我们首先声明 Clock 是通过如下代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Clock</span></span><br></pre></td></tr></table></figure>
+
+<p>【<strong>从技术角度上来说，什么是类（Class）？】</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你可以将类（Class）视为可以驻留在内存中的对象的蓝图，这些蓝图定义了这些对象应该包含的数据以及它们所有的功能。</span><br></pre></td></tr></table></figure>
+
+<p>因为我们不想限制哪些代码可以访问我们的<code>Clock</code>类型，所以最好在它的前面加上<code>Public</code>访问修饰符。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span></span><br></pre></td></tr></table></figure>
+
+<p>【<strong>类的默认访问修饰符是什么？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果没有设定访问修饰符，编译器默认我们使用的是 internal class Clock，这将限制对于来自同一程序集的代码的访问，所以为了确保它始终有效，请默认将类设置为公开，即使用 Public 关键词</span><br></pre></td></tr></table></figure>
+
+<p>此时，我们的还并不是有效的 C# 语法，如果你保存脚本文件并且返回 Unity 编辑器中后，其编译的错误记录会显示在控制台（Console）窗口中。</p>
+<p>我们在定义一个类型的时候，需要使用如下的一对大括号来完成对类型定义的结束表示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在来说，我们的代码是有效的。在保存文件并返回 Unity 编辑器后，Unity 检测到 Assets 的脚本文件发生变化，则会出发重新编译。完成后，选择我们的脚本，检查器（<em>Inspector</em>）面板会提示我们没有<code>MonoBehaviour</code>脚本。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7e6d224a.png" alt="image-20220911192411425" style="zoom:80%;" />
+
+<p>这意味着我们不能使用这个脚本在 Unity 中创建组件。至此，我们定义了<code>Clock</code>类的一个 C# 基本类型。但是我们自定义组件类型，必须使用 Unity 的<code>MonoBehaviour</code>类型，来继承它的数据和功能。</p>
+<p>【**<code>Mono-Behaviour</code>是什么意思？**】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是我们可以编写我们自定义组件来为游戏物体添加自定义行为。这就是 Behaviour 部分所指示的信息。它碰巧使用了英式拼写。而Mono 是指将自定义代码添加到 Unity 的方式，它使用了 Mono 项目，这是个将 .NET 框架跨平台实现的项目。而 MonoBehaviour 是一个旧的名称，为了向后兼容，所以一直使用到现在。</span><br></pre></td></tr></table></figure>
+
+<p>要使得<code>Clock</code>类型变成<code>MonoBehaviour</code>的子类型，我们必须更改我们对<code>Clock</code>类型的声明方式。我们可以在类型声明后面使用<code>:</code>来完成，如下代码所示，这样就使得<code>Clock</code>继承<code>MonoBehaviour</code>类型的所有内容。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span>:<span class="title">Monobehaviour</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，这些写编译器会报错，表示无法找到<code>MonoBehaviour</code>类型，这是因为我们需要引用命名空间<code>UnityEngine</code>，因为<code>MonoBehaviour</code>类型就包含在其中，所以要访问它，我们需要使用其完整的引用名称，即<code>UnityEngine.MonBehaviour</code>。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span>:<span class="title">UnityEngine.MonoBehaviour</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>【<strong>什么是命名空间？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">命名空间类似于网站域名，但是是用于代码部分，命名空间可以用来组织代码并防止代码中的名称冲突。</span><br><span class="line">UnityEngine代码程序集是 Unity 自带的，所以你不需要再单独获取它，如果你导入了适当的编辑器集成包，则编译器会自动识别并使用它</span><br></pre></td></tr></table></figure>
+
+<p>在我们在访问 Unity 类型的时候，每次都带着<code>UnityEngine</code>是很不方便的，所以我们可以通过在文件头顶部分添加<code>using EnityEngine </code>来完成整体声明，并以分号表示结束，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span>:<span class="title">MonoBehaviour</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们可以将自定义的组件添加到我们的 Clock 游戏物体中了，你可以通过拖动脚本到物体来完成或者通过 <em>Add Component</em> （添加组件）来添加。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7eace376.png" alt="image-20220911194635356" style="zoom:80%;" />
+
+<p>需要注意的是：我的教程中大多数的代码类型都会链接到在线文档，例如<a href="httpss://docs.unity3d.com/ScriptReference/MonoBehaviour.html">MonoBehaviour</a> 是一个链接，可以通过它来访问 Unity 中该类型的脚本 API 页面。</p>
+<h2 id="获取时针指针"><a href="#获取时针指针" class="headerlink" title="获取时针指针"></a>获取时针指针</h2><p>如果希望可以旋转指针，则我们所创建的<code>Clock</code>类型，需要先有指针的定义。现在我们从时针开始。和其他游戏物体一样，我们可以调整其 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件来旋转。所以我们必须将时针轴 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件添加到<code>Clock</code>类型中，这可以通过在代码中添加一个字段来完成。</p>
+<p>我将使用<code>hours pivot</code>来命名该字段，一般习惯上我们会将字段第一个单词小写，然后其他单词的首字母大写，然后将它们合并在一起，即<code>hoursPivot</code>，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    hoursPivot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们还必须声明字段的类型为 UnityEngine.<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a>，在本例中，我们必须将其写在名称的前面。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    Transform hoursPivot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们的类现在定义了一个可以保存对另一个对象的引用字段，该对象的类型必须是 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 类型，所以我们可以通过该字段来保存对时针的轴的 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件的引用。</p>
+<p>默认情况下，字段是私有（private）的，这意味着你只属于<code>Clock</code>类型。但是该类不知道我们的 Unity 场景，所以没有办法直接将字段和正确的对象进行关联。我们可以通过将字段声明为可序列化（serializable）来改变这一点。这意味着当 Unity 保存场景的时候，它（该字段）应该包含在场景的数据中，它通过将所有数据按顺序排列并将其写入文件来实现。</p>
+<p>将字段序列化（serializable）是通过将属性附加在它上面来完成的，使用 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/SerializeField.html">SerializeField</a> 并将其写在方括号之间并声明在字段的前面。一般来说是写在字段的上面一行，当然你也可以放在同一行上。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    Transform hoursPivot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【<strong>我们不可以将其<code>Public</code>（公开）吗？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可以，但是让类的字段（变量）可以被公开访问是一种不好的行为。</span><br><span class="line">经验上来说，仅仅需要被其他类型的 C# 代码访问的类型内容时才会公开类的内容，然后优先选择方法或者属性公开而不是字段。越难访问的东西就越容易维护，因为可以直接依赖它的代码更少。</span><br></pre></td></tr></table></figure>
+
+<p>一旦该字段序列化（serializable）后，Unity 将检测到并将其显示在 Clock 游戏物体的检查器（<em>Inspector</em>）面板中。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7f05f3c3.png" alt="image-20220911200820460" style="zoom:80%;" />
+
+<p>要进行正确的链接（引用），我们可以将 Hours Arm Pivot 从结构层级（Hierarchy）面板拖动到对应的字段框，或者选择字段框右侧的圆形按钮进行选择。不论哪种方法，Unity 都会获取到 Hours Arm Pivot 物体的 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件并引用在字段上。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7f39bb2b.png" alt="image-20220911201116320" style="zoom:80%;" />
+
+<h2 id="获取所有指针"><a href="#获取所有指针" class="headerlink" title="获取所有指针"></a>获取所有指针</h2><p>现在我们来对另外的分针和秒针做同样操作，如下所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot;</span><br><span class="line"></span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform minutesPivot;</span><br><span class="line"></span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform secondsPivot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为声明的字段（变量）其类型是相同的，所以我们可以通过改变代码的编写方式来使得上述代码变得更加整洁：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//[SerializeField]</span></span><br><span class="line">	<span class="comment">//Transform minutesPivot;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//[SerializeField]</span></span><br><span class="line">	<span class="comment">//Transform secondsPivot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【**&#x2F;&#x2F; 表示什么？**】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">双斜杠（//）在 C# 中表示注释的意思，编译器会忽略它们之后的所以文本直至最后。</span><br><span class="line">如果需要，可以通过使用它带添加文本来阐明代码。</span><br></pre></td></tr></table></figure>
+
+<p>现在来将分针和秒针链接到字段（变量）上。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7f7784c2.png" alt="image-20220911201558164" style="zoom:80%;" />
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>现在我们获取所有的指针了，接下来就是旋转它们了。为此，我们需要让<code>Clock</code>类执行一些代码。这是通过向类中添加一个代码块来完成，称为：方法（Method）。该块必须以名称为前缀，安装约定大写，其命名为<code>Awake</code>，需要在组件唤醒的时候执行的代码可以写在里面。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    Awake&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法（Method）有点类似于数学函数，例如 $F(X) &#x3D; 2X +3$ ，函数接收一个数值，然后将其进行相关操作，输出结果。</p>
+<p>如同数学函数一样，方法也可以产生结果，但是这不是必须的。我们必须声明结果的类型，就好像字段要声明其类型一样，或者你可以使用<code>void</code>来表示其不需要返回结果。在本例中，我们只想执行一些代码，不需要结果值，所以我们使用<code>void</code>，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> Awake&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的，我们也不需要任何出入数据，但是我们必须将方法的参数定义在圆括号之间并用逗号分隔。在本例中，参数列表是一个空列表，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到现在为止，我们有了一个有效的方法，但是我们并没有做任何事情。如同 Unity 会检测我们定义的字段一样，它也会检测 <code>Awake</code>方法。当组件拥有<code>Awake</code>方法时，Unity会在组件唤醒的时候调用该方法。该方法发生在播放模式（Play）下被创建或者加载之后。我们目前处于编辑模式，所以并不会发生什么：</p>
+<p>【**<code>Awake</code>方法必须要公共（Public）吗**】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Awake函数还有一些其他方法集合被认为是 Unity 的特殊事件方法，所以无论我们怎么声明它们，Unity 引擎都会找到它们并且在适当的时候执行调用它们。这将发生在托管 .NET 环境之外。</span><br></pre></td></tr></table></figure>
+
+<p>请注意，<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.Awake.html">Awake</a> 其他特殊的 Unity 事件方法在我的教程中同样有链接到他们的在线 Unity 脚本 API 页面。</p>
+<h2 id="通过代码来旋转"><a href="#通过代码来旋转" class="headerlink" title="通过代码来旋转"></a>通过代码来旋转</h2><p>要旋转指针，我们可以通过改变物体的 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件的 <code>localRotation</code> 属性（property）来完成旋转。</p>
+<p>【<strong>什么是属性（Property）？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">属性是一种伪装成字段的方法。它可能是只读或者只写的。</span><br><span class="line">C# 约定将属性大写，但是Unity的代码并不这样做。</span><br></pre></td></tr></table></figure>
+
+<p>尽管在检查器（<em>Inspector</em>）面板中 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件的旋转是通过欧拉角（Euler angles，以度数为单位）来定义的，但是在代码中我们必须使用四元数（quaternion）来完成。</p>
+<p>【<strong>什么是四元数（quaternion）？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">四元数是基于复数，用于表示 3D 旋转。</span><br><span class="line">虽然它相比于欧拉角的X,Y,Z轴组合更难以理解，但是它有一些独特的特性，例如：它不会出现万向节死锁的问题。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关于四元数的可以查看<a href="httpss://www.bilibili.com/video/BV1SW411y7W1">四元数的可视化</a></p>
+</blockquote>
+<p>我们可以通过调用 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a>.Euler 该方法创建基于欧拉角的四元数。为此，需要将其写入<code>Awake</code>方法在，最后以分号表示结束。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Quaternion.Euler;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该方法具有描述所需旋转的参数，需要对其传入三个参数，分别表示 X,Y,Z轴的旋转数值，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Quaternion.Euler(<span class="number">0</span>,<span class="number">0</span>,<span class="number">-30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此方法的执行结果是返回一个<code>Quaternion</code>类型的值（结构体，Strcut），其中包含绕 Z 轴顺时针旋转 30°，正好和时钟上的 1 小时匹配上。</p>
+<p>要将其旋转结果应用在时针上，需要使用赋值语句将结果赋值给我们的时针，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        hoursPivot.localRotation = Quaternion.Euler(<span class="number">0</span>,<span class="number">0</span>,<span class="number">-30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【**<code>localRotation</code>和<code>rotation</code>有什么区别？**</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">loaclRotation属性表示Transform组件单独描述的旋转，它是相对于其父级的旋转。</span><br><span class="line">相反而言，rotation属性表示世界空间中的旋转，这将会把整个层级结构考虑在内。</span><br><span class="line">即一个是本地为中心（父级）旋转，一个以世界中心旋转的。</span><br></pre></td></tr></table></figure>
+
+<p>现在进入编辑器的播放模式（Play）。你可以通过 <em>Edit&#x2F; Play</em>来开始，或者使用快捷键，或者使用编辑器窗口顶部中心的播放按钮。进入播放模式（Play）后，Unity 会将焦点切换到游戏窗口（Game），该窗口会渲染 Main Camera 在 Scene（场景）面板中看到的内容。我们编写的 Clock 组件将会被唤醒，执行<code>Awake</code>方法的代码，将时钟设置为 1 点。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf7fdc17e9.png" alt="image-20220911210552600" style="zoom:80%;" />
+
+<p>如果你的摄像机并没有聚焦在时钟上，你可以调整它使得时钟在播放窗口中可见，但是请记住，退出播放模式时场景会重置（即恢复到播放前的状态），也就是所你在播放模式（Play）所做的任何操作都不会被保存。所以如果你需要对场景做更改，需要先退出播放模式。</p>
+<h2 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h2><p>下一步是来计算我们当前的时间。我们可以使用 <a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/search/en-us?query=DateTime">DateTime</a> 类型来获取我们当前设备的时间。<a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/search/en-us?query=DateTime">DateTime</a> 类型并不是 Unity 的类型，而是 .NET 框架的功能之一，我们可以直接用来使用，其类型在<code>System</code>命名空间下。</p>
+<p><a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/search/en-us?query=DateTime">DateTime</a> 包含一个方法<code>Now</code>可以获取包含当前系统时间和日期的属性值。为了检测它是否正确，我们可以在<code>Awake</code>方法中使用<code>Debug.Log</code>来传递这个数值，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(DateTime.Now);</span><br><span class="line">        hoursPivot.localRotation = Quaternion.Euler(<span class="number">0</span>,<span class="number">0</span>,<span class="number">-30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样我们每次进入播放模式（Play）后就会记录一个时间戳，你可以通过控制台（Console）窗口或者编辑器底部的状态栏中看到它。</p>
+<h2 id="旋转指针"><a href="#旋转指针" class="headerlink" title="旋转指针"></a>旋转指针</h2><p>现在我们来调用<code>DateTime.Now.Hour</code>，这样它会在时间戳的基础上给我们一个小时的值。</p>
+<p>因此，为了让时针能够来显示当前小时时间，我们需要将 -30°旋转乘以 当前的小时。在代码中，我们使用<code>*</code>来表示乘法。我们现在也不需要再记录当前时间，可以直接删除<code>Debug.Log</code>语句了。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        hoursPivot.localRotation = Quaternion.Euler(<span class="number">0</span>,<span class="number">0</span>,<span class="number">-30</span>*DateTime.Now.Hour);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf80226904.png" alt="image-20220911211634971" style="zoom:80%;" />
+
+<p>为了清晰表示我们正在从小时转换为旋转的度数，们可以定义一个名称为<code>hoursToDegrees</code>的字段，因为 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a>.Euler 定义为浮点值，所以我们将会使用<code>float</code>类型。因为我们已经知道这个数值了，所以我们可以将其作为字段进行声明，然后使用的时候只需要用字段来表示该值即可。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        hoursPivot.localRotation = Quaternion.Euler(<span class="number">0</span>,<span class="number">0</span>, hoursToDegrees * DateTime.Now.Hour);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【<strong>什么是<code>float</code>(单精度浮点值)？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">计算机并不能存储所有的数值，它必须最后被表示为 0 和 1 的二进制存储，这使得数值必须存储在有限的内存中，而不能做到存储无限的数值，这也就意味着在存储类似于 0.33333... 无限循环/不循环小数的时候，我们不得不丢弃一部分精度，即存储 0.3333 来表示 0.33333......</span><br><span class="line">而存储浮点数就是用float表示这是一个浮点数类型，它在内存一般使用 4个字节的长度来存储。</span><br></pre></td></tr></table></figure>
+
+<p>如果我们直接声明一个没有后缀的数值，则会被默认为是一个整数（即整型数值），它不同于浮点类型数值，虽然编译器会自动转换它们的类型，但是我们一般会在<code>float</code>类型后通过添加<code>f</code>来表明我们的数值是<code>float</code>类型的。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        hoursPivot.localRotation = Quaternion.Euler(<span class="number">0f</span>,<span class="number">0f</span>, hoursToDegrees * DateTime.Now.Hour);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为每小时转动的度数都是相同的，我们可以通过将字段修饰为<code>const</code>来表示其是一个常量而不是字段（变量）。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>;</span><br><span class="line">	[<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        hoursPivot.localRotation = Quaternion.Euler(<span class="number">0f</span>,<span class="number">0f</span>, hoursToDegrees * DateTime.Now.Hour);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【**<code>const</code>类型有什么特殊之处？**】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const关键词表示该值永远不会改变，它的值会在编译期间计算并替换为常量来使用。</span><br></pre></td></tr></table></figure>
+
+<p>现在，我们来使用对其他两个指针做类似的处理，一分钟和一秒钟都是以 -6° 来表示，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>, minutesToDegrees = <span class="number">-6f</span>, secondsToDegrees = <span class="number">-6f</span>;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">		hoursPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, hoursToDegrees * DateTime.Now.Hour);</span><br><span class="line">		minutesPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, minutesToDegrees * DateTime.Now.Minute);</span><br><span class="line">		secondsPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, secondsToDegrees * DateTime.Now.Second);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf80706569.png" alt="image-20220911212946178" style="zoom:80%;" />
+
+<p>我们在使用 <a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/search/en-us?query=DateTime">DateTime</a>.Now 调用三次该方法，这样会导致，每次获取的数值会产生微小的差异。为了确保这种情况不再发生，我们应该只检索一次时间，我们可以通过声明一个变量并将时间分配给它来完成这点。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>, minutesToDegrees = <span class="number">-6f</span>, secondsToDegrees = <span class="number">-6f</span>;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">		DateTime time = DateTime.Now;</span><br><span class="line">		hoursPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, hoursToDegrees * time.Hour);</span><br><span class="line">		minutesPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, minutesToDegrees * time.Minute);</span><br><span class="line">		secondsPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, secondsToDegrees * time.Second);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是变量，可以省略其类型声明，使用<code>var</code>关键字来替换它，这样可以缩短代码，但是只有当变量类型被分配值的时候才会推测其类型。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> time = DateTime.Now</span><br></pre></td></tr></table></figure>
+
+<h2 id="让指针动起来"><a href="#让指针动起来" class="headerlink" title="让指针动起来"></a>让指针动起来</h2><p>现在我们进入播放模式，指针只会变化一次，即进入播放模式（Play）的时刻，我们现在需要将之前的<code>Awake</code>方法改为<code>Update</code>。这是另一个特殊的事件方法，该方法只要我们保持播放模式（Play），Unity 就会在每帧调用一次该方法，而不是类似于<code>Awake</code>方法只调用一次。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>, minutesToDegrees = <span class="number">-6f</span>, secondsToDegrees = <span class="number">-6f</span>;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">		DateTime time = DateTime.Now;</span><br><span class="line">		hoursPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, hoursToDegrees * time.Hour);</span><br><span class="line">		minutesPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, minutesToDegrees * time.Minute);</span><br><span class="line">		secondsPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, secondsToDegrees * time.Second);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><video src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/PicGo/Discrete Updating Clock - Create, .webm" controls="" width="50%" ></video></p>
+<p>需要注意的是：我们创建的 Clock 组件（脚本）在检查器（<em>Inspector</em>）面板中出现了一个选择框，这意味我们可以通过禁用组件来禁用其中的<code>Update</code>方法。</p>
+<h2 id="连续旋转"><a href="#连续旋转" class="headerlink" title="连续旋转"></a>连续旋转</h2><p>现在我们获得了一个离散的数字时针，但是通常来说，我们的时针具有缓慢旋转的指针，可以提供时间的模拟表示，现在来让我们对代码进行部分修改。</p>
+<p><a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/search/en-us?query=DateTime">DateTime</a> 类型并不包含小数数据，幸运的是，它确实有一个 <code>TimeOfDay</code>的属性。它返回一个<code>TimeSpan</code>类型的值，其中包含我们所需要的个数的数据，通过其<code>TotalHours，TotalMinutes,TotalSeconds</code>属性来设置我们的指针变化。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>, minutesToDegrees = <span class="number">-6f</span>, secondsToDegrees = <span class="number">-6f</span>;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		TimeSpan time = DateTime.Now.TimeOfDay;</span><br><span class="line">		hoursPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, hoursToDegrees * time.TotalHours);</span><br><span class="line">		minutesPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, minutesToDegrees * time.TotalMinutes);</span><br><span class="line">		secondsPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, secondsToDegrees * time.TotalSeconds);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果这么写的话，编译器会给我们报错：无法从<code>double</code>转换为<code>float</code>类型，这是因为<code>TimeSpan</code>属性是双精度类型，即<code>double</code>类型。该类型提供了比<code>float</code>精度更高的类型。但是Unity 提供的方法仅仅接收一个单精度类型的数值。</p>
+<p>所以我们可以通过显示转换类型来解决这个问题，此过程称为强制类型转换，通过在要转换的数值前面圆括号内写入要转换的类型即可。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Clock</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> hoursToDegrees = <span class="number">-30f</span>, minutesToDegrees = <span class="number">-6f</span>, secondsToDegrees = <span class="number">-6f</span>;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">	Transform hoursPivot, minutesPivot, secondsPivot;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		TimeSpan time = DateTime.Now.TimeOfDay;</span><br><span class="line">		hoursPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, hoursToDegrees * (<span class="built_in">float</span>)time.TotalHours);</span><br><span class="line">		minutesPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, minutesToDegrees * (<span class="built_in">float</span>)time.TotalMinutes);</span><br><span class="line">		secondsPivot.localRotation =</span><br><span class="line">			Quaternion.Euler(<span class="number">0f</span>, <span class="number">0f</span>, secondsToDegrees * (<span class="built_in">float</span>)time.TotalSeconds);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><video src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/PicGo/Analog Updating Clock - Create, Discover and Share Awesome GIFs on Gfycat.webm" controls="" width="50%" ></video></p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>到目前为止，你已经了解了 Unity中创建对象（物体）和编写代码的相关基础了，下一个教程是：  <a href="httpss://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/%E3%80%90%E5%9F%BA%E7%A1%80%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/">构建函数可视化图形</a>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2001%E3%80%91%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93%E5%92%8C%E8%84%9A%E6%9C%AC/">https://www.helloseraphine.top/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2001%E3%80%91%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93%E5%92%8C%E8%84%9A%E6%9C%AC/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf73478fb4.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/NAS%E5%85%A5%E9%97%A8/" title="NAS入门"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf451322ba.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">NAS入门</div></div></a></div><div class="next-post pull-right"><a href="/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/%E7%8C%AB%E5%BC%8F%E6%95%99%E7%A8%8B/" title="猫式教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf6eee7fe8.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">猫式教程</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93%E5%92%8C%E8%84%9A%E6%9C%AC"><span class="toc-number">1.</span> <span class="toc-text">游戏物体和脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">创建项目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.</span> <span class="toc-text">新项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E5%B8%83%E5%B1%80"><span class="toc-number">2.2.</span> <span class="toc-text">编辑器布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85"><span class="toc-number">2.3.</span> <span class="toc-text">包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4"><span class="toc-number">2.4.</span> <span class="toc-text">色彩空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%9C%BA%E6%99%AF"><span class="toc-number">2.5.</span> <span class="toc-text">示例场景</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F"><span class="toc-number">3.</span> <span class="toc-text">构建一个简单的时钟</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.1.</span> <span class="toc-text">创建游戏对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%92%9F%E7%9A%84%E8%A1%A8%E9%9D%A2"><span class="toc-number">3.2.</span> <span class="toc-text">创建时钟的表面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%92%9F%E6%97%B6%E9%97%B4%E6%A0%87%E8%AF%86"><span class="toc-number">3.3.</span> <span class="toc-text">创建时钟时间标识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E5%B0%8F%E6%97%B6%E6%97%B6%E9%97%B4%E6%A0%87%E8%AF%86"><span class="toc-number">3.4.</span> <span class="toc-text">十二小时时间标识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%8C%87%E9%92%88"><span class="toc-number">3.5.</span> <span class="toc-text">创建指针</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E5%8A%A8%E7%94%BB"><span class="toc-number">4.</span> <span class="toc-text">时钟动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E8%84%9A%E6%9C%AC"><span class="toc-number">4.1.</span> <span class="toc-text">C# 脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%96%B0%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.2.</span> <span class="toc-text">定义新组件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%97%B6%E9%92%88%E6%8C%87%E9%92%88"><span class="toc-number">4.3.</span> <span class="toc-text">获取时针指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%8C%87%E9%92%88"><span class="toc-number">4.4.</span> <span class="toc-text">获取所有指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.5.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E4%BB%A3%E7%A0%81%E6%9D%A5%E6%97%8B%E8%BD%AC"><span class="toc-number">4.6.</span> <span class="toc-text">通过代码来旋转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4"><span class="toc-number">4.7.</span> <span class="toc-text">获取当前时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E6%8C%87%E9%92%88"><span class="toc-number">4.8.</span> <span class="toc-text">旋转指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A9%E6%8C%87%E9%92%88%E5%8A%A8%E8%B5%B7%E6%9D%A5"><span class="toc-number">4.9.</span> <span class="toc-text">让指针动起来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%97%8B%E8%BD%AC"><span class="toc-number">4.10.</span> <span class="toc-text">连续旋转</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">5.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

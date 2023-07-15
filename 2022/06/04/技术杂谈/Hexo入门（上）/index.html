@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo入门（上） | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言在我第二次给网站装修的时候，曾经考虑过使用Hexo，不过那个时候看到人家好看的模板需要一定的网页基础，遂就放弃了，随着我今天发现我的网站似乎CSS的CDN服务停止了，遂打算用Hexo+Github+COS来完成网站的布置和搬迁，这样一来可以剩下一笔费用，而且因为Hexo是纯静态的，所以加载速度也会很快。 以此文章记录和帮助需要帮助的伙伴。 什么是HexoHexo是一个轻量级的博客框架，它是通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo入门（上）">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言在我第二次给网站装修的时候，曾经考虑过使用Hexo，不过那个时候看到人家好看的模板需要一定的网页基础，遂就放弃了，随着我今天发现我的网站似乎CSS的CDN服务停止了，遂打算用Hexo+Github+COS来完成网站的布置和搬迁，这样一来可以剩下一笔费用，而且因为Hexo是纯静态的，所以加载速度也会很快。 以此文章记录和帮助需要帮助的伙伴。 什么是HexoHexo是一个轻量级的博客框架，它是通过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf25a54e16.webp">
+<meta property="article:published_time" content="2022-06-04T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:02:13.380Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf25a54e16.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8A%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo入门（上）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:02:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf25a54e16.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Hexo入门（上）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-04T15:30:01.000Z" title="发表于 2022-06-04 23:30:01">2022-06-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:02:13.380Z" title="更新于 2023-07-14 21:02:13">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Hexo入门（上）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在我第二次给网站装修的时候，曾经考虑过使用<code>Hexo</code>，不过那个时候看到人家好看的模板需要一定的网页基础，遂就放弃了，随着我今天发现我的网站似乎<code>CSS</code>的<code>CDN</code>服务停止了，遂打算用<code>Hexo+Github+COS</code>来完成网站的布置和搬迁，这样一来可以剩下一笔费用，而且因为<code>Hexo</code>是纯静态的，所以加载速度也会很快。</p>
+<p>以此文章记录和帮助需要帮助的伙伴。</p>
+<h1 id="什么是Hexo"><a href="#什么是Hexo" class="headerlink" title="什么是Hexo"></a>什么是Hexo</h1><p>Hexo是一个轻量级的博客框架，它是通过生成静态网页来实现网站的建设，因为是<code>HTML</code>形式，所以它的访问速度是很快的，关于<code>Hexo</code>网站可以通过点击访问<a href="httpss://hexo.io/zh-cn/">Hexo官网</a>。</p>
+<h1 id="Hexo的搭建"><a href="#Hexo的搭建" class="headerlink" title="Hexo的搭建"></a>Hexo的搭建</h1><h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p><strong>Hexo需要在电脑上安装<code>Node.JS</code>和<code>Git</code><strong>，如果你已经安装了这两个环境，则可以跳过这部分，直接到<code>Hexo</code>的部署。</strong>此处安装示例环境为<code>Windows</code>环境</strong>，其他系统请自行参考别的文章。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/">点我访问<code>Node.JS</code>官网</a>，进入官网下载符合自己平台的软件，<strong>版本建议使用<code>12.0</code>及以上的版本，可以无脑最新版</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/">点我访问<code>Git</code>官网</a>，关于<code>Git</code>的安装和使用可以参考我这篇文章<a href="httpss://www.helloseraphine.top/index.php/archives/431.html">Git与GitHub(上)</a>，此处不过多赘述</li>
+</ul>
+<blockquote>
+<p><strong>如果以上官网无法访问，可以尝试科学上网或者寻找其他镜像途径</strong></p>
+</blockquote>
+<p>在安装结束后，可以<strong>通过如下<code>CMD</code>命令来验证是否安装成功</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证Node.JS的版本</span></span><br><span class="line">node --version</span><br></pre></td></tr></table></figure>
+
+<p>如果返回的是一串版本号，例如<code>18.1.0</code>，则证明安装成功。</p>
+<p>在完成了上面的基础环境安装，使用如下代码安装<code>Hexo</code>，代码示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>在完成如上准备后，就可以正式开启Hexo博客之路。</p>
+<h2 id="建站预览"><a href="#建站预览" class="headerlink" title="建站预览"></a>建站预览</h2><p>现在<strong>寻找一个文件位置来存放<code>Hexo</code>网站相关根文件</strong>，使用如下代码来完成初始化：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：执行上述代码前，<strong>需要确保当前目录为安装根文件目录</strong>；如果不是，则使用<code>cd</code>命令切换至对应目录</p>
+</blockquote>
+<p>完成<code>Hexo</code>的初始化后，可以看到在对应的目录下，会生成如下的相关文件：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf26249b27.png" alt="image-20220519104258168" style="zoom:80%;" />
+
+<p><strong>如果初始化失败，则删除对应目录下的文件，切换网络重新执行如上命令</strong>即可。</p>
+<p>初始化完成后，<strong>使用如下代码来在本地开一个端口</strong>，查看建站效果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果命令执行报错，返回的错误是找不到命令之类的，需要在<code>Hexo</code>的根目录下使用该命令，或者你也可以将<code>安装目录\Hexo\node_modules\.bin</code>添加到环境变量中，关于如何设置环境变量，可以查看我的这篇文章<a href="httpss://www.helloseraphine.top/index.php/archives/476.html">环境变量那些事</a></p>
+</blockquote>
+<p>执行命令后，会<strong>显示一个访问地址，复制到浏览器上即可查看预览效果</strong>，如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf26705b36.png" alt="image-20220519104626862" style="zoom: 67%;" />
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf26a9c5af.png" alt="image-20220519104737970" style="zoom: 45%;" />
+
+<p>按下<code>Ctrl+C</code>即可停止本地端口占用，即关闭了网站的访问预览。</p>
+<p><strong>如果预览网站报错了，则尝试如下解决办法：</strong></p>
+<ul>
+<li><strong>有进程占用了默认4000端口，可以使用命令<code>hexo s -p 5000</code></strong></li>
+<li><strong>或者是因为你的电脑没有配置<code>IIS</code>，可以通过【打开控制面板】，选择【程序和功能】，选择【打开或关闭Windows功能】，找到【Internet information services】选中即可。</strong></li>
+</ul>
+<h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h2><p>可以通过官方的主题页面选择自己喜欢的主题（如果你不想自己开发的话），<a href="httpss://hexo.io/themes/">Hexo主题(点击访问)</a>，或者从<code>GitHub</code>等途径自行寻找相关主题，然后根据主题的要求来安装和使用主题。</p>
+<p>需要注意的是：<strong>安装主题需要在<code>Hexo</code>根目录下，即<code>themes</code>里创建相关主题的文件夹即可</strong>。</p>
+<p>主题配置完成后，可以使用上面的命令<code>Hexo s</code>来启动预览网站。</p>
+<h1 id="Hexo部署"><a href="#Hexo部署" class="headerlink" title="Hexo部署"></a>Hexo部署</h1><p><code>Hexo</code>因为是生成的静态页面，所以可以部署在很多地方，例如：<code>Github</code> ，<code>Gitee</code>，相关对象存储或者服务器上，<strong>此处仅示例如何部署在：GitHub和腾讯云的COS上</strong></p>
+<h2 id="部署到GitHubPages"><a href="#部署到GitHubPages" class="headerlink" title="部署到GitHubPages"></a>部署到GitHubPages</h2><blockquote>
+<p>关于Git和GitHub的基本使用，可以参考<a href="httpss://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Git%E4%B8%8EGitHub(%E4%B8%8A)/">Git与GitHub(上)</a></p>
+</blockquote>
+<p>Hexo为 GitHub Pages 的部署提供了便利的部署方式，可以通过下面的命令来实现部署：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者简写为</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p><strong>在使用该命令部署到GitHub页面之前，需要</strong>我们<strong>在Hexo的配置文件</strong>中，<strong>提供一些必要的参数</strong>。</p>
+<h3 id="添加配置文件参数"><a href="#添加配置文件参数" class="headerlink" title="添加配置文件参数"></a>添加配置文件参数</h3><p>**Hexo 的配置文件在安装&#x2F;初始化目录下，名称为<code>_config.yml</code>**，打开文件找到如下部分：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf270687b5.png" alt="image-20220604152435494" style="zoom: 80%;" />
+
+<ul>
+<li><strong><code>type</code>：在本方法下，填写<code>git</code></strong></li>
+<li><strong><code>repo</code>：你所存放网页的Github仓库地址</strong></li>
+<li><strong><code>branch</code>：分支名称，如果不懂的话填<code>main</code>即可</strong></li>
+<li><strong><code>token</code>：访问GitHub账户的令牌，它可以验证是否有权限操作仓库</strong></li>
+</ul>
+<p>如上前三个参数，可以快速填写，我们需要填写第四个<code>token</code>参数，才能实现上传前的设置。</p>
+<h3 id="token的获取"><a href="#token的获取" class="headerlink" title="token的获取"></a>token的获取</h3><ol>
+<li><p>进入【个人账户的设置】中</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2743bc59.png" alt="image-20220604153054210" style="zoom:50%;" />
+</li>
+<li><p>在页面的<strong>最下面找到并【选择<code>Developer settings</code>(开发者选项)】</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf277e7db2.png" alt="image-20220604153219875" style="zoom: 67%;" />
+</li>
+<li><p>在新的页面找到并<strong>【选择<code>Personal access tokens</code>(个人访问令牌)】，然后【选择<code>Generate new token</code>(生成新令牌)】</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf27b6b2f3.png" alt="image-20220604153458147" style="zoom:80%;" />
+</li>
+<li><p>在创建<code>token</code>的页面中<strong>，<code>Note(名称)</code>可以随便填，<code>Expiration(令牌期限)</code>可以选择<code>no expiration（不限制期限） </code>，下面的<code>Select scopes（权限范围）</code>全选即可。</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf27ef366e.png" alt="image-20220604153920416" style="zoom: 67%;" />
+</li>
+<li><p>最后<strong>【点击<code>Generate token</code>】就创建好<code>token</code>了，然后【复制给出的<code>token</code>值】，【填写到配置文件】中<code>token:</code>的部分</strong>就完成了部署前的配置。</p>
+</li>
+</ol>
+<p>这个时候可以通过<strong>使用<code>hexo d</code>命令来测试</strong>上传部署到指定的GitHub仓库是否正常，<strong>如果最后反馈一行<code>INFO  Deploy done: git</code>，则表示上传部署成功</strong>。</p>
+<h2 id="部署到腾讯云COS"><a href="#部署到腾讯云COS" class="headerlink" title="部署到腾讯云COS"></a>部署到腾讯云COS</h2><blockquote>
+<p>感兴趣但是不了解的COS的可以查看这篇文章<a href="httpss://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/%E5%85%B3%E4%BA%8E%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E9%82%A3%E4%BA%9B%E4%BA%8B%EF%BC%88%E4%B8%8B%EF%BC%89/#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%EF%BC%9F">关于网站搭建那些事（下）</a></p>
+</blockquote>
+<p>官方并没有对腾讯云的COS（对象存储）做直接的配置，所以我们需要下载其他开发者的插件，此处**使用<code>hexo-deployer-cos</code>，项目地址<a href="httpss://github.com/sdlzhd/hexo-deployer-cos">hexo-deployer-cos**</a>，如果对你有帮助，可以给插件开发者点个<code>Star</code>。</p>
+<p>在hexo安装的目录下，使用如下命令进行插件的安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-cos --save</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，在hexo 的配置文件中，添加如下部分内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">cos</span></span><br><span class="line">  <span class="attr">secretId:</span> <span class="string">yourSecretId</span></span><br><span class="line">  <span class="attr">secretKey:</span> <span class="string">yourSecretKey</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">yourBucket</span></span><br><span class="line">  <span class="attr">region:</span> <span class="string">yourRegion</span></span><br></pre></td></tr></table></figure>
+
+<p>关于上述的<code>secretID</code>等参数可以在创建COS存储桶的时候获取到，COS的创建可以访问<a href="httpss://cloud.tencent.com/product/cos">对象存储COS</a>来创建，关于COS的更多说明和处理，参见<a href="httpss://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/%E5%85%B3%E4%BA%8E%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E9%82%A3%E4%BA%9B%E4%BA%8B%EF%BC%88%E4%B8%8B%EF%BC%89/#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%EF%BC%9F">关于网站搭建那些事（下）</a>。</p>
+<blockquote>
+<p>注：对象存储是需要对存储空间和访问流量进行收费的</p>
+</blockquote>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>如上就完成了Hexo 的基本部署，以后如果你的博客更新都需要通过<code>hexo d</code>的命令来实现。</p>
+<p>关于Hexo的文章更新，文章编写，插件，主题等配置可以参见<a href="">Hexo入门（下）</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8A%EF%BC%89/">https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8A%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf25a54e16.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8B%EF%BC%89/" title="Hexo入门（下）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2e34cb7c.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hexo入门（下）</div></div></a></div><div class="next-post pull-right"><a href="/2022/06/12/%E8%AF%AD%E8%A8%80%E6%A0%91/CSharp/%E3%80%90CSharp%E5%AE%9E%E4%BE%8B%E3%80%91%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" title="【CSharp实例】文件基本操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb63c9074c.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【CSharp实例】文件基本操作</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHexo"><span class="toc-number">2.</span> <span class="toc-text">什么是Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">Hexo的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-number">3.1.</span> <span class="toc-text">环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%99%E9%A2%84%E8%A7%88"><span class="toc-number">3.2.</span> <span class="toc-text">建站预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">主题配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo%E9%83%A8%E7%BD%B2"><span class="toc-number">4.</span> <span class="toc-text">Hexo部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GitHubPages"><span class="toc-number">4.1.</span> <span class="toc-text">部署到GitHubPages</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%82%E6%95%B0"><span class="toc-number">4.1.1.</span> <span class="toc-text">添加配置文件参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#token%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="toc-number">4.1.2.</span> <span class="toc-text">token的获取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91COS"><span class="toc-number">4.2.</span> <span class="toc-text">部署到腾讯云COS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">5.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

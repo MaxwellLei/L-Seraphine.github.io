@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【4.0】模块 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言因为Python是解释型的，这就意味着如果你运行后退出再次运行，之前定义的变量及其相关数据都会丢失。因此如果你希望编写一些长的程序，则需要使用文本编辑器来进行，并将编辑好的python代码作为输入运行。这种形式的文件被称为：脚本。 随着编写的内容越来越多，当你希望将其编写的内容拆分成几个不同类型的文件以方便维护；或者你希望经常使用自己的某个函数（方法），而不必要每次都编写一次代码内容。为了支持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【4.0】模块">
+<meta property="og:url" content="https://www.helloseraphine.top/2023/06/28/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%904.0%E3%80%91%E6%A8%A1%E5%9D%97/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言因为Python是解释型的，这就意味着如果你运行后退出再次运行，之前定义的变量及其相关数据都会丢失。因此如果你希望编写一些长的程序，则需要使用文本编辑器来进行，并将编辑好的python代码作为输入运行。这种形式的文件被称为：脚本。 随着编写的内容越来越多，当你希望将其编写的内容拆分成几个不同类型的文件以方便维护；或者你希望经常使用自己的某个函数（方法），而不必要每次都编写一次代码内容。为了支持">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbe5b314d5.webp">
+<meta property="article:published_time" content="2023-06-28T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:04:28.075Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbe5b314d5.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2023/06/28/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%904.0%E3%80%91%E6%A8%A1%E5%9D%97/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【4.0】模块',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:04:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64abbe5b314d5.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【4.0】模块</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-28T15:30:01.000Z" title="发表于 2023-06-28 23:30:01">2023-06-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:04:28.075Z" title="更新于 2023-07-14 21:04:28">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/">语言树</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【4.0】模块"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为<code>Python</code>是解释型的，这就意味着如果你运行后退出再次运行，之前定义的变量及其相关数据都会丢失。因此如果你希望编写一些长的程序，则需要使用文本编辑器来进行，并将编辑好的<code>python</code>代码作为输入运行。这种形式的文件被称为：<strong>脚本</strong>。</p>
+<p>随着编写的内容越来越多，当你希望将其编写的内容拆分成几个不同类型的文件以方便维护；或者你希望经常使用自己的某个函数（方法），而不必要每次都编写一次代码内容。为了支持这些需求，<code>python</code>可以将定义放在一个文件里，并在脚本中交互的时候它们。这种文件被称为：<strong>模块</strong>。</p>
+<p>在我们编写的脚本中，可以导入不同的模块，以实现各种我们所需要的功能。</p>
+<p>模块本质仍是一个包含<code>python</code>语句的文件，其后缀为：<code>.py</code>。在模块内部，模块名称可以通过全局变量<code>__name__</code>的值获得。</p>
+<p>例如，你可以在任意文件路径下，创建一个新的<code>.py</code>文件，其代码内容如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">PutText</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;test&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>该<code>.py</code>文件中仅仅定义了一个名称为<code>PutText</code>的函数（方法），你可以通过如下代码在另一个<code>.py</code>文件中，调用你定义的这个方法，代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment">#此处路径为你新建那个.py文件的文件夹路径</span></span><br><span class="line">path = <span class="string">&#x27;D:\\DATA\\PythonProject\\Learn001&#x27;</span></span><br><span class="line">sys.path.append(os.path.abspath(path))</span><br><span class="line"></span><br><span class="line"><span class="comment">#此处导入的名称应该为你创建的.py文件的名称，我命名为：Test002</span></span><br><span class="line"><span class="keyword">import</span> Test002</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用文件名称.可以访问并调用其中的内容</span></span><br><span class="line">Test002.PutText()</span><br></pre></td></tr></table></figure>
+
+<p>如果你经常使用某个函数，你可以将其赋值为一个变量来更快的调用该函数，代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fun = Test002.PutText</span><br><span class="line">fun()</span><br></pre></td></tr></table></figure>
+
+<h1 id="更多关于模块的信息"><a href="#更多关于模块的信息" class="headerlink" title="更多关于模块的信息"></a>更多关于模块的信息</h1><p>每个模块都是独立的个体，它们包含了各自的函数或者变量的“表”，并不会与你现模块中的变量等发生冲突。我们可以通过<code>import</code>关键词来导入其他模块，模块被导入后，就可以通过<code>模块名称.变量/函数</code>来调用模块内的变量或者函数等。</p>
+<blockquote>
+<p>从习惯上来说，所有的<code>import</code>语句都应该放在模块&#x2F;脚本的开头</p>
+</blockquote>
+<p>当然，我们也可以直接选择导入模块中的指定函数，代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Test002 <span class="keyword">import</span> PutText</span><br><span class="line">PutText()</span><br></pre></td></tr></table></figure>
+
+<p>此处，我将我的<code>Test002</code>模块中的<code>PutText</code>函数导入到了现模块中，这样可以直接使用<code>PutText</code>来调用函数。需要注意的是，这样引入仅仅引入了<code>PutText</code>，这意味着你并不能调用到<code>Test002</code>这个模块中的其他内容。</p>
+<p>你甚至可以使用如下代码，来直接引入指定模块中所有函数，代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Test002 <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+
+<p><strong>这样<code>python</code>会调入所有非下划线（<code>_</code>）开头的名称</strong>。不过，在绝大多数情况下，并不会使用这种语句，因为它可能会导致引入模块中的名称覆盖了现模块中已经定义过的东西。</p>
+<p>当然，你也可以通过使用关键词<code>as</code>来为引入的指定模块中的名称做重命名，进行现模块绑定，这么说可能不太好理解，可以通过如下代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Test002 <span class="keyword">import</span> PutText <span class="keyword">as</span> output</span><br><span class="line">output()</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，我使用了<code>output</code>来绑定到导入的<code>Test002</code>模块中的<code>PutText</code>函数名称，这样在我希望调用<code>PutText</code>函数的时候，就可以直接使用我绑定的名称<code>output</code>来调用。</p>
+<p>同样的，我们也可以使用<code>as</code>关键字来重命名导入的模块，其代码类似如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">impotimport Test002 <span class="keyword">as</span> newName</span><br><span class="line">newName.PutText()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：每个模块只会在解释器中导入一次，如果你在执行中改变了你的模块内容，则必须重新启动解释器才能保证你改变的模块内容能正确调用。如果你仅仅是希望在改变后做测试，可以尝试使用 <a href="httpss://docs.python.org/zh-cn/3.8/library/importlib.html#importlib.reload"><code>importlib.reload()</code></a> 函数。</p>
+</blockquote>
+<h2 id="模块搜索路径"><a href="#模块搜索路径" class="headerlink" title="模块搜索路径"></a>模块搜索路径</h2><p>当你需要导入一个名称为<code>Test001</code>的模块的时候，<strong>解释器首先寻找具有该名称的内置模块</strong>。如果没有找到，然后解释器从 <a href="httpss://docs.python.org/zh-cn/3.8/library/sys.html#sys.path"><code>sys.path</code></a> 变量给出的目录列表里寻找名为 <code>spam.py</code> 的文件。<a href="httpss://docs.python.org/zh-cn/3.8/library/sys.html#sys.path"><code>sys.path</code></a> 初始有这些目录地址：</p>
+<ul>
+<li>包含输入脚本的目录（或者未指定文件时的当前目录）。</li>
+<li><a href="httpss://docs.python.org/zh-cn/3.8/using/cmdline.html#envvar-PYTHONPATH"><code>PYTHONPATH</code></a> （一个拓展目录名称的列表，它和shell变量 <code>PATH</code> 有一样的语法）。</li>
+<li>取决于安装的默认设置</li>
+</ul>
+<blockquote>
+<p>需要注意的是，你可以在运行脚本的时候更改<code>sys.path</code>的列表内容，但是通常来说建议是将新增的目录添加到列表的后面，而不是开头；否则可能会出现优先调用你新添加的目录模块，而不是旧的标准模块。</p>
+</blockquote>
+<h2 id="编译过的Pyhton文件"><a href="#编译过的Pyhton文件" class="headerlink" title="编译过的Pyhton文件"></a>编译过的<code>Pyhton</code>文件</h2><p>为了加速模块载入，<code>Python</code>在 <code>__pycache__</code> 目录里缓存了每个模块的编译后版本，名称为 <code>module.*version*.pyc</code> ，其中名称中的版本字段对编译文件的格式进行编码； 它一般使用<code>Python</code>版本号。例如，我的<code>Test002</code>会被命名为：<code>Test002.cpython-38.pyc</code>。这种命名方式会允许不同版本的<code>Python</code>已编译模块共存。</p>
+<p><code>Python</code>根据编译版本检查源的修改日期，以查看它是否已过期并需要重新编译。这是一个完全自动化的过程。</p>
+<p>Python在两种情况下不会检查缓存。首先，对于从命令行直接载入的模块，它从来都是重新编译并且不存储编译结果；其次，如果没有源模块，它不会检查缓存。为了支持无源文件（仅编译）发行版本， 编译模块必须是在源目录下，并且绝对不能有源模块。</p>
+<h1 id="标准模块"><a href="#标准模块" class="headerlink" title="标准模块"></a>标准模块</h1><p>Python附带了一个标准模块库；一些模块内置于解释器中；它们提供对不属于语言核心但仍然内置的操作的访问，以提高效率或提供对系统调用等操作系统原语的访问。</p>
+<p>这些模块的集合是一个配置选项，它也取决于底层平台。例如，<a href="httpss://docs.python.org/zh-cn/3.8/library/winreg.html#module-winreg"><code>winreg</code></a> 模块只在Windows操作系统上提供。一个特别值得注意的模块 <a href="httpss://docs.python.org/zh-cn/3.8/library/sys.html#module-sys"><code>sys</code></a>，它被内嵌到每一个Python解释器中。变量 <code>sys.ps1</code> 和 <code>sys.ps2</code> 定义用作主要和辅助提示的字符串，例如<code>sys.ps1</code>其是<code>&gt;&gt;&gt;</code>字符，<code>sys.ps2</code>其是<code>...</code>字符。</p>
+<blockquote>
+<p>注：这两个变量只有在编译器是交互模式（命令行）下才被定义。</p>
+</blockquote>
+<p><strong><code>sys.path</code> 变量是一个字符串列表，用于确定解释器的模块搜索路径</strong>。该变量被初始化为从环境变量 <a href="httpss://docs.python.org/zh-cn/3.8/using/cmdline.html#envvar-PYTHONPATH"><code>PYTHONPATH</code></a> 获取的默认路径，或者如果 <a href="httpss://docs.python.org/zh-cn/3.8/using/cmdline.html#envvar-PYTHONPATH"><code>PYTHONPATH</code></a> 未设置，则从内置默认路径初始化。你可以使用标准列表操作对其进行修改，代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.path.append(<span class="string">&#x27;这里是你的搜索路径目录&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="dir-函数"><a href="#dir-函数" class="headerlink" title="dir()函数"></a><code>dir()</code>函数</h1><p>内置函数 <a href="httpss://docs.python.org/zh-cn/3.8/library/functions.html#dir"><code>dir()</code></a> <strong>用于查找模块定义的名称</strong>。 它返回一个排序过的字符串列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">dir</span>(sys):</span><br><span class="line">    <span class="built_in">print</span>(a)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#输出结果</span></span><br><span class="line">__breakpointhook__</span><br><span class="line">__displayhook__</span><br><span class="line">__doc__</span><br><span class="line">__excepthook__</span><br><span class="line">__interactivehook__</span><br><span class="line">__loader__</span><br><span class="line">__name__</span><br><span class="line">__package__</span><br><span class="line">__spec__</span><br><span class="line">__stderr__</span><br><span class="line">__stdin__</span><br><span class="line">__stdout__</span><br><span class="line">__unraisablehook__</span><br><span class="line">_base_executable</span><br><span class="line">_clear_type_cache</span><br><span class="line">_current_frames</span><br><span class="line">_debugmallocstats</span><br><span class="line">_enablelegacywindowsfsencoding</span><br><span class="line">_framework</span><br><span class="line">_getframe</span><br><span class="line">_git</span><br><span class="line">_home</span><br><span class="line">_xoptions</span><br><span class="line">addaudithook</span><br><span class="line">api_version</span><br><span class="line">argv</span><br><span class="line">audit</span><br><span class="line">base_exec_prefix</span><br><span class="line">base_prefix</span><br><span class="line">breakpointhook</span><br><span class="line">builtin_module_names</span><br><span class="line">byteorder</span><br><span class="line">call_tracing</span><br><span class="line">callstats</span><br><span class="line">copyright</span><br><span class="line">displayhook</span><br><span class="line">dllhandle</span><br><span class="line">dont_write_bytecode</span><br><span class="line">exc_info</span><br><span class="line">excepthook</span><br><span class="line">exec_prefix</span><br><span class="line">executable</span><br><span class="line">exit</span><br><span class="line">flags</span><br><span class="line">float_info</span><br><span class="line">float_repr_style</span><br><span class="line">get_asyncgen_hooks</span><br><span class="line">get_coroutine_origin_tracking_depth</span><br><span class="line">getallocatedblocks</span><br><span class="line">getcheckinterval</span><br><span class="line">getdefaultencoding</span><br><span class="line">getfilesystemencodeerrors</span><br><span class="line">getfilesystemencoding</span><br><span class="line">getprofile</span><br><span class="line">getrecursionlimit</span><br><span class="line">getrefcount</span><br><span class="line">getsizeof</span><br><span class="line">getswitchinterval</span><br><span class="line">gettrace</span><br><span class="line">getwindowsversion</span><br><span class="line">hash_info</span><br><span class="line">hexversion</span><br><span class="line">implementation</span><br><span class="line">int_info</span><br><span class="line">intern</span><br><span class="line">is_finalizing</span><br><span class="line">maxsize</span><br><span class="line">maxunicode</span><br><span class="line">meta_path</span><br><span class="line">modules</span><br><span class="line">path</span><br><span class="line">path_hooks</span><br><span class="line">path_importer_cache</span><br><span class="line">platform</span><br><span class="line">prefix</span><br><span class="line">pycache_prefix</span><br><span class="line">set_asyncgen_hooks</span><br><span class="line">set_coroutine_origin_tracking_depth</span><br><span class="line">setcheckinterval</span><br><span class="line">setprofile</span><br><span class="line">setrecursionlimit</span><br><span class="line">setswitchinterval</span><br><span class="line">settrace</span><br><span class="line">stderr</span><br><span class="line">stdin</span><br><span class="line">stdout</span><br><span class="line">thread_info</span><br><span class="line">unraisablehook</span><br><span class="line">version</span><br><span class="line">version_info</span><br><span class="line">warnoptions</span><br><span class="line">winver</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果没有参数，<a href="httpss://docs.python.org/zh-cn/3.8/library/functions.html#dir"><code>dir()</code></a> 会列出你当前定义的名称</strong>。</p>
+<blockquote>
+<p>注：它列出所有类型的名称：变量，模块，函数，等等。</p>
+</blockquote>
+<p><a href="httpss://docs.python.org/zh-cn/3.8/library/functions.html#dir"><code>dir()</code></a> <strong>不会列出内置函数和变量的名称</strong>。如果你想要这些，它们的定义是在标准模块 <a href="httpss://docs.python.org/zh-cn/3.8/library/builtins.html#module-builtins"><code>builtins</code></a> 中:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> builtins</span><br><span class="line"><span class="built_in">dir</span>(builtins)  </span><br></pre></td></tr></table></figure>
+
+<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><p>包是一种通过用“带点号的模块名”来构造 Python 模块命名空间的方法。 例如，模块名 <code>A.B</code> 表示 <code>A</code> 包中名为 <code>B</code> 的子模块。</p>
+<p>假设你想为声音文件和声音数据的统一处理，设计一个模块集合（一个“包”）。由于存在很多不同的声音文件格式（通常由它们的扩展名来识别，例如：<code>.wav</code>， <code>.aiff</code>， <code>.au</code>），因此为了不同文件格式间的转换，你可能需要创建和维护一个不断增长的模块集合。 你可能还想对声音数据还做很多不同的处理（例如，混声，添加回声，使用均衡器功能，创造人工立体声效果）， 因此为了实现这些处理，你将另外写一个无穷尽的模块流。这是你的包的可能结构（以分层文件系统的形式表示）：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">sound/                          Top-level <span class="keyword">package</span></span><br><span class="line">      __init__.py               Initialize the sound <span class="keyword">package</span></span><br><span class="line">      formats/                  Subpackage <span class="keyword">for</span> <span class="keyword">file</span> <span class="keyword">format</span> conversions</span><br><span class="line">              __init__.py</span><br><span class="line">              wavread.py</span><br><span class="line">              wavwrite.py</span><br><span class="line">              aiffread.py</span><br><span class="line">              aiffwrite.py</span><br><span class="line">              auread.py</span><br><span class="line">              auwrite.py</span><br><span class="line">              ...</span><br><span class="line">      effects/                  Subpackage <span class="keyword">for</span> sound effects</span><br><span class="line">              __init__.py</span><br><span class="line">              echo.py</span><br><span class="line">              surround.py</span><br><span class="line">              reverse.py</span><br><span class="line">              ...</span><br><span class="line">      filters/                  Subpackage <span class="keyword">for</span> filters</span><br><span class="line">              __init__.py</span><br><span class="line">              equalizer.py</span><br><span class="line">              vocoder.py</span><br><span class="line">              karaoke.py</span><br><span class="line">              ...</span><br></pre></td></tr></table></figure>
+
+<p><strong>包必须要有 <code>__init__.py</code> 文件才能让 Python 将包含该文件的目录当作包</strong>。 这样可以防止具有通常名称例如 <code>string</code> 的目录在无意中隐藏稍后在模块搜索路径上出现的有效模块。 在最简单的情况下，<code>__init__.py</code> 可以只是一个空文件，但它也可以执行包的初始化代码或设置 <code>__all__</code> 变量，具体将会在后面说明。</p>
+<p>包的用户可以从包中导入单个模块，代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sound.effects.echo</span><br></pre></td></tr></table></figure>
+
+<p>这会加载子模块 <code>sound.effects.echo</code> 。但引用它时必须使用它的全名。</p>
+<p>导入子模块的另一种方法是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from sound.effects import echo</span><br></pre></td></tr></table></figure>
+
+<p>这也会加载子模块 <code>echo</code> ，并使其在没有包前缀的情况下可用。</p>
+<p>另一种形式是直接导入所需的函数或变量:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from sound.effects.echo import echofilter</span><br></pre></td></tr></table></figure>
+
+<p>同样，这也会加载子模块 <code>echo</code>，但这会使其函数 <code>echofilter()</code> 直接可用。</p>
+<p>注意，当使用 <code>from package import item</code> 时，item可以是包的子模块（或子包），也可以是包中定义的其他名称，如函数，类或变量。 <code>import</code> 语句首先测试是否在包中定义了item；如果没有，它假定它是一个模块并尝试加载它。如果找不到它，则引发 <a href="httpss://docs.python.org/zh-cn/3.8/library/exceptions.html#ImportError"><code>ImportError</code></a> 异常。</p>
+<p>相反，当使用 <code>import item.subitem.subsubitem</code> 这样的语法时，除了最后一项之外的每一项都必须是一个包；最后一项可以是模块或包，但不能是前一项中定义的类或函数或变量。</p>
+<h2 id="从包中导入"><a href="#从包中导入" class="headerlink" title="从包中导入 *"></a>从包中导入 *</h2><p>当用户写 <code>from sound.effects import *</code> 会发生什么？理想情况下，人们希望这会以某种方式传递给文件系统，找到包中存在哪些子模块，并将它们全部导入。这可能需要很长时间，导入子模块可能会产生不必要的副作用，这种副作用只有在显式导入子模块时才会发生。</p>
+<p><strong>唯一的解决方案是让包作者提供一个包的显式索引</strong>。<a href="httpss://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#import"><code>import</code></a> 语句使用下面的规范：<strong>如果一个包的 <code>__init__.py</code> 代码定义了一个名为 <code>__all__</code> 的列表，它会被视为在遇到 <code>from package import *</code> 时应该导入的模块名列表</strong>。在发布该包的新版本时，包作者可以决定是否让此列表保持更新。包作者如果认为从他们的包中导入 * 的操作没有必要被使用，也可以决定不支持此列表。例如，文件 <code>sound/effects/__init__.py</code> 可以包含以下代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__all__ = [&quot;echo&quot;, &quot;surround&quot;, &quot;reverse&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>这意味着 <code>from sound.effects import *</code> 将导入 <code>sound</code> 包的三个命名子模块。</p>
+<p>如果没有定义 <code>__all__</code>，<code>from sound.effects import *</code> 语句 <em>不会</em> 从包 <code>sound.effects</code> 中导入所有子模块到当前命名空间；它只确保导入了包 <code>sound.effects</code> （可能运行任何在 <code>__init__.py</code> 中的初始化代码），然后导入包中定义的任何名称。 这包括 <code>__init__.py</code> 定义的任何名称（以及显式加载的子模块）。它还包括由之前的 <a href="httpss://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#import"><code>import</code></a> 语句显式加载的包的任何子模块。</p>
+<h2 id="子包参考"><a href="#子包参考" class="headerlink" title="子包参考"></a>子包参考</h2><p>当包被构造成子包时（与示例中的 <code>sound</code> 包一样），你可以使用绝对导入来引用兄弟包的子模块。例如，如果模块 <code>sound.filters.vocoder</code> 需要在 <code>sound.effects</code> 包中使用 <code>echo</code> 模块，它可以使用 <code>from sound.effects import echo</code> 。</p>
+<p>你还可以使用import语句的 <code>from module import name</code> 形式编写相对导入。这些导入使用前导点来指示相对导入中涉及的当前包和父包。例如，从 <code>surround</code> 模块，你可以使用:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from . import echo</span><br><span class="line">from .. import formats</span><br><span class="line">from ..filters import equalizer</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：相对导入是基于当前模块的名称进行导入的。由于主模块的名称总是 <code>&quot;__main__&quot;</code> ，因此用作Python应用程序主模块的模块必须始终使用绝对导入。</p>
+</blockquote>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>看起来有点冗杂，甚至有些难以理解，大概讲述了基本到模块调用，再到包结构和包的引用，可以不需要全部理解，用的时候慢慢也就能最后学到的</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2023/06/28/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%904.0%E3%80%91%E6%A8%A1%E5%9D%97/">https://www.helloseraphine.top/2023/06/28/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%904.0%E3%80%91%E6%A8%A1%E5%9D%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbe5b314d5.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/27/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%903.0%E3%80%91%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="【3.0】数据结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbce73c600.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【3.0】数据结构</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/" title="【6.0】虚拟环境和包"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbedaf2bdd.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【6.0】虚拟环境和包</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">更多关于模块的信息</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-number">2.1.</span> <span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%9A%84Pyhton%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">编译过的Pyhton文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">标准模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dir-%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">dir()函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%85"><span class="toc-number">5.</span> <span class="toc-text">包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%8C%85%E4%B8%AD%E5%AF%BC%E5%85%A5"><span class="toc-number">5.1.</span> <span class="toc-text">从包中导入 *</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%8C%85%E5%8F%82%E8%80%83"><span class="toc-number">5.2.</span> <span class="toc-text">子包参考</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">6.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

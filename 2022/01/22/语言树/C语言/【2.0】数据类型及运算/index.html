@@ -1,0 +1,730 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【2.0】C-数据类型及运算 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【2.0】数据类型及运算前言c 语言经典的入门内容，笔记断断续续写了一个多礼拜，最近一直在考试，碰到考试周了就很头疼。 标识符和关键字C程序由C语言的基本字符组成，基本字符依据规则组成C语言的标识符和关键词，再按照语法要求构成程序。 标识符C语言中由用户命名的符号称为标识符，用来标明用户设定的变量名，数组名，函数名，结构体名等。标识符必须由有效字符构成，也就是标识符要合法。 C语言的命名规则如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【2.0】C-数据类型及运算">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/01/22/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%902.0%E3%80%91%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="【2.0】数据类型及运算前言c 语言经典的入门内容，笔记断断续续写了一个多礼拜，最近一直在考试，碰到考试周了就很头疼。 标识符和关键字C程序由C语言的基本字符组成，基本字符依据规则组成C语言的标识符和关键词，再按照语法要求构成程序。 标识符C语言中由用户命名的符号称为标识符，用来标明用户设定的变量名，数组名，函数名，结构体名等。标识符必须由有效字符构成，也就是标识符要合法。 C语言的命名规则如下：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7e64fec3.jpg">
+<meta property="article:published_time" content="2022-01-22T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:03:42.627Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7e64fec3.jpg"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/01/22/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%902.0%E3%80%91%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E8%BF%90%E7%AE%97/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【2.0】C-数据类型及运算',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:03:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7e64fec3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【2.0】C-数据类型及运算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-22T15:30:01.000Z" title="发表于 2022-01-22 23:30:01">2022-01-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:03:42.627Z" title="更新于 2023-07-14 21:03:42">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/">语言树</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>27分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【2.0】C-数据类型及运算"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="【2-0】数据类型及运算"><a href="#【2-0】数据类型及运算" class="headerlink" title="【2.0】数据类型及运算"></a>【2.0】数据类型及运算</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>c 语言经典的入门内容，笔记断断续续写了一个多礼拜，最近一直在考试，碰到考试周了就很头疼。</p>
+<h1 id="标识符和关键字"><a href="#标识符和关键字" class="headerlink" title="标识符和关键字"></a>标识符和关键字</h1><p>C程序由C语言的基本字符组成，基本字符依据规则组成C语言的<strong>标识符</strong>和<strong>关键词</strong>，再按照语法要求构成程序。</p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>C语言中由<strong>用户命名的符号称为标识符</strong>，用来标明用户设定的变量名，数组名，函数名，结构体名等。标识符必须由有效字符构成，也就是标识符要合法。</p>
+<p>C语言的命名规则如下：</p>
+<ol>
+<li><p>标识符只能由<strong>字母，下划线，数字</strong>组成，且<strong>第一个字符必须是字母或者下划线</strong>，不能是数字。如：<code>cla</code>,<code>cla1</code>都是合法的，但是<code>2cla</code>,<code>%123</code>等都是不合法的。</p>
+</li>
+<li><p>字母区分大小写，例如：<code>AB</code> 和 <code>ab</code>是两个不同的标识符</p>
+<blockquote>
+<p>当然有的计算机语言不区分大小写；例如：VB语言不区分大小写</p>
+</blockquote>
+</li>
+<li><p>不能使用C语言中的关键字</p>
+</li>
+<li><p>C语言虽然本身不限制标识符的长度，但是实际长度收到不同的编译系统和机器系统的限制。</p>
+</li>
+</ol>
+<p><strong>为了提高标识符的可读性，一般来说，业内较为流行的有驼峰命名法，下划线命名法和匈牙利命名法</strong></p>
+<ul>
+<li><strong>驼峰命名法</strong><ul>
+<li><p>小驼峰命名法：除了第一个单词之外，其他单词首字母都大学。例如：<code>myFileName</code>，<code>openFileSys</code>等。</p>
+<blockquote>
+<p>常用于变量名，函数名；</p>
+</blockquote>
+</li>
+<li><p>大驼峰命名法（又称帕斯卡命名法）：所有单词的首字母均大写，例如：<code>OpenFileSys</code>，<code>ConDataBase</code>等</p>
+<blockquote>
+<p>常用于类名，属性，命名空间等；</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><strong>下划线命名法</strong><ul>
+<li>名称中的每一个逻辑断点都用一个下划线来标记，例如，函数名 <code>print_student_name</code>。下划线命名法是随着C语言的出现而流行的，在UNIX&#x2F;Linux这样的环境，以及GNU代码中非常普遍。</li>
+</ul>
+</li>
+<li><strong>匈牙利命名法</strong><ul>
+<li>该命名法由微软公司名为 Charles Simonyi 的匈牙利程序员发明的，其基本原则是，<strong>变量名&#x3D;属性+类型+对象描述</strong>。通过在变量名前面加上相应的小写字母的符号标识作为前缀，标识出变量的作用域，类型等。这些符号可以多个同时使用，顺序是先 <code>m_</code>（成员变量），再指针，再简单数据类型，再其他。例如，<code>m_lpsStr</code> 表示指向一个字符串的长指针成员变量。</li>
+</ul>
+</li>
+</ul>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><p>C语言规定具有特别意义的字符串为关键字（即保留字），关键字不能作为用户标识符。在一些IDE中，关键字会显示为彩色字符来做明显标识。</p>
+<p>C语言的关键字如下表，可以分为以下几类：</p>
+<ol>
+<li>类型声明符。如表示整型的 <code>int</code>等</li>
+<li>语句定义符。用于表示语句功能的，例如条件语句的 <code>if</code>,<code>else</code>等</li>
+<li>预处理命令字。它们是以固定的形式用于专门的位置，表示一个预处理命名，通常将它们当作关键字来看待，如文件包含预处理命令 <code>include</code> 等</li>
+</ol>
+<p><strong>C语言中的关键字</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">int</th>
+<th align="center">long</th>
+<th align="center">short</th>
+<th align="center">float</th>
+<th align="center">double</th>
+<th align="center">char</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">while</td>
+<td align="center">do</td>
+<td align="center">switch</td>
+<td align="center">case</td>
+<td align="center">continue</td>
+<td align="center">break</td>
+</tr>
+<tr>
+<td align="center">const</td>
+<td align="center">signed</td>
+<td align="center">unsigned</td>
+<td align="center">if</td>
+<td align="center">else</td>
+<td align="center">for</td>
+</tr>
+<tr>
+<td align="center">default</td>
+<td align="center">auto</td>
+<td align="center">register</td>
+<td align="center">static</td>
+<td align="center">extern</td>
+<td align="center">void</td>
+</tr>
+<tr>
+<td align="center">return</td>
+<td align="center">struct</td>
+<td align="center">union</td>
+<td align="center">enum</td>
+<td align="center">typedef</td>
+<td align="center">volatile</td>
+</tr>
+<tr>
+<td align="center">goto</td>
+<td align="center">sizeof</td>
+<td align="center">inline</td>
+<td align="center">restrict</td>
+<td align="center">bool</td>
+<td align="center">_ Complex</td>
+</tr>
+<tr>
+<td align="center">_Imaginary</td>
+<td align="center">include</td>
+<td align="center">define</td>
+<td align="center">undef</td>
+<td align="center">ifdef</td>
+<td align="center">ifndef</td>
+</tr>
+<tr>
+<td align="center">endif</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>其中的bool,_Complex和_Imaginary是C99新增的关键字，其余的关键字全由小写字母组成。</p>
+<h1 id="常量与变量"><a href="#常量与变量" class="headerlink" title="常量与变量"></a>常量与变量</h1><p>C程序的处理对象为<strong>数据，它们通常以常量或者变量的形式出现</strong>。常量是在程序运行过程中值保持不变的量，变量则是在程序运行过程中值可以改变的量。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>C语言的常量有两种，一种是字面常量，字面常量不需要定义，是非定义量，即通常的数字和字符，例如：123，456，-123，12.4或者字符”A”,”b”等。第二种是自定义常量，或者符号常量，<strong>以一个标识符来代表某一个字面常量，通常利用C语言的宏定义命令 <code>define</code> 来定义</strong>，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.1415962</span></span><br></pre></td></tr></table></figure>
+<p>其含义为以标识符 <code>PI</code> 来代表数据 3.1415926。宏定义命令之后，程序凡是用到 3.1415926 的地方都可以使用 <code>PI</code> 来表示，减少书写的工作量，还可以通过别名来提高程序的可读性。</p>
+<p>使用符号常量后，程序的可维护性好，当需要修改某一常量时，只要修改宏定义中的常量即可，不必逐一修改。</p>
+<blockquote>
+<p>有关于宏的知识，后面会详细讲述</p>
+</blockquote>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p><strong>每个变量都有三个属性：变量名，存储空间，变量值</strong>。</p>
+<ol>
+<li>变量名：即变量的名字，是我们自定义的标识符，程序中通常使用变量名来对变量进行引用。</li>
+<li>存储空间：每个变量在内存中都占用一定的存储单元。存储单元的大小由变量的类型决定。在C程序中，变量可以通过变量名称访问，也可以通过变量的地址来访问。</li>
+<li>变量值，即变量存储空间中存放的值。</li>
+</ol>
+<p>在C程序中，对任何变量都必须 <strong>先声明，后使用</strong> ，只有在定义了变量的名字，数据类型之后，才能对变量进行各种运算。</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>完整的变量定义语句包含两个元素：<strong>变量名和数据类型</strong>。数据类型规定了变量的三个限制：</p>
+<ol>
+<li>变量所占用的存储空间的大小，存储空间以字节为单位，如整型变量占用2个字节，浮点型占用4个字节。</li>
+<li>变量的取值范围，变量的取值返回与存储空间的大小有关，如整型取值范围为 $-32728$~$32767$ ，浮点型取值范围为 $-3.4 \times 10^{-38}$ ~ $3.4 \times 10^{38}$ 。</li>
+<li>变量能进行的运算。如只有整型或者字符型的数据可以进行”取余”运算</li>
+</ol>
+<blockquote>
+<p>关于为什么整型的取值范围为 -32728~32767 ，详情参见 <a href="httpss://helloseraphine.top/index.php/archives/368.html">原码，反码，补码的前世今生</a></p>
+</blockquote>
+<p>C语言的数据类型如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7f237f39.png" alt="image-20220107161251322" style="zoom:80%;" />
+
+<blockquote>
+<p>存储类型以字节为单位，实际长度由机器字长决定。整型数据取值范围与存储长度一致，但浮点型数据的取值范围还与其系统存储格式有关。</p>
+</blockquote>
+<h2 id="整型数据"><a href="#整型数据" class="headerlink" title="整型数据"></a>整型数据</h2><p>整型数据包括整常数和存放整数的变量，C语言中整型常量可以有三种表示形式：</p>
+<ol>
+<li>十进制形式，如15，-1555</li>
+<li>八进制形式。<strong>C语言中八进制以数字 0 开头</strong>，只能以 0~ 7 这8个数字组合表示，如 0271 对应十进制的数为 $2 \times 8^2 + 7 \times 8^1 +1 \times 8^0 &#x3D; 185$</li>
+<li>十六进制形式。<strong>C语言中十六进制数以 0x 或者 0X 开头，可以用 0<del>9 这10个数表示以及字母 A</del>F（或 a~f ）组合来表示</strong>。如 0x61F 对应的十进制数为 $6 \times 16^2 + 1 \times 16^1 + 15 \times 16^0 &#x3D; 1567$</li>
+</ol>
+<p>整型数据按存储空间长度可以分为五种：</p>
+<ol>
+<li><p><strong>基本整型：关键字为 <code>int</code></strong> 。在16位计算机中基本整型数据占据2个字节，最高位表示正负符号位，取值范围 $-32768$ ~ $32767$。在32位计算机中基本整型占据4个字节，最高位位正负符号位，取值范围为 $-2147493648$ ~ $2147483647$ 。代码示例：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;    <span class="comment">//声明了整型变量 a</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>**短整型：关键字为 <code>short int</code> (<code>int</code>可以省略)**。短整型占2个字节，最高位为符号位，取值范围为 $-32768$ ~ $32767$。代码示例：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">short</span> <span class="type">int</span> a;    <span class="comment">//声明了短整型变量 a</span></span><br><span class="line"><span class="type">short</span> a;</span><br></pre></td></tr></table></figure></li>
+<li><p>**长整型：关键字为 <code>long int</code>( <code>int</code> 可以省略)**。长整型占4个字节，最高位为符号位，取值范围为 $-2^{31}$ ~ $2^{31}-1$ 。代码示例：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">int</span> a;    <span class="comment">//声明了长整型变量 a</span></span><br><span class="line"><span class="type">long</span> a;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>双长整型：关键字为 <code>long long int</code>（<code>int</code> 可以省略）</strong>。双长整型占 8 个字节，最高位为符号位，取值范围为 $-2^{63}$ ~ $2^{63}-1$ 。代码示例：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="type">int</span> a;    <span class="comment">//声明了双长整型变量 a</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> a;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>布尔型：关键字为 <code>bool</code><strong>。布尔型数据占据 2 个字节。</strong>其取值有两种：真（TRUE&#x2F;1）和假（FLASE&#x2F;0）</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">_Bool</span> x;    <span class="comment">//声明了布尔型变量 x</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>C99之后的Bool被定义为 <code>_bool</code>，再次之前布尔类型是通过 <code>int</code> 类型来定义的</p>
+</blockquote>
+</li>
+</ol>
+<p>以上基本整型，短整型，长整型及双长整型都是可正可负的，可以看作省略了关键字 <code>signed</code> 的有符号类型，即以上的定义可以写成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">signed</span> <span class="type">int</span> a;</span><br><span class="line"><span class="type">signed</span> <span class="type">long</span> <span class="type">int</span> a;</span><br><span class="line"><span class="type">signed</span> <span class="type">short</span> <span class="type">int</span> a;</span><br><span class="line"><span class="type">signed</span> <span class="type">long</span> loog a;</span><br></pre></td></tr></table></figure>
+<p>如果在使用的数值无须符号，则定义为无符号类型，其关键字为 <code>unsigned</code> 。 定义无符号类型的整型变量只需要在前面加上该关键字即可。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">int</span> a;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">short</span> <span class="type">int</span> a;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> loog a;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>无符号类型即全为正数，无负数（抛弃了符号位）</p>
+</blockquote>
+<p>无符号关键字只适用于整型变量。</p>
+<p>C语言的变量必须“先定义，后使用”，从上面的示例可以看出，C语言中变量的定义格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">存储类型 数学类型 变量名称；</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中存储类型可以默认省略。</p>
+</blockquote>
+<h2 id="实型数据"><a href="#实型数据" class="headerlink" title="实型数据"></a>实型数据</h2><p>实型数据包括实型常数（常量）和实型变量，实型数据即带小数的数据（实数），或称浮点数。</p>
+<p>C语言中实型常量只用十进制形式，但是其表示方式有两种：</p>
+<ol>
+<li>直接十进制形式，如：0123，-456.48。</li>
+<li>指数形式，如： $1.23e-2$，$-4.123e2$。<br> 指数形式通常用来表示一些比较大的数值，格式为：实数部分+字母 E 或者 e +正负号+整数部分。其中的 E 或者 e 表示十次方，即 $实数e^{-&#x2F;+整数}$，并不是常规数学表达式中的自然底数，正负号表示指数部分的符号，整数为幂的大小。字母 E 或者 e 之前必须有数字，之后的数字必须为整数。</li>
+</ol>
+<p>C语言中实型数据按长度大小可以分为三类：</p>
+<ol>
+<li>**单精度型：关键字为 <code>float</code>**，占 4 个字节。提高 7 位有效数字，取值范围为 $-3.4 \times 10^{-38}$ ~ $3.4 \times 10^{38}$。</li>
+<li>**双精度型：关键字为 <code>double</code>**，占 8 个字节，提供 16 位有效数字，取值范围为 $-1.7 \times 10^{-308}$ ~ $1.7 \times 10^{308}$。</li>
+<li>**长双精度型：关键字为 <code>long double</code>**，占 16 个字节，取值范围为  $-1.2 \times 10^{-4932}$ ~ $1.2 \times 10^{4932}$。</li>
+</ol>
+<blockquote>
+<p>计算机中实型数据实际上是以指数的形式存储的，用二进制来表示小数部分以及用 2 的幂次来表示指数部分。但不同长度类型中究竟用多少位来表示小数部分，多少位来表示指数部分，各种 C 编译系统不尽相同。</p>
+</blockquote>
+<p>【实例】输出单精度实数，验证有效数字位数<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> a = <span class="number">1111111.222222</span>;    <span class="comment">//小数点前7位</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>, a);</span><br></pre></td></tr></table></figure>
+<p>【输出结果】 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7fd6b3dc.png" alt="image-20220107164922598" style="zoom:80%;" /><br>【说明】我用的是VScode，手动配置链接的 <a href="httpss://sourceforge.net/projects/mingw-w64/files/">MinGW</a>，可以得出此编译器的单精度浮点的有效位为 8 位。</p>
+<p>【实例】输出双精度实数<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> a = <span class="number">1111111.22222</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>, a);</span><br></pre></td></tr></table></figure>
+<p>【输出结果】 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb803db070.png" alt="image-20220107165026188" style="zoom:80%;" /><br>【说明】</p>
+<ul>
+<li><strong>使用 <code>%f</code> 可以输出单精度或者双精度浮点数，对于长双精度浮点数，使用 <code>%Lf</code> 。</strong></li>
+<li><strong><code>double</code> 输出的时候，默认输出小数后 6 位 ，不足 6 位时补 0，多余 6 位时四舍五入后只输出前 6 位。</strong></li>
+<li><strong>可以使用 <code>%.xf</code> 修改 x 的值来指定输出小数点后几位</strong></li>
+</ul>
+<h2 id="字符型数据"><a href="#字符型数据" class="headerlink" title="字符型数据"></a>字符型数据</h2><p>C语言中字符型数据包括字符常量和字符变量。</p>
+<p><strong>字符常量必须用单引号括起来，单引号中只能为单个字符</strong>，在内存中占用一个字节，例如：<code>A</code>，<code>a</code>，<code>#</code>等。</p>
+<p><strong>字符型数据在C语言中是以 ASCII 码形式存储的</strong>，即字符常量的数值就是其保持的 ASCII 码的值，如：<code>A</code> 的 ASCII 码值为 65 。<strong>因为 ASCII 码值为整型，故C语言中字符型数据与整型数据可以在同一个表达式中出现，并且不会进行类型转换</strong>。例如： <code>a</code>-32相当于 97-32 。</p>
+<blockquote>
+<p>可以通过对大写字母 +32 来进行大小写转换。</p>
+</blockquote>
+<p>C语言中还有一类特殊的字符，称为<strong>转义字符</strong>，<strong>以 <code>\</code> 开头，根据斜杠后面的不同字符表达特定的含义</strong>。常用的转义字符如下：</p>
+<ul>
+<li><strong><code>\n</code>：回车换行。</strong></li>
+<li><code>\b</code>：退格</li>
+<li><code>\r</code>：回车</li>
+<li><strong><code>\t</code>：水平制表，即横向跳到下一个制表位。</strong></li>
+<li><code>\v</code>：垂直制表，即纵向跳到下一个制表位。</li>
+<li><strong><code>\\</code>：反斜线符号 <code>\</code>。</strong></li>
+<li>**<code>\&#39;</code>：单引号 <code>&#39;</code>**。</li>
+<li>**<code>\&quot;</code>：双引号 <code>&quot;</code>**。</li>
+<li><code>\a</code>：鸣铃。</li>
+<li><code>\f</code>：走纸换页。</li>
+<li><strong><code>\ddd</code>：1~3位八进制数所代表的字符</strong>。</li>
+<li><strong><code>\xhh</code>：1~2位十六进制数所代表的字符</strong></li>
+</ul>
+<p>实际上，利用 <code>\ddd</code> 和 <code>\xhh</code> 可以表示任意一个字符，分别利用八进制和十六进制转换为 ASCII 码的值。例如：<code>\123</code> 输出表示为 <code>S</code>。</p>
+<p>**定义字符型变量的关键字为 <code>char</code>**，字符型变量在内存中占用一个字节。需要注意的是，在使用字符型存储整型时，只有一个字节的大小，注意溢出问题。</p>
+<p>【实例】输出字符及其对应的 ASCII 码<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;ch=%c\nASCII=%d&quot;</span>, ch, ch);</span><br></pre></td></tr></table></figure>
+<p>【输出结果】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb8088ab6d.png" alt="image-20220107165203189" style="zoom:80%;" /></p>
+<p>此外，C语言中还有一类数据，是用一对双引号括起来的一个或者多个字符，称为字符串常量，简称字符串，例如 <code>Hello,World</code>。</p>
+<p>但是C语言并没有字符串类型，字符串类型的处理需要字符型数组。数组的内容后面会涉及，此处先不赘述。</p>
+<h1 id="数据类型的转换"><a href="#数据类型的转换" class="headerlink" title="数据类型的转换"></a>数据类型的转换</h1><p>C语言允许不同类型的数据混合运算，运算中可以按照一定的规则或者人为干预进行类型转换。<strong>转换的方式分为两种：隐式类型转换和显式类型转换</strong>。</p>
+<h2 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h2><p>隐式类型转换是编译系统自动进行的，不需要人为干预，隐式类型转换遵循三个基本规则：</p>
+<ol>
+<li><p>如果参与运算的变量类型不同，则先转换成同一类型，然后进行运算。</p>
+</li>
+<li><p>按“低位向高级转换”原则，如果运算中有几种不同类型的操作数，则同一转换为类型高的数据类型，再进行运算，例如：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="type">float</span> b = <span class="number">2.1</span>;</span><br><span class="line"><span class="type">double</span> c = <span class="number">2.3</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>,a + b + c);</span><br></pre></td></tr></table></figure>
+<p> 在计算的时候，先将 a,b转换为 <code>double</code> 类型，然后进行计算，所得的结果为 <code>double</code> 类型。</p>
+<p> 各种类型转换方向如下图所示：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(char,short) --&gt;B(int) --&gt;C(unsigned) --&gt;D(long) --&gt;E(double)</span><br><span class="line">    F(float) --&gt;E(double)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>浮点型运算时系统一律转换为双精度浮点进行运算，运算结束后再根据类型来转换回去，以防止计算精度丢失。</p>
+</blockquote>
+</li>
+<li><p>赋值运算符号作业两边的数据类型不同时，赋值号右边数据类型将转化为与左边数据一致的类型。例如：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="type">float</span> b = <span class="number">2.1</span>;</span><br><span class="line"><span class="type">double</span> c = <span class="number">2.3</span>;</span><br><span class="line"><span class="type">int</span> d = a + b + c;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,d);</span><br></pre></td></tr></table></figure>
+<p> a+b+c得出的结果为 <code>double</code> 类型，在进行赋值后，被强制转换为 d 的 <code>int</code> 类型，丢失部分精度。</p>
+</li>
+</ol>
+<h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><p>强制类型转换即显式类型转换，其作用是人为将相关类型转换为指定的数据类型。转换格式代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(目标的类型标识符)(要转换的变量)</span><br></pre></td></tr></table></figure>
+<p>【实例】使用强制类型转换参与运算<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="type">float</span> b = <span class="number">2.1</span>;</span><br><span class="line"><span class="type">int</span> d = a + (<span class="type">int</span>)b;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%d\nb=%f&quot;</span>,d,b);</span><br></pre></td></tr></table></figure>
+<p>【输出结果】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb813a7966.png" alt="image-20220107165321653" style="zoom:80%;" /><br>【说明】<strong>强制类型转换不改变原数据类型，只是在参与运算的时候改变运算时的参与数据类型</strong>。</p>
+<h1 id="运算符和表达式"><a href="#运算符和表达式" class="headerlink" title="运算符和表达式"></a>运算符和表达式</h1><p>运算表达式是对数据进行操作和处理的基本单位，一个运算表达式由两m个要素组成的运算量与运算符。运算量包括常量和变量。C语言提供了很多基本运算来实现运算处理，这些运算符可以分为以下几类：</p>
+<ol>
+<li>算术运算符：<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>(求余数，或者称模运算)。</li>
+<li>自增自减运算符：<code>++</code>,<code>--</code>。</li>
+<li>关系运算符：用于比较运算，包括 <code>&gt;</code>,<code>&lt;</code>,<code>&gt;=</code>,<code>=&lt;</code>,<code>==</code>,<code>!=</code>(不相等)。</li>
+<li>逻辑运算符：用于逻辑运算，包括 <code>&amp;&amp;</code>(与),<code>||</code>(或),<code>!</code>(非)。</li>
+<li>位运算符：按照二进制位进行运算，包括 <code>&amp;</code>(位与)，<code>|</code>(位或)，<code>~</code>(位非)，<code>&lt;&lt;</code>(左移)，<code>&gt;&gt;</code>(右移)。</li>
+<li>条件运算符：<code>?:</code> 条件运算符是C语言中唯一一个三目运算符，用于条件求值。</li>
+<li>赋值运算符：可以分为下面三类<ul>
+<li>简单赋值运算符：<code>=</code></li>
+<li>复合算术赋值运算符：<code>+=</code>，<code>-=</code>，<code>*=</code>，<code>/=</code>，<code>%=</code>。</li>
+<li>复合位位运算赋值运算符：<code>&amp;=</code>，<code>|=</code>，<code>^=</code>，<code>&gt;&gt;=</code>，<code>&lt;&lt;=</code>。</li>
+</ul>
+</li>
+<li>逗号运算符：<code>,</code>。</li>
+<li>指针运算符：<code>*</code>。</li>
+<li>地址运算符：<code>&amp;</code>。</li>
+<li>构造类型特殊运算符：<code>.</code>(引用成员运算符)，<code>-&gt;</code>(指向成员运算符)，<code>[]</code>(下标运算符)。</li>
+<li>小括号运算符：<code>()</code>。</li>
+<li>花括号运算符：<code>&#123;&#125;</code>。</li>
+<li>长度运算符：<code>sizeof(类型运算符)</code>用于计算数据类型所占的字节数。</li>
+<li>类型转换运算符：（类型标识符）（表达式）</li>
+</ol>
+<h2 id="算术运算符和算术表达式"><a href="#算术运算符和算术表达式" class="headerlink" title="算术运算符和算术表达式"></a>算术运算符和算术表达式</h2><h3 id="算符运算符及其相关"><a href="#算符运算符及其相关" class="headerlink" title="算符运算符及其相关"></a>算符运算符及其相关</h3><p>算术运算符：<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>(求余数，或者称模运算)。<br>需要注意的是：</p>
+<ol>
+<li><strong>关于除法运算符 <code>/</code>：如果两个整数相除，则结果为整数，小数部分将被去掉，例如：5&#x2F;2，结果为 2，而不是 2.5。两个操作数只要有一个是浮点数，则结果为浮点数</strong>。</li>
+<li><strong>关于模运算符 <code>%</code>:只适用于两个整数取余，其两个运算量只能是整型或者字符型，不能是其他类型，取余结果的符号是由被除数决定的，例如：7%(-3)的结果是 1，而（-7）%（-3）结果为 -1</strong>。</li>
+</ol>
+<h3 id="算术运算符的优先级与结合性"><a href="#算术运算符的优先级与结合性" class="headerlink" title="算术运算符的优先级与结合性"></a>算术运算符的优先级与结合性</h3><p>算术表达式的计算按运算符的优先级从高到低依次进行。双目运算符的优先级与基本四则运算法则一致，先乘除再加减。</p>
+<p>在一个运算符出现同级运算符时，运算遵循“左结合律”，即按照自左向右进行计算，例如：a+b+c，先 a+b ,再 +c。</p>
+<h2 id="赋值运算符和赋值表达式"><a href="#赋值运算符和赋值表达式" class="headerlink" title="赋值运算符和赋值表达式"></a>赋值运算符和赋值表达式</h2><h3 id="赋值运算符及其说明"><a href="#赋值运算符及其说明" class="headerlink" title="赋值运算符及其说明"></a>赋值运算符及其说明</h3><p>赋值运算符的作用时将一个数据赋值给一个变量。赋值运算符：可以分为下面三类</p>
+<ul>
+<li>简单赋值运算符：<code>=</code></li>
+<li>复合算术赋值运算符：<code>+=</code>，<code>-=</code>，<code>*=</code>，<code>/=</code>，<code>%=</code>。</li>
+<li>复合位位运算赋值运算符：<code>&amp;=</code>，<code>|=</code>，<code>^=</code>，<code>&gt;&gt;=</code>，<code>&lt;&lt;=</code>。</li>
+</ul>
+<blockquote>
+<p>例如：<code>a+=1</code> 等价于 <code>a=a+1</code>，其余同理，此处不做过多说明。</p>
+</blockquote>
+<p><strong>所有赋值运算符都是将右边的值赋值给左边，因此赋值运算符左边只能为变量。</strong></p>
+<h3 id="赋值运算符的结合性"><a href="#赋值运算符的结合性" class="headerlink" title="赋值运算符的结合性"></a>赋值运算符的结合性</h3><p>赋值运算符遵循“右结合性”，方向为“自右向左”。</p>
+<p>【实例】验证赋值运算符的结合性<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a =<span class="number">10</span>;</span><br><span class="line">a *= a += <span class="number">2</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,a);</span><br></pre></td></tr></table></figure>
+<p>【输出结果】 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb819781e7.png" alt="image-20220107165243975" style="zoom:80%;" /></p>
+<h2 id="自增自减运算符"><a href="#自增自减运算符" class="headerlink" title="自增自减运算符"></a>自增自减运算符</h2><h3 id="自增自减运算符及其表达式"><a href="#自增自减运算符及其表达式" class="headerlink" title="自增自减运算符及其表达式"></a>自增自减运算符及其表达式</h3><p>自增运算符 <code>++</code>，自减运算符 <code>--</code> 的作用是让变量加 1 或者减 1 ，常用于循环结构中，但自增自减运算符都有前置和后置之分，前置后置决定了变量使用与计算的顺序：</p>
+<ul>
+<li>自增运算符前置：如 <code>++i</code>，是先将 i 的值加 1 后，再使用 i 的值。</li>
+<li>自增运算符后置：如 <code>i++</code>，是先使用 i 的值，然后再加 1 。</li>
+<li>自减运算符前置：如 <code>--i</code>，是先将 i 的值减 1 后，再使用 i 的值。</li>
+<li>自减运算符后置：如 <code>i--</code>，是先使用 i 的值，再使 i 的值减 1 。</li>
+</ul>
+<p><strong>自增自减运算符只能作用域变量，不能用于常量或者表达式，如 <code>3++</code>，<code>--（x*y）</code>等都是不合法的</strong>。</p>
+<h3 id="自增自减的结合性"><a href="#自增自减的结合性" class="headerlink" title="自增自减的结合性"></a>自增自减的结合性</h3><p>自增自减运算符为右结合性，结合方向为“自右向左”。需要注意的是，自增自减运算符不可以作用于表达式。</p>
+<p>【实例】验证自增自减运算符结合性<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a, b,c;</span><br><span class="line">a =<span class="number">10</span>;</span><br><span class="line">b = !a++;</span><br><span class="line">c = a--;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%d\nb=%d\nc=%d&quot;</span>,a,b,c);</span><br></pre></td></tr></table></figure>
+<p>【输出结果】 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb81d8d240.png" alt="image-20220107165448270" style="zoom:80%;" /><br>【说明】 <code>!x</code>x代表数值，结果为 0 。<code>!</code>默认非 0 值为真，采用非操作后，变为假，然后整型输出就是 0 。反之，如果 <code>!0</code>，则输出 1 。</p>
+<h2 id="逗号运算符和逗号表达式"><a href="#逗号运算符和逗号表达式" class="headerlink" title="逗号运算符和逗号表达式"></a>逗号运算符和逗号表达式</h2><p>C语言中，<code>,</code>逗号运算符作为分割符号。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b,c;</span><br></pre></td></tr></table></figure>
+<p>也可以作为运算符，用于链接多个表达式，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">表达式 <span class="number">1</span>,表达式 <span class="number">2</span>,...,表达式 n;</span><br></pre></td></tr></table></figure>
+<p>当逗号用于运算时，将从左到右依次求取各个表达式的值。</p>
+<h1 id="数据的输入和输出"><a href="#数据的输入和输出" class="headerlink" title="数据的输入和输出"></a>数据的输入和输出</h1><p>在C语言中通过输入&#x2F;输出函数实现数据的输入&#x2F;输出。<strong>系统提供了一批标准输出函数，这些函数包含在一些头文件中，称为库函数</strong>。要使用这些函数，必须在程序开头事先用文件包含命令 <code>#include</code> 包含这些头函数。</p>
+<p>以下部分，主要是标准输入&#x2F;输出函数，即 <code>&lt;stdio.h&gt;</code> 库函数里的内容。</p>
+<h2 id="格式输入函数-scanf"><a href="#格式输入函数-scanf" class="headerlink" title="格式输入函数 scanf"></a>格式输入函数 <code>scanf</code></h2><p>格式输入函数 <code>scanf</code> 将数据按规定的格式从键盘上读取到指定变量中。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//格式示例</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;格式控制字符串&quot;</span>,输入项地址列表);</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line"><span class="keyword">if</span> (a==<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a的值为空&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用 <code>scanf</code> 函数从键盘读入数据时，需要注意以下几点：</p>
+<ol>
+<li><p>输入多个数据时，建议使用空格或者相关分隔符进行分割，这样数据的输入不会出现二义性。代码示例</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//比如说下面这样</span></span><br><span class="line"><span class="type">int</span> a,b,c;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;a,&amp;b,&amp;c);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入的数据个数与顺序要与 <code>sacnf()</code> 函数一致。</p>
+</li>
+<li><p>如果格式控制字符串中有普通字符，则必须依次原样输入，否则可能发生错误。代码示例：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b,c;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;a=%d,b=%d,c=%d&quot;</span>, &amp;a,&amp;b,&amp;c);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d,%d,%d&quot;</span>, a, b, c);</span><br><span class="line"></span><br><span class="line"><span class="comment">//输入的时候需要输入</span></span><br><span class="line"><span class="comment">//a=1,b=2,c=3</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>下面对C语言的格式符进行解释说明。<br><strong>格式符皆以 <code>%</code> 开始标记</strong>，格式示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% [m][l或h]数据类型声明字母</span><br></pre></td></tr></table></figure>
+<p>其中，方括号为可选项，可以为空，但是数据类型字母声明不可缺省。</p>
+<ol>
+<li>数据类型声明字母<ul>
+<li><strong>d：输入十进制整数</strong>。</li>
+<li>o：输入八进制整数。</li>
+<li>x：输入十六进制整数。</li>
+<li>u：输入无符号十进制整数。</li>
+<li><strong>f：输入小数形式实型数</strong>。</li>
+<li>e：输入指数形式实型数。</li>
+<li><strong>c：输入单个字符</strong>。</li>
+<li>s：输入字符串。</li>
+</ul>
+</li>
+<li><strong><code>l</code> 和 <code>h</code> 为长度格式符。<code>l</code> 用于规定长整型和双长整型，<code>h</code> 则规定输入为短整型</strong>。<ul>
+<li><code>%ld</code> , <code>%lo</code> , <code>%lx</code>：表示输入数据为长整型十进制，长整型八进制，长整型十六进制。</li>
+<li><code>%lf</code> , <code>le</code>：表示输入双精度型小数形式，双精度指数形式。</li>
+<li><code>%hd</code> , <code>%ho</code> , <code>%hx</code> ：表示输入的数据类型为短整型十进制，短整型八进制，短整型十六进制。</li>
+</ul>
+</li>
+<li><strong><code>m</code> 为十进制整数，用于指定输入数据的宽度（即数字个数）</strong>。代码示例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%5d&quot;</span>, &amp;a);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br></pre></td></tr></table></figure>
+输入 123456，输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb8229d85b.png" alt="image-20220107165540946" style="zoom:80%;" /><br>该代码读取的时候只读取前 5 个字符，即5个宽度。后面的默认去除。</li>
+</ol>
+<p>对于指定了宽度的输入格式，数据之间可以无分隔符，系统会自动截取宽度来读入。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%5d%2d&quot;</span>, &amp;a,&amp;b);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>, a,b);</span><br></pre></td></tr></table></figure>
+<p>输入1234567，输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb82671606.png" alt="image-20220107165620883" style="zoom:80%;" /></p>
+<p><strong>对于浮点型，数据宽度为数据的整体宽度，包括小数点在内，即数据宽度 m&#x3D;整体位数+1（小数点）+小数位数</strong>。格式输入函数只能指定数据整体的宽度，无法指定小数位数，这和后面输出函数 <code>printf</code>时不同的。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> a,b;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%3f%3f&quot;</span>, &amp;a,&amp;b);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%f,b=%f&quot;</span>, a, b);</span><br></pre></td></tr></table></figure>
+<p>输入 1.23.4 ，输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb82a61b6f.png" alt="image-20220107165634840" style="zoom:80%;" /></p>
+<h2 id="格式输出函数-printf"><a href="#格式输出函数-printf" class="headerlink" title="格式输出函数 printf"></a>格式输出函数 <code>printf</code></h2><p><strong>格式输出函数 <code>printf</code> 将指定的数据按指定的格式输出到控制台上</strong>，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//学术定义版</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;格式控制字符串&quot;</span>,输出项列表);</span><br><span class="line"><span class="comment">//通俗版</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;要输出到控制的部分&quot;</span>,伴随输出需要的参数);</span><br></pre></td></tr></table></figure>
+<p><code>printf()</code> 函数中的格式控制字符和 <code>scansf()</code> 函数一致，包含格式符与普通字符。格式符用于控制输出格式，普通字符将原样输出显示。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> a=<span class="number">1.2</span>,b=<span class="number">1.3</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%f,b=%f&quot;</span>, a, b);</span><br></pre></td></tr></table></figure>
+<p>其中 <code>%f</code> 为格式控制符， <code>a=</code> 则是普通字符，会输出到屏幕上。<br><code>printf()</code> 中的格式符与 <code>scanf()</code> 一致，皆以 <code>%</code> 为开始标记，但是相比要复杂一些，格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% [±] [<span class="number">0</span>] [m] [.n] [l或h] 数据类型字母</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>数据类型声明字母与 <code>scanf()</code> 基本一致，有少许扩充：</p>
+<ul>
+<li><strong>d：以十进制整数形式输出</strong>。</li>
+<li>o：以八进制整数形式输出。</li>
+<li>x或者X：以十六进制整数形式输出。</li>
+<li>u：以无符号十进制整数形式输出。</li>
+<li><strong>f：以小数形式实型数输出</strong>。</li>
+<li>e或者E：以指数形式实数输出。</li>
+<li>c：以单个字符形式输出。</li>
+<li>s：以字符串形式输出。</li>
+<li>g或者G：由系统决定采用 <code>%f</code> 格式还是 <code>%e</code> 格式，以使输出宽度最小，不输出无意义的 0。</li>
+<li>% ：输出百分号（例如<code>%%</code>）</li>
+</ul>
+</li>
+<li><p><code>l</code> 或 <code>h</code> 的含义同 <code>sancf()</code>；<code>l</code> 双精度&#x2F;长整型，<code>h</code> 短整型。</p>
+</li>
+<li><p><code>m.n</code> 指定输出数据的宽度。<br> 输出整数时：<strong>只有 <code>m</code>，没有 <code>.n</code> 部分。 <code>m</code> 表示输出整数的位数。如果整数的实际位数大于指定的 <code>m</code>，则按照实际的位数输出，如果整数的实际位数小于指定 <code>m</code>，则左边按位补空格</strong>。<br> 输出浮点数时：<code>m</code> 指定数据总宽度，含义与 <code>scanf</code> 函数相同， <strong>m&#x3D;整数位数+1（小数位）+小数位数</strong>。**<code>n</code> 指定小数位数**。<br> 【实例】指定浮点数输出格式</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> a=<span class="number">1.123</span>,b=<span class="number">112.3</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%3.1f b=%f&quot;</span>, a, b);</span><br></pre></td></tr></table></figure>
+<p> 输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb82f5aaf1.png" alt="image-20220107171339828" style="zoom:80%;" /></p>
+<p> 说明：<code>%3.1f</code>指定了3位输出位数，排除一位小数点，<code>.1</code>指定了一位小数，则输出<code>1.1</code>。</p>
+</li>
+<li><p><strong>[0]指定输出数据空位置的填充方式，指定0则以0填充，不指定则默认空格填充</strong>。代码示例：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> b = <span class="number">123</span>;</span><br><span class="line"><span class="type">float</span> a=<span class="number">1.123</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%3.1f b=%05d&quot;</span>, a, b);</span><br></pre></td></tr></table></figure>
+
+<p> 输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb833e584b.png" alt="image-20220107171951763" style="zoom:80%;" /></p>
+</li>
+<li><p><strong><code>±</code>指定输出数据的对齐方式：指定 <code>+</code> 时，输出右对齐；指定 <code>-</code> 时，输出左对齐；不指定时默认为<code>+</code>，输出右对齐</strong>。</p>
+<blockquote>
+<p>此项在不同的编译器有不同的处理方式，部分编译器不支持该格式</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="字符输出函数-getchar"><a href="#字符输出函数-getchar" class="headerlink" title="字符输出函数 getchar()"></a>字符输出函数 <code>getchar()</code></h2><p><strong>字符输入函数 <code>getchar()</code>的功能是从输入设备上读取输入的一个字符，其返回值即为所读入的字符</strong>，一般与赋值语句联用，将读取的字符传递给变量。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c;</span><br><span class="line">c = getchar();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;c的值为%c&quot;</span>, c);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>该函数只会读取一个字符，如果输入多个字符，默认读取首字符。</p>
+</blockquote>
+<h2 id="字符输出函数-putchar"><a href="#字符输出函数-putchar" class="headerlink" title="字符输出函数 putchar()"></a>字符输出函数 <code>putchar()</code></h2><p><strong>字符输出函数 <code>putchar()</code>的功能是向控制台输出一个字符</strong>，调用格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">putchar</span>(c);</span><br></pre></td></tr></table></figure>
+
+<p>c可以是输出的字符常量或者变量，也可以<strong>是整型常量或者变量（此时系统会默认将其转化为ASCII码对应的字符）</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">78</span>;</span><br><span class="line"><span class="built_in">putchar</span>(a);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb83865349.png" alt="image-20220107173133432" style="zoom:80%;" /></p>
+<h1 id="赋值语句和顺序结构程序设计"><a href="#赋值语句和顺序结构程序设计" class="headerlink" title="赋值语句和顺序结构程序设计"></a>赋值语句和顺序结构程序设计</h1><h2 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h2><p><strong>赋值语句即实现赋值功能</strong>，这里主要说明<code>=</code>运算符构成的赋值语句。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量=表达式;</span><br></pre></td></tr></table></figure>
+
+<p>表达式可以是常量，变量或者运算式。关于<code>=</code>赋值要注意的是：</p>
+<ol>
+<li><p>可以在声明变量的时候，直接赋值。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以先声明变量，后赋值，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>赋值语句可以嵌套，即表达式可以为赋值表达式，例如下面的操作是合法的，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = b = c = d = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是<strong>下面的操作是非法的</strong>，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = b = c = d = <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="顺序结构程序设计"><a href="#顺序结构程序设计" class="headerlink" title="顺序结构程序设计"></a>顺序结构程序设计</h2><p>C语言为结构化程序设计语言，分为三种基本结构：顺序结构，选择结构，循环结构。<strong>顺序结构是最基本的结构，程序从上到下依次执行</strong>。实际上选择结构与循环结构都为局部结构，是在整体顺序框架中的。顺序结构程序按照需要实现的功能逻辑顺序进行设计。</p>
+<p>【实例】输入圆的半径，计算圆的面积<br>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="type">float</span> r;    <span class="comment">//定义圆的半径</span></span><br><span class="line">    <span class="type">float</span> s;    <span class="comment">//定义圆的面积</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入圆的半径&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%f&quot;</span>, &amp;r);</span><br><span class="line">    s = <span class="number">3.14</span> * r * r;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;圆的面积为%f&quot;</span>, s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出结果】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb83e4e79c.png" alt="image-20220107175919896" style="zoom:80%;" /></p>
+<h1 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h1><p>数学函数属于库函数(Library function)，在头文件<code>math.h</code>中，因此**要使用数学函数，必须在程序开头处使用文件包含命令<code>#include</code>将<code>math.h</code>包含进来，例如<code>#include &lt;math.h&gt;</code>**。C语言函数库提供了丰富的数学函数供用户使用，如下是一些常用的函数：</p>
+<ol>
+<li><p>**绝对值函数<code>abs()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">abs</span><span class="params">(<span class="type">int</span> i)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">abs</span>(<span class="number">-5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：5</p>
+<blockquote>
+<p><code>labs()</code>以及<code>fabs()</code>分别用于求长整型数和实数的绝对值</p>
+</blockquote>
+</li>
+<li><p>**开方函数<code>sqrt()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">sqrt</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">sqrt</span>(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：2</p>
+</li>
+<li><p>**对数函数<code>log10()</code>**（以10为底），代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">log10</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">log10</span>(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：1.000000</p>
+</li>
+<li><p>**自然对数函数<code>log()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">log</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">log</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：0.693147</p>
+</li>
+<li><p>**指数函数<code>exp()</code>**（即$e^x$，以e为底），代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">exp</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">exp</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：7.389056</p>
+</li>
+<li><p>**次方函数<code>pow10()</code>**（即$10^x$，以10为底），代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">pow10</span><span class="params">(<span class="type">int</span> p)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line">pow10(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：100</p>
+<blockquote>
+<p>部分编译器不支持该函数</p>
+</blockquote>
+</li>
+<li><p>**次方函数<code>pow()</code>**（即$x^y$），代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">pow</span><span class="params">(<span class="type">double</span> x,<span class="type">double</span> y)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">pow</span>(<span class="number">2</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：4</p>
+</li>
+<li><p>**正弦函数<code>sin()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">sin</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">sin</span>(<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：-0.988032</p>
+</li>
+<li><p>**余弦函数<code>cos()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">cos</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">cos</span>(<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：0.154251</p>
+</li>
+<li><p>**正切函数<code>tan()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">tan</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="built_in">tan</span>(<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：-6.405331</p>
+</li>
+<li><p>**反正弦函数<code>asin()</code>，反余弦函数<code>acos()</code>，反正切函数<code>atan()</code>**，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数代码</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">asin</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="type">double</span> <span class="title function_">acos</span><span class="params">(<span class="type">double</span> x)</span>;</span><br><span class="line"><span class="type">double</span> <span class="title function_">atan</span><span class="params">(<span class="type">double</span> x)</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="常见错误分析"><a href="#常见错误分析" class="headerlink" title="常见错误分析"></a>常见错误分析</h1><ol>
+<li>遗漏符号，例如分号，逗号，引号等。</li>
+<li>未定义就使用，或者在定义之前使用该变量。</li>
+<li>使用中文字符不被识别。</li>
+<li>语法错误。</li>
+<li>数据溢出。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/01/22/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%902.0%E3%80%91%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E8%BF%90%E7%AE%97/">https://www.helloseraphine.top/2022/01/22/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%902.0%E3%80%91%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E8%BF%90%E7%AE%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7e64fec3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/09/%E8%AF%AD%E8%A8%80%E6%A0%91/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E3%80%902.0%E3%80%91%E8%AE%BF%E9%97%AE%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E5%86%85%E5%AD%98/" title="【2.0】访问寄存器和内存"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb2ac5d058.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【2.0】访问寄存器和内存</div></div></a></div><div class="next-post pull-right"><a href="/2022/01/22/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%901.0%E3%80%91%E5%BC%95%E8%A8%80/" title="【1.0】C-引言"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7b231525.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【1.0】C-引言</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%902-0%E3%80%91%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">【2.0】数据类型及运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%92%8C%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">3.</span> <span class="toc-text">标识符和关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">3.1.</span> <span class="toc-text">标识符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">3.2.</span> <span class="toc-text">关键字</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%98%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">常量与变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-number">4.1.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">4.2.</span> <span class="toc-text">变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">5.1.</span> <span class="toc-text">整型数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">5.2.</span> <span class="toc-text">实型数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">5.3.</span> <span class="toc-text">字符型数据</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.</span> <span class="toc-text">数据类型的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.1.</span> <span class="toc-text">隐式类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.2.</span> <span class="toc-text">强制类型转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">运算符和表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E7%AE%97%E6%9C%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">7.1.</span> <span class="toc-text">算术运算符和算术表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E7%AC%A6%E8%BF%90%E7%AE%97%E7%AC%A6%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">7.1.1.</span> <span class="toc-text">算符运算符及其相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E7%BB%93%E5%90%88%E6%80%A7"><span class="toc-number">7.1.2.</span> <span class="toc-text">算术运算符的优先级与结合性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E8%B5%8B%E5%80%BC%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">7.2.</span> <span class="toc-text">赋值运算符和赋值表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E5%8F%8A%E5%85%B6%E8%AF%B4%E6%98%8E"><span class="toc-number">7.2.1.</span> <span class="toc-text">赋值运算符及其说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E7%BB%93%E5%90%88%E6%80%A7"><span class="toc-number">7.2.2.</span> <span class="toc-text">赋值运算符的结合性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">7.3.</span> <span class="toc-text">自增自减运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6%E5%8F%8A%E5%85%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">7.3.1.</span> <span class="toc-text">自增自减运算符及其表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E7%9A%84%E7%BB%93%E5%90%88%E6%80%A7"><span class="toc-number">7.3.2.</span> <span class="toc-text">自增自减的结合性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E9%80%97%E5%8F%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">7.4.</span> <span class="toc-text">逗号运算符和逗号表达式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA"><span class="toc-number">8.</span> <span class="toc-text">数据的输入和输出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%BE%93%E5%85%A5%E5%87%BD%E6%95%B0-scanf"><span class="toc-number">8.1.</span> <span class="toc-text">格式输入函数 scanf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0-printf"><span class="toc-number">8.2.</span> <span class="toc-text">格式输出函数 printf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0-getchar"><span class="toc-number">8.3.</span> <span class="toc-text">字符输出函数 getchar()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0-putchar"><span class="toc-number">8.4.</span> <span class="toc-text">字符输出函数 putchar()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number">9.</span> <span class="toc-text">赋值语句和顺序结构程序设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5"><span class="toc-number">9.1.</span> <span class="toc-text">赋值语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number">9.2.</span> <span class="toc-text">顺序结构程序设计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="toc-number">10.</span> <span class="toc-text">数学函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90"><span class="toc-number">11.</span> <span class="toc-text">常见错误分析</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

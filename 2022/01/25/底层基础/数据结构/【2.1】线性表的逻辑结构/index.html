@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【2.1】线性表的逻辑结构 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言有了前面的基础，现在开始正式学习数据结构最常用也是最简单的一种结构——线性表。 学习本文需要掌握一定的 C语言基础。 本部分内容参考程杰老师《大话数据结构》，青岛大学王卓老师的授课，王道考研公开课等 综合个人所学的总结笔记。 线性表的定义线性表，顾名思义，是具有像线一样串联起来的表。串联则意味着存在一个头部，一个尾部，且中间的每个元素都是一个挨着一个，这样的表就可以称为线性表。 线性表(Lis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【2.1】线性表的逻辑结构">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/01/25/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%902.1%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言有了前面的基础，现在开始正式学习数据结构最常用也是最简单的一种结构——线性表。 学习本文需要掌握一定的 C语言基础。 本部分内容参考程杰老师《大话数据结构》，青岛大学王卓老师的授课，王道考研公开课等 综合个人所学的总结笔记。 线性表的定义线性表，顾名思义，是具有像线一样串联起来的表。串联则意味着存在一个头部，一个尾部，且中间的每个元素都是一个挨着一个，这样的表就可以称为线性表。 线性表(Lis">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae221796b7.webp">
+<meta property="article:published_time" content="2022-01-25T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:01:04.231Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae221796b7.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/01/25/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%902.1%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【2.1】线性表的逻辑结构',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:01:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aae221796b7.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【2.1】线性表的逻辑结构</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-25T15:30:01.000Z" title="发表于 2022-01-25 23:30:01">2022-01-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:01:04.231Z" title="更新于 2023-07-14 21:01:04">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/">底层基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【2.1】线性表的逻辑结构"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有了前面的基础，现在开始正式学习数据结构最常用也是最简单的一种结构——线性表。</p>
+<p>学习本文需要掌握一定的 <strong>C语言基础</strong>。</p>
+<p><strong>本部分内容参考程杰老师《大话数据结构》，青岛大学王卓老师的授课，王道考研公开课等 综合个人所学的总结笔记。</strong></p>
+<h1 id="线性表的定义"><a href="#线性表的定义" class="headerlink" title="线性表的定义"></a>线性表的定义</h1><p>线性表，顾名思义，是具有像线一样串联起来的表。串联则意味着存在一个头部，一个尾部，且中间的每个元素都是一个挨着一个，这样的表就可以称为线性表。</p>
+<p><strong>线性表(List)：零个或多个数据元素的有限序列。</strong></p>
+<p>需要强调的是：</p>
+<ol>
+<li>首先它是一个序列，也就是说，元素之间是有顺序的，如果元素存在多个，那么第一个元素无前驱，最后一个元素无后继，其他的元素都有且只有一个前驱和后继。</li>
+<li>其次，线性表是有限的。事实上，计算机中处理的对象都是有限，无限的序列，只存于数学中的概念。</li>
+</ol>
+<p>如果使用数学语言来进行定义的话，如下：</p>
+<p><strong>若将线性表记为（$a_1,·····,a_{i-1},a_i,a_{i+1},···,a_n$），则表中 $a_{i-1}$ 领先于 $a_i$ ，$a_i$ 领先于 $a_{i+1}$，称 $a_{i-1}$ 是 $a_i$ 的直接前驱，$a_{i+1}$ 是 $a_i$ 的直接后继。当 $i&#x3D;1,2,···，n-1$ 时，$a_i$ 有且仅有一个直接后继；当 $i&#x3D;2,3,···，n$ 时，$a_i$ 有且仅有一个直接前驱。</strong> 如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae1fd3dff3.png" alt="image-20220725001546950" style="zoom:80%;" />
+
+<p>所以<strong>线性表元素的个数 $n$ ($n\geq0$)定义为线性表的长度，当 $n&#x3D;0$ 时，称为空表。</strong></p>
+<p>在非空表中的每个数据元素都有一个确定的位置，如 $a_1$是第一个数据元素，$a_n$是最后一个数据元素，$a_i$ 是第 $i$ 个数据元素，称 $i$ 为数据元素 $a_i$ 在线性表中的位序。</p>
+<h2 id="线性表的例子"><a href="#线性表的例子" class="headerlink" title="线性表的例子"></a>线性表的例子</h2><ul>
+<li><p>26个英文字母组成的英文表<br>  ($A,B,C,···,Z$)<br>  元素都是字母；元素关系是线性的；</p>
+</li>
+<li><p>学生情况登记表</p>
+<table>
+<thead>
+<tr>
+<th align="center">学号</th>
+<th align="center">姓名</th>
+<th align="center">性别</th>
+<th align="center">年龄</th>
+<th align="center">班级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">001</td>
+<td align="center">于春梅</td>
+<td align="center">女</td>
+<td align="center">18</td>
+<td align="center">01级计算机1班</td>
+</tr>
+<tr>
+<td align="center">002</td>
+<td align="center">何仕鹏</td>
+<td align="center">男</td>
+<td align="center">20</td>
+<td align="center">01级计算机2班</td>
+</tr>
+<tr>
+<td align="center">003</td>
+<td align="center">王亚</td>
+<td align="center">女</td>
+<td align="center">19</td>
+<td align="center">01级计算机4班</td>
+</tr>
+<tr>
+<td align="center">：</td>
+<td align="center">：</td>
+<td align="center">：</td>
+<td align="center">：</td>
+<td align="center">：</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h1 id="线性表的抽象数据类型"><a href="#线性表的抽象数据类型" class="headerlink" title="线性表的抽象数据类型"></a>线性表的抽象数据类型</h1><p>线性表的抽象数据类型定义如下：</p>
+<h2 id="线性表的类型定义"><a href="#线性表的类型定义" class="headerlink" title="线性表的类型定义"></a>线性表的类型定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ADT List&#123;</span><br><span class="line">    数据对象：对象的基本信息</span><br><span class="line">    数据关系：数据元素之间的关系</span><br><span class="line">    基本操作：</span><br><span class="line">        InitList(&amp;L);    <span class="comment">//创建线性表</span></span><br><span class="line">        DestroyList(&amp;L);    <span class="comment">//销毁线性表</span></span><br><span class="line">        ListInsert(&amp;L,i,e);    <span class="comment">//插入数据</span></span><br><span class="line">        ListDelete(&amp;L,i,&amp;e);    <span class="comment">//删除数据</span></span><br><span class="line">        ....等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
+<li>InitList(&amp;L)<ul>
+<li>操作结果：<strong>构造一个空的线性表L</strong><blockquote>
+<p>initialization     &#x2F;i,niʃəlai’zeiʃən&#x2F;    初始化，设定初值</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>DestoryList(&amp;L)<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>销毁线性表L</strong></li>
+</ul>
+</li>
+<li>ClearList(&amp;L)<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>将线性表L重置为空表</strong></li>
+</ul>
+</li>
+<li>ListEmpty(L)<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>若线性表L为空表，则返回TRUE；否则返回FLASE</strong></li>
+</ul>
+</li>
+<li>ListLength(L)<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>返回线性表L中的数据元素的个数。</strong></li>
+</ul>
+</li>
+<li>GetElem(L,i,&amp;e);<ul>
+<li>初始条件：线性表L已经存在，$1 \leq i \leq ListLength(L)$。</li>
+<li>操作结果：<strong>用 e 返回线性表L中第 i 个数据元素的值。</strong></li>
+</ul>
+</li>
+<li>LocateElem(L,e,compare())<ul>
+<li>初始条件：线性表L已经存在，<code>compare()</code>是数据元素判定函数。</li>
+<li>操作结果：<strong>返回L中第一个与e满足<code>compare()</code>的数据元素的位序。若这样的数据元素不存在则返回值为0。</strong></li>
+</ul>
+</li>
+<li>PriorElem(L,cur_e,&amp;pre_e)<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>若cur_e是L的数据元素，且不是第一个，则用pre_e返回它的前驱，否则操作失败；pre_e无意义。</strong><blockquote>
+<p>prior    &#x2F;‘praɪɚ&#x2F;    在前的，在先的；优先的；<br>pre- 【前缀】先于；在….前；</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>NextElem(L,cur_e.&amp;next_e)<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>若cur_e是L的数据元素，且不是第最后一个，则用Next_e返回它的后继，否则操作失败，next_e无意义。</strong><blockquote>
+<p>currently    &#x2F;‘kʌrəntli&#x2F;    当前；目前；眼下</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>ListInsert(&amp;L,i,e)<ul>
+<li>初始条件：线性表L已经存在，$1 \leq i \leq ListLength(L)+1$。</li>
+<li>操作结果：<strong>在L的第 i 个位置之前插入信的数据元素e，L的长度加一。</strong></li>
+</ul>
+</li>
+<li>ListDelete(&amp;L,i,&amp;e)<ul>
+<li>初始条件：线性表L已经存在，$1 \leq i \leq ListLength(L)$</li>
+<li>操作结果：<strong>删除L的第 i 个数据元素，并用 e 返回其值，L的长度减一。</strong></li>
+</ul>
+</li>
+<li>ListTraverse(&amp;L,visited())<ul>
+<li>初始条件：线性表L已经存在</li>
+<li>操作结果：<strong>依次对线性表中的每个元素调用<code>visited()</code></strong></li>
+</ul>
+</li>
+</ul>
+<p>以上所提及的运算是逻辑结构上定义的运算。主要是给出这些运算的功能是”做什么“，至于”怎么做“等实现细节，只有在确定了存储结构之后才考虑。</p>
+<h1 id="线性表的存储结构"><a href="#线性表的存储结构" class="headerlink" title="线性表的存储结构"></a>线性表的存储结构</h1><p>在计算机中，线性表有两种基本的存储结构：<strong>顺序存储结构</strong>和<strong>链式存储结构</strong>，也就是耳熟能详的，顺序表和链式表。后面的部分会讲述如何通过顺序存储结构和链式存储结构来表示和实现线性表。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/01/25/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%902.1%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84/">https://www.helloseraphine.top/2022/01/25/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%902.1%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae221796b7.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/22/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%901.0%E3%80%91%E5%BC%95%E8%A8%80/" title="【1.0】C-引言"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb7b231525.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【1.0】C-引言</div></div></a></div><div class="next-post pull-right"><a href="/2022/01/25/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%902.2%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84/" title="【2.2】线性表的物理结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae26ceb58a.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【2.2】线性表的物理结构</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">线性表的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">2.1.</span> <span class="toc-text">线性表的例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">线性表的抽象数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">线性表的类型定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.1.1.</span> <span class="toc-text">基本操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">线性表的存储结构</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,1773 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于C语言的一些零碎思考 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言在使用C的时候难免会碰到一些奇怪的用法或者令人困惑的语法等等，考虑到问题过于琐碎，就写于这个合集中，名为关于C语言的零碎思考 typedef 和 define 的区别这种关键字的使用常见于对于某种类型的替换，例如下面的场景： 123#define ElemType inttypedef int NewType  两者的区别在于：define是一种宏定义，本质上来说就是字符串替换，而typede">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于C语言的一些零碎思考">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/01/28/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言在使用C的时候难免会碰到一些奇怪的用法或者令人困惑的语法等等，考虑到问题过于琐碎，就写于这个合集中，名为关于C语言的零碎思考 typedef 和 define 的区别这种关键字的使用常见于对于某种类型的替换，例如下面的场景： 123#define ElemType inttypedef int NewType  两者的区别在于：define是一种宏定义，本质上来说就是字符串替换，而typede">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc352b8f4.webp">
+<meta property="article:published_time" content="2022-01-28T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:04:14.880Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc352b8f4.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/01/28/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E6%80%9D%E8%80%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于C语言的一些零碎思考',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:04:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc352b8f4.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">关于C语言的一些零碎思考</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-28T15:30:01.000Z" title="发表于 2022-01-28 23:30:01">2022-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:04:14.880Z" title="更新于 2023-07-14 21:04:14">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/">语言树</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="关于C语言的一些零碎思考"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在使用<code>C</code>的时候难免会碰到一些奇怪的用法或者令人困惑的语法等等，考虑到问题过于琐碎，就写于这个合集中，名为<strong>关于<code>C</code>语言的零碎思考</strong></p>
+<h1 id="typedef-和-define-的区别"><a href="#typedef-和-define-的区别" class="headerlink" title="typedef 和 define 的区别"></a>typedef 和 define 的区别</h1><p>这种关键字的使用常见于对于某种类型的替换，例如下面的场景：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> ElemType int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> NewType</span><br></pre></td></tr></table></figure>
+
+<p><strong>两者的区别在于：<code>define</code>是一种宏定义，本质上来说就是字符串替换，而<code>typedef</code>是一种类型封装</strong>。</p>
+<p>例如参考下面的代码，思考各个变量的类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> ElemType int*</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	ElemType a,b;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<strong>变量<code>a</code>的类型为<code>int*</code>，而变量<code>b</code>的类型为<code>int</code>类型</strong>，不难理解宏定义只是字符串替换。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">int</span>* ElemType</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    ElemType a,b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中**变量<code>a</code>和变量<code>b</code>的类型均为<code>int*</code>**，可以理解为<code>typedef</code>将<code>int*</code>封装成了一个新的类型。</p>
+<h1 id="typedef-和-struct-的使用"><a href="#typedef-和-struct-的使用" class="headerlink" title="typedef 和 struct 的使用"></a>typedef 和 struct 的使用</h1><p>关于结构体的相关基础内容我已经在这篇文章中做过说明<a href="httpss://www.helloseraphine.top/2022/05/22/C%E8%AF%AD%E8%A8%80/%E3%80%909-0%E3%80%91C-%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93/#%E7%BB%93%E6%9E%84%E4%BD%93">【9.0】C-结构体与共用体</a>.</p>
+<p>这里主要是梳理当<code>typedef</code>和<code>struct</code>关键词连用时的逻辑关系，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">&#125;Test1;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们使用上述代码来定义结构体，那么**<code>Test1</code>表示的被定义的变量**，而不是数据类型。</p>
+<p>上述代码意味着：<strong>你将不可能在其他位置声明和<code>Test1</code>相同类型的变量</strong>，除非你继续在结构体声明的时候再添加其他变量。同样的，如果使用如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">&#125;Test1;</span><br></pre></td></tr></table></figure>
+
+<p>此处的<code>Test1</code>是表示类型为<code>Test</code>的结构体变量，<strong>此代码与上述代码不同之处在于你可以通过使用<code>struct Test</code>关键词来在其他地方继续声明和<code>Test1</code>变量相同类型的其他变量</strong>。</p>
+<p>但是如果对<code>struct</code>关键词配合<code>typedef</code>关键词的话，其逻辑结构就不同了，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">&#125;Test1;</span><br></pre></td></tr></table></figure>
+
+<p>在使用<code>typedef</code>关键词后，<strong>如上代码中的<code>Test1</code>就不再是变量了，而是结构体类型名称</strong>，如果你使用<code>Test1.a</code>则编译器会报错。你可以通过<code>Test1 变量名称</code>来定义相同结构体类型的变量。</p>
+<p>在了解如上代码的逻辑后，现在来判断如下代码中的<code>Test1</code>,<code>Test2</code>,<code>Test</code>是代表的什么？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Test</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">&#125;Test1,Test2;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc4b230a4.png" alt="image-20220801205502564" style="zoom:80%;" />
+
+<p><strong>答案是三者都表示同一种结构体类型</strong>，只是这种结构体类型的不同名称变体，其并非变量。不过不同的是，对于<code>Test1</code>和<code>Test2</code>两者是相同的，与<code>Test</code>不同，如下是三者使用时声明的代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    Test1 a;</span><br><span class="line">    Test2 b;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Test</span> <span class="title">c</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这里你就会明白了，其实上面的代码，是下面代码的缩写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是上面的代码</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Test</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">&#125;Test1,Test2;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这是其拆解后的过程</span></span><br><span class="line"><span class="comment">//先声明结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Test</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">&#125;Test1,Test2;</span><br><span class="line"><span class="comment">//然后使用typedef函数改变其函数声明格式</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Test</span> <span class="title">Test1</span>,<span class="title">Test2</span>;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Bool函数的使用问题"><a href="#Bool函数的使用问题" class="headerlink" title="Bool函数的使用问题"></a>Bool函数的使用问题</h1><p>如果<strong>你使用<code>GCC</code>编译器</strong>，将其连接到<code>Visual Code</code>编辑器中使用，编译<code>C</code>语言文件。<strong>如果文件中使用了<code>bool</code>关键字，则会报错，需要引用<code>#include &lt;stdbool.h&gt;</code>来使用<code>bool</code>关键字</strong>。</p>
+<p>如果你<strong>使用<code>Visual Studio</code>安装的<code>C/C++</code>环境</strong>，使用<code>bool</code>关键词，通用需要引用<code>#include &lt;stdbool.h&gt;</code>，不过在引用后，<strong>IDE 依旧会报错，需要再引用<code>#define _CRT_SECURE_NO_WARNINGS</code>即可使用</strong>。</p>
+<h1 id="取余运算-取模运算的算法规则"><a href="#取余运算-取模运算的算法规则" class="headerlink" title="取余运算&#x2F;取模运算的算法规则"></a>取余运算&#x2F;取模运算的算法规则</h1><p>取模运算也就是取余运算，它的作用之一是<strong>可以将无线的集合，通过取余来映射到有限的集合里</strong>。</p>
+<p><strong><code>C</code>语言中取余运算符为：<code>%</code>，其作用于两个整型数（正负皆可），运算结果是返回两数的余数（即返回值为整数）</strong>，它遵循如下规定：（示例<code>a%b</code>）</p>
+<ul>
+<li>运算结果的正负和被除数(<code>a</code>)符号一致</li>
+<li><strong>被除数(<code>a</code>)小于除数(<code>b</code>)时，运算结果等于被除数(<code>a</code>)</strong></li>
+</ul>
+<h1 id="单引号和双引号引发的问题"><a href="#单引号和双引号引发的问题" class="headerlink" title="单引号和双引号引发的问题"></a>单引号和双引号引发的问题</h1><p>如果你学习过<code>C#</code>，<code>JAVA</code>或者<code>Python</code>等现代高级语言的时候，你或许对于字符串和字符来说，都是通常来使用双引号（<code>&quot;&quot;</code>）来表示，例如：<code>&quot;这是一个字符串&quot;</code>，这是一个<code>&quot;c&quot;</code>字符）。</p>
+<p>这种写法在高级语言中是合法的，但是在C语言中，这种写法是不规范的，也是不完全合法的，例如下面的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个char类型的数组str，声明其包含字符a,b,c</span></span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>] = &#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>请思考如上写法是否合法？</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc514d8cf.png" alt="image-20220809025647389" style="zoom:80%;" />
+
+<p>很不幸，这种写法并不合法，我们的编译器会给我们报错，如下所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc551ba53.png" alt="image-20220809025317930" style="zoom:80%;" />
+
+<p>那么这是为什么？一共就三个字符<code>a,b,c</code>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc58b0502.png" alt="image-20220809025404051" style="zoom:80%;" />
+
+<p>这是因为<code>C</code>语言在处理字符的时候，<strong>对于双引号（<code>&quot;这是双引号的内容&quot;</code>）的内容来说，它会被优先认为是字符串，对于单引号（<code>&#39;这是单引号内容&#39;</code>）会被优先认为是字符</strong>。</p>
+<p>那么问题来了，请思考如下写法编译器是否会报错？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c = <span class="string">&quot;b&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>答案：<strong>会但是不完全会</strong>，我们的编辑器或者 IDE 并不会直接报错，它不会和上面的数组示例一样，在未编译的时候就报错，这种写法只会在编译的时候报错，<strong>但是仅仅是警告，而不是错误</strong>，也就是说，<strong>这种写法并不会中断程序的运行</strong>。</p>
+<p>在程序中，有句话叫做：“错误需要解决，警告可以不管，程序能跑就行”，但是这样真的可以让程序万无一失吗？</p>
+<p>答案是并不能，<strong>我们在给字符<code>c</code>赋值字符串<code>b</code>的时候，编译器会将字符<code>c</code>的值变为<code>ASCII</code>码的第 40 号（<code>(</code>）字符</strong>，这也就意味着程序并不能如我们所说的那样，警告可以不用管。</p>
+<h1 id="C中各种类型的问题"><a href="#C中各种类型的问题" class="headerlink" title="C中各种类型的问题"></a>C中各种类型的问题</h1><h2 id="所占内存"><a href="#所占内存" class="headerlink" title="所占内存"></a>所占内存</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int</code></td>
+<td><strong>4字节（Byte）</strong></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td><strong>1字节（Byte）</strong></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><strong>4字节（Byte）</strong></td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td><strong>8字节（Byte）</strong></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><strong>4字节（Byte）</strong></td>
+</tr>
+</tbody></table>
+<h2 id="char类型"><a href="#char类型" class="headerlink" title="char类型"></a>char类型</h2><p>因为**<code>char</code>类型占一个字节<strong>，也就是说换算成数值类型，其</strong>可以表示 $2^8$ 个数值，也就是 $0 \sim 255$** 。但是实际上<strong>考虑到正负号</strong>的问题，所以<strong>它可以表示的实际数值为 $-128 \sim 127$</strong> 。</p>
+<p>综上结果，我们是可以将<code>int</code>类型存储在<code>char</code>类型的变量中的，但是其大小只能被限制到如上的实际数值范围中。现在问题来了，思考如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c = <span class="number">128</span>;</span><br></pre></td></tr></table></figure>
+
+<p>请问它是否合法？</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc5d547d3.png" alt="image-20220809204325744" style="zoom:90%;" />
+
+<p>答：赋值合法。但是为什么？</p>
+<p>这需要从<code>char</code>类型和<code>int</code>类型所占用的内存空间说起，如上表格所示，<code>char</code>类型在内存占用<strong>1 个字节</strong>，也就是<strong>8 个位</strong>，而<code>int</code>类型占用<strong>4 个字节</strong>，也就是<strong>32 个位</strong>。计算机本质是二进制的数值，也就是说对于计算机来说本来就没有字符这一个说法，这些字符的说法都是源于<code>ASCII</code>码的映射。</p>
+<p>标准的<code>ASCII</code>码是采用<strong>1 个字节（8 位）</strong>来表示字符，但是<strong>实际上最高位用来做数据的奇偶校验位</strong>，用来验证数据完整。也就是说，**<code>ASCII</code>码实际能用的之后的后 7 位**，也就是会产生 $2^7&#x3D;128$ 种情况。这 128 种情况对应标准<code>ASCII</code>码中的字符数字控制符等。</p>
+<blockquote>
+<p>奇偶检验的相关内容详情查看《计算机组成原理》</p>
+</blockquote>
+<p><strong>通过<code>ASCII</code>码，我们建立了字符和数值的映射，这也就意味着字符本质还是数值</strong>。所以上述代码“合法”，但是它真的能用吗？请思考如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a = <span class="number">128</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;字符A的十进制表示为：%d\n&quot;</span>,a);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;字符A的字符表示为：%c\n&quot;</span>, a);</span><br></pre></td></tr></table></figure>
+
+<p>它们的运行结果是什么？</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc611d3d3.png" alt="image-20220810001213562" style="zoom:80%;" />
+
+<p>答案：</p>
+<ul>
+<li><strong>字符A的十进制表示为：-128</strong></li>
+<li><strong>字符A的字符表示为：€</strong></li>
+</ul>
+<p>为什么？明明给它赋值的 128 ，为什么他的数值结果确是 -128 ？关键是 -128 数值竟然还有对应的字符映射？</p>
+<p>先解释第二个，之所以字符表示为<strong>€</strong>，是因为前面说到标准的<code>ASCII</code>码表最高位用来做校验位，导致其容量只有 128 个映射。后来人将其最高位也算在数值映射内，也就是使用 8 位来映射字符，而形成了新的<strong>拓展<code>ASCII</code>码表</strong>，其拓展内容如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">十进制</th>
+<th align="center">八进制</th>
+<th align="center">十六进制</th>
+<th align="center">二进制</th>
+<th align="center">符号</th>
+<th align="center">HTML 编号</th>
+<th align="center">HTML 名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">128</td>
+<td align="center">200</td>
+<td align="center">80</td>
+<td align="center">10000000</td>
+<td align="center">€</td>
+<td align="center">&#128;</td>
+<td align="center">&euro;</td>
+<td align="left">欧元符号</td>
+</tr>
+<tr>
+<td align="center">129</td>
+<td align="center">201</td>
+<td align="center">81</td>
+<td align="center">10000001</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">130</td>
+<td align="center">202</td>
+<td align="center">82</td>
+<td align="center">10000010</td>
+<td align="center">‚</td>
+<td align="center">&#130;</td>
+<td align="center">&sbquo;</td>
+<td align="left">单个低9引号</td>
+</tr>
+<tr>
+<td align="center">131</td>
+<td align="center">203</td>
+<td align="center">83</td>
+<td align="center">10000011</td>
+<td align="center">ƒ</td>
+<td align="center">&#131;</td>
+<td align="center">&fnof;</td>
+<td align="left">拉丁小写字母f</td>
+</tr>
+<tr>
+<td align="center">132</td>
+<td align="center">204</td>
+<td align="center">84</td>
+<td align="center">10000100</td>
+<td align="center">„</td>
+<td align="center">&#132;</td>
+<td align="center">&bdquo;</td>
+<td align="left">双低9引号</td>
+</tr>
+<tr>
+<td align="center">133</td>
+<td align="center">205</td>
+<td align="center">85</td>
+<td align="center">10000101</td>
+<td align="center">…</td>
+<td align="center">&#133;</td>
+<td align="center">&hellip;</td>
+<td align="left">水平省略号</td>
+</tr>
+<tr>
+<td align="center">134</td>
+<td align="center">206</td>
+<td align="center">86</td>
+<td align="center">10000110</td>
+<td align="center">†</td>
+<td align="center">&#134;</td>
+<td align="center">&dagger;</td>
+<td align="left">匕首</td>
+</tr>
+<tr>
+<td align="center">135</td>
+<td align="center">207</td>
+<td align="center">87</td>
+<td align="center">10000111</td>
+<td align="center">‡</td>
+<td align="center">&#135;</td>
+<td align="center">&Dagger;</td>
+<td align="left">双匕首</td>
+</tr>
+<tr>
+<td align="center">136</td>
+<td align="center">210</td>
+<td align="center">88</td>
+<td align="center">10001000</td>
+<td align="center">ˆ</td>
+<td align="center">&#136;</td>
+<td align="center">&circ;</td>
+<td align="left">修饰语字母抑扬音</td>
+</tr>
+<tr>
+<td align="center">137</td>
+<td align="center">211</td>
+<td align="center">89</td>
+<td align="center">10001001</td>
+<td align="center">‰</td>
+<td align="center">&#137;</td>
+<td align="center">&permil;</td>
+<td align="left">千分号</td>
+</tr>
+<tr>
+<td align="center">138</td>
+<td align="center">212</td>
+<td align="center">8A</td>
+<td align="center">10001010</td>
+<td align="center">Š</td>
+<td align="center">&#138;</td>
+<td align="center">&Scaron;</td>
+<td align="left">拉丁大写字母S</td>
+</tr>
+<tr>
+<td align="center">139</td>
+<td align="center">213</td>
+<td align="center">8B</td>
+<td align="center">10001011</td>
+<td align="center">‹</td>
+<td align="center">&#139;</td>
+<td align="center">&lsaquo;</td>
+<td align="left">单左角引号</td>
+</tr>
+<tr>
+<td align="center">140</td>
+<td align="center">214</td>
+<td align="center">8C</td>
+<td align="center">10001100</td>
+<td align="center">Œ</td>
+<td align="center">&#140;</td>
+<td align="center">&OElig;</td>
+<td align="left">拉丁字母连字OE</td>
+</tr>
+<tr>
+<td align="center">141</td>
+<td align="center">215</td>
+<td align="center">8D</td>
+<td align="center">10001101</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">142</td>
+<td align="center">216</td>
+<td align="center">8E</td>
+<td align="center">10001110</td>
+<td align="center">Ž</td>
+<td align="center">&#142;</td>
+<td align="center"></td>
+<td align="left">拉丁大写字母Z</td>
+</tr>
+<tr>
+<td align="center">143</td>
+<td align="center">217</td>
+<td align="center">8F</td>
+<td align="center">10001111</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">144</td>
+<td align="center">220</td>
+<td align="center">90</td>
+<td align="center">10010000</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">145</td>
+<td align="center">221</td>
+<td align="center">91</td>
+<td align="center">10010001</td>
+<td align="center">‘</td>
+<td align="center">&#145;</td>
+<td align="center">&lsquo;</td>
+<td align="left">左单引号</td>
+</tr>
+<tr>
+<td align="center">146</td>
+<td align="center">222</td>
+<td align="center">92</td>
+<td align="center">10010010</td>
+<td align="center">’</td>
+<td align="center">&#146;</td>
+<td align="center">&rsquo;</td>
+<td align="left">右单引号</td>
+</tr>
+<tr>
+<td align="center">147</td>
+<td align="center">223</td>
+<td align="center">93</td>
+<td align="center">10010011</td>
+<td align="center">“</td>
+<td align="center">&#147;</td>
+<td align="center">&ldquo;</td>
+<td align="left">左双引号</td>
+</tr>
+<tr>
+<td align="center">148</td>
+<td align="center">224</td>
+<td align="center">94</td>
+<td align="center">10010100</td>
+<td align="center">”</td>
+<td align="center">&#148;</td>
+<td align="center">&rdquo;</td>
+<td align="left">右双引号</td>
+</tr>
+<tr>
+<td align="center">149</td>
+<td align="center">225</td>
+<td align="center">95</td>
+<td align="center">10010101</td>
+<td align="center">•</td>
+<td align="center">&#149;</td>
+<td align="center">&bull;</td>
+<td align="left">子弹</td>
+</tr>
+<tr>
+<td align="center">150</td>
+<td align="center">226</td>
+<td align="center">96</td>
+<td align="center">10010110</td>
+<td align="center">–</td>
+<td align="center">&#150;</td>
+<td align="center">&ndash;</td>
+<td align="left">破折号</td>
+</tr>
+<tr>
+<td align="center">151</td>
+<td align="center">227</td>
+<td align="center">97</td>
+<td align="center">10010111</td>
+<td align="center">—</td>
+<td align="center">&#151;</td>
+<td align="center">&mdash;</td>
+<td align="left">破折号</td>
+</tr>
+<tr>
+<td align="center">152</td>
+<td align="center">230</td>
+<td align="center">98</td>
+<td align="center">10011000</td>
+<td align="center">˜</td>
+<td align="center">&#152;</td>
+<td align="center">&tilde;</td>
+<td align="left">小波浪号</td>
+</tr>
+<tr>
+<td align="center">153</td>
+<td align="center">231</td>
+<td align="center">99</td>
+<td align="center">10011001</td>
+<td align="center">™</td>
+<td align="center">&#153;</td>
+<td align="center">&trade;</td>
+<td align="left">商标标志</td>
+</tr>
+<tr>
+<td align="center">154</td>
+<td align="center">232</td>
+<td align="center">9A</td>
+<td align="center">10011010</td>
+<td align="center">š</td>
+<td align="center">&#154;</td>
+<td align="center">&scaron;</td>
+<td align="left">拉丁小写字母S</td>
+</tr>
+<tr>
+<td align="center">155</td>
+<td align="center">233</td>
+<td align="center">9B</td>
+<td align="center">10011011</td>
+<td align="center">›</td>
+<td align="center">&#155;</td>
+<td align="center">&rsaquo;</td>
+<td align="left">单个右指向角引号</td>
+</tr>
+<tr>
+<td align="center">156</td>
+<td align="center">234</td>
+<td align="center">9C</td>
+<td align="center">10011100</td>
+<td align="center">œ</td>
+<td align="center">&#156;</td>
+<td align="center">&oelig;</td>
+<td align="left">拉丁文小连字oe</td>
+</tr>
+<tr>
+<td align="center">157</td>
+<td align="center">235</td>
+<td align="center">9D</td>
+<td align="center">10011101</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">158</td>
+<td align="center">236</td>
+<td align="center">9E</td>
+<td align="center">10011110</td>
+<td align="center">ž</td>
+<td align="center">&#158;</td>
+<td align="center"></td>
+<td align="left">拉丁小写字母z</td>
+</tr>
+<tr>
+<td align="center">159</td>
+<td align="center">237</td>
+<td align="center">9F</td>
+<td align="center">10011111</td>
+<td align="center">Ÿ</td>
+<td align="center">&#159;</td>
+<td align="center">&Yuml;</td>
+<td align="left">拉丁大写字母Y</td>
+</tr>
+<tr>
+<td align="center">160</td>
+<td align="center">240</td>
+<td align="center">A0</td>
+<td align="center">10100000</td>
+<td align="center"></td>
+<td align="center">&#160;</td>
+<td align="center">&nbsp;</td>
+<td align="left">不间断空间</td>
+</tr>
+<tr>
+<td align="center">161</td>
+<td align="center">241</td>
+<td align="center">A1</td>
+<td align="center">10100001</td>
+<td align="center">¡</td>
+<td align="center">&#161;</td>
+<td align="center">&iexcl;</td>
+<td align="left">倒感叹号</td>
+</tr>
+<tr>
+<td align="center">162</td>
+<td align="center">242</td>
+<td align="center">A2</td>
+<td align="center">10100010</td>
+<td align="center">¢</td>
+<td align="center">&#162;</td>
+<td align="center">&cent;</td>
+<td align="left">分号</td>
+</tr>
+<tr>
+<td align="center">163</td>
+<td align="center">243</td>
+<td align="center">A3</td>
+<td align="center">10100011</td>
+<td align="center">£</td>
+<td align="center">&#163;</td>
+<td align="center">&pound;</td>
+<td align="left">英镑符号</td>
+</tr>
+<tr>
+<td align="center">164</td>
+<td align="center">244</td>
+<td align="center">A4</td>
+<td align="center">10100100</td>
+<td align="center">¤</td>
+<td align="center">&#164;</td>
+<td align="center">&curren;</td>
+<td align="left">货币符号</td>
+</tr>
+<tr>
+<td align="center">165</td>
+<td align="center">245</td>
+<td align="center">A5</td>
+<td align="center">10100101</td>
+<td align="center">¥</td>
+<td align="center">&#165;</td>
+<td align="center">&yen;</td>
+<td align="left">日元符号</td>
+</tr>
+<tr>
+<td align="center">166</td>
+<td align="center">246</td>
+<td align="center">A6</td>
+<td align="center">10100110</td>
+<td align="center">¦</td>
+<td align="center">&#166;</td>
+<td align="center">&brvbar;</td>
+<td align="left">管道，竖线损坏</td>
+</tr>
+<tr>
+<td align="center">167</td>
+<td align="center">247</td>
+<td align="center">A7</td>
+<td align="center">10100111</td>
+<td align="center">§</td>
+<td align="center">&#167;</td>
+<td align="center">&sect;</td>
+<td align="left">分区标志</td>
+</tr>
+<tr>
+<td align="center">168</td>
+<td align="center">250</td>
+<td align="center">A8</td>
+<td align="center">10101000</td>
+<td align="center">¨</td>
+<td align="center">&#168;</td>
+<td align="center">&uml;</td>
+<td align="left">间隔透析-umlaut</td>
+</tr>
+<tr>
+<td align="center">169</td>
+<td align="center">251</td>
+<td align="center">A9</td>
+<td align="center">10101001</td>
+<td align="center">©</td>
+<td align="center">&#169;</td>
+<td align="center">&copy;</td>
+<td align="left">版权标志</td>
+</tr>
+<tr>
+<td align="center">170</td>
+<td align="center">252</td>
+<td align="center">AA</td>
+<td align="center">10101010</td>
+<td align="center">ª</td>
+<td align="center">&#170;</td>
+<td align="center">&ordf;</td>
+<td align="left">女性顺序指示器</td>
+</tr>
+<tr>
+<td align="center">171</td>
+<td align="center">253</td>
+<td align="center">AB</td>
+<td align="center">10101011</td>
+<td align="center">«</td>
+<td align="center">&#171;</td>
+<td align="center">&laquo;</td>
+<td align="left">左双角引号</td>
+</tr>
+<tr>
+<td align="center">172</td>
+<td align="center">254</td>
+<td align="center">AC</td>
+<td align="center">10101100</td>
+<td align="center">¬</td>
+<td align="center">&#172;</td>
+<td align="center">&not;</td>
+<td align="left">不签名</td>
+</tr>
+<tr>
+<td align="center">173</td>
+<td align="center">255</td>
+<td align="center">AD</td>
+<td align="center">10101101</td>
+<td align="center">­</td>
+<td align="center">&#173;</td>
+<td align="center">&shy;</td>
+<td align="left">软连字符</td>
+</tr>
+<tr>
+<td align="center">174</td>
+<td align="center">256</td>
+<td align="center">AE</td>
+<td align="center">10101110</td>
+<td align="center">®</td>
+<td align="center">&#174;</td>
+<td align="center">&reg;</td>
+<td align="left">注册商标标志</td>
+</tr>
+<tr>
+<td align="center">175</td>
+<td align="center">257</td>
+<td align="center">AF</td>
+<td align="center">10101111</td>
+<td align="center">¯</td>
+<td align="center">&#175;</td>
+<td align="center">&macr;</td>
+<td align="left">间隔宏-上划线</td>
+</tr>
+<tr>
+<td align="center">176</td>
+<td align="center">260</td>
+<td align="center">B0</td>
+<td align="center">10110000</td>
+<td align="center">°</td>
+<td align="center">&#176;</td>
+<td align="center">&deg;</td>
+<td align="left">学位标志</td>
+</tr>
+<tr>
+<td align="center">177</td>
+<td align="center">261</td>
+<td align="center">B1</td>
+<td align="center">10110001</td>
+<td align="center">±</td>
+<td align="center">&#177;</td>
+<td align="center">&plusmn;</td>
+<td align="left">正负号</td>
+</tr>
+<tr>
+<td align="center">178</td>
+<td align="center">262</td>
+<td align="center">B2</td>
+<td align="center">10110010</td>
+<td align="center">²</td>
+<td align="center">&#178;</td>
+<td align="center">&sup2;</td>
+<td align="left">上标二平方</td>
+</tr>
+<tr>
+<td align="center">179</td>
+<td align="center">263</td>
+<td align="center">B3</td>
+<td align="center">10110011</td>
+<td align="center">³</td>
+<td align="center">&#179;</td>
+<td align="center">&sup3;</td>
+<td align="left">上标三方</td>
+</tr>
+<tr>
+<td align="center">180</td>
+<td align="center">264</td>
+<td align="center">B4</td>
+<td align="center">10110100</td>
+<td align="center">´</td>
+<td align="center">&#180;</td>
+<td align="center">&acute;</td>
+<td align="left">急性口音-间隔锐</td>
+</tr>
+<tr>
+<td align="center">181</td>
+<td align="center">265</td>
+<td align="center">B5</td>
+<td align="center">10110101</td>
+<td align="center">µ</td>
+<td align="center">&#181;</td>
+<td align="center">&micro;</td>
+<td align="left">微标志</td>
+</tr>
+<tr>
+<td align="center">182</td>
+<td align="center">266</td>
+<td align="center">B6</td>
+<td align="center">10110110</td>
+<td align="center">¶</td>
+<td align="center">&#182;</td>
+<td align="center">&para;</td>
+<td align="left">稻草人标志-段落标志</td>
+</tr>
+<tr>
+<td align="center">183</td>
+<td align="center">267</td>
+<td align="center">B7</td>
+<td align="center">10110111</td>
+<td align="center">·</td>
+<td align="center">&#183;</td>
+<td align="center">&middot;</td>
+<td align="left">中间点-格鲁吉亚逗号</td>
+</tr>
+<tr>
+<td align="center">184</td>
+<td align="center">270</td>
+<td align="center">B8</td>
+<td align="center">10111000</td>
+<td align="center">¸</td>
+<td align="center">&#184;</td>
+<td align="center">&cedil;</td>
+<td align="left">间距塞迪利亚</td>
+</tr>
+<tr>
+<td align="center">185</td>
+<td align="center">271</td>
+<td align="center">B9</td>
+<td align="center">10111001</td>
+<td align="center">¹</td>
+<td align="center">&#185;</td>
+<td align="center">&sup1;</td>
+<td align="left">上标一</td>
+</tr>
+<tr>
+<td align="center">186</td>
+<td align="center">272</td>
+<td align="center">BA</td>
+<td align="center">10111010</td>
+<td align="center">º</td>
+<td align="center">&#186;</td>
+<td align="center">&ordm;</td>
+<td align="left">男性顺序指示器</td>
+</tr>
+<tr>
+<td align="center">187</td>
+<td align="center">273</td>
+<td align="center">BB</td>
+<td align="center">10111011</td>
+<td align="center">»</td>
+<td align="center">&#187;</td>
+<td align="center">&raquo;</td>
+<td align="left">右双角引号</td>
+</tr>
+<tr>
+<td align="center">188</td>
+<td align="center">274</td>
+<td align="center">BC</td>
+<td align="center">10111100</td>
+<td align="center">¼</td>
+<td align="center">&#188;</td>
+<td align="center">&frac14;</td>
+<td align="left">分数的四分之一</td>
+</tr>
+<tr>
+<td align="center">189</td>
+<td align="center">275</td>
+<td align="center">BD</td>
+<td align="center">10111101</td>
+<td align="center">½</td>
+<td align="center">&#189;</td>
+<td align="center">&frac12;</td>
+<td align="left">分数的一半</td>
+</tr>
+<tr>
+<td align="center">190</td>
+<td align="center">276</td>
+<td align="center">BE</td>
+<td align="center">10111110</td>
+<td align="center">¾</td>
+<td align="center">&#190;</td>
+<td align="center">&frac34;</td>
+<td align="left">分数四分之三</td>
+</tr>
+<tr>
+<td align="center">191</td>
+<td align="center">277</td>
+<td align="center">BF</td>
+<td align="center">10111111</td>
+<td align="center">¿</td>
+<td align="center">&#191;</td>
+<td align="center">&iquest;</td>
+<td align="left">倒问号</td>
+</tr>
+<tr>
+<td align="center">192</td>
+<td align="center">300</td>
+<td align="center">C0</td>
+<td align="center">11000000</td>
+<td align="center">À</td>
+<td align="center">&#192;</td>
+<td align="center">&Agrave;</td>
+<td align="left">拉丁大写字母A</td>
+</tr>
+<tr>
+<td align="center">193</td>
+<td align="center">301</td>
+<td align="center">C1</td>
+<td align="center">11000001</td>
+<td align="center">Á</td>
+<td align="center">&#193;</td>
+<td align="center">&Aacute;</td>
+<td align="left">拉丁大写字母A</td>
+</tr>
+<tr>
+<td align="center">194</td>
+<td align="center">302</td>
+<td align="center">C2</td>
+<td align="center">11000010</td>
+<td align="center">Â</td>
+<td align="center">&#194;</td>
+<td align="center">&Acirc;</td>
+<td align="left">拉丁大写字母A</td>
+</tr>
+<tr>
+<td align="center">195</td>
+<td align="center">303</td>
+<td align="center">C3</td>
+<td align="center">11000011</td>
+<td align="center">Ã</td>
+<td align="center">&#195;</td>
+<td align="center">&Atilde;</td>
+<td align="left">拉丁大写字母A</td>
+</tr>
+<tr>
+<td align="center">196</td>
+<td align="center">304</td>
+<td align="center">C4</td>
+<td align="center">11000100</td>
+<td align="center">Ä</td>
+<td align="center">&#196;</td>
+<td align="center">&Auml;</td>
+<td align="left">拉丁大写字母A</td>
+</tr>
+<tr>
+<td align="center">197</td>
+<td align="center">305</td>
+<td align="center">C5</td>
+<td align="center">11000101</td>
+<td align="center">Å</td>
+<td align="center">&#197;</td>
+<td align="center">&Aring;</td>
+<td align="left">拉丁大写字母A</td>
+</tr>
+<tr>
+<td align="center">198</td>
+<td align="center">306</td>
+<td align="center">C6</td>
+<td align="center">11000110</td>
+<td align="center">Æ</td>
+<td align="center">&#198;</td>
+<td align="center">&AElig;</td>
+<td align="left">拉丁大写字母AE</td>
+</tr>
+<tr>
+<td align="center">199</td>
+<td align="center">307</td>
+<td align="center">C7</td>
+<td align="center">11000111</td>
+<td align="center">Ç</td>
+<td align="center">&#199;</td>
+<td align="center">&Ccedil;</td>
+<td align="left">拉丁大写字母C</td>
+</tr>
+<tr>
+<td align="center">200</td>
+<td align="center">310</td>
+<td align="center">C8</td>
+<td align="center">11001000</td>
+<td align="center">È</td>
+<td align="center">&#200;</td>
+<td align="center">&Egrave;</td>
+<td align="left">拉丁大写字母E</td>
+</tr>
+<tr>
+<td align="center">201</td>
+<td align="center">311</td>
+<td align="center">C9</td>
+<td align="center">11001001</td>
+<td align="center">É</td>
+<td align="center">&#201;</td>
+<td align="center">&Eacute;</td>
+<td align="left">拉丁大写字母E</td>
+</tr>
+<tr>
+<td align="center">202</td>
+<td align="center">312</td>
+<td align="center">CA</td>
+<td align="center">11001010</td>
+<td align="center">Ê</td>
+<td align="center">&#202;</td>
+<td align="center">&Ecirc;</td>
+<td align="left">拉丁大写字母E</td>
+</tr>
+<tr>
+<td align="center">203</td>
+<td align="center">313</td>
+<td align="center">CB</td>
+<td align="center">11001011</td>
+<td align="center">Ë</td>
+<td align="center">&#203;</td>
+<td align="center">&Euml;</td>
+<td align="left">拉丁大写字母E</td>
+</tr>
+<tr>
+<td align="center">204</td>
+<td align="center">314</td>
+<td align="center">CC</td>
+<td align="center">11001100</td>
+<td align="center">Ì</td>
+<td align="center">&#204;</td>
+<td align="center">&Igrave;</td>
+<td align="left">拉丁大写字母I</td>
+</tr>
+<tr>
+<td align="center">205</td>
+<td align="center">315</td>
+<td align="center">CD</td>
+<td align="center">11001101</td>
+<td align="center">Í</td>
+<td align="center">&#205;</td>
+<td align="center">&Iacute;</td>
+<td align="left">拉丁大写字母I</td>
+</tr>
+<tr>
+<td align="center">206</td>
+<td align="center">316</td>
+<td align="center">CE</td>
+<td align="center">11001110</td>
+<td align="center">Î</td>
+<td align="center">&#206;</td>
+<td align="center">&Icirc;</td>
+<td align="left">拉丁大写字母I</td>
+</tr>
+<tr>
+<td align="center">207</td>
+<td align="center">317</td>
+<td align="center">CF</td>
+<td align="center">11001111</td>
+<td align="center">Ï</td>
+<td align="center">&#207;</td>
+<td align="center">&Iuml;</td>
+<td align="left">拉丁大写字母I</td>
+</tr>
+<tr>
+<td align="center">208</td>
+<td align="center">320</td>
+<td align="center">D0</td>
+<td align="center">11010000</td>
+<td align="center">Ð</td>
+<td align="center">&#208;</td>
+<td align="center">&ETH;</td>
+<td align="left">拉丁大写字母ETH</td>
+</tr>
+<tr>
+<td align="center">209</td>
+<td align="center">321</td>
+<td align="center">D1</td>
+<td align="center">11010001</td>
+<td align="center">Ñ</td>
+<td align="center">&#209;</td>
+<td align="center">&Ntilde;</td>
+<td align="left">拉丁大写字母N</td>
+</tr>
+<tr>
+<td align="center">210</td>
+<td align="center">322</td>
+<td align="center">D2</td>
+<td align="center">11010010</td>
+<td align="center">Ò</td>
+<td align="center">&#210;</td>
+<td align="center">&Ograve;</td>
+<td align="left">拉丁大写字母O</td>
+</tr>
+<tr>
+<td align="center">211</td>
+<td align="center">323</td>
+<td align="center">D3</td>
+<td align="center">11010011</td>
+<td align="center">Ó</td>
+<td align="center">&#211;</td>
+<td align="center">&Oacute;</td>
+<td align="left">拉丁大写字母O</td>
+</tr>
+<tr>
+<td align="center">212</td>
+<td align="center">324</td>
+<td align="center">D4</td>
+<td align="center">11010100</td>
+<td align="center">Ô</td>
+<td align="center">&#212;</td>
+<td align="center">&Ocirc;</td>
+<td align="left">拉丁大写字母O</td>
+</tr>
+<tr>
+<td align="center">213</td>
+<td align="center">325</td>
+<td align="center">D5</td>
+<td align="center">11010101</td>
+<td align="center">Õ</td>
+<td align="center">&#213;</td>
+<td align="center">&Otilde;</td>
+<td align="left">拉丁大写字母O</td>
+</tr>
+<tr>
+<td align="center">214</td>
+<td align="center">326</td>
+<td align="center">D6</td>
+<td align="center">11010110</td>
+<td align="center">Ö</td>
+<td align="center">&#214;</td>
+<td align="center">&Ouml;</td>
+<td align="left">拉丁大写字母O</td>
+</tr>
+<tr>
+<td align="center">215</td>
+<td align="center">327</td>
+<td align="center">D7</td>
+<td align="center">11010111</td>
+<td align="center">×</td>
+<td align="center">&#215;</td>
+<td align="center">&times;</td>
+<td align="left">乘法</td>
+</tr>
+<tr>
+<td align="center">216</td>
+<td align="center">330</td>
+<td align="center">D8</td>
+<td align="center">11011000</td>
+<td align="center">Ø</td>
+<td align="center">&#216;</td>
+<td align="center">&Oslash;</td>
+<td align="left">拉丁大写字母O</td>
+</tr>
+<tr>
+<td align="center">217</td>
+<td align="center">331</td>
+<td align="center">D9</td>
+<td align="center">11011001</td>
+<td align="center">Ù</td>
+<td align="center">&#217;</td>
+<td align="center">&Ugrave;</td>
+<td align="left">拉丁大写字母U</td>
+</tr>
+<tr>
+<td align="center">218</td>
+<td align="center">332</td>
+<td align="center">DA</td>
+<td align="center">11011010</td>
+<td align="center">Ú</td>
+<td align="center">&#218;</td>
+<td align="center">&Uacute;</td>
+<td align="left">拉丁大写字母U</td>
+</tr>
+<tr>
+<td align="center">219</td>
+<td align="center">333</td>
+<td align="center">DB</td>
+<td align="center">11011011</td>
+<td align="center">Û</td>
+<td align="center">&#219;</td>
+<td align="center">&Ucirc;</td>
+<td align="left">拉丁大写字母U</td>
+</tr>
+<tr>
+<td align="center">220</td>
+<td align="center">334</td>
+<td align="center">DC</td>
+<td align="center">11011100</td>
+<td align="center">Ü</td>
+<td align="center">&#220;</td>
+<td align="center">&Uuml;</td>
+<td align="left">拉丁大写字母U</td>
+</tr>
+<tr>
+<td align="center">221</td>
+<td align="center">335</td>
+<td align="center">DD</td>
+<td align="center">11011101</td>
+<td align="center">Ý</td>
+<td align="center">&#221;</td>
+<td align="center">&Yacute;</td>
+<td align="left">拉丁大写字母Y</td>
+</tr>
+<tr>
+<td align="center">222</td>
+<td align="center">336</td>
+<td align="center">DE</td>
+<td align="center">11011110</td>
+<td align="center">Þ</td>
+<td align="center">&#222;</td>
+<td align="center">&THORN;</td>
+<td align="left">拉丁大写字母THORN</td>
+</tr>
+<tr>
+<td align="center">223</td>
+<td align="center">337</td>
+<td align="center">DF</td>
+<td align="center">11011111</td>
+<td align="center">ß</td>
+<td align="center">&#223;</td>
+<td align="center">&szlig;</td>
+<td align="left">拉丁小写字母sharp s - ess-zed</td>
+</tr>
+<tr>
+<td align="center">224</td>
+<td align="center">340</td>
+<td align="center">E0</td>
+<td align="center">11100000</td>
+<td align="center">à</td>
+<td align="center">&#224;</td>
+<td align="center">&agrave;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">225</td>
+<td align="center">341</td>
+<td align="center">E1</td>
+<td align="center">11100001</td>
+<td align="center">á</td>
+<td align="center">&#225;</td>
+<td align="center">&aacute;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">226</td>
+<td align="center">342</td>
+<td align="center">E2</td>
+<td align="center">11100010</td>
+<td align="center">â</td>
+<td align="center">&#226;</td>
+<td align="center">&acirc;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">227</td>
+<td align="center">343</td>
+<td align="center">E3</td>
+<td align="center">11100011</td>
+<td align="center">ã</td>
+<td align="center">&#227;</td>
+<td align="center">&atilde;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">228</td>
+<td align="center">344</td>
+<td align="center">E4</td>
+<td align="center">11100100</td>
+<td align="center">ä</td>
+<td align="center">&#228;</td>
+<td align="center">&auml;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">229</td>
+<td align="center">345</td>
+<td align="center">E5</td>
+<td align="center">11100101</td>
+<td align="center">å</td>
+<td align="center">&#229;</td>
+<td align="center">&aring;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">230</td>
+<td align="center">346</td>
+<td align="center">E6</td>
+<td align="center">11100110</td>
+<td align="center">æ</td>
+<td align="center">&#230;</td>
+<td align="center">&aelig;</td>
+<td align="left">拉丁小写字母a</td>
+</tr>
+<tr>
+<td align="center">231</td>
+<td align="center">347</td>
+<td align="center">E7</td>
+<td align="center">11100111</td>
+<td align="center">ç</td>
+<td align="center">&#231;</td>
+<td align="center">&ccedil;</td>
+<td align="left">拉丁小写字母c</td>
+</tr>
+<tr>
+<td align="center">232</td>
+<td align="center">350</td>
+<td align="center">E8</td>
+<td align="center">11101000</td>
+<td align="center">è</td>
+<td align="center">&#232;</td>
+<td align="center">&egrave;</td>
+<td align="left">拉丁小写字母e</td>
+</tr>
+<tr>
+<td align="center">233</td>
+<td align="center">351</td>
+<td align="center">E9</td>
+<td align="center">11101001</td>
+<td align="center">é</td>
+<td align="center">&#233;</td>
+<td align="center">&eacute;</td>
+<td align="left">拉丁小写字母e</td>
+</tr>
+<tr>
+<td align="center">234</td>
+<td align="center">352</td>
+<td align="center">EA</td>
+<td align="center">11101010</td>
+<td align="center">ê</td>
+<td align="center">&#234;</td>
+<td align="center">&ecirc;</td>
+<td align="left">拉丁小写字母e</td>
+</tr>
+<tr>
+<td align="center">235</td>
+<td align="center">353</td>
+<td align="center">EB</td>
+<td align="center">11101011</td>
+<td align="center">ë</td>
+<td align="center">&#235;</td>
+<td align="center">&euml;</td>
+<td align="left">拉丁小写字母e</td>
+</tr>
+<tr>
+<td align="center">236</td>
+<td align="center">354</td>
+<td align="center">EC</td>
+<td align="center">11101100</td>
+<td align="center">ì</td>
+<td align="center">&#236;</td>
+<td align="center">&igrave;</td>
+<td align="left">拉丁小写字母i</td>
+</tr>
+<tr>
+<td align="center">237</td>
+<td align="center">355</td>
+<td align="center">ED</td>
+<td align="center">11101101</td>
+<td align="center">í</td>
+<td align="center">&#237;</td>
+<td align="center">&iacute;</td>
+<td align="left">拉丁小写字母i</td>
+</tr>
+<tr>
+<td align="center">238</td>
+<td align="center">356</td>
+<td align="center">EE</td>
+<td align="center">11101110</td>
+<td align="center">î</td>
+<td align="center">&#238;</td>
+<td align="center">&icirc;</td>
+<td align="left">拉丁小写字母i</td>
+</tr>
+<tr>
+<td align="center">239</td>
+<td align="center">357</td>
+<td align="center">EF</td>
+<td align="center">11101111</td>
+<td align="center">ï</td>
+<td align="center">&#239;</td>
+<td align="center">&iuml;</td>
+<td align="left">拉丁小写字母i</td>
+</tr>
+<tr>
+<td align="center">240</td>
+<td align="center">360</td>
+<td align="center">F0</td>
+<td align="center">11110000</td>
+<td align="center">ð</td>
+<td align="center">&#240;</td>
+<td align="center">&eth;</td>
+<td align="left">拉丁小写字母eth</td>
+</tr>
+<tr>
+<td align="center">241</td>
+<td align="center">361</td>
+<td align="center">F1</td>
+<td align="center">11110001</td>
+<td align="center">ñ</td>
+<td align="center">&#241;</td>
+<td align="center">&ntilde;</td>
+<td align="left">拉丁小写字母n</td>
+</tr>
+<tr>
+<td align="center">242</td>
+<td align="center">362</td>
+<td align="center">F2</td>
+<td align="center">11110010</td>
+<td align="center">ò</td>
+<td align="center">&#242;</td>
+<td align="center">&ograve;</td>
+<td align="left">拉丁小写字母o</td>
+</tr>
+<tr>
+<td align="center">243</td>
+<td align="center">363</td>
+<td align="center">F3</td>
+<td align="center">11110011</td>
+<td align="center">ó</td>
+<td align="center">&#243;</td>
+<td align="center">&oacute;</td>
+<td align="left">拉丁小写字母o</td>
+</tr>
+<tr>
+<td align="center">244</td>
+<td align="center">364</td>
+<td align="center">F4</td>
+<td align="center">11110100</td>
+<td align="center">ô</td>
+<td align="center">&#244;</td>
+<td align="center">&ocirc;</td>
+<td align="left">拉丁小写字母o</td>
+</tr>
+<tr>
+<td align="center">245</td>
+<td align="center">365</td>
+<td align="center">F5</td>
+<td align="center">11110101</td>
+<td align="center">õ</td>
+<td align="center">&#245;</td>
+<td align="center">&otilde;</td>
+<td align="left">拉丁小写字母o</td>
+</tr>
+<tr>
+<td align="center">246</td>
+<td align="center">366</td>
+<td align="center">F6</td>
+<td align="center">11110110</td>
+<td align="center">ö</td>
+<td align="center">&#246;</td>
+<td align="center">&ouml;</td>
+<td align="left">拉丁小写字母o</td>
+</tr>
+<tr>
+<td align="center">247</td>
+<td align="center">367</td>
+<td align="center">F7</td>
+<td align="center">11110111</td>
+<td align="center">÷</td>
+<td align="center">&#247;</td>
+<td align="center">&divide;</td>
+<td align="left">除号</td>
+</tr>
+<tr>
+<td align="center">248</td>
+<td align="center">370</td>
+<td align="center">F8</td>
+<td align="center">11111000</td>
+<td align="center">ø</td>
+<td align="center">&#248;</td>
+<td align="center">&oslash;</td>
+<td align="left">拉丁小写字母o</td>
+</tr>
+<tr>
+<td align="center">249</td>
+<td align="center">371</td>
+<td align="center">F9</td>
+<td align="center">11111001</td>
+<td align="center">ù</td>
+<td align="center">&#249;</td>
+<td align="center">&ugrave;</td>
+<td align="left">拉丁小写字母u</td>
+</tr>
+<tr>
+<td align="center">250</td>
+<td align="center">372</td>
+<td align="center">FA</td>
+<td align="center">11111010</td>
+<td align="center">ú</td>
+<td align="center">&#250;</td>
+<td align="center">&uacute;</td>
+<td align="left">拉丁小写字母u</td>
+</tr>
+<tr>
+<td align="center">251</td>
+<td align="center">373</td>
+<td align="center">FB</td>
+<td align="center">11111011</td>
+<td align="center">û</td>
+<td align="center">&#251;</td>
+<td align="center">&ucirc;</td>
+<td align="left">拉丁小写字母u</td>
+</tr>
+<tr>
+<td align="center">252</td>
+<td align="center">374</td>
+<td align="center">FC</td>
+<td align="center">11111100</td>
+<td align="center">ü</td>
+<td align="center">&#252;</td>
+<td align="center">&uuml;</td>
+<td align="left">拉丁小写字母u</td>
+</tr>
+<tr>
+<td align="center">253</td>
+<td align="center">375</td>
+<td align="center">FD</td>
+<td align="center">11111101</td>
+<td align="center">ý</td>
+<td align="center">&#253;</td>
+<td align="center">&yacute;</td>
+<td align="left">拉丁小写字母y</td>
+</tr>
+<tr>
+<td align="center">254</td>
+<td align="center">376</td>
+<td align="center">FE</td>
+<td align="center">11111110</td>
+<td align="center">þ</td>
+<td align="center">&#254;</td>
+<td align="center">&thorn;</td>
+<td align="left">拉丁小写字母thorn</td>
+</tr>
+<tr>
+<td align="center">255</td>
+<td align="center">377</td>
+<td align="center">FF</td>
+<td align="center">11111111</td>
+<td align="center">ÿ</td>
+<td align="center">&#255;</td>
+<td align="center">&yuml;</td>
+<td align="left">拉丁小写字母y</td>
+</tr>
+</tbody></table>
+<p>你可以很清楚的发现，表中的对应关系，**十进制的 128 对应的字符为 <code>€</code>**，这也就是为什么第二个输出为字符<code>€</code>。</p>
+<p>那为什么第一个采用十进制输出就变成了 -128 了呢？</p>
+<p><strong>这就不得不提到数值是如何在计算机中存储的</strong>了，我在博客没搬家之前写过一篇《计算机的原码，反码，补码》的内容，不过搬到<code>Hexo</code>后感觉质量不是很好，遂没有腾过来。</p>
+<blockquote>
+<p>计算机原码，反码，补码的详细内容可以参考<a href="httpss://www.zhihu.com/question/30395946/answer/696377317">(知乎)计算机补码运算背后的数学原理是什么？</a>，知识出处《计算机组成原理》</p>
+</blockquote>
+<p>我先说结论，<strong>数值在计算机中采用补码的形式存储</strong>，前面提到字符其实是数值十进制的映射，而十进制和二进制又有一层映射，所以<strong>本质来说，所有字符数值都是和二进制（当前情况是 8 位）的映射</strong>。</p>
+<p>我们在代码中（<code>char a = 128</code>）给变量<code>a</code>赋值 128 （十进制），其二进制原码为 <code>1000 0000</code>，很不幸的是，计算机采用 8 位，<strong>存储整型数值的时候，最高位用来表示符号位</strong>，也就是说计算机用 8 位表示数值的时候只能表示 $-128 \sim 127$ 这个范围。<strong>对于 128 的二进制源码其实它溢出到最高位</strong>了（最高位是符号位，只有 $2^7 &#x3D;128$ 个数值了），127 的二进制原码为<code>0111 1111</code>，将它 $+1$ 也就是 128 ，<strong>它最后数值溢出到了最高位符号位上了，计算机会将它认为是负数</strong>，会按照 原码 -&gt; 反码 -&gt; 补码 的过程将其转换成补码存储。</p>
+<p>当计算机需要读取它的十进制数值的时候，会再将 补码 -&gt; 反码 -&gt; 原码 -&gt; 十进制呈现在屏幕上。这样就是为什么最后再输出十进制的时候会变成 -128 了。根据上述原理，<strong>下述代码同样的就是 -127 （十进制数值）</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a = <span class="number">129</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;字符A的十进制表示为：%d\n&quot;</span>,a);</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc6b19311.png" alt="image-20220810004238779" style="zoom:80%;" />
+
+<p>现在查看如下代码，请判断其是否合法？如果合法其输出结果是什么？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a = <span class="string">&#x27;33&#x27;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;字符A的十进制表示为：%d\n&quot;</span>,a);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;字符A的字符表示为：%c\n&quot;</span>, a);</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc6e8202f.png" alt="image-20220810004446624" style="zoom:80%;" />
+
+<p>答：“合法但是有问题”，上述代码会根据编译器的不同而不同，但是最多报个警报，并不会终端程序的运行，代码运行结果如下：</p>
+<ul>
+<li><strong>字符A的十进制表示为：51</strong></li>
+<li><strong>字符A的字符表示为：3</strong></li>
+</ul>
+<p>看着这个输出结果，更加迷惑了，明明赋值的 33 输出一个 51 一个给我 3 .</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc71f0a98.png" alt="image-20220810004905053" style="zoom: 50%;" />
+
+<p>原因：在上面的单引号和双引号的部分我说过，<strong>单引号（<code>&#39;&#39;</code>）表示字符</strong>，也就是说，你赋值的<code>&#39;33&#39;</code>意味着你告诉计算机我要赋值给这个变量<code>a</code>一个字符<code>33</code>，计算机说：好的，字符<code>&#39;33&#39;</code>赋值给…..嗯？我这<code>ASCII</code>码表里可没有你说的字符<code>&#39;33&#39;</code>，怎么办？<strong>它在这里做了一个模运算</strong>，伪代码应该是这样<code>数值%10</code>，<strong>这里的模运算的结果是将无限的整型数值映射到了<code>ASCII</code>码表里有的 $0 \sim 9$ 字符</strong>。</p>
+<p>我们<strong>示例中的<code>&#39;33&#39;</code>经过模运算就是字符<code>&#39;3&#39;</code>，查询<code>ASCII</code>码表可知，字符<code>&#39;3&#39;</code>对应的十进制整型数值为 51 。</strong></p>
+<h2 id="类型转换带来的未定义行为"><a href="#类型转换带来的未定义行为" class="headerlink" title="类型转换带来的未定义行为"></a>类型转换带来的未定义行为</h2><p>关于未定义行为（<strong>Undefined behavior</strong>）的解释如下：</p>
+<p><em>In <a href="httpss://en.wikipedia.org/wiki/Computer_programming">computer programming</a>, <strong>undefined behavior</strong> (<strong>UB</strong>) is the result of executing a program whose <a href="httpss://en.wikipedia.org/wiki/Behavior">behavior</a> is prescribed to be unpredictable, in the <a href="httpss://en.wikipedia.org/wiki/Language_specification">language specification</a> to which the <a href="httpss://en.wikipedia.org/wiki/Computer_code">computer code</a> adheres. This is different from <a href="httpss://en.wikipedia.org/wiki/Unspecified_behavior">unspecified behavior</a>, for which the language specification does not prescribe a result, and implementation-defined behavior that defers to the documentation of another component of the <a href="httpss://en.wikipedia.org/wiki/Platform_(computing)">platform</a> (such as the <a href="httpss://en.wikipedia.org/wiki/Application_binary_interface">ABI</a> or the <a href="httpss://en.wikipedia.org/wiki/Translator_(computing)">translator</a> documentation).</em></p>
+<p><em>In the <a href="httpss://en.wikipedia.org/wiki/C_(programming_language)">C community</a>, undefined behavior may be humorously referred to as “<strong>nasal demons</strong>“, after a <a href="httpss://en.wikipedia.org/wiki/Comp.*_hierarchy">comp.std.c</a> post that explained undefined behavior as allowing the compiler to do anything it chooses, even “to make demons fly out of your nose”.</em></p>
+<blockquote>
+<p>内容来源：<a href="httpss://en.wikipedia.org/wiki/Undefined_behavior">维基百科Undefined behavior</a></p>
+</blockquote>
+<p>简述来说，未定义行为并不是错误，更多的来说是<strong>因为<code>C</code>的标准定义并没有对此进行详细的标准定义</strong>，以至于其对于不同的编译器可能会存在不同的处理方式，最终出现对于不同的编译器来说，运行结果不同的结果。</p>
+<p>现在来尝试观察如下代码，分析其输出结果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">float</span> a = <span class="number">1.5</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;test: %d&quot;</span>, (a+b) / <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码运行结果：我不好说，<strong>因为它已经进入了未定义行为了</strong>。</p>
+<p>如果你了解隐式类型转换的话，<strong>对于上述运行的来说变量<code>a</code>是<code>float</code>类型， 和<code>int</code>类型的变量<code>b</code>进行加和的时候编译器会将<code>b</code>转换成<code>float</code>类型再参与运算</strong>，你发现了吗？<strong>其运算结果是<code>float</code>类型，也就意味着在<code>printf()</code>函数中使用<code>%d</code>输出<code>float</code>值就会出现未定义行为了</strong>。</p>
+<p>现在对上述代码进行微小改动，来参考如下代码，思考其运行结果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">float</span> a = <span class="number">1.5</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">2</span>;</span><br><span class="line">	<span class="type">int</span> c = a + b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;test: %d&quot;</span>, c / <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：<code>test：1</code></p>
+<p>你会发现**对于<code>c=a+b</code>来说，会将<code>a+b</code>其值的<code>float</code>类型转换为<code>int</code>**，虽然会丢失一定的精度，但是不至于因为<code>%d</code>而出现未定义行为。</p>
+<p>现在来陈胜追击，查看一段奇怪的代码，思考其运行结果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span>                                              </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;                                                    </span><br><span class="line">    <span class="type">int</span> i=<span class="number">10</span>;                                                     </span><br><span class="line">    <span class="type">float</span> x=<span class="number">43.2892f</span>;                                              </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i=%f  x=%d \n&quot;</span>,i,x);                               </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;                                                  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>代码出自：【Stack Overfl0w】 <a href="httpss://stackoverflow.com/questions/44571175/why-are-the-int-and-float-passed-in-printf-going-to-the-wrong-positions-in-the-f">Why are the int and float passed in printf going to the wrong positions in the format string?</a>]</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc76f29e8.png" alt="image-20220902204628036" style="zoom:50%;" />
+
+<p>根据一开始的代码可以得知，这段代码也会因为<code>%f</code>，<code>%d</code>而出现未定义行为，其提问者的运行结果如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i=<span class="number">43.289200</span>  x=<span class="number">10</span>      </span><br></pre></td></tr></table></figure>
+
+<p>其中一个高赞回答：</p>
+<p><em>What you’re doing invokes undefined behavior1, but looking at <a href="httpss://godbolt.org/g/Wo4wYT">the resulting assembly</a> using GCC on a platform with the <a href="httpss://en.m.wikipedia.org/wiki/X86_calling_conventions#System_V_AMD64_ABI">System V AMD64 ABI</a> we might formulate a hypothesis. The floating-point value is passed in the <code>xmm0</code> register (an SSE register), while the integer is passed in the <code>esi</code> register (a general register). Presumably, your <code>printf</code> implementation expects floating-point numbers to be passed in SSE registers and integers to be passed in general registers, and simply picks the <code>xmm0</code> register to read from when it encounters the first <code>%f</code> (and vice versa).</em></p>
+<p>简述来说，就是如上代码的操作会引发未定义行为，在具有<code>System V AMD64 ABI</code> 的平台上使用 GCC 查看其汇编，推出的假设是：浮点值在寄存器（SSE 寄存器）中传递，而整数在寄存器（通用寄存器）中传递，因为调用关系问题，导致寄存器读取取反了。</p>
+<blockquote>
+<p>回答作者：<a href="httpss://stackoverflow.com/users/147845/you">You</a></p>
+</blockquote>
+<h1 id="C函数问题"><a href="#C函数问题" class="headerlink" title="C函数问题"></a>C函数问题</h1><h2 id="关于-Main-函数的有趣问题"><a href="#关于-Main-函数的有趣问题" class="headerlink" title="关于 Main 函数的有趣问题"></a>关于 Main 函数的有趣问题</h2><p>如果你使用<code>Visual Studio</code>集成的 C&#x2F;C++ 编译器，在编写<code>main()</code>函数的时候将其写为<code>mian()</code>，编译器并不会保<code>mian()</code>的错误，反而是报错如下所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc7cef75f.png" alt="image-20220902190945178" style="zoom:80%;" />
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc808fcd7.png" alt="image-20220902191052794" style="zoom:50%;" />
+
+<h2 id="Scanf函数读取问题"><a href="#Scanf函数读取问题" class="headerlink" title="Scanf函数读取问题"></a>Scanf函数读取问题</h2><p><code>Scanf</code>作为C语言入门级别函数，功能上来说学习过C语言的人都理解，现在来思考一下下面一段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入字符\n&quot;</span>);</span><br><span class="line">	<span class="type">char</span> tempdata;</span><br><span class="line">    <span class="comment">//读取字符</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;tempdata);</span><br><span class="line">	<span class="keyword">while</span> (tempdata != <span class="string">&#x27;!&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输出读取的字符</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入的字符为:%c\n&quot;</span>, tempdata);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;tempdata);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在如果读取字符的时候，输入一个 A （或者任意一个单字符），猜一下输出结果是什么？会是<code>输入的字符为:A</code>吗？又或者是其他结果？</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc854d44e.png" alt="image-20220829055941223" style="zoom:80%;" />
+
+<p>很不幸，它的运行结果如下所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc899c291.png" alt="image-20220829060030262" style="zoom:80%;" />
+
+<p>这就奇了个怪了，<code>scanf</code>函数不应该不读取回车字符吗？</p>
+<p>有了上面的运行结果，现在来看看下面的代码，猜一下运行结果是什么？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入数值\n&quot;</span>);</span><br><span class="line">	<span class="type">int</span> tempdata;</span><br><span class="line">    <span class="comment">//读取字符</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;tempdata);</span><br><span class="line">	<span class="keyword">while</span> (tempdata != <span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输出读取的字符</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入的数值为:%d\n&quot;</span>, tempdata);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;tempdata);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在输入 2 （或者任意一个单数值），然后回车确认，猜猜运行结果是什么？运行结果如下：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc8d2c612.png" alt="image-20220829061227547" style="zoom:80%;" />
+
+<p>发现了，<code>scanf</code>对于<code>%c</code>即字符的处理和其他的处理是不一样的，我猜测是因为字符采用的是<code>ASCII</code>码表存储的，因为<code>ASCII</code>存在各种控制字符，包括“回车”和“空格”等控制字符，<strong>事实上对于一般除字符格式的字符都会在<code>scanf</code>前将空格等控制字符删除，而字符缺不会做这个处理，也就出现了上面的字符读取了回车字符的情况</strong>。</p>
+<p>关于上述<code>scanf</code>读取回车字符的解决方案如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot; %c&quot;</span>,&amp;value);	<span class="comment">//在%c前面加个空格就可以读取输入字符的时候避免回车和空格</span></span><br></pre></td></tr></table></figure>
+
+<p>当然你也可以选择使用其他的读取输入的函数，例如：<code>sscanf</code>等等来解决上述问题。</p>
+<p>题外话：<strong>对于读取输入函数<code>scanf</code>来说，其实它会将键盘的输入读取到缓存区，你可以把它理解为队列，读取的字符压入队列，先入先出，对于每次输入结束都会在其末尾加上回车符（编译器自动），但是对于字符来说，编译器并没有给我的缓存区加上回车符，而是我们输入的时候把回车符输入了，由于字符的特殊性，导致读取字符的时候编译器并没有给我们删除前面的控制字符，使得我们读取到了回车字符。</strong></p>
+<p>因为缓存区的存在，所以对于上述输入来说，例如：我们希望输入<code>ABCD</code>四个字符，其实可以不需要<code>A</code>，回车，<code>B</code>，回车，这样输入，其实<strong>我们可以直接在第一次输入就输入<code>ABCD</code>，程序会依次将第一次输入存储到缓存区，然后挨个读取。</strong></p>
+<h2 id="返回值数组"><a href="#返回值数组" class="headerlink" title="返回值数组"></a>返回值数组</h2><p><code>C</code>不允许函数返回一个数组，但是可以通过返回一个类型指针来代替（顺序表）。</p>
+<p><strong>关于数组指针，需要注意的是它是线性的</strong>。</p>
+<p>数组名本身其实是一块地址的首地址，<strong>创建一个数组例如<code>int a[10]</code>类型的数组，编译器会根据我们传入的数组包含的数组个数(10)，来开辟一块大小为 $10 \times 4byte$ 大小空间，并将空间的首地址返回给所其的数组名称<code>a</code>，所以本质上来说，数组名其实是一块首地址的指针</strong>；至于我们根据数组下标的访问数组，其实是根据首地址的加和计算出来的。所以参考如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">2</span>] = &#123; <span class="number">1</span>,<span class="number">2</span> &#125;;	<span class="comment">//创建一个一维数组</span></span><br><span class="line">	<span class="type">int</span>* b = a;	<span class="comment">//声明并定义 int 类型指针，其初始值为数组 a 的“首地址”</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;其值为:%d\n&quot;</span>, b[i]);	<span class="comment">//输出其值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc914dc2f.png" alt="image-20220901074210064" style="zoom:80%;" />
+
+<p><strong>对于二维及以上的数组来说，如果采用数组指针的方式要获取其值，不可以采用常规的<code>a[n][n]...</code>来获取值</strong>，其本质原因是因为数组本身就是线性的，<strong>二维数组本质是上还是线性的存储</strong>，参考如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">2</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">3</span>,<span class="number">4</span>&#125; &#125;;	<span class="comment">//声明并定义二维数组</span></span><br><span class="line">	<span class="type">int</span>* b = a;	<span class="comment">//int 类型的指针</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;其值为:%d\n&quot;</span>, b[j][i]);	<span class="comment">//遍历数组</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你运行上述代码，会发现它是无法运行的，原因就是其本质是线性存储的，如果你希望正常读取二维数组的内容，可以修改成如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">2</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">3</span>,<span class="number">4</span>&#125; &#125;;	<span class="comment">//声明并定义二维数组</span></span><br><span class="line">	<span class="type">int</span>* b = a;	<span class="comment">//int 类型的指针</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;其值为:%d\n&quot;</span>, b[j]);	<span class="comment">//遍历数组</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码也印证了数组名是个地址，而且二维数组是线性存储的，其运行结果如下：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc950cd4f.png" alt="image-20220901074633848" style="zoom:80%;" />
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/01/28/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E6%80%9D%E8%80%83/">https://www.helloseraphine.top/2022/01/28/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E5%85%B3%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E6%80%9D%E8%80%83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbc352b8f4.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/25/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%901.1%E3%80%91%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" title="【1.1】数据结构与算法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae1cfd4261.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【1.1】数据结构与算法</div></div></a></div><div class="next-post pull-right"><a href="/2022/01/28/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%905.1%E3%80%91%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/" title="【5.1】树与二叉树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae43a44a18.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【5.1】树与二叉树</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#typedef-%E5%92%8C-define-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">typedef 和 define 的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#typedef-%E5%92%8C-struct-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">typedef 和 struct 的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bool%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">Bool函数的使用问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%96%E4%BD%99%E8%BF%90%E7%AE%97-%E5%8F%96%E6%A8%A1%E8%BF%90%E7%AE%97%E7%9A%84%E7%AE%97%E6%B3%95%E8%A7%84%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">取余运算&#x2F;取模运算的算法规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E5%BC%95%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E5%BC%95%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">单引号和双引号引发的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C%E4%B8%AD%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">7.</span> <span class="toc-text">C中各种类型的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E5%8D%A0%E5%86%85%E5%AD%98"><span class="toc-number">7.1.</span> <span class="toc-text">所占内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#char%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.2.</span> <span class="toc-text">char类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA"><span class="toc-number">7.3.</span> <span class="toc-text">类型转换带来的未定义行为</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C%E5%87%BD%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">C函数问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Main-%E5%87%BD%E6%95%B0%E7%9A%84%E6%9C%89%E8%B6%A3%E9%97%AE%E9%A2%98"><span class="toc-number">8.1.</span> <span class="toc-text">关于 Main 函数的有趣问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scanf%E5%87%BD%E6%95%B0%E8%AF%BB%E5%8F%96%E9%97%AE%E9%A2%98"><span class="toc-number">8.2.</span> <span class="toc-text">Scanf函数读取问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E6%95%B0%E7%BB%84"><span class="toc-number">8.3.</span> <span class="toc-text">返回值数组</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

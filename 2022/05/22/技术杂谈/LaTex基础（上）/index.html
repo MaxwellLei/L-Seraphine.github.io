@@ -1,0 +1,784 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LaTex基础（上） | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言从MS Office 到 Markdown 再到 LaTex，每个不同的编辑软件都对不同的文本排列提供了一种解决方案，可以根据自己的实际需求来合理使用，我尝试记录最基本且简单的语法来说明LaTex的使用语法。 我使用的 LaTex 编辑器为 TexStudio，Tex的宏包直接安装的 Tex Live。  本文内容是我个人学习自 《简单高效LaTex》以及百度和Bilibili相关网站的学习内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTex基础（上）">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/LaTex%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言从MS Office 到 Markdown 再到 LaTex，每个不同的编辑软件都对不同的文本排列提供了一种解决方案，可以根据自己的实际需求来合理使用，我尝试记录最基本且简单的语法来说明LaTex的使用语法。 我使用的 LaTex 编辑器为 TexStudio，Tex的宏包直接安装的 Tex Live。  本文内容是我个人学习自 《简单高效LaTex》以及百度和Bilibili相关网站的学习内">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3295cd39.jpg">
+<meta property="article:published_time" content="2022-05-22T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:02:19.880Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3295cd39.jpg"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/LaTex%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LaTex基础（上）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:02:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3295cd39.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LaTex基础（上）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-22T15:30:01.000Z" title="发表于 2022-05-22 23:30:01">2022-05-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:02:19.880Z" title="更新于 2023-07-14 21:02:19">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="LaTex基础（上）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>从MS Office 到 Markdown 再到 LaTex，每个不同的编辑软件都对不同的文本排列提供了一种解决方案</strong>，可以根据自己的实际需求来合理使用，我尝试记录最基本且简单的语法来说明<code>LaTex</code>的使用语法。</p>
+<p><strong>我使用的 <code>LaTex</code> 编辑器为 <code>TexStudio</code>，<code>Tex</code>的宏包直接安装的 <code>Tex Live</code>。</strong></p>
+<blockquote>
+<p><strong>本文内容是我个人学习自 《简单高效LaTex》以及百度和Bilibili相关网站的学习内容整理笔记</strong></p>
+</blockquote>
+<h1 id="认识LaTex"><a href="#认识LaTex" class="headerlink" title="认识LaTex"></a>认识<code>LaTex</code></h1><blockquote>
+<p>前排提醒：<code>LaTex</code>对大小写敏感，即区分大小写</p>
+</blockquote>
+<h2 id="命令与环境"><a href="#命令与环境" class="headerlink" title="命令与环境"></a>命令与环境</h2><p><strong><code>LaTex</code>中的命令通常是由一个反斜杠加上命令名称，再加上花括号内的参数构成</strong>，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;ctexart&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果一些选项是有其他可以缺省的参数，一般在花括号前使用<code>[]</code>来指定</strong>，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8](ctexart)</span><br></pre></td></tr></table></figure>
+
+<p><strong>关于<code>LaTex</code>的正文部分，写在一个称为环境的部分</strong>，其格式类似于<code>HTML</code>的<code>body</code>，<strong>需要将内容写在其间</strong>，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;environment&#125;</span><br><span class="line">这里是你的内容</span><br><span class="line"><span class="keyword">\end</span>&#123;environment&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="保留字符"><a href="#保留字符" class="headerlink" title="保留字符"></a>保留字符</h2><p><strong>在<code>LaTex</code>中，有一部分字符被用来作为命令字符，这些字符被称为<code>LaTex</code>的保留字符</strong>，例如下表</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>#</code></td>
+<td>自定义命令时，用于标明参数序号</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>用于编写数学公式标识符</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>注释符，可以通过在行末添加该注释符，来注释掉后面的空白符</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>数学公式中的上标符</td>
+</tr>
+<tr>
+<td><code>_</code></td>
+<td>数学公司中的下标符</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>表格中的跳列符</td>
+</tr>
+<tr>
+<td><code>&#123;&#125;</code></td>
+<td>在一些命令中填写参数的标识</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td>标识<code>LaTex</code>命令的标识符</td>
+</tr>
+</tbody></table>
+<p>上述字符，<strong>如果在文中需要使用上述保留字符的话（除<code>\</code>反斜杠）需要在前面加上<code>\</code>，即反斜杠来标识，这样就能够使用该字符</strong>，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%表示要使用 # 符号</span></span><br><span class="line"><span class="keyword">\#</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%表示要使用 &amp; 符号</span></span><br><span class="line"><span class="keyword">\&amp;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想要使用 <code>\</code>（反斜杠）的话，需要使用如下示例命令：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%表示使用 \ 符号</span></span><br><span class="line"><span class="keyword">\texttt</span>&#123;<span class="keyword">\char</span>92&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>\texttt</code>是使用 <code>tt</code> 字体环境，用于输出ASCII码对应的字符，<code>\char92</code>指定的是反斜杠字符，同样的可以使用：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\char</span>`<span class="keyword">\\</span></span><br></pre></td></tr></table></figure>
+
+<p>来输出<code>\</code>反斜杠。</p>
+<h2 id="导言区"><a href="#导言区" class="headerlink" title="导言区"></a>导言区</h2><p>对于任何一份<code>LaTex</code>文档都应该含有如下结构：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[options]&#123;doc-class&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;environment&#125;</span><br><span class="line">你的内容部分</span><br><span class="line"><span class="keyword">\end</span>&#123;environment&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<strong>在<code>\begin&#123;environment&#125;</code>之前的内容被称为导言区。导言区用来对文档进行一些设定，可以通俗理解为调控文档模板的地方</strong>。关于上述<code>options</code>和<code>doc-class</code>的参数如下表：</p>
+<table>
+<thead>
+<tr>
+<th>doc-class参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>article</code></td>
+<td>科学期刊，演示文档，短报告，邀请函等</td>
+</tr>
+<tr>
+<td><code>proc</code></td>
+<td>基于<code>article</code>的会议论文集</td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td>多章节的长报告，博士论文，短篇书</td>
+</tr>
+<tr>
+<td><code>book</code></td>
+<td>书籍</td>
+</tr>
+<tr>
+<td><code>slides</code>或<code>beamer</code></td>
+<td>幻灯片</td>
+</tr>
+</tbody></table>
+<p><strong>一般来说，对于纯英文的文档，推荐直接使用<code>article</code>，如果是含有中文的文档，则使用<code>ctexart</code>，并且要在前面的缺省参数标明指定的中文编码，例如<code>UTF-8</code>，</strong>命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>文中所有命令都是在，<code>ctexart</code>格式下进行的，即上述命令示例</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>options参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认<code>10pt</code>，可选则<code>11pt</code>和<code>12pt</code></td>
+<td>字体大小</td>
+</tr>
+<tr>
+<td>默认<code>portrait</code>（纵向），<code>landscape</code>（横向）</td>
+<td>页面方向</td>
+</tr>
+<tr>
+<td>默认<code>letterpaper</code>，可选<code>a4paper</code>，<code>b5paper</code>等</td>
+<td>纸张大小</td>
+</tr>
+<tr>
+<td>默认<code>onecolumn</code>（单栏），可选<code>twocolumn</code>（两栏）</td>
+<td>分栏</td>
+</tr>
+<tr>
+<td><code>article</code>和<code>report</code>默认单面，可选<code>oneside</code>和<code>twoside</code></td>
+<td>双面打印</td>
+</tr>
+<tr>
+<td>默认任意页，可选<code>openright</code>和<code>openany</code>，决定在奇数页或者任意页开启新页。<br />需要注意的是，<code>article</code>是没有<code>chapter</code>(章)命令的。</td>
+<td>章节分页</td>
+</tr>
+<tr>
+<td>默认居中，可选<code>fleqn</code>（左对齐）<br />默认编号居右，可选<code>leqno</code>（左对齐）</td>
+<td>公式对齐</td>
+</tr>
+<tr>
+<td>默认<code>final</code>，可选<code>draft</code>（使行溢出部分显示为黑块）</td>
+<td>草稿选项</td>
+</tr>
+</tbody></table>
+<p>**在导言区最常见的是宏包的加载工作，命令形如<code>\usepackage&#123;package&#125;</code>**。关于什么是宏包，通俗来说就是提前封装好的一些功能格式，对于一些非原生<code>LaTex</code>的功能格式，可以通过借用第三方宏包的方式来使用，提高效率。</p>
+<blockquote>
+<p>关于宏包文档的查看，可以通过打开Windows系统的<code>CMD</code>，然后输出<code>texdoc+宏包名称 </code>就可以查看对应宏包的说明文档，部分文档是汉化的，所以可以任意阅读</p>
+</blockquote>
+<h2 id="文件输出"><a href="#文件输出" class="headerlink" title="文件输出"></a>文件输出</h2><p><strong>一般情况下，推荐输出<code>pdf</code>格式</strong>，由<code>LaTex</code>直接生成的<code>dvi</code>格式并不推荐。</p>
+<p>你或许会在<code>tex</code>文档的文件夹下看到如下格式类型的文件：</p>
+<ul>
+<li><code>.sty</code>：宏包文件</li>
+<li><code>.cls</code>：文档类文件</li>
+<li><code>.aux</code>：用于存储交叉引用信息的文件，因此，在更新交叉引用（公式编号，大纲级别）后，需要编译两次才能正常显示。</li>
+<li><code>.log</code>：日志，记录上次的编译信息。</li>
+<li><code>.toc</code>：目录文件。</li>
+<li><code>.lof</code>：图形目录</li>
+<li><code>.lot</code>：表格目录</li>
+<li><code>.idx</code>：如果文档中包含索引，该文件用于存储索引信息</li>
+<li><code>.ind</code>：索引记录文件</li>
+<li><code>.ilg</code>：索引日志文件</li>
+<li><code>.bib</code>：<code>BIBTEX</code>参考文献数据文件</li>
+<li><code>.bbl</code>：生成的参考文献记录</li>
+<li><code>.bst</code>：<code>BIBTEX</code>模板</li>
+<li><code>.blg</code>：<code>BIBTEX</code>日志</li>
+<li><code>.out</code>：<code>hyperref</code>宏包生成的<code>pdf</code>书签记录</li>
+</ul>
+<p>例如，我使用的示例<code>tex</code>文档下的文件内容：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf335082c7.png" alt="image-20220306204837996" style="zoom:67%;" />
+
+<p><strong>有时<code>LaTex</code>编译出现异常时，可以通过删除除了<code>tex</code>文件外的文件再编译</strong>。</p>
+<blockquote>
+<p>还需要注意的时，有时候其他程序占用了以上文件也会出现错误。</p>
+</blockquote>
+<h1 id="标点与强调"><a href="#标点与强调" class="headerlink" title="标点与强调"></a>标点与强调</h1><h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><p><strong>英文单引号并不是两个<code>&#39;</code>（单引号）符号的组合，而是由左单引号<code>ˋ</code>和右单引号<code>&#39;</code>来实现英文单引号</strong>，示例命令：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	这是两个单引号`&#x27;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染结果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf33fadd6c.png" alt="image-20220306211513687" style="zoom:80%;" />
+
+<p>如果我们直接使用英文两个<code>&#39;</code>单引号，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	这是两个单引号&#x27;&#x27;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染结果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf343a0fcc.png" alt="image-20220306212022453" style="zoom:80%;" />
+
+<p>同样的，<strong>使用英文双引号，也需要分开左双引号，即两个<code>ˋˋ</code>，然后两个右双引号<code>&#39;&#39;</code><strong>即可。</strong>中文符号的引号直接使用中文即可</strong>。</p>
+<h2 id="短横，省略号与破折号"><a href="#短横，省略号与破折号" class="headerlink" title="短横，省略号与破折号"></a>短横，省略号与破折号</h2><p>英文的短横分为三种：</p>
+<ul>
+<li><strong>连字符：输入一个短横<code>-</code></strong></li>
+<li><strong>数字起止符：输入两个短横<code>--</code></strong></li>
+<li><strong>破折号：输入三个短横<code>---</code></strong></li>
+</ul>
+<p>【渲染效果】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf34991e9a.png" alt="image-20220306213543194" style="zoom:80%;" /></p>
+<p>中文的字符都可以正常使用。<strong>需要注意的是，英文的省略号需要使用<code>\ldots</code>命令</strong>。</p>
+<h2 id="强调：粗体与斜体"><a href="#强调：粗体与斜体" class="headerlink" title="强调：粗体与斜体"></a>强调：粗体与斜体</h2><p><code>LaTex</code>中有个命令<code>\emph&#123;text&#125;</code>，可以强调文本。对于一般的英文字体来说，这个命令的结果是斜体，而如果输入中文，则不会触发斜体，只是给中文应用了某个细字体，例如：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf34e3239e.png" alt="image-20220306214147619" style="zoom: 67%;" />
+
+<p><strong>对于英文来说，是采用斜体的方式进行强调，而不是中文惯用的粗体</strong>。</p>
+<h2 id="下划线与删除线"><a href="#下划线与删除线" class="headerlink" title="下划线与删除线"></a>下划线与删除线</h2><p><code>LaTex</code>原生提供的下划线命令是<code>\underline</code>，不过原生提供的下划线风评不是很好，可以使用<code>ulem</code>宏包提供的下划线，如下是两个下划线的比较示例：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf351e3447.png" alt="image-20220306215057754" style="zoom:80%;" />
+
+<p>同样的<code>ulem</code>宏包还提供了一些其他的命令，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\uline</span>&#123;下划线&#125;</span><br><span class="line"><span class="keyword">\uuline</span>&#123;双下划线&#125;</span><br><span class="line"><span class="keyword">\uwave</span>&#123;下波浪线&#125;</span><br><span class="line"><span class="keyword">\sout</span>&#123;删除线&#125;</span><br><span class="line"><span class="keyword">\xout</span>&#123;删除封禁线&#125;</span><br><span class="line"><span class="keyword">\dashuline</span>&#123;下虚划线&#125;</span><br><span class="line"><span class="keyword">\dotuline</span>&#123;下点线&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf355e84b4.png" alt="image-20220307083136655" style="zoom:67%;" />
+
+<blockquote>
+<p><strong>如果希望<code>LaTex</code>开头不自动缩进的话，可以在开头输入<code>\noindent</code>，来表示首行不缩进</strong></p>
+</blockquote>
+<p>需要注意的是<code>ulem</code>宏包对<code>\emph&#123;text&#125;</code>进行了重定义，之前使用<code>\emph</code>命令会产生斜体，<strong>使用<code>ulem</code>宏包后，它重定义的效果是产生下划线而不是斜体，如果希望取消这个重定义，则在引入宏包的导言区输入如下命令参数</strong>：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>[normalem]&#123;ulem&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>关于数学公式，化学公式等，如果你使用过Markdown则会更熟悉，需要使用<code>$这里是你的公式内容$</code>来包裹你的公式来表示这里要渲染公式。例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 数学公式</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\frac</span>&#123;x<span class="built_in">^</span>2-2&#125;&#123;x<span class="built_in">^</span>3&#125;+3=y<span class="built_in">$</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 化学苯环</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\chemfig</span>&#123;*6(-=-=-=)&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf35a02144.png" alt="image-20220307084339540" style="zoom: 67%;" />
+
+<p>关于输出<code>Tex</code>家族标志，可以使用原生命令，例如<code>\LaTex</code>，<code>\Tex</code>等 </p>
+<p>【渲染输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf35e18276.png" alt="image-20220307085001047" style="zoom:50%;" />
+
+<h1 id="格式控制"><a href="#格式控制" class="headerlink" title="格式控制"></a>格式控制</h1><p>关于<code>LaTex</code>的长度单位：</p>
+<ul>
+<li>**pt(point)**：磅</li>
+<li>**pc(pica)**：1pc&#x3D;12pt，四号字</li>
+<li>**in(inch)**：英寸，1 in&#x3D;72.27 pt</li>
+<li>**bp(bigpoint)**：大点，1 bp &#x3D; $\frac{1}{72}$ in</li>
+<li>**cm(centimeter)**：厘米，1 cm &#x3D; $\frac{1}{2.54}$ in</li>
+<li>**mm(millimeter)**：毫米，1 mm &#x3D; $\frac{1}{10}$ cm</li>
+<li>**sp(scaled point)**：<code>Tex</code>的基本长度单位，1 sp&#x3D;$\frac{1}{65536}$ pt</li>
+<li><strong>em</strong>：当前字号下，大写字母 <code>M</code> 的宽度</li>
+<li><strong>ex</strong>：当前字号下，小写字母 <code>x</code> 的高度</li>
+</ul>
+<p>如下是两个常用的长度宏，关于其他的长度宏后面的表格，分栏部分会做详细说明。</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 页面上文字的总宽度，即页宽减去两侧边距</span></span><br><span class="line"><span class="keyword">\textwidth</span></span><br><span class="line"><span class="comment">% 当前行允许的行宽</span></span><br><span class="line"><span class="keyword">\linewidth</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="空格，换行与分段"><a href="#空格，换行与分段" class="headerlink" title="空格，换行与分段"></a>空格，换行与分段</h2><p>关于空格有多种表示方法，如下表格：</p>
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th>命令</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>两个<code>quad</code>宽度</td>
+<td><code>\qquad</code></td>
+<td>$a \qquad b$</td>
+</tr>
+<tr>
+<td>一个<code>quad</code>宽度</td>
+<td><code>\quad</code></td>
+<td>$a \quad b$</td>
+</tr>
+<tr>
+<td>大空格</td>
+<td><code>\+空格</code></td>
+<td>$a\ b$</td>
+</tr>
+<tr>
+<td>中等空格</td>
+<td><code>\;</code></td>
+<td>$a;b$</td>
+</tr>
+<tr>
+<td>小空格</td>
+<td><code>\,</code></td>
+<td>$a,b$</td>
+</tr>
+<tr>
+<td>紧贴（即缩进距离）</td>
+<td><code>\!</code></td>
+<td>$a!b$</td>
+</tr>
+</tbody></table>
+<p>换行的方法也非常简单，对于一般的长度来说，<code>LaTex</code>会自动换行，而<strong>如果希望手动换行，只需要在换行处输入两个回车即可完成分段</strong>。命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\noindent</span>	<span class="comment">%该命令表示开头无缩进</span></span><br><span class="line">	测试测试测试测试测试测试测试</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</span><br><span class="line">	<span class="keyword">\TeX</span></span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf363c4def.png" alt="image-20220308211214804" style="zoom:80%;" />
+
+<p>如果希望<strong>在两个段之间插入一个空白行，即空白段，则需要先输入两个回车，然后使用命令<code>\mbox&#123;&#125;</code>，最后再输入两个回车即可</strong>。命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\noindent</span></span><br><span class="line">	测试测试测试测试测试测试测试</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">\mbox</span>&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</span><br><span class="line">	<span class="keyword">\TeX</span></span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf36898359.png" alt="image-20220308211433101" style="zoom:80%;" />
+
+<p>同样的，<strong>也可以使用<code>\per</code>来生成一个带缩进的新段</strong>。</p>
+<p><strong>关于强制换行的命令，即<code>\\</code>，这样会有一个缺点，即换行后的新段首行缩进会消失</strong>，这个命令一般不用在正文中换行。正常使用两个回车换行即可。</p>
+<p>另外，宏包<code>lettrine</code>能够生成首字下沉的效果，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;lettrine&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\noindent</span></span><br><span class="line">	<span class="keyword">\lettrine</span>&#123;测&#125; 试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</span><br><span class="line">	<span class="keyword">\TeX</span></span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf36c9200b.png" alt="image-20220308212304346" style="zoom:80%;" />
+
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p><strong>使用<code>\newpage</code>开始新的一页</strong>。</p>
+<p>使用<code>\clearpage</code>命令清空浮动体队列，并开始新的一页。</p>
+<blockquote>
+<p>关于什么事浮动体队列，详情看后面</p>
+</blockquote>
+<p>使用<code>\cleardoublepage</code>情况浮动体队列，并在偶数页开始新的一页。</p>
+<p>需要注意的是，上述命令是基于<code>vfill</code>的，<strong>所以如果需要连续新开两页，需要在中间加上一个空的箱子</strong>，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\newpage</span> <span class="keyword">\mbox</span>&#123;&#125; <span class="keyword">\newpage</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="缩进，对齐与行距"><a href="#缩进，对齐与行距" class="headerlink" title="缩进，对齐与行距"></a>缩进，对齐与行距</h2><p>关于首行缩进问题，在部分教程和书籍中表示<code>LaTex</code>对中文首行默认不缩进，需要借助宏包<code>indentfirst</code>来完成缩进，我测试过，在我的环境下，即 Win10，Tex Live 2022，Tex Studio 的情况下，已经支持中文默认缩进。<strong>关于取消首行缩进可以通过前面提到过的<code>\noindent</code>来实现</strong>。</p>
+<p>关于其他更复杂的部分详细看后面。</p>
+<h1 id="字体与颜色"><a href="#字体与颜色" class="headerlink" title="字体与颜色"></a>字体与颜色</h1><p>这部分只说明文中的字体使用，关于数学公式字体的使用详细看后面。</p>
+<h2 id="字族，字系与字形"><a href="#字族，字系与字形" class="headerlink" title="字族，字系与字形"></a>字族，字系与字形</h2><p>宋体，黑体，楷体属于字族；对应到外文就是罗马体，等宽体等。加粗，加斜属于字系和字形，五号，小四号属于字号。这三者并称为字体。</p>
+<h2 id="中西文“斜体”"><a href="#中西文“斜体”" class="headerlink" title="中西文“斜体”"></a>中西文“斜体”</h2><p>首先需要明确一点：<strong>汉字没有加斜体。平常看到的斜体汉字是通过几何变换得到的结果</strong>，对于排版来说，这种斜体是非常粗糙的，真正的字形是需要精细设计的。</p>
+<p>西文中一般设有加斜，但与“斜体”并不是一回事。加斜是指某种字族的 <code>Italy</code> 字系；而斜体，是指<code>Slant</code>字族。</p>
+<h2 id="原生字体命令"><a href="#原生字体命令" class="headerlink" title="原生字体命令"></a>原生字体命令</h2><p><code>LaTex</code>提供了基本的字体命令，如下表</p>
+<table>
+<thead>
+<tr>
+<th>字体</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字族</td>
+<td><code>\rmfamily</code></td>
+<td>设置字体为<code>Roman</code>罗马字族</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\sffamily</code></td>
+<td>把字体设置为<code>Sans Serif</code>无衬线字族</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\ttfamily</code></td>
+<td>把字体设置为<code>Typewriter</code>等宽字族</td>
+</tr>
+<tr>
+<td>字系</td>
+<td><code>\bfseries</code></td>
+<td>粗体<code>BoldSeries</code>字系属性</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\mdseries</code></td>
+<td>中粗体<code>MiddleSeries</code>字系属性</td>
+</tr>
+<tr>
+<td>字形</td>
+<td><code>\upshape</code></td>
+<td>竖直<code>Upright</code>字形</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\slshape</code></td>
+<td>斜体<code>Slant</code>字形</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\itshape</code></td>
+<td>强调体<code>Italic</code>字形</td>
+</tr>
+<tr>
+<td></td>
+<td><code>\scshape</code></td>
+<td>小号大写体<code>SCAP</code>字形</td>
+</tr>
+</tbody></table>
+<p>然后就是<strong>关于字号的命令，<code>LaTex</code>给出了一系列“相对字号命令”</strong>，如下表所示，当然你也可以使用宏包<code>ctex</code>的相关字号命令来控制字号，详细文档说明可以使用控制台命令<code>texdoc ctex</code>即可查看。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>命令</th>
+<th>符号</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>超超小</td>
+<td><code>$\tiny$</code></td>
+<td>其次小</td>
+<td><code>$\scriptsize$</code></td>
+</tr>
+<tr>
+<td>小一点</td>
+<td><code>$\small$</code></td>
+<td>默认大小</td>
+<td><code>$\normalsize$</code></td>
+</tr>
+<tr>
+<td>大一点</td>
+<td><code>$\large$</code></td>
+<td>大两点</td>
+<td><code>$\Large$</code></td>
+</tr>
+<tr>
+<td>大三点</td>
+<td><code>$\LARGR$</code></td>
+<td>巨大</td>
+<td><code>$\huge$</code></td>
+</tr>
+<tr>
+<td>巨巨大</td>
+<td><code>$\Huge$</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="中文支持与CJK字体"><a href="#中文支持与CJK字体" class="headerlink" title="中文支持与CJK字体"></a>中文支持与CJK字体</h2><p>中文方面，<code>ctex</code>宏包直接定义了新的中文文档类<code>ctexart</code>，<code>ctexrep</code>与<code>ctexbook</code>，以及<code>ctexbeamer</code>幻灯文档类。</p>
+<blockquote>
+<p>关于中文支持方面的更多问题可以查看<code>ctex</code>文档说明</p>
+</blockquote>
+<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><p>使用<code>xcolor</code>宏包来方便的调用颜色，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\textcolor</span>&#123;red&#125;&#123;试测试测试测试&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf375b603e.png" alt="image-20220309162354001" style="zoom:80%;" />
+
+<blockquote>
+<p>关于更多的颜色说明可以参考宏包<code>xcolor</code>说明文档</p>
+</blockquote>
+<h1 id="引用与注释"><a href="#引用与注释" class="headerlink" title="引用与注释"></a>引用与注释</h1><p>电子文档最大的优点在于可以使用超链接，跳转标签和目录。这些功能的实现都需要“引用”。</p>
+<h2 id="标签和引用"><a href="#标签和引用" class="headerlink" title="标签和引用"></a>标签和引用</h2><p><strong>使用<code>\label</code>命令插入标签（在MS Word中称为“题注”），然后在其他地方使用<code>\ref</code>或者<code>\pageref</code>命令进行引用。</strong>命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 创建标签</span></span><br><span class="line"><span class="keyword">\label</span>&#123;123&#125;</span><br><span class="line"><span class="comment">% 引用标签</span></span><br><span class="line"><span class="keyword">\ref</span>&#123;123&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外有个宏包<code>amsmath</code>提供了相关引用的命令，可以自行查看。</p>
+<h2 id="脚注，边注与尾注"><a href="#脚注，边注与尾注" class="headerlink" title="脚注，边注与尾注"></a>脚注，边注与尾注</h2><h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p>脚注是一种简单的标注，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是一段测试文本<span class="keyword">\footnote</span>&#123;这是一段脚注&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf37a5566b.png" alt="image-20220309164253562" style="zoom:80%;" />
+
+<p><strong>在某些情况下（如表格），脚注无法正常使用，可以通过在需要插入脚注的位置插入命令<code>\footnotemark</code>，然后再在环境外使用<code>\footnotetext</code>来指明脚注内容</strong>，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	这是一段测试文本<span class="keyword">\footnotemark</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">\footnotetext</span>&#123;这是一段脚注内容&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>【渲染结果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf37e28392.png" alt="image-20220309165118369" style="zoom:80%;" />
+
+<blockquote>
+<p>行文中切记过多使用脚注，会分散读者的注意力</p>
+</blockquote>
+<h3 id="边注"><a href="#边注" class="headerlink" title="边注"></a>边注</h3><p><code>LaTex</code>的边注命令<code>\marginpar</code>不会进行编号，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 命令格式</span></span><br><span class="line"><span class="keyword">\marginpar</span>&#123;右侧注释内容&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 命令示例</span></span><br><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	这是一段测试文本<span class="keyword">\marginpar</span>&#123;这是右侧边注&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf38237632.png" alt="image-20220309165633332" style="zoom:95%;" />
+
+<h3 id="尾注"><a href="#尾注" class="headerlink" title="尾注"></a>尾注</h3><p>尾注用于注释比较长，无法使用脚注的场合，需要使用宏包<code>endnotes</code>。</p>
+<h2 id="援引环境"><a href="#援引环境" class="headerlink" title="援引环境"></a>援引环境</h2><p><strong>普通的援引环境有<code>quote</code>和<code>quotation</code>两种。前者首行不缩进，后者首行缩进，且支持多段文字</strong>。命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\noindent</span> 这是原文内容</span><br><span class="line">	<span class="keyword">\begin</span>&#123;quote&#125;</span><br><span class="line">		这是一段援引内容</span><br><span class="line">	<span class="keyword">\end</span>&#123;quote&#125;</span><br><span class="line">	这是后面的内容</span><br><span class="line">	<span class="keyword">\begin</span>&#123;quotation&#125;</span><br><span class="line">		这也是一段援引内容</span><br><span class="line">	<span class="keyword">\end</span>&#123;quotation&#125;</span><br><span class="line">	这也是后面的内容</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf385baa0e.png" alt="image-20220309170310170" style="zoom: 67%;" />
+
+<p>另外一个诗歌援引环境叫<code>verse</code>，是悬挂缩进的，一般很少用。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>部分文档类环境支持摘要，如果使用摘要，这需要在<code>\maketitle</code>命令之后才可以使用<code>abstract</code>环境来完成摘要。命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\title</span>&#123;这是文章标题&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\maketitle</span> </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">\begin</span>&#123;abstract&#125;</span><br><span class="line">		这部分是摘要。这部分是摘要。这部分是摘要。这部分是摘要。这部分是摘要。这部分是摘要。这部分是摘要。这部分是摘要。</span><br><span class="line">	<span class="keyword">\end</span>&#123;abstract&#125;</span><br><span class="line">	</span><br><span class="line">	这是正文内容</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf38a1e761.png" alt="image-20220309172432967" style="zoom: 80%;" />
+
+<blockquote>
+<p>需要注意的是命令要放在<code>document</code>环境内</p>
+</blockquote>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><strong>参考文献注意使用的命令是<code>\cite</code>。</strong></p>
+<p>如果想要将参考文献章节正常编号，并加入到目录中，可以使用<code>tocbibind</code>宏包。</p>
+<h1 id="正式排版：封面，大纲与目录"><a href="#正式排版：封面，大纲与目录" class="headerlink" title="正式排版：封面，大纲与目录"></a>正式排版：封面，大纲与目录</h1><h2 id="封面"><a href="#封面" class="headerlink" title="封面"></a>封面</h2><p>封面的内容在导言区进行定义，一般写在所有宏包，自定义命令之后，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\title</span>&#123;文章标题&#125;</span><br><span class="line"><span class="keyword">\author</span>&#123;作者名字&#125;</span><br><span class="line"><span class="keyword">\date</span>&#123;<span class="keyword">\today</span>&#125;		<span class="comment">%\today命令表示获取当前时间</span></span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf38f7ac8b.png" alt="image-20220309180826184" style="zoom:80%;" />
+
+<p><strong>然后在<code>document</code>环境内第一行写上<code>\maketitle</code><strong>，这样就形成了一个简易的封面。</strong>其中，<code>\title</code>和<code>author</code>是必须定义的</strong>。<code>\date</code>省略会自动编译当天的日期为准。**如果不想显示日期，这使用<code>\data&#123;&#125;</code>**即可。</p>
+<p>标题页的脚注用<code>\thanks</code>命令完成。</p>
+<h2 id="大纲与章节"><a href="#大纲与章节" class="headerlink" title="大纲与章节"></a>大纲与章节</h2><p><code>LaTex</code>中，文档分为若干大纲级别，分别包括如下内容：</p>
+<ul>
+<li><strong><code>\part</code>：部分，这个大纲不会打段<code>chapter</code>的编号</strong></li>
+<li><strong><code>\chapter</code>：章，<code>article</code>的文档类不包含该大纲级别</strong></li>
+<li><strong><code>\section</code>：节。</strong></li>
+<li><strong><code>\subsection</code>：次节。</strong></li>
+<li><strong><code>\subsubsection</code>：次节。</strong></li>
+<li><strong><code>\paragraph</code>：段，很少使用</strong></li>
+<li><strong><code>\subparagraph</code>：段，很少使用</strong></li>
+</ul>
+<p>book文档类还提供了以下命令：</p>
+<ul>
+<li><strong><code>\frontmatter</code>：前言。页码为小写罗马字母，其后章节不编号，但是生成页眉页脚和目录项</strong></li>
+<li><strong><code>\mainmatter</code>：正文。页码为阿拉伯数字，其后章节编号，页眉页脚和目录项正常生成</strong></li>
+<li><strong><code>\backmatter</code>：后记。页码格式不变，章节不编号，但生成页眉页脚和目录项</strong></li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p><strong>目录在大纲的基础上生成，使用命令<code>\tableofcontents</code>既可插入目录。</strong></p>
+<p>在加入宏包<code>hyperref</code>，目录可以实现点击跳转。关于更多高级目录自定义需要借助<code>titletoc</code>宏包。</p>
+<h1 id="计数器与列表"><a href="#计数器与列表" class="headerlink" title="计数器与列表"></a>计数器与列表</h1><h2 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h2><p><code>LaTex</code>中的自动编号都借助内部的计数器来完成，计数器包括如下几种：</p>
+<ul>
+<li><strong>章节</strong>：part，chapter，section，subsection，subsubsection，paragraph，subparagraph</li>
+<li><strong>编号列表</strong>：enumi，enumii，enumiii和enumiv</li>
+<li><strong>公式和图表</strong>：equation，figure 与 table</li>
+<li><strong>其他</strong>：page，footnote 与 mpfootnote</li>
+</ul>
+<p>可以通过<code>\the</code>接上计数器的名称来调用计数器，例如：<code>\thepart</code>。</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>**<code>LaTex</code>支持的预定义列表有三种，分别是无须列表<code>itemize</code>，自动编号列表<code>enumerate</code>，以及描述列表<code>description</code>**。</p>
+<p><strong>无须列表</strong>命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;itemize&#125;</span><br><span class="line">		<span class="keyword">\item</span> 第一项</span><br><span class="line">		<span class="keyword">\item</span>[-] 第二项</span><br><span class="line">		<span class="keyword">\item</span>[*] 第三项</span><br><span class="line">	<span class="keyword">\end</span>&#123;itemize&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf395bb006.png" alt="image-20220309185733983" style="zoom:80%;" />
+
+<p><strong>有序列表</strong>命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;enumerate&#125;</span><br><span class="line">		<span class="keyword">\item</span> 第一项</span><br><span class="line">		<span class="keyword">\item</span> 第二项</span><br><span class="line">		<span class="keyword">\item</span> 第三项</span><br><span class="line">	<span class="keyword">\end</span>&#123;enumerate&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3995448f.png" alt="image-20220309185946504" style="zoom: 80%;" />
+
+<p><strong>描述列表</strong>（自定义列表）命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;description&#125;</span><br><span class="line">		<span class="keyword">\item</span>[LaTex] 第一项</span><br><span class="line">		<span class="keyword">\item</span>[Tex] 第二项</span><br><span class="line">		<span class="keyword">\item</span>[MarkDown] 第三项</span><br><span class="line">	<span class="keyword">\end</span>&#123;description&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf39d3b139.png" alt="image-20220309190154869" style="zoom:80%;" />
+
+<h1 id="浮动体与图表"><a href="#浮动体与图表" class="headerlink" title="浮动体与图表"></a>浮动体与图表</h1><h2 id="浮动体"><a href="#浮动体" class="headerlink" title="浮动体"></a>浮动体</h2><p>浮动体将图或者表及其标题定义为整体，可以动态排版，以解决图，表在换页处造成的过长留白问题。</p>
+<p><strong>图片的浮动体是<code>figure</code>环境，表格的浮动体是<code>table</code>环境。</strong></p>
+<p>如果希望浮动体不要跨过<code>section</code>，可以使用如下命令：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>[section]&#123;placeins&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>图片的插入需要使用宏包<code>graphicx</code>和<code>\includegraphics</code>命令。命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	这是正文内容，我是长长的内容，我真的很长并且有很多内容，我企图扩展到第二行，甚至第三行。</span><br><span class="line">	<span class="keyword">\begin</span>&#123;center&#125;</span><br><span class="line">		<span class="keyword">\includegraphics</span>[width=0.8<span class="keyword">\linewidth</span>]&#123;1.jpg&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;center&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3a52c085.png" alt="image-20220309192047201" style="zoom:80%;" />
+
+<p>其中，可选参数可以指定其宽高等，类似地，也可以使<code>height</code>（高），<code>scale</code>（图片缩放倍数），<code>angle</code>（图片逆时针旋转角度），<code>origin</code>（图片选中中心）等命令。</p>
+<blockquote>
+<p>前三个命令不建议同时使用，旋转的图片基线会变化，所以一般使用<code>totalheight</code>代替<code>height</code></p>
+</blockquote>
+<p>至于<code>&#123;&#125;</code>里的参数的写法，<code>LaTex</code>支持<code>pdf</code>,<code>eps</code>,<code>png</code>与<code>jpg</code>格式，所以可以选择带有图片拓展名的表示方式，也可以不带拓展名，如果不带拓展名，则会按照上述格式顺序搜索图片。</p>
+<blockquote>
+<p>默认图片需要在<code>.tex</code>文件放在同一个文件夹下</p>
+</blockquote>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>懒得解释了，就看一个简单的命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;tabular&#125;&#123;|c|c|c|&#125;</span><br><span class="line">		<span class="keyword">\hline</span> 2<span class="built_in">&amp;</span>9<span class="built_in">&amp;</span>4<span class="keyword">\\</span></span><br><span class="line">		<span class="keyword">\hline</span> 7<span class="built_in">&amp;</span>5<span class="built_in">&amp;</span>3<span class="keyword">\\</span></span><br><span class="line">		<span class="keyword">\hline</span> 6<span class="built_in">&amp;</span>1<span class="built_in">&amp;</span>8<span class="keyword">\\</span></span><br><span class="line">		<span class="keyword">\hline</span></span><br><span class="line">	<span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3a9bc785.png" alt="image-20220309194713871" style="zoom:80%;" />
+
+<h1 id="页面设置"><a href="#页面设置" class="headerlink" title="页面设置"></a>页面设置</h1><h2 id="纸张，方向和边距"><a href="#纸张，方向和边距" class="headerlink" title="纸张，方向和边距"></a>纸张，方向和边距</h2><p>详情参考宏包<code>geometry</code>。</p>
+<h2 id="页眉和页脚"><a href="#页眉和页脚" class="headerlink" title="页眉和页脚"></a>页眉和页脚</h2><p>详情参考宏包<code>fancyhdr</code>。</p>
+<h1 id="抄录与代码环境"><a href="#抄录与代码环境" class="headerlink" title="抄录与代码环境"></a>抄录与代码环境</h1><p>如果你希望直接输出相关内容而不经过<code>Tex</code>解释，可以使用<code>\verb</code>命令。命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;color&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\textcolor</span>&#123;red&#125;&#123;text&#125;</span><br><span class="line">	<span class="keyword">\verb</span>*<span class="string">|\textcolor&#123;red&#125;&#123;text&#125;|</span></span><br><span class="line"><span class="string">\end&#123;document&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3aebcafe.png" alt="image-20220309195249437" style="zoom:80%;" />
+
+<h1 id="分栏"><a href="#分栏" class="headerlink" title="分栏"></a>分栏</h1><p>分栏需要使用<code>multicol</code>宏包，命令示例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>[UTF8]&#123;ctexart&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;multicol&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;multicols&#125;&#123;2&#125;</span><br><span class="line">		测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</span><br><span class="line">	<span class="keyword">\end</span>&#123;multicols&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【渲染效果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3b28326f.png" alt="image-20220309195831024" style="zoom:80%;" />
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/LaTex%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/">https://www.helloseraphine.top/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/LaTex%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf3295cd39.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/22/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/MarkDown%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95/" title="MarkDown进阶用法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf4036b63a.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MarkDown进阶用法</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/23/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/MySelf/%E5%85%B3%E4%BA%8E%E6%88%91%E7%9A%84Unity%E8%87%AA%E8%BF%B0/" title="关于我的Unity自述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aafa6870a20.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">关于我的Unity自述</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86LaTex"><span class="toc-number">2.</span> <span class="toc-text">认识LaTex</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.</span> <span class="toc-text">命令与环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E7%95%99%E5%AD%97%E7%AC%A6"><span class="toc-number">2.2.</span> <span class="toc-text">保留字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E8%A8%80%E5%8C%BA"><span class="toc-number">2.3.</span> <span class="toc-text">导言区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%BE%93%E5%87%BA"><span class="toc-number">2.4.</span> <span class="toc-text">文件输出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E7%82%B9%E4%B8%8E%E5%BC%BA%E8%B0%83"><span class="toc-number">3.</span> <span class="toc-text">标点与强调</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%8F%B7"><span class="toc-number">3.1.</span> <span class="toc-text">引号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%AD%E6%A8%AA%EF%BC%8C%E7%9C%81%E7%95%A5%E5%8F%B7%E4%B8%8E%E7%A0%B4%E6%8A%98%E5%8F%B7"><span class="toc-number">3.2.</span> <span class="toc-text">短横，省略号与破折号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E8%B0%83%EF%BC%9A%E7%B2%97%E4%BD%93%E4%B8%8E%E6%96%9C%E4%BD%93"><span class="toc-number">3.3.</span> <span class="toc-text">强调：粗体与斜体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E5%88%92%E7%BA%BF%E4%B8%8E%E5%88%A0%E9%99%A4%E7%BA%BF"><span class="toc-number">3.4.</span> <span class="toc-text">下划线与删除线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.5.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">格式控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A9%BA%E6%A0%BC%EF%BC%8C%E6%8D%A2%E8%A1%8C%E4%B8%8E%E5%88%86%E6%AE%B5"><span class="toc-number">4.1.</span> <span class="toc-text">空格，换行与分段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-number">4.2.</span> <span class="toc-text">分页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%A9%E8%BF%9B%EF%BC%8C%E5%AF%B9%E9%BD%90%E4%B8%8E%E8%A1%8C%E8%B7%9D"><span class="toc-number">4.3.</span> <span class="toc-text">缩进，对齐与行距</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E4%B8%8E%E9%A2%9C%E8%89%B2"><span class="toc-number">5.</span> <span class="toc-text">字体与颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E6%97%8F%EF%BC%8C%E5%AD%97%E7%B3%BB%E4%B8%8E%E5%AD%97%E5%BD%A2"><span class="toc-number">5.1.</span> <span class="toc-text">字族，字系与字形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E8%A5%BF%E6%96%87%E2%80%9C%E6%96%9C%E4%BD%93%E2%80%9D"><span class="toc-number">5.2.</span> <span class="toc-text">中西文“斜体”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E5%AD%97%E4%BD%93%E5%91%BD%E4%BB%A4"><span class="toc-number">5.3.</span> <span class="toc-text">原生字体命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81%E4%B8%8ECJK%E5%AD%97%E4%BD%93"><span class="toc-number">5.4.</span> <span class="toc-text">中文支持与CJK字体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2"><span class="toc-number">5.5.</span> <span class="toc-text">颜色</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E4%B8%8E%E6%B3%A8%E9%87%8A"><span class="toc-number">6.</span> <span class="toc-text">引用与注释</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E5%92%8C%E5%BC%95%E7%94%A8"><span class="toc-number">6.1.</span> <span class="toc-text">标签和引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%B3%A8%EF%BC%8C%E8%BE%B9%E6%B3%A8%E4%B8%8E%E5%B0%BE%E6%B3%A8"><span class="toc-number">6.2.</span> <span class="toc-text">脚注，边注与尾注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%B3%A8"><span class="toc-number">6.2.1.</span> <span class="toc-text">脚注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E6%B3%A8"><span class="toc-number">6.2.2.</span> <span class="toc-text">边注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%BE%E6%B3%A8"><span class="toc-number">6.2.3.</span> <span class="toc-text">尾注</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%B4%E5%BC%95%E7%8E%AF%E5%A2%83"><span class="toc-number">6.3.</span> <span class="toc-text">援引环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">6.4.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">6.5.</span> <span class="toc-text">参考文献</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%BC%8F%E6%8E%92%E7%89%88%EF%BC%9A%E5%B0%81%E9%9D%A2%EF%BC%8C%E5%A4%A7%E7%BA%B2%E4%B8%8E%E7%9B%AE%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">正式排版：封面，大纲与目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E9%9D%A2"><span class="toc-number">7.1.</span> <span class="toc-text">封面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E7%BA%B2%E4%B8%8E%E7%AB%A0%E8%8A%82"><span class="toc-number">7.2.</span> <span class="toc-text">大纲与章节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">7.3.</span> <span class="toc-text">目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8%E4%B8%8E%E5%88%97%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text">计数器与列表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">8.1.</span> <span class="toc-text">计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-number">8.2.</span> <span class="toc-text">列表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E4%BD%93%E4%B8%8E%E5%9B%BE%E8%A1%A8"><span class="toc-number">9.</span> <span class="toc-text">浮动体与图表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E4%BD%93"><span class="toc-number">9.1.</span> <span class="toc-text">浮动体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">9.2.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC"><span class="toc-number">9.3.</span> <span class="toc-text">表格</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E8%AE%BE%E7%BD%AE"><span class="toc-number">10.</span> <span class="toc-text">页面设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%B8%E5%BC%A0%EF%BC%8C%E6%96%B9%E5%90%91%E5%92%8C%E8%BE%B9%E8%B7%9D"><span class="toc-number">10.1.</span> <span class="toc-text">纸张，方向和边距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%9C%89%E5%92%8C%E9%A1%B5%E8%84%9A"><span class="toc-number">10.2.</span> <span class="toc-text">页眉和页脚</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%84%E5%BD%95%E4%B8%8E%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83"><span class="toc-number">11.</span> <span class="toc-text">抄录与代码环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%A0%8F"><span class="toc-number">12.</span> <span class="toc-text">分栏</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

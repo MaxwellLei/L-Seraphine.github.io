@@ -1,0 +1,557 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【6.0】C-函数 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言函数是组成C语言的基本单位，为了提高程序设计的质量和效率，C系统提高了大量的标准函数。例如前面部分提到的printf()，scanf()等函数。同样的，我们可以根据我们的实际需求来定义我们的函数。 【关于Function(函数)翻译问题】 如果你学过或者接触过现代的一些计算机语言，获取你会了解到一个词——“方法”。不论是函数也好，方法也罢，都是出自这个次——Function，就个人经验而言，这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【6.0】C-函数">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/02/18/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%906.0%E3%80%91%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言函数是组成C语言的基本单位，为了提高程序设计的质量和效率，C系统提高了大量的标准函数。例如前面部分提到的printf()，scanf()等函数。同样的，我们可以根据我们的实际需求来定义我们的函数。 【关于Function(函数)翻译问题】 如果你学过或者接触过现代的一些计算机语言，获取你会了解到一个词——“方法”。不论是函数也好，方法也罢，都是出自这个次——Function，就个人经验而言，这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9a2027ce.jpg">
+<meta property="article:published_time" content="2022-02-18T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:03:56.762Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9a2027ce.jpg"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/02/18/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%906.0%E3%80%91%E5%87%BD%E6%95%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【6.0】C-函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:03:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9a2027ce.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【6.0】C-函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-18T15:30:01.000Z" title="发表于 2022-02-18 23:30:01">2022-02-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:03:56.762Z" title="更新于 2023-07-14 21:03:56">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/">语言树</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【6.0】C-函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>函数是组成C语言的基本单位，为了提高程序设计的质量和效率，C系统提高了大量的标准函数。例如前面部分提到的<code>printf()</code>，<code>scanf()</code>等函数。同样的，我们可以根据我们的实际需求来定义我们的函数。</p>
+<p>【关于<code>Function</code>(函数)翻译问题】</p>
+<p>如果你学过或者接触过现代的一些计算机语言，获取你会了解到一个词——“<strong>方法</strong>”。不论是函数也好，方法也罢，都是出自这个次——<code>Function</code>，就个人经验而言，这是个翻译的历史遗留问题，早起计算机进入我国的时候，那个时候没有相关的经验和相关书籍的参考，再加上一开始的计算机是数学领域发展起来的，就通俗的直译为——函数，由于现代计算机的发展和大量的经验，对于程序员来说，函数这个词非常的抽象，没有办法形成——望文知意，经过本土化，翻译为方法更复合实际，所以你如果接触过相对现代一些的教程都是说是方法而不是函数。</p>
+<p>当然还有另一个说法，是对于面向过程编程语言，称为函数，而面向对象编程语言，称为方法。</p>
+<p>（PS：面向对象编程是在面向对象过程编程的基础上发展而来的）</p>
+<p>以上两种解释没有谁对谁错，此处仅做说明，以防初学者出现歧义。</p>
+<h1 id="函数概述"><a href="#函数概述" class="headerlink" title="函数概述"></a>函数概述</h1><h2 id="函数的概念"><a href="#函数的概念" class="headerlink" title="函数的概念"></a>函数的概念</h2><p>在前面的所有示例中，一个程序中只有一个<code>main()</code>函数。对于复杂的程序，如果只有一个<code>main()</code>函数，将会影响程序的可读性，也不能体现程序的结构化设计的思想。因此，需要将某种特定功能的代码定义为函数，一个程序由<code>main()</code>函数和若干函数组成，每个函数在程序中形成即相对独立又相互联系的模块。**<code>main()</code>函数可以调用其他函数，其他函数也可以相互调用**。</p>
+<p>一个简单的函数代码示例：</p>
+<p>【实例】实现两数加法运算。</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Plus</span><span class="params">()</span>;	<span class="comment">//声明函数</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, Plus(x, y));	<span class="comment">//调用函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">Plus</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;	<span class="comment">//函数定义</span></span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="库函数"><a href="#库函数" class="headerlink" title="库函数"></a>库函数</h2><p><strong>从用户使用的角度来说，C语言的函数可以分为库函数和用户自定义函数</strong>。库函数是系统提供的，用户不必自己定义而可以直接使用。<strong>库函数由系统预定义在相应的文件中，使用时需要在程序的开头把该函数所在的头文件包含进来</strong>。例如，为了调用<code>printf()</code>，<code>scanf()</code>函数，需要调用<code>#include &lt;stdio.h&gt;</code>包含<code>stdio.h</code>头文件；为了调用<code>sqrt()</code>，<code>log()</code>函数，需要调用<code>#include &lt;math.h&gt;</code>包含<code>math.h</code>头文件。</p>
+<p>使用库函数需要注意以下几个问题：</p>
+<ul>
+<li>函数的功能</li>
+<li>函数参数的数目和顺序，以及每个参数的意义以及类型</li>
+<li>函数的返回值的意义以及类型</li>
+<li>需要使用的包含文件</li>
+</ul>
+<blockquote>
+<p>常用的标准函数库参考<a href="httpss://www.runoob.com/cprogramming/c-standard-library-stddef-h.html">C 标准库</a></p>
+</blockquote>
+<p>有关问题底层大全等可以查询<a href="httpss://docs.microsoft.com/zh-cn/documentation/">微软文档</a>。</p>
+<h1 id="用户自定义函数"><a href="#用户自定义函数" class="headerlink" title="用户自定义函数"></a>用户自定义函数</h1><h2 id="函数定义的格式"><a href="#函数定义的格式" class="headerlink" title="函数定义的格式"></a>函数定义的格式</h2><p><strong>函数由函数名，形参列表和函数体组成</strong>。函数名是用户为函数起的名字，用来标识唯一一个函数；函数的形参列表用来接受调用函数传递的数据，形参列表可以为空，此时函数名后的括号不可以省略；函数体是函数实现自身功能的一组语句。</p>
+<ol>
+<li><p><strong>无参数函数的定义格式</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">类型声明符 函数名称()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>**类型声明符指定函数值的类型，即函数返回值的类型。如果一个函数没有返回值，该函数的返回值类型为<code>void</code>**。函数名称的命名规则与变量的名称规则相同。</p>
+</li>
+<li><p><strong>有参数函数的定义格式</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型声明符 函数名称(形参列表声明)&#123;</span><br><span class="line">	<span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，类型声明符号指定函数返回值的类型，可以是任何有效类型，如果省略类型声明符号，系统默认函数的返回值为<code>int</code>类型。如果函数只是执行相关操作而不需要返回值，则可以使用<code>void</code>。</p>
+<p>有参函数在函数名称后的括号内必须有形式参数表，用于调用函数和被调用函数之间的数据传递，故必须对其进行类型声明，这由形式参数声明部分完成。一般情况下，函数执行需要多少原始外部数据，就有多少个形参数据，<strong>形参之间用逗号隔开</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Plus</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;	<span class="comment">//定义自定义函数</span></span><br><span class="line">    <span class="keyword">return</span> a + b;	<span class="comment">//返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>空函数</strong></p>
+<p>C语言中可以有空函数，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型声明符 函数名()\</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用该函数，什么工作都不做。在主函数调用该函数，可以暂时表示某功能，后期扩充的时候填充该函数。</p>
+</li>
+</ol>
+<h2 id="形式参数和实际参数"><a href="#形式参数和实际参数" class="headerlink" title="形式参数和实际参数"></a>形式参数和实际参数</h2><p>在调用有参函数时，主调函数和被调函数之间往往有数据传递关系。<strong>在定义函数时函数名后面小括号内的变量为形式参数（简称形参）</strong>，函数调用时用于接收主调函数传来的数据。在调用函数时，<strong>主调函数的函数调用语句的函数名后面小括号的参数称为实际参数（简称实参）</strong>。</p>
+<p>【实例】编写函数求三个整数中的最小值</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">MaxV</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> c)</span>&#123;</span><br><span class="line">    <span class="type">int</span> max;</span><br><span class="line">    <span class="keyword">if</span> (a&gt;b)</span><br><span class="line">    &#123;</span><br><span class="line">        max = a;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        max = b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (max&lt;c)</span><br><span class="line">    &#123;</span><br><span class="line">        max = c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> z = <span class="number">4</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最大值为：%d&quot;</span>, MaxV(x,y,z));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9adc0f02.png" alt="image-20220116221916755" style="zoom:80%;" /></p>
+<p>【实例】求三个实数的平均值</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">float</span> <span class="title function_">Age</span><span class="params">(<span class="type">float</span> a,<span class="type">float</span> b,<span class="type">float</span> c)</span>&#123;</span><br><span class="line">    <span class="type">float</span> x = (a + b + c) / <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">float</span> x = <span class="number">6</span>;</span><br><span class="line">    <span class="type">float</span> y = <span class="number">3</span>;</span><br><span class="line">    <span class="type">float</span> z = <span class="number">4</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最大值为：%f&quot;</span>, Age(x,y,z));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9b54adb2.png" alt="image-20220116222636066" style="zoom:80%;" /></p>
+<blockquote>
+<p>如果你把形参的类型改为<code>int</code>类型，则返回的值为4</p>
+</blockquote>
+<h2 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h2><p>通常是系统通过函数调用使主函数从被调函数得到一个确定的值，这就是函数的返回值。<strong>在C语言中，是通过<code>return</code>语句来实现的</strong>。<code>return</code>语句一般有以下3种形式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> 表达式;</span><br><span class="line"><span class="keyword">return</span> (表达式);</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<ol>
+<li><code>return</code>语句有双重作用：<strong>它使得函数从被调函数中退出，返回到调用的代码处，并向调用函数返回一个确定的值</strong>。</li>
+<li>一个函数中可以用有多个<code>return</code>语句，执行到哪一个<code>return</code>语句，哪个<code>return</code>语句就起作用。</li>
+</ol>
+<h1 id="函数的调用"><a href="#函数的调用" class="headerlink" title="函数的调用"></a>函数的调用</h1><p>所谓函数的调用，是指一个函数（主调函数）暂时中断本函数的运行，转去执行另一个函数（被调函数）的过程。被调函数执行完成后，返回调用函数中断处继续调用函数的运行，则是一个返回过程。<strong>函数的一次调用必定伴随着一个返回过程，在函数的调用和返回这个过程中，两个函数之间发生信息的交换</strong>。</p>
+<h2 id="函数调用的一般形式"><a href="#函数调用的一般形式" class="headerlink" title="函数调用的一般形式"></a>函数调用的一般形式</h2><p>语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名(参数列表);</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ol>
+<li>如果调用无参函数，则实参列表可以没有，但是括号不能省略。</li>
+<li>实参列表的参数类型和个数必须与形参相同且顺序一致，多个实参之间用逗号隔开。</li>
+</ol>
+<h2 id="函数的调用方式"><a href="#函数的调用方式" class="headerlink" title="函数的调用方式"></a>函数的调用方式</h2><p>按照被调用函数在主调函数中出现的位置和完成的功能划分，函数调用有如下方式：</p>
+<ol>
+<li><p>把函数调用作为一个语句。此时一般不需要返回值，只需要执行特定的操作。</p>
+</li>
+<li><p>在表达式中调用函数，这种表达式称为函数表达式。此时要求函数返回一个值参与运算，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=c*Plus(a,b,c);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将函数调用作为另一个函数调用的参数。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;和为：%d&quot;</span>,Sum(a,b));</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>【实例】编写函数判断一个数是否是素数</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">IsPrimeint</span><span class="params">(<span class="type">int</span> x)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x==<span class="number">1</span> || x==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果一个数n可以被2~(n-1)之间的数除，则不是素数，返回1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x<span class="number">-2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x%(i+<span class="number">2</span>)==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> prime;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;prime);</span><br><span class="line">    <span class="keyword">if</span> (IsPrimeint(prime)==<span class="number">1</span>)	<span class="comment">//根据返回值来判断是否是素数</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d不是素数&quot;</span>, prime);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d是素数&quot;</span>, prime);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9bba4146.png" alt="image-20220116232953286" style="zoom:80%;" /></p>
+<h2 id="函数的调用过程"><a href="#函数的调用过程" class="headerlink" title="函数的调用过程"></a>函数的调用过程</h2><p>代码示例如上面的示例，图示如下：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9bfaf396.png" alt="image-20220116233320143" style="zoom:80%;" />
+
+<h2 id="函数的原型声明"><a href="#函数的原型声明" class="headerlink" title="函数的原型声明"></a>函数的原型声明</h2><p>与变量的定义和使用一样，<strong>函数的调用也要遵循“先声明，后调用”</strong>的原则。在一个函数调用另一个函数时，需要具备以下条件：</p>
+<ol>
+<li><p>被调函数必须已经存在。</p>
+</li>
+<li><p>如果使用库函数，需要提前引用相关库函数。</p>
+</li>
+<li><p><strong>如果使用用户自定义函数，并且该函数与主调函数在同一个文件中，这时被调用函数应该放在主调函数之前定义。如果函数调用的位置在函数定义之前，则在函数调用之前必须对所调用的函数进行函数原型声明</strong>，函数原型声明的语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类型声明符 函数名(形参表);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>函数原型声明是向编译器表示一个函数的名称，将接收什么样的参数和有什么样的返回值，使编译器能够检查函数调用的合法性。实际上就是函数定义时的函数头，最后加上分号构成的声明语句。<strong>与函数头的区别是，函数声明中的形参列表中可以只写类型名，而不写形参名</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> <span class="title function_">average</span><span class="params">(<span class="type">float</span> x,<span class="type">float</span> y,<span class="type">float</span> z)</span>;</span><br><span class="line"><span class="comment">//可以写为</span></span><br><span class="line"><span class="type">float</span> <span class="title function_">average</span><span class="params">(<span class="type">float</span>,<span class="type">float</span>,<span class="type">float</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数的参数传递"><a href="#函数的参数传递" class="headerlink" title="函数的参数传递"></a>函数的参数传递</h2><p>在C语言中进行函数调用时，有两种不同的参数传递方式：<strong>值传递和地址传递</strong>。</p>
+<ol>
+<li><p><strong>值传递</strong></p>
+<p><strong>在函数调用时，实参将其值传递给形参</strong>。这种传递方式即为值传递。</p>
+<p>C语言规定，实参对形参的数据传递是值传递，即单向传递，也就是只能由实参传递给形参而不能由形参传递回来给实参。这是因为，<strong>在内存中，实参和形参占用不同的存储单元</strong>。在调用函数时，给形参分配存储单元，并将实参对应的值传递给形参，调用结束后，形参的存储单元会被释放，实参的存储单元仍要保留维持原值。因此，在执行一个被调用函数时，形参的变化不会改变实参的值。</p>
+</li>
+<li><p><strong>地址传递</strong></p>
+<p><strong>地址传递指的是函数调用时，实参将某些量的地址传递给形参</strong>。这样实参和形参指向同一个内存空间，在执行被调函数的过程中，对形参所指向的空间中的内容改变能够直接影响到实参的值。</p>
+<blockquote>
+<p>在地址传递方式下，形参和实参可以是指针变量（欠-指针）</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="函数的嵌套调用和递归调用"><a href="#函数的嵌套调用和递归调用" class="headerlink" title="函数的嵌套调用和递归调用"></a>函数的嵌套调用和递归调用</h1><h2 id="函数的嵌套调用"><a href="#函数的嵌套调用" class="headerlink" title="函数的嵌套调用"></a>函数的嵌套调用</h2><p>C语言中的函数的定义是相互平行的，在定义函数时，一个函数不能包含另一个函数。但是，一个函数在被调用的过程中可以调用其他函数，这就是函数的嵌套调用。</p>
+<p>如下为常规的嵌套调用图示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9c554ed3.png" alt="image-20220117144058984" style="zoom:80%;" />
+
+<p>【实例】计算1+$2!$+$3!$+·····+$10!$。（使用嵌套函数）</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Sum</span><span class="params">(<span class="type">int</span>)</span>;	<span class="comment">//自定义函数原型声明</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Fac</span><span class="params">(<span class="type">int</span>)</span>;	<span class="comment">//自定义函数原型声明</span></span><br><span class="line"><span class="type">int</span> sum = <span class="number">0</span>;	<span class="comment">//和的值</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Sum(Fac(i + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;阶乘的和为：%d&quot;</span>, sum);</span><br><span class="line">    sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//求和</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Sum</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    sum += num;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//求阶乘</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Fac</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        res *= (i + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9ca6d775.png" alt="image-20220117145914488" style="zoom:80%;" />
+
+<h2 id="函数的递归调用"><a href="#函数的递归调用" class="headerlink" title="函数的递归调用"></a>函数的递归调用</h2><p><strong>在调用一个函数的过程中又直接或者间接的调用该函数本身，称为函数的递归调用</strong>。</p>
+<p>递归是一种非常实用的程序设计技术。许多问题具有递归的特性，在某些情况下，用其他方法很难解决的问题，利用递归可以轻松解决。</p>
+<p>【实例】利用递归安抚计算$n!$。</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> facRes = <span class="number">1</span>;	<span class="comment">//阶乘结果返回值</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Fac</span><span class="params">(<span class="type">int</span>)</span>;	<span class="comment">//自定义阶乘函数原型声明</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);	<span class="comment">//获取要求的阶乘</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d!阶乘的结果为：%d&quot;</span>,num, Fac(num));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//阶乘计算</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Fac</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num!=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        facRes *= num;</span><br><span class="line">        Fac(num - <span class="number">1</span>);	<span class="comment">//递归调用</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> facRes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9ce7006a.png" alt="image-20220117153716073" style="zoom:80%;" />
+
+<h1 id="数组作为函数的参数"><a href="#数组作为函数的参数" class="headerlink" title="数组作为函数的参数"></a>数组作为函数的参数</h1><p>关于函数的形参前面说明过支持任何类型的参数，同样的数组也是支持的。</p>
+<h2 id="一维数组作为函数参数"><a href="#一维数组作为函数参数" class="headerlink" title="一维数组作为函数参数"></a>一维数组作为函数参数</h2><p><strong>用数组名作为函数实参时，向形参传递的是数组的地址值</strong>。在定义数组形参时，只需要在后面跟一个方括号就可以。</p>
+<p>【实例】求一组整数的平均值（一维数组）</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">float</span> <span class="title function_">Avg</span><span class="params">(<span class="type">int</span> x[])</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> n[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;平均值为：%f&quot;</span>, Avg(n));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//求平均函数</span></span><br><span class="line"><span class="type">float</span> <span class="title function_">Avg</span><span class="params">(<span class="type">int</span> x[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum += x[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum / <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9d2e076f.png" alt="image-20220117161707032" style="zoom:80%;" />
+
+<h2 id="二维数组作为函数的参数"><a href="#二维数组作为函数的参数" class="headerlink" title="二维数组作为函数的参数"></a>二维数组作为函数的参数</h2><p><strong>可以使用二维数组名作为函数参数，此时的实参可以直接使用二维数组名，在被调函数中可以指定形参所有维数的大小，也可以省略一维大小的声明</strong>。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">find</span><span class="params">(<span class="type">char</span> x[<span class="number">3</span>][<span class="number">10</span>])</span>;</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">find</span><span class="params">(<span class="type">char</span> x[][<span class="number">10</span>])</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这两个声明都是合法的，<strong>但是不能把第二维或者更高维度的大小省略</strong>，例如下面的定义说不合法的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">find</span><span class="params">(<span class="type">char</span> x[][])</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在第二维相同的情况下，形参数组的第一维可以与实参数组不同，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实参为：</span></span><br><span class="line"><span class="type">int</span> <span class="built_in">array</span>[<span class="number">5</span>][<span class="number">10</span>];</span><br><span class="line"><span class="comment">//形参可以定义为：</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test</span><span class="params">(<span class="type">int</span> <span class="built_in">array</span>[<span class="number">3</span>][<span class="number">10</span>])</span>;</span><br><span class="line"><span class="comment">//形参或者为：</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test</span><span class="params">(<span class="type">int</span> <span class="built_in">array</span>[<span class="number">8</span>][<span class="number">10</span>])</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上两种形参定义都是可以的，这是形参数组和实参数组都是由相同类型的一维数组组成的，<strong>C语言系统不检查第一维度的大小</strong>。</p>
+<p>【实例】实现两个 3 $\times$ 4 矩阵A和B的加法运算。</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Plus</span><span class="params">(<span class="type">int</span> a[][<span class="number">4</span>], <span class="type">int</span> b[][<span class="number">4</span>])</span>;	<span class="comment">//自定义函数原型声明</span></span><br><span class="line"><span class="type">int</span> res[<span class="number">3</span>][<span class="number">4</span>];	<span class="comment">//矩阵和结果</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line">    <span class="type">int</span> b[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)	<span class="comment">//获取需要计算的矩阵A</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入矩阵A第%d行数据 | &quot;</span>,i+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;a[i][<span class="number">0</span>], &amp;a[i][<span class="number">1</span>], &amp;a[i][<span class="number">2</span>], &amp;a[i][<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;--------------\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)	<span class="comment">//获取需要计算的矩阵B</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入矩阵B第%d行数据 | &quot;</span>,i+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;b[i][<span class="number">0</span>], &amp;b[i][<span class="number">1</span>], &amp;b[i][<span class="number">2</span>], &amp;b[i][<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;矩阵的和为:\n&quot;</span>);</span><br><span class="line">    Plus(a, b);	<span class="comment">//调用自定义函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//矩阵和计算函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Plus</span><span class="params">(<span class="type">int</span> a[<span class="number">3</span>][<span class="number">4</span>],<span class="type">int</span> b[<span class="number">3</span>][<span class="number">4</span>])</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            res[i][j] = a[i][j] + b[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>, res[i][<span class="number">0</span>], res[i][<span class="number">1</span>], res[i][<span class="number">2</span>], res[i][<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9d73d0a2.png" alt="image-20220117212546625" style="zoom:80%;" />
+
+<h1 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h1><p>C语言程序是由一些函数组成的。每个函数都是相对独立的代码块，这些代码只局限于该函数。因此，在非特殊说明下，一个函数的代码对于程序的其他部分来说是隐藏的，它既不会影响程序的其他部分，也不会受程序其他部分的影响。也就是说一个函数的代码和数据不可能与另一个函数的代码和数据相互作用。这是因为它们分别有着自己的作用域。<strong>根据作用域的不同，变量分为两种类型：局部变量和全局变量</strong>。</p>
+<h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><p><strong>在函数内部定义的变量称为局部变量。局部变量的作用域仅局限于定义它的函数中</strong>。例如：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9db6b91e.png" alt="image-20220117213754751"  />
+
+
+
+<p>说明：</p>
+<ol>
+<li>主函数<code>main()</code>中定义的变量也是局部变量，仅在<code>main()</code>函数中有效。</li>
+<li><strong>形参也是局部变量</strong>，只能在定义它的函数中有效。</li>
+<li>不同的函数中，可以使用相同名称的局部变量，它们代表不同的对象，互不干扰。</li>
+</ol>
+<p>【实例】判断下述代码的运行结果</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> x = <span class="number">20</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, x);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9dfcaa5b.png" alt="image-20220117214820769" style="zoom:80%;" />
+
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><p><strong>在函数体外定义的变量称为全局变量</strong>，全局变量的作用域是从它的定义点开始到文件结束，即位于全局变量定义后面的所有函数都可以使用该变量。</p>
+<p>说明：</p>
+<p><strong>如果要在定义全局变量之前使用函数中的使用该变量，则需要在该函数中使用关键词<code>extern</code>对全局变量进行外部声明</strong>。</p>
+<p>【实例】<code>extern</code>关键字使用</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">extern</span> <span class="type">int</span> a, b;	<span class="comment">//全局变量原型声明</span></span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">    b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d&quot;</span>, a,b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> a, b;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】 a&#x3D;1 b&#x3D;2</p>
+<p>【实例】全局变量与局部变量同名，分析结果</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">Test</span><span class="params">(<span class="type">int</span>)</span>;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    Test(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;主函数变量%d&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">Test</span><span class="params">(<span class="type">int</span> b)</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, b+ ++a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9e44a6b3.png" alt="image-20220117222317221" style="zoom:80%;" />
+
+
+
+<p>利用全局变量可以减少函数实参的个数，从而减少内存空间以及传递数据时的时间消耗。但是一般还是建议除非必要，尽量不要使用全局变量，因为：</p>
+<ol>
+<li><strong>全局变量使函数的执行依赖于外部变量，降低了程序的通用性</strong>。模块化程序设计要求各个模块之间的“关联性”应尽量的小，函数尽可能是封闭的，只通过参数与外界发生联系。</li>
+<li>降低程序的清晰性。</li>
+<li>全局变量在整个程序的执行过程中都会占用存储空间。</li>
+</ol>
+<h1 id="变量的存储类别"><a href="#变量的存储类别" class="headerlink" title="变量的存储类别"></a>变量的存储类别</h1><p><strong>从变量的作用域，即空间的角度看，变量分为局部变量和全局变量</strong>。</p>
+<p><strong>从变量的生存期，即变量的存在时间看，变量可以分为静态变量和动态变量</strong>。静态变量和动态变量是按照其存储方式来区分的。<strong>静态存储方式是指在程序运行期间分配固定的存储空间，程序执行完毕才释放。动态存储方式是在程序运行期间根据需要动态的分配存储空间</strong>，一旦动态过程结束，不论程序是否结束，都将释放存储空间。</p>
+<p><strong>在C语言中，供用户使用的存储空间分为三部分，即程序区，静态存储区和动态存储区。</strong></p>
+<ul>
+<li><strong>程序区：存放用户程序</strong>。</li>
+<li><strong>静态存储区：存放全局变量，静态局部变量和外部变量</strong>。</li>
+<li><strong>动态存储区：存放局部变量，函数形参变量</strong>。</li>
+</ul>
+<blockquote>
+<p><strong>CPU寄存器存放寄存器变量</strong></p>
+</blockquote>
+<p>【关于静态局部变量的作用】</p>
+<p>我在看到静态局部变量的时候，第一反应是这个有什么用？局部使用使用完成都不再使用，为何使用静态来占用内存，目前我大概理解两种静态局部变量的适用情况：</p>
+<ul>
+<li><p>变量如果没有赋初值，对于一般的变量其值系统给的是<code>NULL</code>，静态局部变量系统会赋予初始值0；</p>
+</li>
+<li><p>静态局部变量占用内存，其值会一直保存，可以适用于需要多次调用某方法，但是值要增加的条件等，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">Plus</span><span class="params">()</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;主函数变量%d&quot;</span>, Plus());	<span class="comment">//调用三次，获得三次不同的结果</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">Plus</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> a;	<span class="comment">//静态局部变量</span></span><br><span class="line">    a++;	<span class="comment">//自增</span></span><br><span class="line">    <span class="keyword">return</span> a;	<span class="comment">//返回结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：主函数变量1 主函数变量2 主函数变量3</p>
+</li>
+</ul>
+<blockquote>
+<p>详细相关静态局部变量的内容查看<strong>局部变量的存储类型-静态局部变量</strong></p>
+</blockquote>
+<p>C语言有4种变量存储类别声明符，用来通知编译程序采用哪种方式存储变量，这4种变量存储类别声明符是：</p>
+<ul>
+<li><strong>自动变量声明符<code>auto</code>（一般省略）</strong></li>
+<li><strong>静态变量声明符<code>static</code></strong></li>
+<li><strong>外部变量声明符<code>extern</code></strong></li>
+<li><strong>寄存器变量声明符<code>register</code></strong></li>
+</ul>
+<h2 id="局部变量的存储类型"><a href="#局部变量的存储类型" class="headerlink" title="局部变量的存储类型"></a>局部变量的存储类型</h2><p><strong>局部变量可有3种存储类型：自动变量，局部静态变量和寄存器变量</strong>。</p>
+<h3 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h3><p>自动变量是C语言中使用最多的一种变量。因为建立和释放这种类型的变量，都是系统自动进行的，所以称为自动变量。声明自动变量的语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">auto</span>] 类型声明符 变量名;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>auto</code>是自动变量存储类别声明符，一般可以省略。如果省略，系统默认该变量为<code>auto</code>。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> <span class="type">int</span> a;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line"><span class="type">int</span> a;</span><br></pre></td></tr></table></figure>
+
+<p>自动变量是在动态存储区分配存储单元的。在一个函数中定义自动变量，在调用次函数时才会给变量分配存储空间，当函数执行完毕，这些单元被释放，自动变量中存放的数据也随之丢失。每次调用函数，自动变量重新被赋值，且其默认初值是不确定的。</p>
+<h3 id="局部静态变量"><a href="#局部静态变量" class="headerlink" title="局部静态变量"></a>局部静态变量</h3><p>如果希望在函数调用结束后仍然保留其中定义的局部变量的值，则可以将局部变量定义为局部静态变量。声明局部静态变量的语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> 类型声明符 变量名;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ol>
+<li>局部静态变量是在静态存储区分配存储单元的。<strong>一个变量被声明为静态，在编译时即分配存储空间，在整个程序运行期间都不释放。因此，函数调用结束后，它的值并不消失，其值能够保持连续性</strong>。</li>
+<li>局部静态变量是在编译过程中赋予初值的，且只赋予一次初值，在程序运行时其初值已定，以后每次调用函数时，都不再赋予初值，而是保留上一次函数调用结束时的结果。</li>
+<li><strong>局部静态变量在未显式初始化时，编译系统把它们初始化为 <code>0</code>（整型变量），<code>0.0</code>（实型变量），<code>\0(空字符)</code>（字符型变量）</strong>。</li>
+</ol>
+<h3 id="寄存器变量"><a href="#寄存器变量" class="headerlink" title="寄存器变量"></a>寄存器变量</h3><p>寄存器变量具有与自动变量完全相同的性质。<strong>当把一个变量指定为寄存器存储类型时，系统将它们放在CPU中的一个寄存器中，通常把使用频率较高的变量（如循环次数较多的循环变量）定义为<code>register</code>类型</strong>。</p>
+<p>【实例】寄存器变量的应用</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; i+<span class="number">1</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d * %d = %d &quot;</span>, j, i, j * i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9eb9c809.png" alt="image-20220117235837946" style="zoom:80%;" />
+
+<p>说明：</p>
+<ol>
+<li><strong>只有局部自动变量和形参可以作为寄存器变量，其他（如全局变量，局部静态变量则不行）</strong>。</li>
+<li><strong>只有<code>int</code>,<code>char</code>和指针类型变量可以定义为寄存器类型，而<code>long</code>,<code>double</code>和<code>float</code>型变量不能设定为寄存器类型，因为它们的数据长度已经超出通用寄存器本身的位长。</strong></li>
+<li>可用于变量空间分配的寄存器的个数依赖于具体的机器</li>
+</ol>
+<h2 id="全局变量的存储类别"><a href="#全局变量的存储类别" class="headerlink" title="全局变量的存储类别"></a>全局变量的存储类别</h2><p>全局变量是在静态存储区域分配单元的，其默认值初值为0。全局变量的存储类型有两种，即外部<code>extern</code>类型和静态<code>static</code>类型。</p>
+<h3 id="外部全局变量"><a href="#外部全局变量" class="headerlink" title="外部全局变量"></a>外部全局变量</h3><p><strong>在多个源程序文件的情况下，如果在一个文件中要引用其他文件中定义的全局变量，则应该在需要引用变量的文件中，使用<code>extern</code>进行该变量的声明</strong>。</p>
+<p>【实例】调用其他文件的全局变量</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件一代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test</span><span class="params">()</span>;	<span class="comment">//在文件二自定义函数原型声明</span></span><br><span class="line"><span class="type">int</span> a = <span class="number">32</span>;	<span class="comment">//全局变量声明定义</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	Test();	<span class="comment">//调用文件二自定义函数</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件二代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> a;	<span class="comment">//文件一全局变量原型声明</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> c = a;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】32</p>
+<p>说明：</p>
+<ol>
+<li><p><code>extern</code>只能用来声明变量，不能用来定义变量。因为它不会生成新的变量，只是表示该变量已在其他地方有过定义。</p>
+</li>
+<li><p><code>extern</code>用来声明变量时，类型名可以写，也可以不写，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> a;</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="keyword">extern</span> a;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>extern</code>不能用来初始化变量</strong>，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> a=<span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="静态全局变量"><a href="#静态全局变量" class="headerlink" title="静态全局变量"></a>静态全局变量</h3><p>在程序设计时，<strong>如果希望在一个文件中定义的全局变量仅限于被本文件引用，而不能被其他文件访问，则可以在定义次全局变量前面加上<code>static</code>关键词</strong>，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> a;</span><br></pre></td></tr></table></figure>
+
+<p>此时，全局变量的作用域仅限于本文件内，其他文件中即使进行了<code>extern</code>声明，也无法使用该变量。</p>
+<p>由此可见，<strong>静态全局变量与外部全局变量在同一个文件的作用域是一样的，但是外部全局变量的作用域可以延伸至其他程序文件，而静态全局变量在被定义的文件以外是不可见的</strong>。</p>
+<h1 id="内部函数和外部函数"><a href="#内部函数和外部函数" class="headerlink" title="内部函数和外部函数"></a>内部函数和外部函数</h1><p>C语言由函数组成的，这些函数既可以在一个文件中也可以在多个不同的文件中，根据函数的使用范围，可以将其分为<strong>内部函数和外部函数</strong>。</p>
+<h2 id="内部函数"><a href="#内部函数" class="headerlink" title="内部函数"></a>内部函数</h2><p>使用存储类别<code>static</code>定义的函数称为内部函数，其一般形式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> 类型声明符 函数名(形参表);</span><br></pre></td></tr></table></figure>
+
+<p>内部函数又称为静态函数。内部函数只能被本文件中的其他函数所调用，而不能被其他外部文件调用。使用内部函数，可以使函数局限于所在文件，如果在不同的文件中有同名函数，则互不干扰。</p>
+<h2 id="外部函数"><a href="#外部函数" class="headerlink" title="外部函数"></a>外部函数</h2><p><strong>使用存储类别<code>extern</code>（或者没有指定存储类别）定义的函数，其作用域是整个程序的各个文件，可以被其他文件的任何函数调用，称为外部函数</strong>。一般函数没有指定存储类别，都是外部函数。语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> 类型声明符 函数名(形参表);</span><br></pre></td></tr></table></figure>
+
+<p>由于函数都是外部性质的，因此，在定义函数时，关键字<code>extern</code>可以省略。</p>
+<p>在调用函数的文件中，一般要用<code>extern</code>声明所用的函数是外部函数。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/02/18/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%906.0%E3%80%91%E5%87%BD%E6%95%B0/">https://www.helloseraphine.top/2022/02/18/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%906.0%E3%80%91%E5%87%BD%E6%95%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9a2027ce.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/16/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%905.0%E3%80%91%E6%95%B0%E7%BB%84/" title="【4.0】C-循环结构及其应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb92be2bb6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【4.0】C-循环结构及其应用</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/20/%E8%AF%AD%E8%A8%80%E6%A0%91/R%E8%AF%AD%E8%A8%80/%E3%80%90NEW-1.0%E3%80%91%E6%A6%82%E8%A6%81/" title="【NEW-1.0】概要"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf9c3533d.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【NEW-1.0】概要</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A6%82%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">函数概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">函数的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">库函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">用户自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">函数定义的格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8F%82%E6%95%B0%E5%92%8C%E5%AE%9E%E9%99%85%E5%8F%82%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">形式参数和实际参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">3.3.</span> <span class="toc-text">函数的返回值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">函数的调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E4%B8%80%E8%88%AC%E5%BD%A2%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">函数调用的一般形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">函数的调用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">4.3.</span> <span class="toc-text">函数的调用过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%A3%B0%E6%98%8E"><span class="toc-number">4.4.</span> <span class="toc-text">函数的原型声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">4.5.</span> <span class="toc-text">函数的参数传递</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%B5%8C%E5%A5%97%E8%B0%83%E7%94%A8%E5%92%8C%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">函数的嵌套调用和递归调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%B5%8C%E5%A5%97%E8%B0%83%E7%94%A8"><span class="toc-number">5.1.</span> <span class="toc-text">函数的嵌套调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8"><span class="toc-number">5.2.</span> <span class="toc-text">函数的递归调用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">数组作为函数的参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-number">6.1.</span> <span class="toc-text">一维数组作为函数参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">6.2.</span> <span class="toc-text">二维数组作为函数的参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">7.</span> <span class="toc-text">局部变量和全局变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number">7.1.</span> <span class="toc-text">局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">7.2.</span> <span class="toc-text">全局变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E7%B1%BB%E5%88%AB"><span class="toc-number">8.</span> <span class="toc-text">变量的存储类别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.1.</span> <span class="toc-text">局部变量的存储类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8F%98%E9%87%8F"><span class="toc-number">8.1.1.</span> <span class="toc-text">自动变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="toc-number">8.1.2.</span> <span class="toc-text">局部静态变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%8F%98%E9%87%8F"><span class="toc-number">8.1.3.</span> <span class="toc-text">寄存器变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E7%B1%BB%E5%88%AB"><span class="toc-number">8.2.</span> <span class="toc-text">全局变量的存储类别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">8.2.1.</span> <span class="toc-text">外部全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">8.2.2.</span> <span class="toc-text">静态全局变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0"><span class="toc-number">9.</span> <span class="toc-text">内部函数和外部函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0"><span class="toc-number">9.1.</span> <span class="toc-text">内部函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0"><span class="toc-number">9.2.</span> <span class="toc-text">外部函数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

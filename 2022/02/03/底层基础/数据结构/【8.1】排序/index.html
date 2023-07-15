@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【8.1】排序 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言数据结构的最后一部分了，排序也是在前面的数据结构的基础上来解决实际问题的。 排序排序算法可以根据数据量的大小分为：  内部排序：数据都在内存中 外部排序：数据太多，无法全部存放在内存中  关于下述的各种排序算法是基于如下的方法结构来实现的： 123456789101112131415161718192021222324252627282930313233343536373839404142#i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【8.1】排序">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%908.1%E3%80%91%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言数据结构的最后一部分了，排序也是在前面的数据结构的基础上来解决实际问题的。 排序排序算法可以根据数据量的大小分为：  内部排序：数据都在内存中 外部排序：数据太多，无法全部存放在内存中  关于下述的各种排序算法是基于如下的方法结构来实现的： 123456789101112131415161718192021222324252627282930313233343536373839404142#i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae62decdbc.webp">
+<meta property="article:published_time" content="2022-02-03T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:01:33.345Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae62decdbc.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%908.1%E3%80%91%E6%8E%92%E5%BA%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【8.1】排序',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:01:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aae62decdbc.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【8.1】排序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-03T15:30:01.000Z" title="发表于 2022-02-03 23:30:01">2022-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:01:33.345Z" title="更新于 2023-07-14 21:01:33">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/">底层基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【8.1】排序"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>数据结构的最后一部分了，排序也是在前面的数据结构的基础上来解决实际问题的。</p>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><p>排序算法可以根据数据量的大小分为：</p>
+<ul>
+<li>内部排序：数据都在内存中</li>
+<li>外部排序：数据太多，无法全部存放在内存中</li>
+</ul>
+<p>关于下述的各种排序算法是基于如下的方法结构来实现的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ElemType int	<span class="comment">//存放的数据类型</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 10	<span class="comment">//最大数组容量</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义了新的List类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span> &#123;</span></span><br><span class="line">	ElemType data[MaxSize];	<span class="comment">//数据数组</span></span><br><span class="line">	<span class="type">int</span> num;	<span class="comment">//数组的实际大小，即实际存放数据数量</span></span><br><span class="line">&#125;List;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历输出List</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">PrintList</span><span class="params">(List l)</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;List数据为：&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; l.num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, l.data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建List</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">CreatList</span><span class="params">(List* l)</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入数据：&quot;</span>);</span><br><span class="line">	<span class="type">int</span> data, i = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;data);</span><br><span class="line">	<span class="keyword">while</span> (data!=<span class="number">-999</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i&gt;MaxSize<span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;超出最大数组长度\n&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		l-&gt;data[i] = data;</span><br><span class="line">		i++;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data);</span><br><span class="line">	&#125;</span><br><span class="line">	l-&gt;num = i;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;List创建完成\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="内部排序"><a href="#内部排序" class="headerlink" title="内部排序"></a>内部排序</h1><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序算法的思想是对于某个要排序的序列，假定第一个元素已经是排完序的序列中，从第二个元素开始扫描，如果第二个元素大于第一个元素（升序），则不移动，反之则第一个和第二个元素交换位置，保证前面的比后面的小，依次类推，直到所有元素排序完成。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">InsertSort</span><span class="params">(List* l)</span> &#123;</span><br><span class="line">	<span class="type">int</span> j,temp = <span class="number">0</span>;	<span class="comment">//j是移动前指针，temp用来存放正在比较的元素</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; l-&gt;num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		j = i<span class="number">-1</span>;	</span><br><span class="line">		temp = l-&gt;data[i];	<span class="comment">//当前扫描到的要排序元素的值</span></span><br><span class="line">		<span class="comment">//如果扫描到的值比它前面的值小或者等于</span></span><br><span class="line">		<span class="keyword">while</span>(temp &lt; l-&gt;data[j])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//则将其前面值向后移动一位</span></span><br><span class="line">			l-&gt;data[j+<span class="number">1</span>] = l-&gt;data[j];</span><br><span class="line">			<span class="comment">//直到前面的值没有比他大的了</span></span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//将正在比较的元素放到新的位置</span></span><br><span class="line">		l-&gt;data[j + <span class="number">1</span>] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	InsertSort(&amp;l);	<span class="comment">//进行插入排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出排序后的List内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae63774e2d.png" alt="image-20220905110158101" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：稳定</p>
+</blockquote>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>希尔排序是插入排序的优化版本，它通过引入增量来减少插入排序遍历的次数。如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae63bd9be0.png" alt="image-20220906190855924" style="zoom:80%;" />
+
+<p>上图采用增量 4 ，则意味着第一轮将序号 (0,4),(1,5)等每个括号看成一个单独的序列采用插入排序，即增量 4 这轮，排序结果为下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae63fa8e86.png" alt="image-20220906191115941" style="zoom:80%;" />
+
+<p><strong>然后再对增量不断做 $d(增量) &#x3D; \frac{d(增量)}{2}$   直到增量为 1，也就是变成了普通的插入排序</strong>。</p>
+<p>其代码实现如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//希尔排序——升序(递归) inc表示增量</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">ShellSort</span><span class="params">(List* l,<span class="type">int</span> inc)</span> &#123;</span><br><span class="line">	<span class="type">int</span> tempdata,j;	<span class="comment">//临时数据变量，临时标识</span></span><br><span class="line">	<span class="comment">//只要增量大于1就一直执行</span></span><br><span class="line">	<span class="keyword">while</span> (inc&gt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; l-&gt;num-inc; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			j = i;	</span><br><span class="line">			tempdata = l-&gt;data[i + inc];</span><br><span class="line">			<span class="comment">//当标识大于0并且后面增量数据小于前面的数据</span></span><br><span class="line">			<span class="keyword">while</span> (l-&gt;data[j]&gt; l-&gt;data[j + inc]&amp;&amp; j&gt;<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//交换数据</span></span><br><span class="line">				l-&gt;data[j + inc] = l-&gt;data[j];</span><br><span class="line">				l-&gt;data[j] = tempdata;</span><br><span class="line">				<span class="comment">//向前比较到小于0就标识前面同一个增量内的比较完了</span></span><br><span class="line">				j = j - inc;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		inc = inc / <span class="number">2</span>;	<span class="comment">//每次增量减半</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行测试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	ShellSort(&amp;l,<span class="number">4</span>);	<span class="comment">//希尔排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出排序后的List内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae646e2e73.png" alt="image-20220906200537472" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：不稳定</p>
+</blockquote>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>冒泡排序故名思意，<strong>通过将两个数据两个数据的比较，每次将一个最大&#x2F;最小值“运送”到排序队列的队头，依次“运送”，直到所有的数都被“运送”完成了</strong>；在这个过程中，将一个最大&#x2F;最小值“运送”就类似于冒泡一样，一步一步上升。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//冒泡排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">BubbleSort</span><span class="params">(List* l)</span> &#123;</span><br><span class="line">	<span class="type">int</span> tempdata, j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (j&lt;l-&gt;num<span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = l-&gt;num<span class="number">-1</span>; i &gt; j; i--)</span><br><span class="line">		&#123;</span><br><span class="line">			tempdata = l-&gt;data[i];</span><br><span class="line">			<span class="keyword">if</span> (tempdata&lt;l-&gt;data[i<span class="number">-1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				l-&gt;data[i] = l-&gt;data[i - <span class="number">1</span>];</span><br><span class="line">				l-&gt;data[i - <span class="number">1</span>] = tempdata;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行测试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	BubbleSort(&amp;l);	<span class="comment">//冒泡排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出排序后的List内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae64b9f6ef.png" alt="image-20220906200315949" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：稳定</p>
+</blockquote>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p><strong>快速排序</strong>顾名思义，<strong>是排序算法中最快的排序方式</strong>。</p>
+<p>快速排序通过选择一个基准元素（默认第一个元素），使用两个指针<code>low</code>和<code>high</code>分别指向数组最低位和最高位，分别和基准元素进行比较，向中间靠拢，直到<code>low</code>大于等于<code>high</code>表示一次排序结束。再使用分好的左右两列，再次进行快速排序，最后完成排序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//序列划分</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Partition</span><span class="params">(List* l, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">	<span class="type">int</span> tempdata = l-&gt;data[low];	<span class="comment">//tempdata作为基准元素</span></span><br><span class="line">	<span class="keyword">while</span> (low &lt; high)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (low &lt; high &amp;&amp; l-&gt;data[high] &gt;= tempdata)</span><br><span class="line">		&#123;</span><br><span class="line">			high--;</span><br><span class="line">		&#125;</span><br><span class="line">		l-&gt;data[low] = l-&gt;data[high];</span><br><span class="line">		<span class="keyword">while</span> (low &lt; high &amp;&amp; l-&gt;data[low] &lt; tempdata)</span><br><span class="line">		&#123;</span><br><span class="line">			low++;</span><br><span class="line">		&#125;</span><br><span class="line">		l-&gt;data[high] = l-&gt;data[low];</span><br><span class="line">	&#125;</span><br><span class="line">	l-&gt;data[low] = tempdata;</span><br><span class="line">	<span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//快速排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">QuickSort</span><span class="params">(List* l,<span class="type">int</span> low,<span class="type">int</span> high)</span> &#123;</span><br><span class="line">	<span class="type">int</span> pivotops;</span><br><span class="line">	<span class="keyword">if</span> (low&lt;high)</span><br><span class="line">	&#123;</span><br><span class="line">		pivotops = Partition(l, low, high);</span><br><span class="line">		QuickSort(l, low, pivotops - <span class="number">1</span>);</span><br><span class="line">		QuickSort(l, pivotops + <span class="number">1</span>,high);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行测试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	QuickSort(&amp;l,<span class="number">0</span>,l.num<span class="number">-1</span>);	<span class="comment">//快速排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出排序后的List内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae650d8454.png" alt="image-20220906213631740" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：不稳定</p>
+</blockquote>
+<h2 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h2><p>简单选择排序，也就是我们最简单常用的排序，即遍历获得最小值存入排序序列，然后再遍历最小值存入，依次反复，直到所有关键字都被排序完成。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//简单选择排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">SelectSort</span><span class="params">(List* l)</span> &#123;</span><br><span class="line">	<span class="type">int</span> tempdata,index, j=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; l-&gt;num<span class="number">-1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tempdata = l-&gt;data[i];</span><br><span class="line">		index = i;</span><br><span class="line">		j = i + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (j; j &lt; l-&gt;num; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (l-&gt;data[j]&lt;tempdata)</span><br><span class="line">			&#123;</span><br><span class="line">				tempdata = l-&gt;data[j];</span><br><span class="line">				index = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		l-&gt;data[index] = l-&gt;data[i];</span><br><span class="line">		l-&gt;data[i] = tempdata;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	SelectSort(&amp;l);	<span class="comment">//快速排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出排序后的List内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae654f3c40.png" alt="image-20220906221059999" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：不稳定</p>
+</blockquote>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>In <a href="httpss://en.wikipedia.org/wiki/Computer_science">computer science</a>, a <strong>heap</strong> is a specialized <a href="httpss://en.wikipedia.org/wiki/Tree_(data_structure)">tree</a>-based <a href="httpss://en.wikipedia.org/wiki/Data_structure">data structure</a> which is essentially an <a href="httpss://en.wikipedia.org/wiki/Binary_tree#Types_of_binary_trees">almost complete</a>[<a href="httpss://en.wikipedia.org/wiki/Heap_(data_structure)#cite_note-1">1]</a> tree that satisfies the <strong>heap property</strong>: in a <em>max heap</em>, for any given <a href="httpss://en.wikipedia.org/wiki/Node_(computer_science)">node</a> C, if P is a parent node of C, then the <em>key</em> (the <em>value</em>) of P is greater than or equal to the key of C. In a <em>min heap</em>, the key of P is less than or equal to the key of C.[<a href="httpss://en.wikipedia.org/wiki/Heap_(data_structure)#cite_note-2">2]</a> The node at the “top” of the heap (with no parents) is called the <em>root</em> node.</p>
+<blockquote>
+<p>内容来源：【Wiki百科】<a href="httpss://en.wikipedia.org/wiki/Heap_(data_structure)">Heap (data structure)</a></p>
+</blockquote>
+<p><strong>堆（Heap）</strong>，<strong>是一种树类型的数据结构</strong>，根据其排序特性可以分为：</p>
+<ul>
+<li><strong>大根堆</strong>：若满足 $L(i) \geq L(2i)$ 且 $L(i) \geq L(2i+1)$ （$1 \leq i \leq \frac{n}{2}$） </li>
+<li><strong>小根堆</strong>：若满足 $L(i) \leq L(2i)$ 且 $L(i) \leq L(2i+1)$ （$1 \leq i \leq \frac{n}{2}$）</li>
+</ul>
+<h3 id="大根堆的建立"><a href="#大根堆的建立" class="headerlink" title="大根堆的建立"></a>大根堆的建立</h3><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae65a24f39.png" alt="image-20220907170111338" style="zoom:80%;" />
+
+<p>大根堆的示例如上所示，其代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//其存储结构和排序的List是同一个，只是我多给它命名了一个名称用来区分</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span> &#123;</span></span><br><span class="line">	ElemType data[MaxSize];</span><br><span class="line">	<span class="type">int</span> num;</span><br><span class="line">&#125;List,Heap;</span><br><span class="line"></span><br><span class="line"><span class="comment">//建立大根堆（根据传入的List数组再调整大根堆）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">CreatHeap</span><span class="params">(Heap* h)</span> &#123;</span><br><span class="line">	<span class="type">int</span> tempdata;	<span class="comment">//临时最大值变量位置</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = (h-&gt;num/<span class="number">2</span>)<span class="number">-1</span>; i &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		tempdata = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//如果存在右子树，判断右子树和左子树哪个大</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="number">2</span>*i + <span class="number">2</span> &lt;= h-&gt;num<span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (h-&gt;data[<span class="number">2</span>*i+<span class="number">1</span>]&lt;h-&gt;data[<span class="number">2</span>*i+<span class="number">2</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				tempdata = <span class="number">2</span> * i + <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//根结点小于子结点</span></span><br><span class="line">		<span class="keyword">if</span> (h-&gt;data[i]&lt;h-&gt;data[tempdata])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="number">2</span>*i+<span class="number">2</span>==tempdata)</span><br><span class="line">			&#123;</span><br><span class="line">				tempdata = h-&gt;data[<span class="number">2</span> * i + <span class="number">2</span>];</span><br><span class="line">				h-&gt;data[<span class="number">2</span> * i + <span class="number">2</span>] = h-&gt;data[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				tempdata = h-&gt;data[<span class="number">2</span> * i + <span class="number">1</span>];</span><br><span class="line">				h-&gt;data[<span class="number">2</span> * i + <span class="number">1</span>] = h-&gt;data[i];</span><br><span class="line">			&#125;</span><br><span class="line">			h-&gt;data[i] = tempdata;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//PrintList(*h);	//这行代码实际执行过程不必执行，只是调试的时候查看实时的调整过程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h3><p>现在利用上面建立好的大根堆来排序，每次将最开始的元素（即大根堆的根）和大根堆最后一个元素互换位置，然后再对更换位置后除了最后一个元素，进行大根堆建立，建立成新的大根堆后，其新的根一定是最大值，也通之前一样，将其换到新大根堆的最后（实际数组的导数第二个），依次类推，直到完成整个大根堆的排序。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//堆排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">HeapSort</span><span class="params">(Heap* h)</span> &#123;</span><br><span class="line">	<span class="type">int</span> tempdata,j=<span class="number">0</span>,num = h-&gt;num<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (j&lt;num)</span><br><span class="line">	&#123;</span><br><span class="line">		tempdata = h-&gt;data[<span class="number">0</span>];	<span class="comment">//获取堆顶值，即最大值</span></span><br><span class="line">		h-&gt;data[<span class="number">0</span>] = h-&gt;data[h-&gt;num <span class="number">-1</span>];	<span class="comment">//将最后一位元素换到堆顶</span></span><br><span class="line">		h-&gt;data[h-&gt;num - <span class="number">1</span>] = tempdata;;	<span class="comment">//最大值，即原来堆顶换到最后</span></span><br><span class="line">		h-&gt;num--;	<span class="comment">//将堆的长度-1</span></span><br><span class="line">		CreatHeap(h);	<span class="comment">//将置换后的堆重新整理成堆</span></span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line">	h-&gt;num = j+<span class="number">1</span>;	<span class="comment">//最后将堆的实际数量复原，因为后序遍历显示堆排序结果的方法需要使用堆的数量</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;堆排序完成\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	CreatHeap(&amp;l);	<span class="comment">//建立大根堆</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	HeapSort(&amp;l);	<span class="comment">//进行堆排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出排序后的List内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae65f38db3.png" alt="image-20220907171009211" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：不稳定</p>
+</blockquote>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p><strong>归并排序是可以将多个数组（排序好的）来合并成一个排序的新数组</strong>，根据合并的数组数目可以分为：二路归并，三路归并等，一般情况下我们都以二路归并为默认。<strong>因为归并其递归特性，所以我们在对数组进行排序的时候，可以数组看作又每个单个元素组成的“单个元素数组”，然后对其使用并归排序</strong>，这样就完成了整个并归排序。其过程如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae66329e96.png" alt="image-20220907171530940" style="zoom: 50%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//归并排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Merge</span><span class="params">(List* l,<span class="type">int</span> low,<span class="type">int</span> mid,<span class="type">int</span> high)</span> &#123;</span><br><span class="line">	<span class="type">int</span>* copy[MaxSize];	<span class="comment">//创建辅助数组</span></span><br><span class="line">	<span class="type">int</span> i, j, k;	<span class="comment">//i表示辅助数组的low指针，j表示辅助数组的mid下一个指针即两路合并的第二路开始指针，K表示要将最小的数放在原排序序列的哪里</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; l-&gt;num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		copy[i] = l-&gt;data[i];	<span class="comment">//将要排序的数组复制一份给辅助数组</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = low,j=mid+<span class="number">1</span>,k=low; i &lt;= mid &amp;&amp; j&lt;=high; k++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (copy[i]&lt;copy[j])</span><br><span class="line">		&#123;</span><br><span class="line">			l-&gt;data[k] = copy[i];	<span class="comment">//最小值的放回原数组</span></span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			l-&gt;data[k] = copy[j];	<span class="comment">//最小值的放回原数组</span></span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/// 如果最后发现两路数组其中剩下一组没有比较完，则按顺序一次放入即可</span></span><br><span class="line">	<span class="keyword">while</span> (i&lt;=mid)</span><br><span class="line">	&#123;</span><br><span class="line">		l-&gt;data[k] = copy[i];</span><br><span class="line">		k++;</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (j &lt;= high)</span><br><span class="line">	&#123;</span><br><span class="line">		l-&gt;data[k] = copy[j];</span><br><span class="line">		k++;</span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//归并排序——升序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">MergeSort</span><span class="params">(List* l, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (low &lt; high)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid = (low + high) / <span class="number">2</span>;	<span class="comment">//求Mid值	</span></span><br><span class="line">		MergeSort(l, low, mid);	<span class="comment">//先排序并并归左半边</span></span><br><span class="line">		MergeSort(l, mid + <span class="number">1</span>, high);	<span class="comment">//再排序并并归右半边</span></span><br><span class="line">		Merge(l, low, mid, high);	<span class="comment">//最后完成并归</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;	<span class="comment">//声明List</span></span><br><span class="line">	CreatList(&amp;l);	<span class="comment">//创建List</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">	MergeSort(&amp;l, <span class="number">0</span>, l.num);	<span class="comment">//并归排序</span></span><br><span class="line">	PrintList(l);	<span class="comment">//输出List现在的内容（未排序）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae66c3840e.png" alt="image-20220908105037724" style="zoom:80%;" />
+
+<blockquote>
+<p>稳定性：稳定</p>
+</blockquote>
+<h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2><p>例如下图的序列进行排序，我们可以通过<strong>先进行个位排序，再进行十分位排序，再进行百分位排序，完成最终的排序</strong>。有点迭代的思想，个位的排序可以让其在个位有先后，十分位排序在个位有序的基础上让其十分位有序，然后百分位在个位和十分位有序的基础上，再让百分位有序就完成整个排序。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae67019952.png" alt="image-20220908105411196" style="zoom:80%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<h1 id="外部排序"><a href="#外部排序" class="headerlink" title="外部排序"></a>外部排序</h1><p> 外部排序，是因为<strong>我们有时候处理的数据量太大而导致不可能一次性将其装入内存进行处理，这个时候就要利用内存和外存的交换来完成排序</strong>，这个过程就是外部排序。</p>
+<p>外部排序逻辑如下所示，通过将每一块磁盘块或者说数据块从一块一块开始利用归并排序，排序好一块就写入外存，直到完成整个外存的排序。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae67375873.png" alt="image-20220908145249849" style="zoom: 67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<h2 id="优化外部排序"><a href="#优化外部排序" class="headerlink" title="优化外部排序"></a>优化外部排序</h2><p>因为归并排序的特性可以知道，<strong>随着开辟的内存缓冲区越多，即归并段同时归并的越多，对磁盘的读写越少，同时就减少了排序时间</strong>。需要注意的是<strong>这个归并段并不是可以无线增大的，因为内存缓冲区开辟的越多，对于内存的开销也就越大</strong>。内存中排序所需要消耗的时间也会增加。如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae67749b1a.png" alt="image-20220908145824801" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>即优化方向：</p>
+<ul>
+<li><strong>增加归并路数</strong></li>
+<li><strong>减少初始归并段数量</strong></li>
+</ul>
+<h3 id="败者树"><a href="#败者树" class="headerlink" title="败者树"></a>败者树</h3><p>因为增加归并路数可以一定程度优化排序所消耗的时间，但是带来的问题是：<strong>K路的归并，意味着每次取得最小值&#x2F;最大值就需要进行 $K-1$ 次的对比</strong>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae67b7abcd.png" alt="image-20220908150304017" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>败者树就是我们常规所理解的比赛的层级方式，通过败者树可以缩短比较关键词的次数，进而缩短排序时间。</p>
+<p>如下图所示，在第一次归并的时候进行 $K-1$ 次归并计算出败者树，在非叶子结点其数值指向归并段的位置，即第一次归并得到其最小值来自归并段3号，其中的第一个元素 1 是最小值，写入排序序列即可。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae67ec94da.png" alt="image-20220908150632953" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>接下来，再从归并段冠军中获取下一个元素，进行比较，如下图所示：</p>
+<p>因为第一次的时候就已经得到败者树，所以<strong>新元素只需要根据败者树路径比较即可，不必要和每个元素再次进行比较</strong>，这样可以有限的缩短比较次数。一次类推。知道所有元素比较完成。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae68269077.png" alt="image-20220908150951704" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<h3 id="置换-选择排序"><a href="#置换-选择排序" class="headerlink" title="置换-选择排序"></a>置换-选择排序</h3><p><strong>通过置换置换-选择排序可以利用有限的内存空间，构建更长的归并段</strong>，其实现过程如下：</p>
+<p>如下图，内存只能开辟如下三个数据的空间，通过每次将其中的最小值写入归并段1，并记录其值在变量<code>MiniMax</code>中，然后从外存中将新的数值填充到内存中替代换出去的位置，再从中选择比变量<code>MiniMax</code>大但是又是其中最小的值，并写入归并段，再将变量<code>MiniMax</code>记录为新的值，如此反复。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae686c1f9e.png" alt="image-20220908151443421" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>直到内存工作区的三个记录值都小于<code>MiniMAX</code>的值，则意味着第一个归并段完成了，再从此记录第二个归并段，一次就可以记录完成所有的排序序列分成长度不等的归并段。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae68a75691.png" alt="image-20220908152020828" style="zoom:67%;" />
+
+<h3 id="最佳归并树"><a href="#最佳归并树" class="headerlink" title="最佳归并树"></a>最佳归并树</h3><p>我们通过置换-选择排序，最终利用有限的内存，获得了不同长度的归并段，如下图，因为长度不同的归并段，每次需要读写磁盘的次数不同，造成其消耗的时间不同，下图中的<code>R1,R2,R3...</code>表示归并段，其结点数据表示读写磁盘次数，<strong>因为结点带有权值，不难想到前面树的部分的哈夫曼树，构建最优带权路径长度，来减少对磁盘的读写，最终减少排序时间</strong>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae68e5a240.png" alt="image-20220908153452400" style="zoom:67%;" />
+
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>路漫漫其修远兮，所以，开摆！！！</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae692a85f7.png" alt="image-20220908154157719" style="zoom:33%;" />
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%908.1%E3%80%91%E6%8E%92%E5%BA%8F/">https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%908.1%E3%80%91%E6%8E%92%E5%BA%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae62decdbc.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/01/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%906.1%E3%80%91%E5%9B%BE/" title="【6.1】图"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae4e680130.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【6.1】图</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%907.1%E3%80%91%E6%9F%A5%E6%89%BE/" title="【7.1】查找"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae59ceb1c4.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【7.1】查找</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">内部排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">3.1.</span> <span class="toc-text">插入排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="toc-number">3.2.</span> <span class="toc-text">希尔排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">3.3.</span> <span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">3.4.</span> <span class="toc-text">快速排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">3.5.</span> <span class="toc-text">简单选择排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="toc-number">3.6.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86"><span class="toc-number">3.6.1.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%A0%B9%E5%A0%86%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">3.6.2.</span> <span class="toc-text">大根堆的建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F-1"><span class="toc-number">3.6.3.</span> <span class="toc-text">堆排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">3.7.</span> <span class="toc-text">归并排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-number">3.8.</span> <span class="toc-text">基数排序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">外部排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F"><span class="toc-number">4.1.</span> <span class="toc-text">优化外部排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A5%E8%80%85%E6%A0%91"><span class="toc-number">4.1.1.</span> <span class="toc-text">败者树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%AE%E6%8D%A2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">4.1.2.</span> <span class="toc-text">置换-选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%BD%92%E5%B9%B6%E6%A0%91"><span class="toc-number">4.1.3.</span> <span class="toc-text">最佳归并树</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">5.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

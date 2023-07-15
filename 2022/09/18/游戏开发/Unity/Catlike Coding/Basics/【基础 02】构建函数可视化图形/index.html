@@ -1,0 +1,650 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【基础 02】构建函数可视化图形 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言 前排说明：关于本教程目录导航以及说明：猫式教程  在本篇文章中你将会学到：   创建一个预制体（prefab）  实例化（Instantiate）多个立方体  图形化一个数学函数  创建surface shader and shader graph  将图形赋予动画  这是有关学习和使用 Unity 基础知识系列教程的第二篇。这次我们将会使用基本的游戏对象（物体）来构建函数图形，我们可以通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【基础 02】构建函数可视化图形">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2002%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言 前排说明：关于本教程目录导航以及说明：猫式教程  在本篇文章中你将会学到：   创建一个预制体（prefab）  实例化（Instantiate）多个立方体  图形化一个数学函数  创建surface shader and shader graph  将图形赋予动画  这是有关学习和使用 Unity 基础知识系列教程的第二篇。这次我们将会使用基本的游戏对象（物体）来构建函数图形，我们可以通过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf84481c2a.png">
+<meta property="article:published_time" content="2022-09-18T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:02:55.377Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf84481c2a.png"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2002%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【基础 02】构建函数可视化图形',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:02:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf84481c2a.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【基础 02】构建函数可视化图形</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-18T15:30:01.000Z" title="发表于 2022-09-18 23:30:01">2022-09-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:02:55.377Z" title="更新于 2023-07-14 21:02:55">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/">Unity</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike-Coding/">Catlike Coding</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike-Coding/Basics/">Basics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>36分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【基础 02】构建函数可视化图形"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p><strong>前排说明：关于本教程目录导航以及说明：<a href="httpss://www.helloseraphine.top/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/%E7%8C%AB%E5%BC%8F%E6%95%99%E7%A8%8B/">猫式教程</a></strong></p>
+</blockquote>
+<p>在本篇文章中你将会学到：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>创建一个预制体（<em>prefab</em>）</strong></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>实例化（<em>Instantiate</em>）多个立方体</strong></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>图形化一个数学函数</strong></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>创建<em>surface shader and shader graph</em></strong></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>将图形赋予动画</strong></li>
+</ul>
+<p>这是有关学习和使用 Unity 基础知识系列教程的第二篇。这次我们将会使用基本的游戏对象（物体）来构建函数图形，我们可以通过图形来展示（图形化）数学函数。同时我们将会使用函数和时间进行关联创建对应的动画。</p>
+<p>本篇教程使用<code>Unity 2020.3.38f1c1</code> 编写。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf84481c2a.png" alt="image-20220918103315837" style="zoom:80%;" />
+
+<h1 id="创建一排”点”"><a href="#创建一排”点”" class="headerlink" title="创建一排”点”"></a>创建一排”点”</h1><p>对数学的理解是编程所必不可少的。<strong>从表面上来说，数学是对表示数值的符号（即未知数）的操作</strong>。求解方程归结为一组符号（即方程）。数学规则（即函数定义）决定了这种结果。</p>
+<p>例如，我们使用函数 $F(x) &#x3D; X +1$ ，现在我们使用数值 $3$ 来替代 $X$ 的位置，你就可以得到输出为 $F(x) &#x3D; 3 + 1 &#x3D; 4$ 。我们可以说通过函数  $F(x) &#x3D; X +1$  将数值 $3$ 映射到 数值 $4$ 上。当然，你可以通过如下的方式进行更短的缩写，例如：$(3,4)$ ；基于此我们可以写出更多的形式 $(X,F(x))$ 的映射，例如：$(5,6)$ 等。</p>
+<p>对于函数 $F(x) &#x3D; X +1$ 相对容易理解，但是对于函数 F(X)&#x3D; $ (X-1)^ {4} $ + $ 5X^ {3} $ - $ 8X^ {2} $ +3X 理解起来会相对困难一些。当然我们也可以通过上述函数的方法，来写出其对应的映射对（即 $(X,F(X))$ 形式的映射结果），但是离散有限的映射对可能无法让我们很好的理解该函数。因此我们需要很多个点，来形成无数的映射对结果。相反的，我们也可以将这些映射转换成二维坐标 $[x,f(x)]$ 来展示。其中坐标的数值表示 $X$ 轴上的水平坐标，右边的数值表示 $Y$ 轴上的垂直坐标，<strong>我们可以通过大量的映射结果，来最终得到一条映射结果图</strong>，如下所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8512a10e.png" alt="image-20220918105143493" style="zoom: 67%;" />
+
+<blockquote>
+<p>图形由 <a href="httpss://www.desmos.com/calculator/di84egsf7a?lang=zh-CN">Desmos</a> 绘制</p>
+</blockquote>
+<p>查看函数的图形可以让我们快速理解函数的行为结果。这是一个很方便的工具，现在来让我们在 Unity 中创建一个。现在我们将会从一个新项目开始创建。</p>
+<h2 id="创建预制体-Prefabs"><a href="#创建预制体-Prefabs" class="headerlink" title="创建预制体(Prefabs)"></a>创建预制体(Prefabs)</h2><p>通过上面我们知道了可以在适当的坐标上来放置（生成）点来生成图形。所以我们需要一个可视化的“点”。为此，我们选择使用 Unity 中最基本的游戏对象（物体），即立方体。现在<strong>在场景中创建一个立方体并命名为 <code>Point</code> ，同时删除它的 <code>BoxColoder</code> 组件（<em>component</em>）</strong>，因为我们不会使用它的物理特性。</p>
+<p>【<strong>立方体是可视化图形的最佳方式吗</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你也可以使用粒子系统或者线段，但是立方体是最容易使用的</span><br></pre></td></tr></table></figure>
+
+<p>我们将使用一个自定义的组件（脚本）来创建这个立方体的许多实例并正确的定位它们的位置。为了做到这一点，我们需要通过<strong>将立方体<code>point</code>从层次结构窗口（<em>Hierarchy</em>）拖动到项目（<em>Project</em>）面板中</strong>将其<strong>转换成一个游戏对象（物体）的模板</strong>。这将会创建一个新的资源对象（<em>Assets</em>），其被称为<strong>预制体</strong>（<em>Prefab</em>）。它代表着已经预先制作好的游戏对象，属于这个项目中，而不单单是某个场景中。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf85589d0b.png" alt="image-20220918111102016" style="zoom:80%;" />
+
+<p>现在你会发现我们创建的预制体的游戏对象依旧存在于场景（<em>Scene</em>）中，但是它现在已经变成了一个预制体了。它<strong>在结构层次面板（<em>Hierarchy</em>）中变成了一个蓝色的图标</strong>，右侧存在一个箭头图标。其检查器面板（<em>Inspector</em>）标题栏部分也表明了该物体是一个预制体并且会多出一部分可选择按钮。位置（<em>Position</em>）和旋转（<em>Rotation</em>）现在也以粗体来显示，这表面实例对象（物体）的值覆盖了预制体的值。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf85a421a4.png" alt="image-20220918111640415" style="zoom:80%;" />
+
+<p>当你在项目资源面板（<em>Project</em>）中查看预制体的检查器面板（<em>Inspector</em>）将显示其根游戏对象和一个用于打开预制体（<em>Open Prefab</em>）的按钮。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf85ea4810.png" alt="image-20220918111843039" style="zoom:80%;" />
+
+<p>单击 <strong>【Open Prefab】</strong> 按钮会在场景（<em>Scene</em>）中显示一个只包含预制体（<em>Prefab</em>）的场景。你也可以通过点击层次结构面板（<em>Hierarchy</em>）预制体实例右侧的小箭头，或者双击项目资源面板（<em>Project</em>）中的预制体进入预制体（<em>Prefab</em>）场景。当我们制作复杂层次结构的预制体的时候，这会很有帮助，但是对于目前情况来说，并不需要。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf862e77a0.png" alt="image-20220918160846361" style="zoom:80%;" />
+
+<blockquote>
+<p>你可以通过上图左侧的箭头退出预制体（<em>Prefab</em>）场景</p>
+</blockquote>
+<p>【<strong>为什么预制体场景的背景是统一的深蓝色</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果你是通过项目资源面板（Project）的预制体进入的预制体场景，则其默认是关闭天空盒（Skybox）的。</span><br><span class="line">如果你是通过层次结构面板（Hierarchy）进入的预制体场景，则默认是有天空盒（Skybox）的</span><br><span class="line">你也可以通过场景工具栏上，类似于堆栈上面有颗星星的图标进行设置</span><br></pre></td></tr></table></figure>
+
+<p><strong>预制体（<em>Prefab</em>）是快速配置游戏对象的快捷方式</strong>。如果你修改了项目资源面板（<em>Project</em>）中的预制体，则场景中的所有实例都会以相同的方式进行修改。此外，你<strong>可以通过修改实例的值，来覆盖预制体（<em>Prefab</em>）的值</strong>。</p>
+<blockquote>
+<p>需要注意的是：在播放模式（<em>Play</em>）下，预制体和实例的影响关系会被暂时解除</p>
+</blockquote>
+<p>接下来，我们将使用脚本来创建我们设置好的预制体（<em>Prefab</em>）实例，这意味着我们现在并不需要使用场景中的这个预制体（<em>Prefab</em>）实例了，所以可以删除它了。</p>
+<h2 id="创建图形组件-类"><a href="#创建图形组件-类" class="headerlink" title="创建图形组件(类)"></a>创建图形组件(类)</h2><p>现在我们需要创建一个<code>C#</code>脚本来使用我们创建的预制体来生成相关图形。创建脚本并命名为<code>Graph</code>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8673ef87.png" alt="image-20220918162140215" style="zoom:80%;" />
+
+<p>我们从最简单的类（<em>Class</em>）开始，<strong>其继承自 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html">MonoBehaviour</a> ，这样它就可以作为组件附加到游戏对象上</strong>。现在来创建一个可序列化字段来保存对实例化点的预制体的引用，名称为<code>pointPrefab</code>。因为我们需要访问 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件来控制物体的位置，所以字段的类型为 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Graph</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    Transform pointPrefab;  <span class="comment">//序列化 Transform 类型的字段</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在在场景中添加一个空的游戏对象（<em>Empty</em>）并为其命名 <code>Graph</code>，确保它的位置（<em>Postiion</em>）和旋转（<em>Rotation</em>）为 0 ，且物体缩放（<em>Scale</em>）为 1 。现在将我们创建的脚本作为组件添加到这个对象上，然后将我们创建的预制体拖到 <em>point Prefab</em> 字段上，完成对预制体的引用。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf86ad8716.png" alt="image-20220918163300842" style="zoom:80%;" />
+
+<h2 id="实例化预制体"><a href="#实例化预制体" class="headerlink" title="实例化预制体"></a>实例化预制体</h2><p><strong>实例化（<em>Instantiate</em>）游戏对象是通过 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a>.<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.Instantiate.html">Instantiate</a> 来实现的</strong>。这是 Unity 为开发者提供的公开可用的方法，通过其基类为 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a> 以及类继承自 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html">MonoBehaviour</a> （这段的意思是物体的基类是<code>Object</code>类型可以实例化，但是要调用实例化代码需要将类继承自 <code>MonoBehaviour</code>来完成组件化）。<strong>该方法会创建一个预制体实例对象在场景中</strong>。现在我们在组件唤醒的时候执行该操作，代码示例：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Graph</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    Transform pointPrefab;  <span class="comment">//序列化 Transform 类型的字段</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Object.Instantiate(pointPrefab);	<span class="comment">//实例化预制体</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【<strong>关于<code>MonoBehaviour</code>的完整继承关系是什么？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MonoBehaviour 继承自 Behaviour，而 Behaviour 继承自 Component</span><br><span class="line">Component 继承自 Object</span><br></pre></td></tr></table></figure>
+
+<p>如果我们现在进行播放模式（<em>Play</em>）则在开始的时候在世界原点生成一个预制体实例。它的名称和预制体的名称相同，你可以在层次结构面板（<em>Hierarchy</em>）中带有<code>(clone)</code>名称标识找到它。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf86f32741.png" alt="image-20220918164425639" style="zoom:80%;" />
+
+<p>要将该预制体实例移动到其他位置，我们需要调整实例的位置。<strong>而<code>Instantiate</code>方法为我们提供了其创建的内容的引用。因为我们给它传入的参数类型是<code>Transform</code>类型的引用，所以其方法的返回值也是创建实例的<code>Transform</code>类型</strong>。现在我们来使用一个变量来获取到创建的实例的值。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：我仅对修改代码的部分进行展示，未修改的代码和之前一样</p>
+</blockquote>
+<p>在第一篇教程中，我们使用了<code>localRotation</code>将四元数分配给时针轴来改变时钟臂的旋转。现在同样的，不过不太一样的是我们需要使用<code>localPosition</code>来向其分配一个三维向量来改变位置。</p>
+<p>三维向量使用 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Vector3.html">Vector3</a> 类型创建。例如，现在我们将点的 X 坐标设置为 1，将其 Y 和 Z 设置为 0 。<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Vector3.html">Vector3</a> 类型有一个<code>right</code>属性给我们提供了这样的一个向量，现在我们来使用它设置点的位置。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8737d1fc.png" alt="image-20220918170100345" style="zoom:80%;" />
+
+<p>现在进入播放模式后，我们依然会得到一个立方体，只是位置和之前有所不同。现在我们进行实例化第二个预制体对象。并将其向右移动两个单位。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right;</span><br><span class="line"></span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right*<span class="number">2f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你会发现上述代码编译器会报错，这是因为我们尝试定义同一个变量两次，或者你可以理解为变量名称重复了。所以我们需要修改变量的名称来使用它，或者我们不使用该变量，继续使用之前定义的<code>point</code>变量。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right;</span><br><span class="line"></span><br><span class="line">    point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right*<span class="number">2f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8781aac2.png" alt="image-20220918170706876" style="zoom:80%;" />
+
+<h2 id="循环创建"><a href="#循环创建" class="headerlink" title="循环创建"></a>循环创建</h2><p>现在让我们创建更多的点一直到十个。我们可以通过重复上述代码 8 遍，但是这样是一种低效的编程，我们需要使用尽可能少的代码，让代码多次执行来完成。</p>
+<p>现在使用<code>while</code>语句来使代码块重复执行。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> ()</span><br><span class="line">    &#123;</span><br><span class="line">        Transform point = Instantiate(pointPrefab);</span><br><span class="line">        point.localPosition = Vector3.right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>while</code>关键词必须后面跟着圆括号内的表达式。只有圆括号内的表达式计算结果为真（<em>True</em>）时，才会执行后面代码块的内容。之后，程序会再次回到<code>while</code>语句，再次判断圆括号内的表达式结果，如果为真，则继续执行，如此重复。但是需要注意的是，要确保循环不会永远重复，即不会产生无限循环导致程序卡住，最安全的编译是使用关键词<code>false</code>，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="literal">false</span>)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，我们可以通过追踪代码的执行次数来限制其重复的次数。我们来创建一个<code>int</code>类型的变量命名为<code>i</code>，其初始值为 0 ，为了能够在<code>while</code>语句中迭代使用，我们需要将其定义在<code>while</code>语句的上面。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i&lt;<span class="number">10</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        i = i + <span class="number">1</span>;</span><br><span class="line">        Transform point = Instantiate(pointPrefab);</span><br><span class="line">        point.localPosition = Vector3.right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们进入播放模式（<em>play</em>）会得到十个立方体，但是它们的位置是相同的。现在我们将其排成一排正方体，来将其<code>right</code>属性乘以变量<code>i</code>，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">point.localPosition = Vector3.right * i;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf87cf04df.png" alt="image-20220918172011291" style="zoom:80%;" />
+
+<p>需要注意的是，这样创建的立方体，第一个的位置在 1 ，而最后一个立方体的位置在 10 。现在让我们对其做修改，来让其从 0 开始。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i&lt;<span class="number">10</span>)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right*i;</span><br><span class="line">    i = i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="简化代码"><a href="#简化代码" class="headerlink" title="简化代码"></a>简化代码</h2><p>代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">        Transform point = Instantiate(pointPrefab);</span><br><span class="line">        point.localPosition = Vector3.right*i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更改实例化范围"><a href="#更改实例化范围" class="headerlink" title="更改实例化范围"></a>更改实例化范围</h2><p>现在我们实例化 X 的坐标范围为 $0 \sim 9$ 。通常使用函数来说，我们一般使用 $0 \sim 1$ 的范围，或者说以零为中心的范围，即 $-1 \sim 1$ 。现在来让我们重新定位我们的点。</p>
+<p>如果我们在不改变立方体的大小的情况下，将十个立方体放置在 $0 \sim 2$ 的位置范围中，会导致它们相互重叠。为了解决这种情况，我们将其大小缩小。默认情况下，立方体的维度大小为 1 。将其映射到 2 的范围中，则其大小比例应该为 $\frac{2}{10} &#x3D; \frac{1}{5}$ 。我们已通过将每个点的局部大小（通过属性<code>Vector3.one</code>）比例除以 5 来实现。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right*i;</span><br><span class="line">    point.localScale = Vector3.one / <span class="number">5f</span>;	<span class="comment">//缩小5分之1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以通过切换场景（<em>Scene</em>）面板的正交透视模式来查看其相对位置。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf881402bd.png" alt="image-20220918173512783" style="zoom:80%;" />
+
+<p>要将立方体重新聚合在一起（指并排排一排），需要将其位置也除以 5 。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right*i / <span class="number">5f</span>;	<span class="comment">//位置也除以5</span></span><br><span class="line">    point.localScale = Vector3.one / <span class="number">5f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样使得其生成范围为 $0 \sim 2$ 。要使其范围为 $-1 \sim 1$ ，则将其位置再 $-1$。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">point.localPosition = Vector3.right* (i / <span class="number">5f</span> <span class="number">-1f</span>);</span><br></pre></td></tr></table></figure>
+
+<p>现在第一个立方体的坐标为 -1 ，而最后一个立方体的坐标为 0.8 。这是因为立方体的大小为 0.2，即在其位置的左右各占 0.1 的宽度。所以只需要将其向右移动一般宽度距离即可，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">point.localPosition = Vector3.right* (i + <span class="number">0.5f</span> / <span class="number">5f</span> <span class="number">-1f</span>);</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf886972cf.png" alt="image-20220918174537522" style="zoom:80%;" />
+
+<h2 id="优化代码结构"><a href="#优化代码结构" class="headerlink" title="优化代码结构"></a>优化代码结构</h2><p>因为所有立方体最后是相同的大小比例，所以我们不需要每次都要计算新实例的大小。只需要计算一次即可，然后将其存储在变量<code>scale</code>中，循环使用它即可。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scale = Vector3.one / <span class="number">5f</span>;	<span class="comment">//提到外面，仅计算一次即可</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    point.localPosition = Vector3.right* ((i + <span class="number">0.5f</span>) / <span class="number">5f</span> <span class="number">-1f</span>);</span><br><span class="line">    point.localScale = scale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以在循环之前顶一个变量，当我们沿 X 轴创建一条线的时候，只需要调整点对应 X 的坐标即可。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vector3 position;   <span class="comment">//位置变量</span></span><br><span class="line"><span class="keyword">var</span> scale = Vector3.one / <span class="number">5f</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    position.x = ((i + <span class="number">0.5f</span>) / <span class="number">5f</span> - <span class="number">1f</span>);    <span class="comment">//计算点的 X 轴的位置</span></span><br><span class="line">    point.localPosition = position; <span class="comment">//将实例物体位置调整到计算好的位置</span></span><br><span class="line">    point.localScale = scale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【<strong>我可以单独修改向量吗</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3 类型结构有三个浮点类型字段：x，y和z。这些字段是公开的（Public），因此我们可以单独更改它们。</span><br></pre></td></tr></table></figure>
+
+<p>如果你编译上述的代码，你会发现编译器给我们报错了，它告诉我们使用了未赋值的变量，这是因为我们只对变量<code>position</code>的 X 轴分量进行了赋值，而 Y 和 Z 轴的分量并未赋值，而编译器不知道应该给它们什么值。所以我们可以通过给变量<code>position</code>赋值零向量（即X,Y,Z全为0）来解决这个问题。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> position = Vector3.zero;   <span class="comment">//位置变量</span></span><br><span class="line"><span class="keyword">var</span> scale = Vector3.one / <span class="number">5f</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    position.x = ((i + <span class="number">0.5f</span>) / <span class="number">5f</span> - <span class="number">1f</span>);    <span class="comment">//计算点的 X 轴的位置</span></span><br><span class="line">    point.localPosition = position; <span class="comment">//将实例物体位置调整到计算好的位置</span></span><br><span class="line">    point.localScale = scale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-X-映射-Y-的值"><a href="#使用-X-映射-Y-的值" class="headerlink" title="使用 X 映射 Y 的值"></a>使用 X 映射 Y 的值</h2><p>和我们在开头说的那样，Y 可以通过 X 表达式来建立相关的映射关系。现在来让 Y 轴的映射结果和 X 轴的值相同，这样就会产生一条线性的线，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> position = Vector3.zero;   <span class="comment">//位置变量</span></span><br><span class="line"><span class="keyword">var</span> scale = Vector3.one / <span class="number">5f</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    position.x = ((i + <span class="number">0.5f</span>) / <span class="number">5f</span> - <span class="number">1f</span>);    <span class="comment">//计算点的 X 轴的位置</span></span><br><span class="line"></span><br><span class="line">    position.y = position.x;    <span class="comment">//Y 轴的值由 X 的值映射</span></span><br><span class="line"></span><br><span class="line">    point.localPosition = position; <span class="comment">//将实例物体位置调整到计算好的位置</span></span><br><span class="line">    point.localScale = scale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf88c0ac9e.png" alt="image-20220918184246912" style="zoom:80%;" />
+
+<p>现在来对代码做稍微改动，使其映射为 $F(X) &#x3D; X^2$ ，这个映射的表达式表示的是一条抛物线，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position.y = position.x*position.x;    <span class="comment">//Y 轴新的映射</span></span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8905aaaa.png" alt="image-20220918184529915" style="zoom:80%;" />
+
+<h1 id="创建更多的”点”"><a href="#创建更多的”点”" class="headerlink" title="创建更多的”点”"></a>创建更多的”点”</h1><p>尽管我们现在有了一个函数的图形化，但是它看起来相当简陋。这是因为我们只使用了十个立方体（“点”），所以其结果看起来十分离散。如果我们使用更多更小的立方体的话结果会更加好看。</p>
+<h2 id="动态修改”点”数"><a href="#动态修改”点”数" class="headerlink" title="动态修改”点”数"></a>动态修改”点”数</h2><p>现在我们为立方体的数目做字段序列化，而不是之前固定数量的立方体。现在定义一个<code>int</code>类型变量<code>resolution</code>默认值为 10 ，也就是目前定义的 10 个立方体。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">SerializeField</span>]</span><br><span class="line"><span class="built_in">int</span> resolution = <span class="number">10</span>;    <span class="comment">//立方体的数量</span></span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf89503c83.png" alt="image-20220918191843839" style="zoom:80%;" />
+
+<p>现在我们可以通过检查器面板（<em>Inspector</em>）来修改”点”数了，但是并非所有的值都是有效的点数。所以我们需要为检查器面板增加一个数值范围，可以通过其 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/RangeAttribute.html">Range</a> 属性附加来完成。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">SerializeField,Range(10,100)</span>]</span><br><span class="line"><span class="built_in">int</span> resolution = <span class="number">10</span>;    <span class="comment">//立方体的数量</span></span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf898ac45f.png" alt="image-20220918192642939" style="zoom:80%;" />
+
+<p>【<strong>这能否保证<code>resolution</code>其值范围限制了 $10 \sim 100$ ？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Range属性仅仅检查我们在检查器面板（Inspector）的改动，它不会影响其以外的修改。</span><br><span class="line">也就是说，如果你在代码中修改了变量的值是不会被Range属性限制的，但是我们不会这样做</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量实例化"><a href="#变量实例化" class="headerlink" title="变量实例化"></a>变量实例化</h2><p>现在为了能够使用我们创建的变量<code>resolution</code>，即让生成预制体物体，即”点”的数量和我们的变量值是一致的，我们需要修改循环次数，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; resolution; i++) &#123;</span><br><span class="line">    <span class="comment">//省略中间代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为迭代生成的预制体数量不同了（即点数目不同），为了能让其映射范围始终在 $-1 \sim 1$，需要对代码做一点更改。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> position = Vector3.zero;   <span class="comment">//位置变量</span></span><br><span class="line"><span class="keyword">var</span> step = <span class="number">2f</span> / resolution; <span class="comment">//计算应该怎么分配位置</span></span><br><span class="line"><span class="keyword">var</span> scale = Vector3.one * step;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; resolution; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    position.x = ((i + <span class="number">0.5f</span>) * step - <span class="number">1f</span>);    <span class="comment">//计算点的 X 轴的位置</span></span><br><span class="line"></span><br><span class="line">    position.y = position.x*position.x;    <span class="comment">//Y 轴的值由 X 的值映射</span></span><br><span class="line"></span><br><span class="line">    point.localPosition = position; <span class="comment">//将实例物体位置调整到计算好的位置</span></span><br><span class="line">    point.localScale = scale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf89d61d7a.png" alt="image-20220918193640643" style="zoom:80%;" />
+
+<h2 id="设置父对象"><a href="#设置父对象" class="headerlink" title="设置父对象"></a>设置父对象</h2><p>当我们设置 50 数量点时，场景中会出现很多实例化的立方体，它们会出现在层次结构面板（<em>Hierarchy</em>）中。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8a12bb08.png" alt="image-20220918194319307" style="zoom:80%;" />
+
+<p>它们排列在层次结构面板中，我们需要为其设置一个父对象，这样能够在结构面板中展示的更加有序。我们可以通过调用 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> 组件的 <code>SetParent</code>方法，将要设置的父对象传给它。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> step = <span class="number">2f</span> / resolution; <span class="comment">//计算应该怎么分配位置</span></span><br><span class="line"><span class="keyword">var</span> position = Vector3.zero;   <span class="comment">//位置变量</span></span><br><span class="line"><span class="keyword">var</span> scale = Vector3.one * step;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; resolution; i++)&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab);</span><br><span class="line">    position.x = (i + <span class="number">0.5f</span>) * step - <span class="number">1f</span>;    <span class="comment">//计算点的 X 轴的位置</span></span><br><span class="line">    position.y = position.x*position.x;    <span class="comment">//Y 轴的值由 X 的值映射</span></span><br><span class="line">    point.localPosition = position; <span class="comment">//将实例物体位置调整到计算好的位置</span></span><br><span class="line">    point.localScale = scale;</span><br><span class="line">    point.SetParent(transform);	<span class="comment">//设置父对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8a55722e.png" alt="image-20220918194737687" style="zoom:80%;" />
+
+<p>当设置了新的父对象，Unity默认其子对象还时保持在原来设置的位置，旋转和缩放。在我们目前的情况下，我们不需要如此，我们需要让子物体跟随父对象而变换，这个时候可以将<code>SetParent</code>方法第二个参数设置为<code>false</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">point.SetParent(transform,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="为图形添加颜色"><a href="#为图形添加颜色" class="headerlink" title="为图形添加颜色"></a>为图形添加颜色</h1><p>白色的函数图形并不是很好看，虽然我们可以使用另外一种纯色，但是也不是很有趣。如果我们根据点的位置而设置不同的颜色，这会更加有趣。</p>
+<p>调整每个立方体的颜色一种直接的方法是设置材质的颜色属性，我们可以通过循环中做到这一点。由于不同立方体都会有不同的颜色，这意味着我们会为每一个对象提供一个唯一的材质实例。这样做虽然有效，但是效率不高。如果我们可以使用一种直接使用位置作为颜色的单一材质就好了。很不幸，Unity 并没有这样的材质，我们需要自己去做。</p>
+<h2 id="创建表面着色器（Surface-Shader）"><a href="#创建表面着色器（Surface-Shader）" class="headerlink" title="创建表面着色器（Surface Shader）"></a>创建表面着色器（Surface Shader）</h2><p>GPU 运行着色器（<em>Shader</em>）程序来渲染 3D 对象。Unity 材质资源确定使用哪个着色器，并允许配置其属性。我们需要通过 <em>Assets&#x2F;Create&#x2F;Shader&#x2F;Standard Surface Shader</em> 创建一个自定义着色器并命名为<code>Point Surface</code>来实现我们想要的功能。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8a9ad6a6.png" alt="image-20220918200138214" style="zoom:80%;" />
+
+<p>我们现在有了一个着色器（<em>Shader</em>）资源，你可以像脚本一样打开它。着色器文件包含定义表面着色器（<em>Surface Shader</em>）的代码，它使用的语法和<code>C#</code>不同。它默认包含一个表面着色器模板，但是我们将删除其所有内容并从头开始创建一个最小的着色器。</p>
+<p>【<strong>表面着色器（<em>Surface Shader</em>）如何工作的？</strong>】</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Unity 提供了一个框架来快速生成执行默认光照计算的着色器，你可以通过修改它的某些值来影响它的结果。</span><br><span class="line">这种着色器成为表面着色器（Surface Shader）。</span><br><span class="line">不幸的是，它仅仅适用于默认渲染管道。后面我们将会介绍通用渲染管道。</span><br></pre></td></tr></table></figure>
+
+<p>Unity 有着自己的着色器语法，总体上大致类似于<code>C#</code>，但是它是不同语言的混合。它以关键字<code>Shader</code>作为开头，后面跟着定义着色器在菜单栏显示的名称字符串。字符串写在双引号内。我们使用字符串 “<code>Graph/Point Surface</code>“，最后以花括号结束，花括号其中包含着色器内容代码。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>着色器可以拥有多个子着色器，每个子着色器使用关键字<code>SubShader</code>来定义，后面也是跟着一个代码块（花括号）。我们目前只需要一个。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	SubShader &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在子着色器下方，我们还需要为标准漫反射着色器（<em>Standard diffuse shader</em>）添加一个<code>FallBack</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	SubShader &#123;&#125;</span><br><span class="line">	FallBack <span class="string">&quot;DIFFUSE&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表面着色器的子着色器需要使用<code>CG</code>和<code>HLSL</code>这两种着色器语言混合编写代码部分。此代码部分必须使用关键字<code>CGPROGRAM</code>和<code>ENDCG</code>括起来，即代码编写的内容必须处于这两个关键词之间。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	SubShader &#123;</span><br><span class="line">		CGPROGRAM</span><br><span class="line"></span><br><span class="line">		ENDCG</span><br><span class="line">	&#125;</span><br><span class="line">	FallBack <span class="string">&quot;DIFFUSE&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个语句是编译器指令，称为<code>pragma</code>。它的使用方法是<code>#pragma</code>后面跟着指令内容。我们需要使用<code>#pragma surface ConfigureSurface Standard fullforwardshadows</code>，它指示着色器编译器生成具有标准照明和完全支持阴影的表面着色器（<em>standard lighting and full support for shadows</em>）。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	SubShader &#123;</span><br><span class="line">		CGPROGRAM</span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> surface ConfigureSurface Standard fullforwardshadows</span></span><br><span class="line">		ENDCG</span><br><span class="line">	&#125;</span><br><span class="line">	FallBack <span class="string">&quot;DIFFUSE&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【**<code>pragma</code>是什么意思？**】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pragma 这个词来自于希腊语，指的是一个动作，或者是需要做的事情</span><br><span class="line">它在许多编程语言中用于表示特殊的编译器指令</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们使用指令<code>#pragma target 3.0</code> 来为着色器的级别和质量（<em>the shader’s target level and quality</em>）设置最小值。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	SubShader &#123;</span><br><span class="line">		CGPROGRAM</span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> surface ConfigureSurface Standard fullforwardshadows</span></span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> target 3.0</span></span><br><span class="line">		ENDCG</span><br><span class="line">	&#125;</span><br><span class="line">	FallBack <span class="string">&quot;DIFFUSE&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们将根据物体的世界位置为我们的点着色。我们为着色器定义输入结构<code>struct Input</code>。其格式后面必须跟着一个代码块，然后是一个分号结束。在代码块中我们声明了一个结构字段<code>float3 worldPos</code>，它代表着被渲染物体的世界位置，其类型是着色器结构体的等价类型。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	SubShader &#123;</span><br><span class="line">		CGPROGRAM</span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> surface ConfigureSurface Standard fullforwardshadows</span></span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> target 3.0</span></span><br><span class="line"></span><br><span class="line">			<span class="keyword">struct</span> Input &#123;</span><br><span class="line">				float3 worldPos;</span><br><span class="line">			&#125;;</span><br><span class="line">		ENDCG</span><br><span class="line">	&#125;</span><br><span class="line">	FallBack <span class="string">&quot;DIFFUSE&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【<strong>这是否意味着图形的移动会影响其颜色？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">是的，使用这种方法，只要物体离开 Graph 物体的位置就会变化</span><br><span class="line"></span><br><span class="line">需要注意的是，这个位置是按着顶点来确定的。在我们这个例子中，是根据每个立方体的四个顶点。</span><br><span class="line">颜色会在立方体的面上进行插值计算。立方体的体积越大，这种颜色过度越明显。</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们定义<code>ConfigureSurface</code>方法，尽管在着色器的情况下它总是被称为函数，而不是方法。它是一个返回值为<code>void</code>类型且带有两个传入参数的函数。其第一个参数，它是我们刚刚定义的<code>Input</code>类型，第二个参数是表面配置数据（<em>surface configuration data</em>），其类型为<code>SurfaceOutputStandard</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Input &#123;</span><br><span class="line">	float3 worldPos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConfigureSurface</span>(<span class="params">Input input,SurfaceOutputStandard surface</span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二个参数必须在其类型前面加上关键字<code>inout</code>，这表面它即传递给函数参数又作用于函数的结果。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConfigureSurface</span>(<span class="params">Input input,inout SurfaceOutputStandard surface</span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们有了一个正常工作的着色器，为它创建一个材质并命名为<code>Point Surface</code>，通过在材质的检查器面板（<em>Insepector</em>）标题栏的<em>Shader</em> 选项下拉选择我们创建的<code>Graph/Point Surface</code>。</p>
+<blockquote>
+<p>你也可以选中我们编辑好的表面着色器资源，然后右键创建材质即可直接创建对应材质</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8afc7682.png" alt="image-20220925153259662" style="zoom:80%;" />
+
+<p>目前该材质是纯色哑光黑。我们可以通过在配置函数中设置<code>surface.Smoothness = 0.5</code> 来使其看起来更加相近于默认材质。</p>
+<blockquote>
+<p>注：在编写着色器代码的时候，不需要在 float 类型的值后面加 f</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConfigureSurface</span>(<span class="params">Input input,inout SurfaceOutputStandard  surface</span>)</span>&#123;</span><br><span class="line">	surface.Smoothness = <span class="number">0.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在材质就不再是纯色的了，你可以在检查器面板（<em>inspector</em>）的材质预览中查看其预览效果。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8b3dc02d.png" alt="image-20220925154511542" style="zoom:80%;" />
+
+<p>我们还可以使材质的平滑度(<em>smoothness</em>)可配置，如同为其添加一个字段并在函数中使用它。默认格式是在其配置选项前加上下划线并讲第一个字符进行大写，我们使用<code>_Smoothness</code>，如下所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> _Smoothness;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConfigureSurface</span>(<span class="params">Input input,inout SurfaceOutputStandard  surface</span>)</span>&#123;</span><br><span class="line">	surface.Smoothness = _Smoothness;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了能够让我们在检查器面板（<em>Inspector</em>）中可以配置该变量，我们必须在着色器顶部，即子着色器上方添加一个新的“块”。将变量<code>_Smoothness</code>写在其中，并将<code>(&quot;Smoothness&quot;,Range(0,1)) = 0.5</code>写在其后。这语句意味着将<code>Smoothness</code>作为标签&#x2F;字段（<em>label</em>）显示在检查器面板（<em>Inspector</em>）中并将其滑块范围限定在 $0 \sim 1$ 中，其默认值为 0.5 。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">&quot;Graph/Point Surface&quot;</span>&#123;</span><br><span class="line">	Properties&#123;</span><br><span class="line">		_Smoothness (<span class="string">&quot;Smoothness&quot;</span>,Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.5</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SubShader &#123;</span><br><span class="line">		CGPROGRAM</span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> surface ConfigureSurface Standard fullforwardshadows</span></span><br><span class="line">			<span class="meta">#<span class="keyword">pragma</span> target 3.0</span></span><br><span class="line"></span><br><span class="line">			<span class="keyword">struct</span> Input &#123;</span><br><span class="line">				float3 worldPos;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			<span class="built_in">float</span> _Smoothness;</span><br><span class="line"></span><br><span class="line">			<span class="function"><span class="keyword">void</span> <span class="title">ConfigureSurface</span>(<span class="params">Input input,inout SurfaceOutputStandard  surface</span>)</span>&#123;</span><br><span class="line">				surface.Smoothness = _Smoothness;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		ENDCG</span><br><span class="line">	&#125;</span><br><span class="line">	FallBack <span class="string">&quot;DIFFUSE&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8b83755b.png" alt="image-20220925155608099" style="zoom:80%;" />
+
+<p>现在来设置我们的“点”，即立方体的材质为我们设置好的材质而不是默认材质。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8bbc660c.png" alt="image-20220925155739921" style="zoom:80%;" />
+
+<h2 id="基于世界坐标开始着色"><a href="#基于世界坐标开始着色" class="headerlink" title="基于世界坐标开始着色"></a>基于世界坐标开始着色</h2><p>要修改“点”的颜色，我们必须修改其<code>surface.Albedo</code>参数。因为漫反射（<em>albedo</em>）和世界坐标都是三个参数的结构体类型，所以我们可以直接将世界坐标作为参数传递给漫反射（<em>albedo</em>）。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConfigureSurface</span>(<span class="params">Input input,inout SurfaceOutputStandard  surface</span>)</span>&#123;</span><br><span class="line">	surface.Albedo = input.worldPos;</span><br><span class="line">	surface.Smoothness = _Smoothness;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8bf42f77.png" alt="image-20220925160100193" style="zoom: 80%;" />
+
+<p>【<strong>漫反射（<em>Albedo</em>）是什么意思？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Albedo（漫反射）在拉丁语中是白色的意思。它是衡量有多少光被表面漫反射的度量。</span><br><span class="line">如果漫反射不是全白，那么部分的光能会被吸收而不是反射。</span><br></pre></td></tr></table></figure>
+
+<p>现在<strong>世界坐标 X 轴位置控制点的红色分量，Y 位置控制绿色分量，Z 位置控制蓝色分量</strong>。由于我们的图形定义域（即 X 轴域）限定在了 $-1 \sim 1$ 中，负颜色分量是没有意义的。所以我们必须将位置减半，然后添加 $\frac{1}{2}$ 使颜色处于合适的域中。我们可以一次对所有三个维度执行此操作。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">surface.Albedo = input.worldPos* <span class="number">0.5</span> +<span class="number">0.5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>为了更好的确定颜色变化是否正确，现在对函数进行修改，使得其展示 $F(X) &#x3D; X ^3 $ 的图形。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8c31682f.png" alt="image-20220925160830921" style="zoom:80%;" />
+
+<p>结果发现其颜色整体偏蓝，这是因为立方体面的 Z 坐标都是 0 ，这是使得其蓝色分量为 0.5 。我们可以通过设置漫反射只包括红色和绿色通道来消除蓝色。这样就可以使得蓝色分量保持为 0 。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">surface.Albedo.rg = input.worldPos.xy* <span class="number">0.5</span> +<span class="number">0.5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>由于红色+绿色&#x3D; 黄色，这使得左下角开始接近于黑色，随着 Y 增加快于 X 轴的增加而变成绿色，随着 X 的追赶变为黄色，随着 X 增加更快变成橙色，最后接近明亮结束右上角的黄色。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8c636976.png" alt="image-20220925161530507" style="zoom:80%;" />
+
+<h2 id="通用渲染线管（Universal-Render-Pipeline）"><a href="#通用渲染线管（Universal-Render-Pipeline）" class="headerlink" title="通用渲染线管（Universal Render Pipeline）"></a>通用渲染线管（<em>Universal Render Pipeline</em>）</h2><p><strong>除了默认的渲染线管（<em>default render pipeline</em>），Unity 还包含了通用渲染线管（<em>Universal</em>）和高清渲染线管（<em>High-Definition</em>），简称 URP 和 HDRP</strong> 。两种渲染管线都有不同的功能和限制。当前默认渲染管线依然有效，但是其特性功能已经不被使用了（<em>its feature set is frozen</em>）。或许几年后，URP 会称为默认的渲染管线设置。因此，现在来让我们的图形也适用于 URP 。</p>
+<p>如果你还没有使用 URP ，现在打开包管理器并安装最新的 URP，就我而言我使用的是版本 <em>10.4.0</em></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8ca6c7ec.png" alt="image-20220925162132964" style="zoom:80%;" />
+
+<blockquote>
+<p>在查找 URP 的时候确保您的包过滤（<em>package filter</em>）设置为：Unity Registry 而不是 In Project</p>
+</blockquote>
+<p>在完成安装后这并不会使得 Unity 自动的使用 URP 。我们首先需要通过 <em>Assets &#x2F; Create &#x2F; Rendering &#x2F; Universal Render Pipeline &#x2F; Pipeline Asset (Forward Renderer)</em> 为其创建一个资源（<em>Asset</em>）,我给其命名为 <code>URP</code>。同时 Unity 也会自动给渲染器创建另一个资源（<em>Asset</em>），在本例中其被命名为<code>URP_Renderer</code>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8d15ae83.png" alt="image-20220925162800578" style="zoom:80%;" />
+
+<p>接下来，<strong>前往项目的设置中<code>Graphics</code>的部分，将 URP 资源（<em>Asset</em>）分配给 <em>Scriptable Renderer Pipeline Settings</em> 。</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8d53f03c.png" alt="image-20220925163002691" style="zoom:80%;" />
+
+<p>要是希望再切换回默认渲染管线，则只需在设置中将 <em>Scriptable Renderer Pipeline Settings</em> 改为 <em>none</em> 即可。当然这些操作只能在编辑器中完成，<strong>渲染管线不可以在构建的独立应用程序中更改。</strong></p>
+<p>【<strong>HDRP 呢？</strong>】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDRP 是一个更复杂的渲染管线，我并不会我的教程中介绍它。</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建着色器（Shader-Graph）"><a href="#创建着色器（Shader-Graph）" class="headerlink" title="创建着色器（Shader Graph）"></a>创建着色器（<em>Shader Graph</em>）</h2><p>我们<strong>前面制作的材质只适用于默认渲染管线，而不适用于 URP。</strong>因此当我们使用 URP 的时候，它会被 Unity 的错误材质取代，即纯洋红色。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8d996570.png" alt="image-20220925163402874" style="zoom:80%;" />
+
+<p>我们现在必须为 URP 创建一个单独的着色器，当然我们可以自己编写一个，但是目前来说非常困难，并且在升级到较新的 URP 版本的时候可能会失效（<em>Break</em>）。<strong>最好的办法是使用 Unity 提供的着色器图形包（<em>shader graph package</em>）来可视化的设置着色器</strong>。URP 依赖于这个包，因此它会和 URP 包安装的时候一起安装。</p>
+<p>我们可以通过 <em>Assets &#x2F; Create &#x2F; Shader &#x2F; Universal Render Pipeline &#x2F; Lit Shader Graph</em> 创建一个新的着色器，并命名其为 <code>Point URP</code>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8dd6feed.png" alt="image-20220925163754152" style="zoom:80%;" />
+
+<p>可以通过在项目窗口双击其资源或者点击检查器面板中的<em>Open Shader Editor</em>按钮来打开一个图形化的着色器面板&#x2F;窗口。其中包含”黑板”（<em>Blackboard</em>），图形检查器面板（<em>Graph Insoector</em>）和主预览面板（<em>Main Preview</em>），你可以调整其大小或者通过工具来选择是否隐藏。另外在该图形化窗口中，<strong>还包含两个可以链接的节点：一个顶点（<em>Vertex</em>）节点和一个”面”（<em>Fragment</em>）节点。这两个节点用于配置着色器的输出</strong>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8e117a96.png" alt="image-20220925164658793" style="zoom:80%;" />
+
+<p>URP 图形化着色器由表示数据或者操作的节点组成。现在”面”（<em>Fragment</em>）节点的<code>Smoothness</code>值为 0.5 。要使其成为可配置的着色器属性，需要<strong>在左边的 Ponit URP “黑板”（<em>Blackboard</em>）点击加号按钮，选择<code>Float</code>类型，并将其命名为<code>Smoothness</code>。</strong>（这个过程是添加变量）</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8e4bc890.png" alt="image-20220925165247066" style="zoom:80%;" />
+
+<p>引用（<em>Reference</em>）是表示和内部变量属性的链接。因此我们需要使用其内部属性名称<code>_Smoothness</code>（我们的表面着色器代码中属性的名称字段），然后设置其默认值（<em>Default</em>）为 0.5 。确保其 <em>Exposed</em> 选项已启动，因为其控制材质是否为能获取着色器的属性。最后，如果要使其显示为滑块，着将模式（<em>Mode</em>）修改为 滑块（<em>Slider</em>）。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8e88c249.png" alt="image-20220925165806430" style="zoom:80%;" />
+
+<p>接下来，拖动左侧”黑板”上的<code>Smoothness</code>圆形按钮到窗口的空白处。这将为图形窗口添加一个<code>Smoothness</code>节点，将其连接到<code>Smoothness</code>的输入。这样两者就建立了链接。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8ebf33c3.png" alt="image-20220925170202128" style="zoom:80%;" />
+
+<p>现在你可以点击图形化着色器面板工具栏左侧的保存资源（<em>Save Asset</em>）来保存修改后的图形化着色器，接着创建一个对应的材质来替代之前的表面着色器的材质，将新创建的材质命名为<code>Point URP</code>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8f001d72.png" alt="image-20220925170834422" style="zoom:80%;" />
+
+<h2 id="使用节点编程"><a href="#使用节点编程" class="headerlink" title="使用节点编程"></a>使用节点编程</h2><p>要为“点”着色，我们需要从位置节点开始。<strong>我们可以通过右键图形化着色器的空白处，再弹出的菜单中，选择创建节点（<em>Create Node</em>），然后在其中选择 <em>Input &#x2F; Geometry &#x2F; Position</em> 或者说直接搜索 <em>Position</em></strong> 。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8f424e1a.png" alt="image-20220925171319000" style="zoom:80%;" />
+
+<p>我们现在有一个位置节点，默认其设置为世界空间坐标。你可以通过单击将光标悬停在其上方时出现的上箭头来折叠其可视化预览。</p>
+<p>现在来使用相同的方法创建一个乘法（<em>Multiply</em>）和加分（<em>Add</em>）节点，然后将其位置 XY 的分量缩放 0.5 ，然后加 0.5 ，同时将 Z 设置为 0 。最后，将结果链接到“面”（<em>Fragment</em>）的 <em>Base Color</em> 作为输入。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8f7ebeb4.png" alt="image-20220925172718931" style="zoom:80%;" />
+
+<p>你可以通过将鼠标悬停在节点上方，单击出现的箭头来隐藏其视觉大小。这样将较少一定程度上的视觉混乱，你也可以通过删除顶点（<em>Vertex</em>）和“面”（<em>Fragment</em>）节点的组件来减少视觉混乱。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8fb92651.png" alt="image-20220925173039442" style="zoom:80%;" />
+
+<p>保存图形化着色器的资源后，现在在播放模式（<em>Play</em>）下获得的渲染结果和默认渲染管道时是相同的结果颜色。除此之外，你还会发现<strong>在层次结构面板（<em>Hierarchy</em>）出现了 <em>DontDestroyOnLoad</em> 场景。这是为了调试 URP，可以忽略</strong>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf8ff43b10.png" alt="image-20220925173355119" style="zoom:80%;" />
+
+<p>这个时候，你可以选择使用默认渲染线管或者 URP。切换到另一种渲染线管后，需要将指定的材质进行更替，否则其会显示成洋红色的错误材质。如果你对图形化着色器的代码感到好奇，你可以通过检查器面板（<em>Inspetor</em>）中的 <em>View Generated Shader</em> 按钮进行查看。</p>
+<h1 id="为图形添加动画"><a href="#为图形添加动画" class="headerlink" title="为图形添加动画"></a>为图形添加动画</h1><p>显示静态图形很有用，但是显示动态图形会更加有趣。因此，我们将会为图形添加动画。这是通过将时间作为附件函数参数来完成的，其格式为 <code>F(X,t)</code>，<code>t</code> 表示时间。</p>
+<h2 id="跟踪点"><a href="#跟踪点" class="headerlink" title="跟踪点"></a>跟踪点</h2><p>为了使图形动画化，我们必须跟随时间来调整其点的位置。我们可以通过删除所有点并在每次更新时创建新点来实现，但是这是一种比较低效的方法。最好是继续使用相同的点，每次更新调整它们的位置。为了实现，我们需要使用一个字段来保留对我们点的引用。为 <em>Graph</em> 类添加一个类型为 <code>Transform</code>的字段<code>points</code>。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">SerializeField,Range(10,100)</span>]</span><br><span class="line"><span class="built_in">int</span> resolution = <span class="number">50</span>;    <span class="comment">//立方体的数量</span></span><br><span class="line"></span><br><span class="line">Transform points;   </span><br></pre></td></tr></table></figure>
+
+<p>该字段允许我们引用单个点，但是我们需要访问所有这些点。我们可以通过在其类型后面加上空的方括号将该字段转换为数组。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transform[] points;</span><br></pre></td></tr></table></figure>
+
+<p>该<code>points</code>字段现在是对数组的引用，其元素类型为 <code>Transform</code>。数组是对象，而不是简单的值。我们必须显式的创建一个这样的对象并让字段获取对其的引用。这是通过关键字<code>new</code>来实现的。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span>&#123;</span><br><span class="line">	points = <span class="keyword">new</span> Transform[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建数组的时候，我们必须指定其长度，这意味着它包含了多少个元素，并且在创建后无法进行更改。构造数组时，长度写在方括号内。我们使其等于图形的“点”数。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">points = <span class="keyword">new</span> Transform[resolution];</span><br></pre></td></tr></table></figure>
+
+<p>现在我们可以将实例化的物体和创建的数组元素进行引用链接。访问数组元素是通过数组引用后面方括号之间写下它的索引来完成的。第一个元素的数组索引是从零开始的，就像迭代的计数器一样。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">points = <span class="keyword">new</span> Transform[resolution]; <span class="comment">//创建数组对象</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; resolution; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = Instantiate(pointPrefab); <span class="comment">//获取实例化对象的引用</span></span><br><span class="line">    points[i] = point;  <span class="comment">//填充数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们多次引用&#x2F;赋值相同的东西，我们可以使用连等号来使其链接在一起，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">points = <span class="keyword">new</span> Transform[resolution]; <span class="comment">//创建数组对象</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; resolution; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = points[i] =  Instantiate(pointPrefab); <span class="comment">//获取实例化对象的引用并填充数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们正在循环我们的“点”数组。因为数组长度和“点”数相同，所以我们可以使用数组长度来约束我们的循环。每个数组都有一个<code>Lenth</code>属性，所以我们来使用它。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = points[i] =  Instantiate(pointPrefab); <span class="comment">//获取实例化对象的引用并填充数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新“点”"><a href="#更新“点”" class="headerlink" title="更新“点”"></a>更新“点”</h2><p>要调整每一帧的图形，我们需要在 <code>Update</code>方法中设置点的 Y 坐标。所以我们不需要在<code>Awake</code>中计算它们的值。但是我们任然可以在这里设置 X 的坐标，因为我们不会更改它们的值。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这句不需要了</span></span><br><span class="line">position.y = position.x*position.x* position.x;    <span class="comment">//Y 轴的值由 X 的值映射</span></span><br></pre></td></tr></table></figure>
+
+<p>像<code>Awake</code>一样在<code>Updat</code>添加一个带有<code>for</code>循环的代码，但是它的块中代码还暂时是空的。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="comment">//这里啥也没有</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们将通过获取对当前数组元素的引用并将其存储在变量中开始循环迭代。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Transform point = points[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后，我们将“点”的本地位置存储在一个变量中。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = points[i];</span><br><span class="line">    Vector3 position = point.localPosition;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们可以根据 X 的位置，调整 Y 坐标，和之前做的那样。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Transform point = points[i];</span><br><span class="line">Vector3 position = point.localPosition;</span><br><span class="line">position.y = position.x * position.x * position.x;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们进行是对变量<code>position</code>做了计算处理，我们要将其结果作用于该“点”，我们需要再次设置其值。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Transform point = points[i];    <span class="comment">//获取实例对象</span></span><br><span class="line">Vector3 position = point.localPosition; <span class="comment">//获取对象的位置</span></span><br><span class="line">position.y = position.x * position.x * position.x;  <span class="comment">//计算新的位置</span></span><br><span class="line">point.localPosition = position; <span class="comment">//新位置赋值给对象</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="显示正弦图形"><a href="#显示正弦图形" class="headerlink" title="显示正弦图形"></a>显示正弦图形</h2><p>现在在播放模式下，我们的图形的“点”每帧都会进行计算定位。但是我们还没有注意到这一点，因为它们每次开始和结束的位置是相同的。我们必须将时间引用到函数中才能使其发生变化。但是，简单的添加时间会使其不断上升然后消失在我们视野之中。为了防止这种情况，我们必须使用一个能够改变但是保持在一定范围内的函数。正弦函数（<em>sine</em>）是理想的选择。所以我们可以通过<code>Mathf.Sin</code>来使其函数变为 $F(X) &#x3D; sin(X)$ 。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position.y = Mathf.Sin(position.x); </span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf9052214e.png" alt="image-20220925193641494" style="zoom:80%;" />
+
+<p>【**什么是<code>Mathf</code> ?**】</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">它是 UnityEngine 命名空间中一个结构，包含了数学函数和常量的集合。</span><br><span class="line">因为它使用浮点数，所以它的类型名称给与了 f 的后缀。</span><br></pre></td></tr></table></figure>
+
+<p>正弦波形在 $-1 \sim 1$ 之间震荡。它每 $2 \pi$ 个单位重复一次，这意味着它的周期约为 6.28 。我们的坐标介于 $-1 \sim 1$ 之间，也就是说看到的不足其图形的 $\frac{1}{3}$ 。为了能够查看到其整体的图形，我们需要将我们的左右边界乘以 $\pi$ ，这样使得我们的范围映射到了  $- \pi \sim \pi$ 之间，正好是其一个周期。我们可以使用<code>Mathf.PI</code>来表示  $\pi$ 的近似值。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position.y = Mathf.Sin(Mathf.PI * position.x);  <span class="comment">//计算新的位置</span></span><br></pre></td></tr></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf90959a23.png" alt="image-20220925195019920" style="zoom:80%;" />
+
+<p>要将函数图形设置动画，需要在计算函数之前将游戏时间添加到 X 坐标数值。即通过使用<code>Time.time</code>来获取时间。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position.y = Mathf.Sin(Mathf.PI * (position.x + Time.time));  <span class="comment">//计算新的位置</span></span><br></pre></td></tr></table></figure>
+
+<p><video src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/PicGo/WeepyAgreeableBoutu-mobile.webm" controls="" width="50%" autoplay="" playsinline="" preload="auto" ></video></p>
+<p>因为<code>Time.time</code>循环每次迭代的值是相同的，所以我们可以将其调用到循环之外。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> time = Time.time; <span class="comment">//获取时间</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Length; i++)</span><br><span class="line">&#123;</span><br><span class="line">    Transform point = points[i];    <span class="comment">//获取实例对象</span></span><br><span class="line">    Vector3 position = point.localPosition; <span class="comment">//获取对象的位置</span></span><br><span class="line">    position.y = Mathf.Sin(Mathf.PI * (position.x + time));  <span class="comment">//计算新的位置</span></span><br><span class="line">    point.localPosition = position; <span class="comment">//新位置赋值给对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="限制颜色范围"><a href="#限制颜色范围" class="headerlink" title="限制颜色范围"></a>限制颜色范围</h2><p>因为正弦的幅度是 $-1 \sim 1$ ，所以其最高点为 $1$ ，最低点是 $1$ 。但是因为我们的“点”是立方体，这就意味着它们的大小会导致其超出这个   $-1 \sim 1$  的范围。因此，我们会获得低于 -1 或者大于 1 的绿色分量颜色，虽然这个并不明显，但是我们需要来正确的限制颜色在 0 -1 的范围中。</p>
+<p>我们可以通过将生成的颜色传递给 <code>Saturate</code>函数来为我们的着色器执行此操作。这是一项特殊功能，它可以将所有分量限制在 0-1 之间。这是着色器的常见操作，称为“饱和度”（<em>saturation</em>）。</p>
+<blockquote>
+<p>关于<a href="httpss://developer.download.nvidia.cn/cg/saturate.html">“饱和度”（<em>saturation</em>）的说明</a></p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">surface.Albedo.rg = saturate(input.worldPos.xy * <span class="number">0.5</span> + <span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>同样的，你也可以在图形化着色器中使用<code>Saturate</code>节点来实现。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf90f8dedd.png" alt="image-20220925200807685" style="zoom:80%;" />
+
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>下一个教程：<strong>数学曲面（* Mathematical Surfaces*）</strong>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2002%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/">https://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2002%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf84481c2a.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/11/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/%E7%8C%AB%E5%BC%8F%E6%95%99%E7%A8%8B/" title="猫式教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf6eee7fe8.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">猫式教程</div></div></a></div><div class="next-post pull-right"><a href="/2023/01/05/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/WPF/%E3%80%902.0%E3%80%91XAML/" title="【2.0】XAML"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf58021995.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【2.0】XAML</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E6%8E%92%E2%80%9D%E7%82%B9%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">创建一排”点”</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A2%84%E5%88%B6%E4%BD%93-Prefabs"><span class="toc-number">2.1.</span> <span class="toc-text">创建预制体(Prefabs)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%BB%84%E4%BB%B6-%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">创建图形组件(类)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E9%A2%84%E5%88%B6%E4%BD%93"><span class="toc-number">2.3.</span> <span class="toc-text">实例化预制体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%88%9B%E5%BB%BA"><span class="toc-number">2.4.</span> <span class="toc-text">循环创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-number">2.5.</span> <span class="toc-text">简化代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%8C%83%E5%9B%B4"><span class="toc-number">2.6.</span> <span class="toc-text">更改实例化范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84"><span class="toc-number">2.7.</span> <span class="toc-text">优化代码结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-X-%E6%98%A0%E5%B0%84-Y-%E7%9A%84%E5%80%BC"><span class="toc-number">2.8.</span> <span class="toc-text">使用 X 映射 Y 的值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%9B%B4%E5%A4%9A%E7%9A%84%E2%80%9D%E7%82%B9%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">创建更多的”点”</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9%E2%80%9D%E7%82%B9%E2%80%9D%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">动态修改”点”数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">变量实例化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%88%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.3.</span> <span class="toc-text">设置父对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E5%9B%BE%E5%BD%A2%E6%B7%BB%E5%8A%A0%E9%A2%9C%E8%89%B2"><span class="toc-number">4.</span> <span class="toc-text">为图形添加颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%88Surface-Shader%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">创建表面着色器（Surface Shader）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87%E5%BC%80%E5%A7%8B%E7%9D%80%E8%89%B2"><span class="toc-number">4.2.</span> <span class="toc-text">基于世界坐标开始着色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%B8%B2%E6%9F%93%E7%BA%BF%E7%AE%A1%EF%BC%88Universal-Render-Pipeline%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">通用渲染线管（Universal Render Pipeline）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%88Shader-Graph%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">创建着色器（Shader Graph）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%8A%82%E7%82%B9%E7%BC%96%E7%A8%8B"><span class="toc-number">4.5.</span> <span class="toc-text">使用节点编程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E5%9B%BE%E5%BD%A2%E6%B7%BB%E5%8A%A0%E5%8A%A8%E7%94%BB"><span class="toc-number">5.</span> <span class="toc-text">为图形添加动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%9F%E8%B8%AA%E7%82%B9"><span class="toc-number">5.1.</span> <span class="toc-text">跟踪点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E2%80%9C%E7%82%B9%E2%80%9D"><span class="toc-number">5.2.</span> <span class="toc-text">更新“点”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%BC%A6%E5%9B%BE%E5%BD%A2"><span class="toc-number">5.3.</span> <span class="toc-text">显示正弦图形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E9%A2%9C%E8%89%B2%E8%8C%83%E5%9B%B4"><span class="toc-number">5.4.</span> <span class="toc-text">限制颜色范围</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">6.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

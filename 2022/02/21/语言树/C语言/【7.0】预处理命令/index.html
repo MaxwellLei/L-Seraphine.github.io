@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【7.0】C-预处理命令 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言预处理是在进行编译的第一遍扫描（扫描语法和词法）之前所做的工作，是C语言的一个重要功能，它由预处理程序负责完成。 前面的代码已经多次使用#开头的预处理命令，例如：#include &lt;stdio.h&gt;等，在源程序中这些命令都放在函数之外，而且一般都放在源文件的前面。 C语言提供了多种预处理命令，如宏定义，文件包含，条件编译等。C语言的预处理命令均是以#开始，末尾不加分号。合理的使用预">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【7.0】C-预处理命令">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/02/21/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%907.0%E3%80%91%E9%A2%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言预处理是在进行编译的第一遍扫描（扫描语法和词法）之前所做的工作，是C语言的一个重要功能，它由预处理程序负责完成。 前面的代码已经多次使用#开头的预处理命令，例如：#include &lt;stdio.h&gt;等，在源程序中这些命令都放在函数之外，而且一般都放在源文件的前面。 C语言提供了多种预处理命令，如宏定义，文件包含，条件编译等。C语言的预处理命令均是以#开始，末尾不加分号。合理的使用预">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba18986a0.jpg">
+<meta property="article:published_time" content="2022-02-21T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:04:00.075Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba18986a0.jpg"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/02/21/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%907.0%E3%80%91%E9%A2%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【7.0】C-预处理命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:04:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64abba18986a0.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【7.0】C-预处理命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-21T15:30:01.000Z" title="发表于 2022-02-21 23:30:01">2022-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:04:00.075Z" title="更新于 2023-07-14 21:04:00">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/">语言树</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【7.0】C-预处理命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>预处理是在进行编译的第一遍扫描（扫描语法和词法）之前所做的工作，是C语言的一个重要功能，它由预处理程序负责完成。</p>
+<p>前面的代码已经多次使用<code>#</code>开头的预处理命令，例如：<code>#include &lt;stdio.h&gt;</code>等，在源程序中这些命令都放在函数之外，而且一般都放在源文件的前面。</p>
+<p>C语言提供了多种预处理命令，如宏定义，文件包含，条件编译等。<strong>C语言的预处理命令均是以<code>#</code>开始，末尾不加分号</strong>。合理的使用预处理指令可以使得程序便于阅读，修改和调试。</p>
+<h1 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h1><p><strong>在C语言源程序中允许用一个标识符来表示一个字符串，称为宏。被定义为宏的标识符称为宏名。在编译预处理时，对程序中所有出现的宏名，都用宏定义的字符串去替换，这称为宏替换或者宏展开</strong>。</p>
+<p>宏定义是由源程序中的宏定义命令完成的，宏替换是由预处理程序自动完成的。</p>
+<p>宏定义是C语言提供的三种常用预处理命令中的一种，使用宏定义可以防止出错，并且可以提高程序的可移植性和可读性。宏分为不带参数和带参数两种。</p>
+<h2 id="不带参数的宏定义"><a href="#不带参数的宏定义" class="headerlink" title="不带参数的宏定义"></a>不带参数的宏定义</h2><p>不带参数的宏定义语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//语法格式</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> 标识符 字符串</span></span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>#</code>表示这是一条预处理命令。<code>define</code>为宏定义命令。标识符就是所谓的符号常量，也称为宏名。字符串可以是参数，表达式，格式串等。</p>
+<p>预处理工作也称为宏展开，就是将宏名替换为字符串。掌握宏的关键就是“换”。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br></pre></td></tr></table></figure>
+
+<p>它的作用就是指定标识符<code>PI</code>来代替常量3.14。在编写程序的时候，所有的3.14都可以使用<code>PI</code>来表示，而对于源程序编译的时候，将由预处理程序进行宏替换，即将<code>PI</code>的部分再替换回3.14，然后再进行编译。</p>
+<p>关于宏定义的说明：</p>
+<ol>
+<li><p><strong>宏名习惯上用大写字母表示，以便于与变量区别</strong>，不过你也可以使用小写</p>
+</li>
+<li><p>使用宏可以提高程序的拓展性和易读性。</p>
+</li>
+<li><p><strong>预处理是在编译之前进行的处理，而编译的工作之一就是语法检查，也就是说，预处理不做语法检查</strong>。</p>
+</li>
+<li><p>宏定义不是语句，<strong>在句末不必加分号，如果加上分号，则连分号一起替换</strong>。</p>
+</li>
+<li><p><strong>宏定义必须写在函数外，默认其作用域为：从宏定义命令开始到程序结束。</strong></p>
+<p><strong>如果要终止其作用域可以使用<code>#undef</code>命令</strong>，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//很多代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> PI</span></span><br><span class="line"><span class="comment">//又是很多代码</span></span><br></pre></td></tr></table></figure>
+
+<p>表示该宏定义只在<code>main</code>函数中有效。</p>
+</li>
+<li><p>宏定义允许嵌套，在宏定义的字符串中可以使用已定义的宏名。在宏展开时由预处理程序层层替换。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3,14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> C 2*PI</span></span><br><span class="line"><span class="comment">//以上宏定义的不限制顺序，例如下面的和上面的结果是一致的</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> C 2*PI</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3,14</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>宏定义不分配存储空间，变量定义才分配存储空间。</p>
+</li>
+<li><p>宏定义以回车符结束，如果宏定义超过一行，可以在行末加反斜杠<code>\</code>来续行。</p>
+</li>
+<li><p>宏定义中也可以没有替换的字符串，这种宏定义常作为条件编译检测的一个标志。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> FLAG</span></span><br></pre></td></tr></table></figure>
+
+<p>【关于宏定义无字符串的意义】</p>
+<p>【说明】<strong>这部分解释需要学会下面的条件编译命令再看</strong></p>
+<p>比如：<code>#define USEHDMI</code>表示定义<code>USEHDMI</code>这个宏，但内容是空的，这样的宏一般不会用于替换<br>-用途：在程序中会这样用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\<span class="meta">#<span class="keyword">ifdef</span> USEHDMI</span></span><br><span class="line">... <span class="comment">//宏被定义时的处理程序</span></span><br><span class="line">\<span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">... <span class="comment">//宏未被定义时的程序</span></span><br><span class="line">\<span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>这样假设我们在使用HDMI接口时会在头文件中写：<code>#define USEHDMI</code>，或写<code>#define USEHDMI 1</code>也是一样的，否则用默认模式可注释此句或写：<code>#undef USEHDMI</code>，即可实现程序增加处理HDMI接口的部分，或者去除。</p>
+<blockquote>
+<p>以上解释出自<a href="httpss://zhidao.baidu.com/question/1365904455539906219.html">c++程序中宏定义只有宏名没有字符串是怎么一回事</a></p>
+</blockquote>
+</li>
+<li><p><strong>字符，字符串和注释中永远不做宏处理</strong>，即如果在其中包含宏字符，不会进行宏替换处理。</p>
+<blockquote>
+<p>需要注意的是，变量和宏名不可以相同</p>
+</blockquote>
+<p>【实例】验证宏名和字符串</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;PI %f\n&quot;</span>, PI);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba2b35887.png" alt="image-20220121162246646" style="zoom:80%;" /></li>
+</ol>
+<h2 id="带参数的宏定义"><a href="#带参数的宏定义" class="headerlink" title="带参数的宏定义"></a>带参数的宏定义</h2><p>C语言允许宏带有参数。宏定义中的参数称为形参，宏调用中的参数称为实参。对于带参数的宏，在调用中，不仅要宏展开，还要用实参去代替形参。</p>
+<p>带参数的宏定义一般形式为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> 宏名(参数列表) 字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>在字符串中可以含有多个形参。</p>
+<p>带参数宏调用的一般形式为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">宏名(实参列表)</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> S(a,b) a*b</span></span><br><span class="line">area=S(<span class="number">3</span>,<span class="number">2</span>);	<span class="comment">//第一步替换为area=a*b,第二部替换为area=3</span></span><br></pre></td></tr></table></figure>
+
+<p>【实例】利用带参数的宏定义求三个数的最小值</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Min(a,b) (a&lt;b)?a:b  </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> x, y, z, min;   <span class="comment">//声明三个数值和最小值</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入三个数值&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">    min = Min(x, y);</span><br><span class="line">    min = Min(min, z);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最小值为;%d&quot;</span>, min);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出结果】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba302b946.png" alt="image-20220121164749966" style="zoom:80%;" />
+
+<p>关于带参数的宏定义需要注意以下几点：</p>
+<ol>
+<li><p><strong>宏名和参数的括号间不能有空格</strong>。</p>
+</li>
+<li><p>宏替换只做替换，不做计算，不做表达式求解。</p>
+</li>
+<li><p>在宏定义中形参是标识符，而宏调用中的实参可以是表达式。</p>
+</li>
+<li><p>在带参数宏定义中，形参不分配存储空间，因此不必进行类型声明，而宏调用中的实参有具体的值，要用它们去替换形参，因此必须进行类型声明。</p>
+</li>
+<li><p>带参数的宏和带参数函数很相似，但有本质上的不同：</p>
+<p>函数调用在编译后程序运行时进行，占用运行时间（分配内存，保留现场，值传递，返回值）；宏替换在编译前进行，不分配内存，不占用运行时间，只占用编译时间。</p>
+<p>在函数中，形参和实参是两个不同的量，各有自己的作用域，调用时要把实参传递给形参，进行“值传递”；而在带参数宏中，只是符号替换，不存在值传递。</p>
+<p>函数只有一个返回值，利用宏可以设法得到多个返回值；</p>
+<p>宏展开使源程序边长。</p>
+</li>
+<li><p>宏定义也可以用来定义多个语句，在宏调用时，把这些语句替换到源程序中。</p>
+</li>
+</ol>
+<h2 id="撤销宏定义命令"><a href="#撤销宏定义命令" class="headerlink" title="撤销宏定义命令"></a>撤销宏定义命令</h2><p>宏定义命令<code>#define</code>应该写在函数外面，通常写在一个文件开头，这样宏定义的作用范围是整个文件。<strong>可以使用命令<code>#undef</code>撤销已定义的宏，终止该宏定义的作用域</strong>。</p>
+<p>【实例】撤销已定义的宏示例</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14	<span class="comment">//宏定义PI=3.14</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;派值为;%f&quot;</span>, PI);</span><br><span class="line">    Test();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> PI	<span class="comment">//终止宏定义PI</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>, PI);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba34c4cd7.png" alt="image-20220121170916060" style="zoom:80%;" />
+
+<h1 id="文件包含命令"><a href="#文件包含命令" class="headerlink" title="文件包含命令"></a>文件包含命令</h1><p><strong>文件包含是指一个源文件可以将另一个源文件的全部内容包含进来，即将另一个文件包含到本文件中</strong>。文件包含命令是以<code>#include</code>开头的预处理命令，在前面的部分使用各种C语言自带的函数时已经使用了文件包含命令。在C语言中，这个命令可以使得程序分为多个模块，被不同的程序员编写。有些公用的符号常量或宏定义等可以单独组成一个文件，在其他文件的开头用文件包含命令包含该文件即可使用。这样可以避免在每个文件开头编写这些公用量，从而节省时间，减少出错。</p>
+<p>文件包含命令语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//格式1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;文件名&quot;</span></span></span><br><span class="line"><span class="comment">//格式2</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;文件名&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>格式1：系统先在本程序文件所在的磁盘和路径下寻找包含文件，若找不到，再按系统规定的路径搜索包含文件</strong>。</p>
+<p><strong>格式2：系统仅按规定的路径搜索包含文件：在包含文件目录中查找（包含目录是由用户在设置环境是设置的），而不在源文件目录去查找。</strong></p>
+<p>需要注意的是：</p>
+<ol>
+<li><strong>一个<code>#include</code>命令只能包含一个文件，若有多个文件要包含，则需要用多个<code>#include</code>命令</strong>。</li>
+<li>为了避免寻找包含文件时出错，如果是包含系统头文件通常使用格式2，其他情况使用格式1</li>
+<li><strong>由于被包含文件的内容全部出现在源程序清单中，所以其内容必须是C语言的源程序清单，否则编译时会出错</strong>。</li>
+<li>文件包含允许嵌套，即在一个被包含的文件中又可以包含另一个文件。</li>
+<li>文件包含命令还有一个很重要的功能：能将多个源程序清单合并成一个源程序进行编译。</li>
+</ol>
+<p>【实例】包含多个文件合并编译</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Plus</span><span class="params">(a,b)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文件2</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">PutOut</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输出结果为：\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文件3：主入口</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;2.1.c&quot;</span>	<span class="comment">//载入文件1</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;2.2.c&quot;</span>	<span class="comment">//载入文件2</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    PutOut();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,Plus(<span class="number">3</span>,<span class="number">4</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba3a76d98.png" alt="image-20220121183257670" style="zoom:80%;" />
+
+<h1 id="条件编译命令"><a href="#条件编译命令" class="headerlink" title="条件编译命令"></a>条件编译命令</h1><p><strong>一般情况下，源程序中所有的行都参加编译，但有时希望其中的部分内容只有在满足一定的条件下才进行编译，即对一部分内容指定编译条件，这就是条件编译</strong>。条件编译命令将决定哪些代码被编译，哪些不被编译。可将表达式的值或某个特定宏是否被定义作为编译条件。</p>
+<p>条件编译有三种语法格式，代码如下：</p>
+<ul>
+<li><p>格式一：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//格式1</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> 标识符</span></span><br><span class="line">	程序段<span class="number">1</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">	程序段<span class="number">2</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>      </span></span><br></pre></td></tr></table></figure>
+
+<p>其功能是，<strong>如果标识符已使用<code>#define</code>命令定义则对程序段1进行编译，否则对程序段2进行编译</strong>。如果没有程序段2，则可以写为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> 标识符</span></span><br><span class="line">	程序段<span class="number">1</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>        </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式二：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> 标识符</span></span><br><span class="line">	程序段<span class="number">1</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span> 标识符</span></span><br><span class="line">	程序段<span class="number">2</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>        </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>与格式一不同的是由<code>#ifdef</code>变为<code>#ifndef</code>，它的功能是，如果标识符未被<code>#define</code>命令定义，则对程序段1进行编译，否则对程序段2进行编译</strong>。</p>
+<p>【实例】进行条件编译命令</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> PI</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>, PI);</span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;PI未定义&quot;</span>);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba3faef50.png" alt="image-20220121210007943" style="zoom:80%;" />
+</li>
+<li><p>格式三：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> 常量表达式</span></span><br><span class="line">	程序段<span class="number">1</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">	程序段<span class="number">2</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>        </span></span><br></pre></td></tr></table></figure>
+
+<p>其功能是，<strong>如果常量表达式的值为真（非0），则对程序段1进行编译，反之则对程序段2进行编译。</strong>因此可以使程序在不同条件下完成不同的功能。</p>
+<p>【实例】测试格式三</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> c 1 <span class="comment">//c的值非0时，执行加法，反之执行减法</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> c</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a加b的和为：%d&quot;</span>, a + b);</span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的差为：%d&quot;</span>,a-b);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba43f26c6.png" alt="image-20220121211515511" style="zoom:80%;" />
+
+<blockquote>
+<p>对于预处理命令里的标识符或者变量，和代码中定义的不通用，且名称不可重复</p>
+</blockquote>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/02/21/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%907.0%E3%80%91%E9%A2%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/">https://www.helloseraphine.top/2022/02/21/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%907.0%E3%80%91%E9%A2%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba18986a0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/20/%E8%AF%AD%E8%A8%80%E6%A0%91/R%E8%AF%AD%E8%A8%80/%E3%80%90NEW-1.0%E3%80%91%E6%A6%82%E8%A6%81/" title="【NEW-1.0】概要"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf9c3533d.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【NEW-1.0】概要</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/25/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%908.0%E3%80%91%E6%8C%87%E9%92%88/" title="【8.0】C-指针"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abba6f02093.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【8.0】C-指针</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">宏定义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">不带参数的宏定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">带参数的宏定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E5%AE%8F%E5%AE%9A%E4%B9%89%E5%91%BD%E4%BB%A4"><span class="toc-number">2.3.</span> <span class="toc-text">撤销宏定义命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">文件包含命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">条件编译命令</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【4.0】C-循环结构及其应用 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言对于大规模的数据，尤其是相互之间存在一定的联系的数据，怎么表示和组织才能达到高效呢？C语言的数组类型为同类型的数据组织提供了一种有效的形式。 同样的，字符串应用广泛，但C语言中没有专门的字符串类型，字符串是使用字符数组来存放的。 一维数组一维数组的定义和引用一维数组的定义在C语言中使用数组前必须先进行定义。一维数组的定义如下： 1234&#x2F;&#x2F;格式声明类型声明符 数组名[常量表达式];&#x2F;&#x2F;代码示例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【4.0】C-循环结构及其应用">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/02/16/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%905.0%E3%80%91%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言对于大规模的数据，尤其是相互之间存在一定的联系的数据，怎么表示和组织才能达到高效呢？C语言的数组类型为同类型的数据组织提供了一种有效的形式。 同样的，字符串应用广泛，但C语言中没有专门的字符串类型，字符串是使用字符数组来存放的。 一维数组一维数组的定义和引用一维数组的定义在C语言中使用数组前必须先进行定义。一维数组的定义如下： 1234&#x2F;&#x2F;格式声明类型声明符 数组名[常量表达式];&#x2F;&#x2F;代码示例">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb92be2bb6.jpg">
+<meta property="article:published_time" content="2022-02-16T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:03:53.372Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb92be2bb6.jpg"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/02/16/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%905.0%E3%80%91%E6%95%B0%E7%BB%84/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【4.0】C-循环结构及其应用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:03:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64abb92be2bb6.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【4.0】C-循环结构及其应用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-16T15:30:01.000Z" title="发表于 2022-02-16 23:30:01">2022-02-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:03:53.372Z" title="更新于 2023-07-14 21:03:53">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/">语言树</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【4.0】C-循环结构及其应用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于大规模的数据，尤其是相互之间存在一定的联系的数据，怎么表示和组织才能达到高效呢？C语言的数组类型为同类型的数据组织提供了一种有效的形式。</p>
+<p>同样的，字符串应用广泛，但C语言中没有专门的字符串类型，字符串是使用字符数组来存放的。</p>
+<h1 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h1><h2 id="一维数组的定义和引用"><a href="#一维数组的定义和引用" class="headerlink" title="一维数组的定义和引用"></a>一维数组的定义和引用</h2><h3 id="一维数组的定义"><a href="#一维数组的定义" class="headerlink" title="一维数组的定义"></a>一维数组的定义</h3><p>在C语言中使用数组前必须先进行定义。一维数组的定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//格式声明</span></span><br><span class="line">类型声明符 数组名[常量表达式];</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="type">int</span> c[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ol>
+<li><p>类型声明符是任一种基本数据类型或者构造数据类型，即<code>int</code>，<code>float</code>，<code>char</code>等基本数据类型，以及结构体数据类型。从这里可以看出，数组是建立在其他数据类型的基础之上的，因此数组是构造类型。</p>
+</li>
+<li><p>数组名是用户定义的数组标识符，命名规则遵循标识符命名规则。对于数组元素来说，它们具有一个共同的名字，即数组名。</p>
+<blockquote>
+<p>需要注意的是，数组的名称不可以与其他变量名相同</p>
+</blockquote>
+</li>
+<li><p><strong>方括号中的常量表达式表示数组元素的个数，也成为数组的长度</strong>。</p>
+<blockquote>
+<p>不能在方括号中用变量来表示数组元素的个数，但可以使用符号常数或者常量表达式</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="一维数组元素的存储"><a href="#一维数组元素的存储" class="headerlink" title="一维数组元素的存储"></a>一维数组元素的存储</h3><p>每个数组元素都占用内存中的一个存储单元，每个元素都是一个变量，可以像以前使用普通变量一样使用，不过使用的是数组的索引。<strong>系统在内存中为数组元素分配连续的存储单元</strong>。</p>
+<p>例如，定义语句<code>int a[15]</code>，声明了以下几个问题：</p>
+<ol>
+<li>数组名为<code>a</code></li>
+<li>数组元素的数据类型为<code>int</code></li>
+<li>数组元素的下标值是从0开始的。</li>
+<li>数组名<code>a</code>是数组存储区的首地址，即存放数组第一个元素的地址。<strong>a等价于<code>&amp;a[0]</code>，因此数组名是一个地址常量。不能对数组名进行赋值或者运算</strong>。</li>
+</ol>
+<h3 id="一维数组元素的引用"><a href="#一维数组元素的引用" class="headerlink" title="一维数组元素的引用"></a>一维数组元素的引用</h3><p>对数组元素的引用与对变量的引用类似，与变量引用不同的是，只能对单个数组元素进行引用，而不能一次引用整个数组。一维数组元素的引用格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组名[下标]</span><br></pre></td></tr></table></figure>
+
+<p>【实例】从键盘输入10个整数，求其中的最大数并输出</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入10个数值：&quot;</span>);</span><br><span class="line">    <span class="type">int</span> num[<span class="number">10</span>];    <span class="comment">//定义数组存放10个数值</span></span><br><span class="line">    <span class="type">int</span> max;    <span class="comment">//最大值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)     </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num[i]);    <span class="comment">//记录输入数值</span></span><br><span class="line">    &#125;</span><br><span class="line">    max = num[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (max&lt;num[j])</span><br><span class="line">        &#123;</span><br><span class="line">            max = num[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最大值为：%d&quot;</span>, max);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb93605863.png" alt="image-20220112202101454" style="zoom:80%;" />
+
+<h2 id="一维数组的初始化"><a href="#一维数组的初始化" class="headerlink" title="一维数组的初始化"></a>一维数组的初始化</h2><p><strong>与一半变量初始化一样，数组的初始化就是在定义数组的同时，给其数组元素赋予初值</strong>。</p>
+<blockquote>
+<p>数组的初始化是在编译阶段进行的，这样减少运行时间，提高效率</p>
+</blockquote>
+<p>一维数组的初始化语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//语法格式</span></span><br><span class="line">类型声明符 数组名[常量表达式]=&#123;数值<span class="number">1</span>，数值<span class="number">2</span>，···，数值n&#125;;</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="type">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="comment">//以上示例代码，相当于：</span></span><br><span class="line">a[<span class="number">0</span>]=<span class="number">1</span>,a[<span class="number">1</span>]=<span class="number">2</span>,a[<span class="number">2</span>]=<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>C语言对数组的初始化有以下几点规定：</p>
+<ol>
+<li><p><strong>可以只给部分数组元素赋初值</strong>。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">10</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只能给数组元素逐个赋值，不能给数组整体赋值。</p>
+</li>
+<li><p><strong>如果给全部元素赋值，则在数组声明中，可以不给出数组元素的个数</strong>。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="一维数组实例"><a href="#一维数组实例" class="headerlink" title="一维数组实例"></a>一维数组实例</h3><p>【实例】给定$n$个任意数，按由小到大对其排序，并输出排序结果。</p>
+<blockquote>
+<p>详细看数据结构部分（欠数据结构），经典的排序问题</p>
+</blockquote>
+<h1 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h1><h2 id="二维数组的定义和引用"><a href="#二维数组的定义和引用" class="headerlink" title="二维数组的定义和引用"></a>二维数组的定义和引用</h2><p>前面介绍的数组只有一个下标，称为一维数组，其数组元素也成为单下标变量。在实际问题中，很多问题是二维甚至是多维的，比如常见的矩阵就是二维的，因此C语言允许构造多维数组。</p>
+<h3 id="二维数组的定义"><a href="#二维数组的定义" class="headerlink" title="二维数组的定义"></a>二维数组的定义</h3><p>二维数组定义的语法格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//语法格式</span></span><br><span class="line">类型声明符 数组名[常量表达式<span class="number">1</span>][常量表达式<span class="number">2</span>];</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="type">int</span> a[<span class="number">2</span>][<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p><strong>其中，常量表达式1表示第一维的长度，常量表达式2表示第二维的长度</strong>。</p>
+<blockquote>
+<p>数组元素的个数&#x3D;常量表达式1 $\times$ 常量表达式2</p>
+</blockquote>
+<h3 id="二维数组的存储"><a href="#二维数组的存储" class="headerlink" title="二维数组的存储"></a>二维数组的存储</h3><p><strong>二维数组在概念上是二维的，比如说矩阵，但是其存储器单元是按一维线性排列的</strong>。在一维存储器中存放二维数组，有两种方式：一种是按行排列，即放完一行之后顺次放入第二行；另一种是按列排列，即放完一列之后再顺次放入第二列。<strong>在C语言中，二维数组是按行排列的</strong>。例如：<code>int x[2][3];</code></p>
+<p>先放第一行，即<code>x[0][0]</code>，<code>x[0][1]</code>，<code>x[0][2]</code>，再放第二行，即<code>x[1][0]</code>，<code>x[1][1]</code>，<code>x[1][2]</code>。如图：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb93c24d1b.png" alt="image-20220113212405628" style="zoom:80%;" />
+
+<h3 id="二维数组的引用"><a href="#二维数组的引用" class="headerlink" title="二维数组的引用"></a>二维数组的引用</h3><p>与一维数组一样，不能对一个二维数组整体进行引用，只能对具体的数据元素进行引用。语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组名[下标<span class="number">1</span>][下标<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>要注意下标越界问题，部分编译系统不会检查下标越界问题</p>
+</blockquote>
+<h3 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h3><p>二维数组的初始化即定义数组的同时对其元素赋值，初始化有两种方法：</p>
+<ol>
+<li><p><strong>把初始化值括在一对大括号内</strong>，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">2</span>][<span class="number">3</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>初始化的结果是：<code>x[0][0]=1</code>，<code>x[0][1]=2</code>，<code>x[0][2]=3</code>，<code>x[1][0]=4</code>，<code>x[1][1]=5</code>，<code>x[1][2]=6</code>。</p>
+</li>
+<li><p><strong>把多维数组分解成多个一维数组</strong>，也就是把二维数组看作是一种特殊的一维数组，该数组的每一个元素又是一个一维数组。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">2</span>][<span class="number">3</span>]=&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>说明：</p>
+<ol>
+<li><p><strong>可以只对部分元素赋值，未赋值的元素自动取0值</strong>。</p>
+</li>
+<li><p><strong>如果对全部元素赋初值，则第一维的长度可以不给出</strong>。例如，对二维数组初始化：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x[][<span class="number">3</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>即第一维度的长度可以省略，但是第二维度的长度不能省略。</p>
+</li>
+</ol>
+<h3 id="二维数组的应用实例"><a href="#二维数组的应用实例" class="headerlink" title="二维数组的应用实例"></a>二维数组的应用实例</h3><p>【实例】某公司2020年上半年产品销售统计表如下表所示，求每种产品的月平均销售量和所有产品的总月平均销售量。</p>
+<table>
+<thead>
+<tr>
+<th>月份</th>
+<th>产品A</th>
+<th>产品B</th>
+<th>产品C</th>
+<th>产品D</th>
+<th>产品E</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>30</td>
+<td>21</td>
+<td>50</td>
+<td>35</td>
+<td>42</td>
+</tr>
+<tr>
+<td>2</td>
+<td>35</td>
+<td>15</td>
+<td>60</td>
+<td>40</td>
+<td>40</td>
+</tr>
+<tr>
+<td>3</td>
+<td>32</td>
+<td>18</td>
+<td>56</td>
+<td>37</td>
+<td>50</td>
+</tr>
+<tr>
+<td>4</td>
+<td>40</td>
+<td>25</td>
+<td>48</td>
+<td>42</td>
+<td>48</td>
+</tr>
+<tr>
+<td>5</td>
+<td>36</td>
+<td>23</td>
+<td>52</td>
+<td>33</td>
+<td>46</td>
+</tr>
+<tr>
+<td>6</td>
+<td>41</td>
+<td>19</td>
+<td>55</td>
+<td>39</td>
+<td>52</td>
+</tr>
+</tbody></table>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> A[<span class="number">5</span>][<span class="number">6</span>] =&#123;  &#123;<span class="number">30</span>, <span class="number">35</span>, <span class="number">32</span>, <span class="number">40</span>, <span class="number">36</span>, <span class="number">41</span>&#125; ,  </span><br><span class="line">                    &#123;<span class="number">21</span>, <span class="number">15</span>, <span class="number">18</span>, <span class="number">25</span>, <span class="number">23</span>, <span class="number">19</span>&#125;,   </span><br><span class="line">                    &#123;<span class="number">50</span>, <span class="number">60</span>, <span class="number">56</span>, <span class="number">48</span>, <span class="number">52</span>, <span class="number">55</span>&#125;,   </span><br><span class="line">                    &#123;<span class="number">35</span>, <span class="number">40</span>, <span class="number">37</span>, <span class="number">42</span>, <span class="number">33</span>, <span class="number">39</span>&#125;,   </span><br><span class="line">                    &#123;<span class="number">42</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">48</span>, <span class="number">46</span>, <span class="number">52</span>&#125;</span><br><span class="line">                    &#125;;</span><br><span class="line">    <span class="type">float</span> yuePing;  <span class="comment">//每种产品的月平均销售量</span></span><br><span class="line">    <span class="type">float</span> zongYue;  <span class="comment">//所有产品的总月平均销售量</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            yuePing += A[i][j];	<span class="comment">//产品总和</span></span><br><span class="line">            <span class="keyword">if</span> (j==<span class="number">5</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;产品%d月平均销售量为：%.2f\n&quot;</span>,i+<span class="number">1</span>,yuePing/<span class="number">6</span>);</span><br><span class="line">                zongYue += yuePing/<span class="number">6</span>;	<span class="comment">//每件产品总和的和</span></span><br><span class="line">                yuePing = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span> (i+<span class="number">1</span>==<span class="number">5</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;所有产品月平均销售量为：%.2f&quot;</span>, zongYue/<span class="number">5</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb941b54a7.png" alt="image-20220115162021891" style="zoom:80%;" /></p>
+<h1 id="字符数组和字符串"><a href="#字符数组和字符串" class="headerlink" title="字符数组和字符串"></a>字符数组和字符串</h1><p>前面说明的都是数值型数组，即数组元素都是数值。<strong>还有一种数组，其每个元素都是字符，也就是说数组元素的数据类型是<code>char</code>，初次之外与数值型数组没有区别</strong>。</p>
+<p>字符串应用广泛，但是C语言中没有专门的字符串类型，<strong>字符串是存放在字符数组中的</strong>。</p>
+<h2 id="字符数组的定义和初始化"><a href="#字符数组的定义和初始化" class="headerlink" title="字符数组的定义和初始化"></a>字符数组的定义和初始化</h2><p>字符型数组的语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//语法格式</span></span><br><span class="line"><span class="type">char</span> 数组名[字符个数];</span><br><span class="line"><span class="comment">//代码示例</span></span><br><span class="line"><span class="type">char</span> c[<span class="number">2</span>]=&#123;<span class="string">&quot;ch&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>**字符数组也可以是二维或者多维数组，例如：<code>char c[2][2]</code>**。</p>
+<p>同样，字符数组也允许在定义时进行初始化赋值，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符常量赋值</span></span><br><span class="line"><span class="type">char</span> c[<span class="number">6</span>]=&#123;<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>&#125;;</span><br><span class="line"><span class="comment">//字符串常量赋值</span></span><br><span class="line"><span class="type">char</span> c[<span class="number">5</span>]=&#123;<span class="string">&quot;Hello&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>**字符型数组初始化时，提供的数据个数如果小于数组元素的个数，则多余的数组元素初始化为空字符<code>\0</code>，而数值型数组初始化为<code>0</code>**。</p>
+<blockquote>
+<p><code>\0</code>在C语言中定义为<code>NULL</code>，即空字符</p>
+</blockquote>
+<p>【实例】编写程序，输出”Hello,world”。</p>
+<p>【代码示例】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码一</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">12</span>]=&#123;<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;\,&#x27;</span>,<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;d&#x27;</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//代码二</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">12</span>]=&#123;<span class="string">&quot;Hello,world&quot;</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb94822f22.png" alt="image-20220115171917918" style="zoom:80%;" /></p>
+<blockquote>
+<p>如果你足够细心的话，会发现，<strong>字符数组的长度多余实际字符长度</strong>，详细原因见字符串</p>
+</blockquote>
+<p>【关于字符数组长度&#x3D;初始化字符长度问题】</p>
+<p>如果你使用如下代码输出，就会发现一些奇怪的输出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">5</span>] = &#123;<span class="string">&quot;Hello&quot;</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, c);    <span class="comment">//输出全部字符数组</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上代码所示，规定5个字符，但是初始化的时候就给5个字符，按照之前说的<code>printf</code>函数必须遇到<code>\0</code>才会停止输出。那么在GCC编译器上，输出的结果为：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb94c37a1b.png" alt="image-20220115202945078" style="zoom:80%;" /></p>
+<p>在Visual Studio 2019 IDE上的输出结果为：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb94f8b715.png" alt="image-20220115203201315" style="zoom:80%;" /></p>
+<p>这也是著名的“烫烫烫”问题，详细原因可以参考<a href="httpss://zhuanlan.zhihu.com/p/92004659">烫烫烫烫烫烫！ - 汇智动力IT学院的文章 - 知乎</a>。</p>
+<p><strong>简单来说，对于编译器来说，一次编译过程中会做很多初始化的工作，在这个工作中为了对内存的高效合理化应用，会提前在没用的内存或者需要调度它用的内存写入一些字符来标识，当发生内存溢出的时候，这些本来标识的字符被当作数据处理，例如中文处理，在中文编码就变成了“烫烫烫”</strong>。</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>前面说明字符串常量时，说明了对于实际字符小于声明字符长度的，其余字符会被<code>\0</code>赋值。因此<strong>C编译器以<code>\0</code>来判断字符串是否结束，而不是通过字符长度来判断字符串长度</strong>。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c[<span class="number">6</span>]=&#123;<span class="string">&quot;China&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>赋值结果为：数组<code>c</code>含有6个字符，前五个组成”China”，最后一位字符为<code>\0</code>，即空字符。</p>
+<p>需要注意的是：</p>
+<ol>
+<li><p>初始化字符数组时不可以超出数组长度</p>
+</li>
+<li><p><strong>用字符串常量初始化时，字符数组长度可以省略，其数组存放字符个数由赋值的字符串长度决定</strong>。</p>
+<blockquote>
+<p>实际长度&#x3D;实际字符长度+1（<code>\0</code>）</p>
+</blockquote>
+</li>
+<li><p><strong>用字符常量初始化时，如果省略字符数组长度，则实际长度&#x3D;实际字符长度</strong>。</p>
+</li>
+</ol>
+<h2 id="字符数组的输入和输出"><a href="#字符数组的输入和输出" class="headerlink" title="字符数组的输入和输出"></a>字符数组的输入和输出</h2><p>字符数组的输入和输出有两种方法：<strong>一种是逐个把字符输入&#x2F;输出，另一种方法是整个字符串一次输入&#x2F;输出</strong>。</p>
+<p>**<code>scanf</code>&#x2F;<code>printf</code>函数可以输入&#x2F;输出任何类型的数据，若要输入&#x2F;输出字符，则格式为<code>%c</code>，若要输入&#x2F;输出字符串，格式为<code>%s</code>**。</p>
+<ol>
+<li><p>字符数组的输入。从键盘逐个读取字符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,字符数组元素地址);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从键盘读取一串字符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,字符数组名);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符数组的输出。从键盘逐个输出字符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,字符数组元素地址);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从键盘输出一串字符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,字符数组名);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>需要注意的是，输出字符串时，遇到<code>\0</code>则结束。</p>
+</blockquote>
+<p>【<strong>关于输入字符串超出数组字符长度问题</strong>】</p>
+<p>问题源于如下代码，代码很简单，输入字符串，输出字符串：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">3</span>];	<span class="comment">//定义字符数组</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, c);	<span class="comment">//输入字符存储字符数组</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, c);	<span class="comment">//输入字符输出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们正常按照字符数量输入字符，则输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb954afb51.png" alt="image-20220115193556578" style="zoom:80%;" /></p>
+<p>但是如果我们故意多输入一些字符，则输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb957c2db2.png" alt="image-20220115193639617" style="zoom:80%;" /></p>
+<p>首先我们需要明确几点规则：</p>
+<ol>
+<li><strong>对于字符数组，每个字符数组最后一位一定是一个<code>\0</code>字符</strong>。</li>
+<li><strong>对于<code>printf()</code>函数来说，输出字符是自动截取到<code>\0</code>字符</strong>。</li>
+<li><strong>对于数组溢出问题，不在C编译器的预编译报错范围</strong>，也就是说数组溢出问题需要程序员自行负责。</li>
+</ol>
+<p><strong>所以对于直接获取字符串输入来说，获取多少编译器就在最后+<code>\0</code>字符，然后<code>printf</code>函数输出字符串，是读取到<code>\0</code>才会停止，导致即使超出字符数组长度，也可以原样输出的原因</strong>。</p>
+<p>那么问题升级一下，如果我在输入字符串的时候，输入了空格会怎么办？代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">5</span>];  <span class="comment">//容纳5个字符</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, c); <span class="comment">//输入字符串</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d \n&quot;</span>, c[<span class="number">3</span>]); <span class="comment">//输出第四个字符串</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, c);    <span class="comment">//输出全部字符数组</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb95cf3e80.png" alt="image-20220115195643582" style="zoom:80%;" /></p>
+<blockquote>
+<p>0对应的是<a target="_blank" rel="noopener" href="https://c.biancheng.net/c/ascii/">ASCII</a>码的<code>NULL</code>，即空字符，也就是C语言的<code>\0</code>。</p>
+</blockquote>
+<p>可以看到，<strong>如果我们在输入字符串的时候，输入空格，那么空格会被默认为<code>\0</code>字符，即<code>NULL</code>（空字符）</strong>。那么，我们真的想要输出空格怎么办？</p>
+<p><strong>可以使用<code>%[^\n]</code>来告诉输入函数，以回车作为字符串输入的结束</strong>。对于上面的代码，我们修改后：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">5</span>];  <span class="comment">//容纳5个字符</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%[^\n]&quot;</span>, c); <span class="comment">//输入字符串</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d \n&quot;</span>, c[<span class="number">3</span>]); <span class="comment">//输出第四个字符串</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, c);    <span class="comment">//输出全部字符数组</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【输出】<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb960d7548.png" alt="image-20220115200213805" style="zoom:80%;" /></p>
+<p>可以得知，32是<a target="_blank" rel="noopener" href="https://c.biancheng.net/c/ascii/">ASCII</a>的空格字符。在输入的时候，我们规定编译器在回车的地方认为是字符串的结束，即在该处加上了<code>\0</code>字符，这样就解决了这个问题。</p>
+<h2 id="字符串处理函数"><a href="#字符串处理函数" class="headerlink" title="字符串处理函数"></a>字符串处理函数</h2><p>**在C语言标准库函数中，提供了一些专门用于处理字符串的函数，常用的有<code>gets()</code>,<code>puts()</code>,<code>strlen()</code>,<code>strcmp()</code>,<code>strlwr</code>,<code>strupr()</code>,<code>strcat()</code>,<code>strcpy()</code>,<code>strncpyy()</code>**函数。</p>
+<blockquote>
+<p>在使用这些函数之前，需要引入专门的函数库，即<code>#include &lt;string.h&gt;</code></p>
+</blockquote>
+<ol>
+<li><p><strong><code>gets()</code>，<code>puts()</code>是字符串输入&#x2F;输出函数</strong>。</p>
+<p>其中，<code>gets()</code>函数是字符串输入函数。语法格式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gets(字符数组名);</span><br></pre></td></tr></table></figure>
+
+<p>函数功能：获取输入的字符串到指定变量中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">puts</span>(字符数组名);</span><br></pre></td></tr></table></figure>
+
+<p>函数功能：输出指定字符串，同<code>printf</code>，也是截取到字符<code>\0</code>。</p>
+</li>
+<li><p><strong><code>strlen()</code>函数事获取字符串长度函数</strong>。语法格式如下：</p>
+<blockquote>
+<p><code>strlen</code>是英文<code>string length</code>的缩写，即字符串长度。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strlen</span>(字符数组名);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在Visual Studio 2019 编译器上是截取<code>\0</code>之前的字符实际长度，而在GCC编译器中，是截取全部的字符长度，即包含<code>\0</code>字符的长度。（修正：如果字符数组长度没有大于实际长度1位，这输出的长度包含<code>\0</code>字符，即实际长度+1，反之，这输出正确的数组实际长度）</p>
+</blockquote>
+</li>
+<li><p><strong><code>strcmp()</code>函数是字符串比较函数</strong>。语法格式如下：</p>
+<blockquote>
+<p><code>strcmp</code>是英文<code>string compare</code>的缩写，即字符串比较。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcmp</span>(字符数组<span class="number">1</span>，字符数组<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>函数功能：<strong>将两个字符数组的字符串从左到右逐个比较，比较字符的ASCII码大小，并由函数返回值返回比较结果</strong>。（<strong>字符串的比较原理：每个字符串ASCII码的和做比较</strong>）</p>
+<ul>
+<li>字符串1&#x3D;字符串2，返回值&#x3D;0</li>
+<li>字符串1&gt;字符串2，返回值&gt;0</li>
+<li>字符串1&lt;字符串2，返回值&lt;0</li>
+</ul>
+<p>【大坑说明】</p>
+<p>注意这里有个大坑，如果我们常规的字符数组初始化<code>char c[2]=&#123;&quot;he&quot;&#125;;</code>末尾没有<code>\0</code>字符，则编译器在获取该字符串的时候会溢出，也就是说编译器底层获取的<code>c[2]</code>实际的值已经不是<code>he</code>了。而对于<code>scanf()</code>&#x2F;<code>puts()</code>来说，它会自动在最后加上<code>\0</code>字符，所以不会出现这种问题。</p>
+<blockquote>
+<p>当初始化字符数组规定字符&#x3D;实际赋值，这会出现<code>\0</code>字符丢失，如果按照C语言规定，初始化数组时规定字符&gt; 实际初始化赋值一位，则不会出现这个问题</p>
+</blockquote>
+</li>
+<li><p><strong><code>strlwr()</code>和<code>strupr()</code>函数，是字符串大小写转换函数</strong>。函数语法格式如下：</p>
+<blockquote>
+<p><code>strlwr</code>是英文<code>string lower</code>(case)的缩写，即字符串小写（字母）</p>
+<p><code>struper</code>是英文<code>string upper</code>(case)的缩写，即字符串大写（字母）</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//转换小写字母函数</span></span><br><span class="line">   strlwr(字符数组名);</span><br><span class="line">   <span class="comment">//转换大写字母函数</span></span><br><span class="line">   strupr(字符数组名);</span><br></pre></td></tr></table></figure>
+
+<p>代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line">   <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line">   <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">       <span class="type">char</span> c[<span class="number">6</span>] = &#123;<span class="string">&quot;hello&quot;</span>&#125;;	<span class="comment">//小写字母初始化</span></span><br><span class="line">       <span class="type">char</span> b[<span class="number">6</span>] = &#123;<span class="string">&quot;HELLO&quot;</span>&#125;;	<span class="comment">//大写字母初始化</span></span><br><span class="line">       <span class="built_in">puts</span>(strupr(c));	<span class="comment">//转换为大写</span></span><br><span class="line">       <span class="built_in">puts</span>(strlwr(b));	<span class="comment">//转换为小写</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb965ca450.png" alt="image-20220115215932091" style="zoom:80%;" /></p>
+</li>
+<li><p><strong><code>strcat()</code>是字符串连接函数</strong>。语法格式如下：</p>
+<blockquote>
+<p><code>strcat</code>是英文<code>string catenate</code>的缩写，即字符串连接。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcat</span>(字符数组名<span class="number">1</span>，字符数组名<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数功能：把字符数组2中的字符串连接到字符数组1中字符串的后面，并删去字符串1后的串标志<code>\0</code>。函数返回值为字符数组1的首地址</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">16</span>] = &#123;<span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> b[<span class="number">6</span>] = &#123;<span class="string">&quot;HELLO&quot;</span>&#125;;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="built_in">strcat</span>(c, b));	<span class="comment">//拼接字符串数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9697cbf9.png" alt="image-20220115223420492" style="zoom:80%;" /></p>
+<blockquote>
+<p>需要注意的是，合并字符数组时，第一个字符数组的长度要足够长，否则不足以容纳全部字符数组2</p>
+</blockquote>
+</li>
+<li><p><strong><code>strcpy()</code>&#x2F;<code>strncpy()</code>是字符串复制函数</strong>。语法格式如下：</p>
+<blockquote>
+<p><code>strcpy</code>是英文<code>string copy</code>的缩写，即字符串复制。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//复制全部字符数组</span></span><br><span class="line"><span class="built_in">strcpy</span>(字符数组<span class="number">1</span>,字符数组<span class="number">2</span>);</span><br><span class="line"><span class="comment">//复制指定长度的字符串数组</span></span><br><span class="line"><span class="built_in">strncpy</span>(字符数组<span class="number">1</span>,字符数组<span class="number">2</span>,n);</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数功能：（<code>strcpy</code>）把字符数组2中的字符串复制到字符组1中。串结束标志<code>\0</code>也一同复制；（<code>strncpy</code>）把字符数组2中的前n个字符复制到字符数组1中，取代字符数组1中原有的前n个字符</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//strcpy</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">6</span>] = &#123;<span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> b[<span class="number">6</span>] = &#123;<span class="string">&quot;HELLO&quot;</span>&#125;;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="built_in">strcpy</span>(c, b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb96d9a226.png" alt="image-20220116160131040" style="zoom:80%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//strncpy</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">16</span>] = &#123;<span class="string">&quot;helloleoleiming&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> b[<span class="number">6</span>] = &#123;<span class="string">&quot;HELLO&quot;</span>&#125;;</span><br><span class="line">    <span class="built_in">strncpy</span>(c,b,<span class="number">6</span>);	<span class="comment">//复制字符数组b前六个字符到C</span></span><br><span class="line">    c[<span class="number">6</span>] = <span class="string">&#x27;\0&#x27;</span>;	<span class="comment">//将c的第七个字符变为结束字符“\0”</span></span><br><span class="line">    <span class="built_in">puts</span>(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb97154e63.png" alt="image-20220116163403734" style="zoom:80%;" /></p>
+<p>如果你足够细心，会疑问直接复制不可以吗？为什么要多此一举？**实际上<code>strncpy</code>函数不会给末尾加上结束符号，即<code>\0</code>**。所以需要手动添加。</p>
+<blockquote>
+<p>我在GCC编译器上测试这样是可以通过的，但是在Visual Studio 2019上测试不通过，原因还是上面提到的<strong>实际上<code>strncpy</code>函数不会给末尾加上结束符号，即&#96;\0</strong>。</p>
+</blockquote>
+<ul>
+<li>个人感觉这是个历史遗留问题，此方法暂时不建议使用。</li>
+</ul>
+</li>
+</ol>
+<h2 id="字符数组应用实例"><a href="#字符数组应用实例" class="headerlink" title="字符数组应用实例"></a>字符数组应用实例</h2><p>【实例】编程实现凯撒加密，即是将加密文本中的每个字符替换成为其后面的第k个字符。</p>
+<p>【代码示例】【伪装凯撒加密】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 100 <span class="comment">//设置最大加密字符</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Bit 12 <span class="comment">//设置加密位数</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入加密文本：&quot;</span>);</span><br><span class="line">    <span class="type">char</span> text[MAX]; <span class="comment">//定义加密字符变量</span></span><br><span class="line">    gets(text); <span class="comment">//获取字符</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(text); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        text[i] += Bit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;加密后的文本为：%s&quot;</span>,text);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9755894a.png" alt="image-20220116164848886" style="zoom:80%;" /></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/02/16/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%905.0%E3%80%91%E6%95%B0%E7%BB%84/">https://www.helloseraphine.top/2022/02/16/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%905.0%E3%80%91%E6%95%B0%E7%BB%84/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb92be2bb6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/12/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%904.0%E3%80%91%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/" title="【4.0】C-循环结构及其应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb8c89ff9a.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【4.0】C-循环结构及其应用</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/18/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%906.0%E3%80%91%E5%87%BD%E6%95%B0/" title="【6.0】C-函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb9a2027ce.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【6.0】C-函数</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">2.</span> <span class="toc-text">一维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">一维数组的定义和引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">一维数组的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">2.1.2.</span> <span class="toc-text">一维数组元素的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.3.</span> <span class="toc-text">一维数组元素的引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">一维数组的初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%AE%9E%E4%BE%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">一维数组实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%BC%95%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">二维数组的定义和引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.1.</span> <span class="toc-text">二维数组的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">3.1.2.</span> <span class="toc-text">二维数组的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">3.1.3.</span> <span class="toc-text">二维数组的引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.1.4.</span> <span class="toc-text">二维数组的初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-number">3.1.5.</span> <span class="toc-text">二维数组的应用实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">4.</span> <span class="toc-text">字符数组和字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.1.</span> <span class="toc-text">字符数组的定义和初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">4.2.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E7%9A%84%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA"><span class="toc-number">4.3.</span> <span class="toc-text">字符数组的输入和输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">字符串处理函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-number">4.5.</span> <span class="toc-text">字符数组应用实例</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

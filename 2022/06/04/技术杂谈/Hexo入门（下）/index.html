@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo入门（下） | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言这部分将着手Hexo的一些基本的配置和使用方面，关于Hexo的部署部分可以参考我的上篇文章。 Hexo文件目录Hexo的安装&#x2F;初始化目录如下图所示，可能部分文件存在不同，不需要担心，只需要关心我框出来的红色的文件部分：      文件&#x2F;文件夹名 说明    public 我们最后生成的静态博客.html文件会在该目录下存在，如果你并为生成或者使用了hexo clean命令，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo入门（下）">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8B%EF%BC%89/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言这部分将着手Hexo的一些基本的配置和使用方面，关于Hexo的部署部分可以参考我的上篇文章。 Hexo文件目录Hexo的安装&#x2F;初始化目录如下图所示，可能部分文件存在不同，不需要担心，只需要关心我框出来的红色的文件部分：      文件&#x2F;文件夹名 说明    public 我们最后生成的静态博客.html文件会在该目录下存在，如果你并为生成或者使用了hexo clean命令，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2e34cb7c.webp">
+<meta property="article:published_time" content="2022-06-04T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:51:26.489Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2e34cb7c.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8B%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo入门（下）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:51:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2e34cb7c.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Hexo入门（下）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-04T15:30:01.000Z" title="发表于 2022-06-04 23:30:01">2022-06-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:51:26.489Z" title="更新于 2023-07-14 21:51:26">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Hexo入门（下）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这部分将着手Hexo的一些基本的配置和使用方面，关于Hexo的部署部分可以参考我的上篇文章。</p>
+<h1 id="Hexo文件目录"><a href="#Hexo文件目录" class="headerlink" title="Hexo文件目录"></a>Hexo文件目录</h1><p>Hexo的安装&#x2F;初始化目录如下图所示，可能部分文件存在不同，不需要担心，<strong>只需要关心我框出来的红色的文件部分</strong>：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2eae123b.png" alt="image-20220604161631343" style="zoom:80%;" />
+
+<table>
+<thead>
+<tr>
+<th>文件&#x2F;文件夹名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>public</code></td>
+<td>我们最后生成的静态博客<code>.html</code>文件会在该目录下存在，如果你并为生成或者使用了<code>hexo clean</code>命令，则该文件夹不存在</td>
+</tr>
+<tr>
+<td><code>scaffolds</code></td>
+<td>模板文件夹，里面存在我们创建文章，分类等初始化的默认内容</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>文章以及一些主要内容的文件夹，该文件夹下的内容会被全部拷贝到生成的<code>public</code>文件夹里</td>
+</tr>
+<tr>
+<td><code>themes</code></td>
+<td>主题文件夹，我们下载使用的主题需要导入到该文件夹中，通过在该文件夹下创建命名为主题名称的文件夹即可</td>
+</tr>
+<tr>
+<td><code>_config.yml</code></td>
+<td>Hexo的配置文件</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：Hexo的配置文件和主题的配置文件不要混淆，如果你使用别人的主题则会存在一个对应的主题的配置文件</p>
+</blockquote>
+<h1 id="配置文件参数"><a href="#配置文件参数" class="headerlink" title="配置文件参数"></a>配置文件参数</h1><blockquote>
+<p><strong>yaml文件的参数填写时一定要在<code>:</code>后加一个空格，再填写参数</strong></p>
+</blockquote>
+<p>在了解了Hexo 的文件目录后，我对一些常见的配置文件参数进行说明，以供参考。</p>
+<h2 id="Site"><a href="#Site" class="headerlink" title="Site"></a>Site</h2><p>Site部分主要是网站一些基本说明参数。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site 【网站设置】</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">这是一个主标题</span> <span class="comment">#【网站主标题】就是网站最上面标签上的文字</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;这是一个子标题&#x27;</span> <span class="comment">#【子标题】跟在主标题后面</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;这是一句描述&#x27;</span> <span class="comment">#【网站描述】不同主题可能会呈现位置效果不同</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="comment">#【网站关键词】如果希望百度等搜索引擎收录网站，可以设置自己网站的关键词</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">我是作者名字</span> <span class="comment">#【作者名称】一般文章结束说明以及最后的版权归属会使用该名称</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment">#【网站语言】可以选择简体（zh-CN），繁体（zh-tw），英文（en）</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span> <span class="comment">#【时区】网站时间，如果是中国，则使用左边的参数即可</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p>URL部分参数的设置，涉及到Hexo最后部署后的呈现成功与否，参数说明如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;httpss://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">httpss://www.baidu.com/</span> <span class="comment">#【访问网站的网址】</span></span><br><span class="line"><span class="attr">root:</span> <span class="comment">#【根目录位置】</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">  <span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span></span><br><span class="line">  <span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果你部署到GitHub上，则<code>url</code>的参数填写，GitHub提供的地址，<code>root</code>参数填写你的仓库名称，例如：<code>/仓库名称</code>；如果你使用了自定义的域名，则需要将这里<code>url</code>的参数改为你的自定义域名，<code>root</code>参数为空即可（前提是你的网站初始<code>index.html</code>文件就在仓库下，而不是被文件夹嵌套在里面）</strong>。</p>
+<blockquote>
+<p><strong>如果上述参数设置不正确，则会出现访问网站只有内容，而丢失样式</strong>，即排版不正常的情况出现</p>
+</blockquote>
+<h2 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h2><p><strong>Directory规定了相关文件生成&#x2F;获取的路径</strong>，我们可以通过修改其参数来指定相关文件生成的目录，而不是默认的hexo安装目录下，参数说明如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Directory</span></span><br><span class="line"><span class="attr">source_dir:</span> <span class="string">D:\DATA\TyporaMd\z_hexo_source</span> <span class="comment">#【数据源文件夹】你可以理解为你写文章的目录，默认为Source，此处我将它自定义到如上参数路径下，则在编译生成网站静态文件的时候就会从我指定目录下获取数据编译</span></span><br><span class="line"><span class="attr">public_dir:</span> <span class="string">public</span></span><br><span class="line"><span class="attr">tag_dir:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">archive_dir:</span> <span class="string">archives</span></span><br><span class="line"><span class="attr">category_dir:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">code_dir:</span> <span class="string">downloads/code</span></span><br><span class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span></span><br><span class="line"><span class="attr">skip_render:</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="theme"><a href="#theme" class="headerlink" title="theme"></a>theme</h2><p><strong>theme参数主要是指定网站的主题</strong>，传入主题名称即可，前提是网站主题已经导入到主题文件夹下，且和主题文件夹同名。参数说明：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: httpss://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: httpss://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span> <span class="comment">#【主题的名称】</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="插件和主题的配置"><a href="#插件和主题的配置" class="headerlink" title="插件和主题的配置"></a>插件和主题的配置</h1><p>插件和主题的配置，可以在后面熟悉上手之后进行配置，可以选择不配置使用默认主题。</p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>网站的美化可以使用别人已经开发的主题来快速实现，主题可以通过Hexo官网获取<a href="httpss://hexo.io/zh-cn/">Hexo官网</a>，或者从Github，百度等其他渠道获取使用。</p>
+<p>主题的下载安装可以根据主题的说明文档来，<strong>需要注意的是，主题需要在Hexo指定的主题文件夹下存放，且每个主题都需要是一个文件夹</strong>。</p>
+<p>关于主题配置的实例，可以参考本站，本站使用的是<code>buttfly</code>主题，<a href="httpss://butterfly.js.org/posts/21cfbf15/">主题地址</a>，希望大家可以给源作者一个Star支持一下。</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>插件也同理，找到需要的插件，查看插件的文档，对插件进行相关配置。</p>
+<p>插件的使用，本站使用了如下插件：</p>
+<ol>
+<li>本地搜索感谢 hexo-generator-search 提供支持</li>
+<li>评论系统感谢 waline 提供支持</li>
+<li>网站统计感谢  百度统计 提供支持</li>
+<li>数学公式感谢 mathjax 提供支持</li>
+<li>番剧列表感谢 hexo-bilibili-bangumi 提供支持</li>
+<li>视频插件感谢 hexo-tag-mmedia 提供支持</li>
+<li>文章自动分类感谢 hexo-auto-category 提供支持</li>
+<li>游戏展示感谢 hexo-steam-games 提供支持</li>
+<li>电影书籍音乐展示感谢 HEXO-DOUBAN-CARD 提供支持</li>
+</ol>
+<h1 id="文章编写和发布"><a href="#文章编写和发布" class="headerlink" title="文章编写和发布"></a>文章编写和发布</h1><p><em>Hexo 支持以任何格式书写文章，只要安装了相应的渲染插件</em></p>
+<p>如上引用自Hexo官方说明，Hexo默认安装了<code>hexo-renderer-marked</code> 和 <code>hexo-renderer-ejs</code>，所以<strong>默认支持使用<code>Markdown</code>进行写作</strong>，此处也使用<code>Markdown</code>写作来实例。</p>
+<p>可以使用如下命令来创建一篇新文章：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">语法格式</span></span><br><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一篇名称为 测试 的文章</span></span><br><span class="line">hexo new post 测试</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因为layout默认为post，所以上述命令可以简写为</span></span><br><span class="line">hexo new 测试</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一篇名称为 测试 的草稿</span></span><br><span class="line">hexo new draft 测试</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一页名称为 测试 的独立页面</span></span><br><span class="line">hexo new page 测试</span><br></pre></td></tr></table></figure>
+
+<p>例如，<strong>使用命令<code>hexo new 测试</code>，可以发现在<code>source</code>文件夹下，里的<code>_post</code>文件夹里生成了一个名称为<code>测试</code>的<code>.md</code>文件，该<code>.md</code>文件就可以直接使用<code>Markdown</code>语法来书写文章</strong>。</p>
+<blockquote>
+<p>如果你自定义了<code>source</code>文件夹的位置，则生成在自定义的<code>source</code>文件夹下<code>_post</code>文件夹里</p>
+</blockquote>
+<p>当你打开生成 的<code>测试.md</code>文件后，会发现它默认文件中生成了一部分<code>yaml</code>内容，如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">测试</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-06-04 18:02:30</span></span><br><span class="line"><span class="attr">updated:</span></span><br><span class="line"><span class="attr">top_img:</span></span><br><span class="line"><span class="attr">mathjax:</span></span><br><span class="line"><span class="attr">aplayer:</span></span><br><span class="line"><span class="attr">cover:</span></span><br><span class="line"><span class="attr">description:</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，你生成的文件中的内容或许没这么多，一般会有<code>title</code>，<code>tags</code>等参数，其他的参数是我通过修改模板文件来实现，生成新文章的时候自动预先生成相关参数。<strong>这些参数是对本篇文章的参数，它可以设置本篇文章的标题，文章标签，文章分类，文章封面图片，文章描述等等的参数。当然你也可以选择不填写这些参数，可以为空（标题除外）</strong>。</p>
+<blockquote>
+<p>关于模板文件可以查看下面的部分，此处不做过多赘述</p>
+</blockquote>
+<p>然后在上面<code>yaml</code>参数的下面，开始使用<code>Markdown</code>语法写我们的文章，现在使用如下内容：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 这是一个一级标题</span></span><br><span class="line"><span class="section">## 这是一个二级标题</span></span><br><span class="line"><span class="section">### 这是一个三级标题</span></span><br><span class="line"><span class="section">#### 这是一个四级标题</span></span><br><span class="line"><span class="bullet">*</span> 这是一个无序序号</span><br><span class="line"><span class="bullet">*</span> 这也是一个无序序号</span><br><span class="line"><span class="bullet">*</span> 这也是一个无序序号</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 这是一个引用说明</span></span><br><span class="line"></span><br><span class="line"><span class="strong">**这是黑体**</span></span><br><span class="line"><span class="emphasis">*这是斜体*</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 这是有序序号</span><br><span class="line"><span class="bullet">1.</span> 这也是有序序号</span><br><span class="line"><span class="bullet">1.</span> 这还是有序序号</span><br><span class="line"></span><br><span class="line">这是一个代码块</span><br><span class="line"><span class="code">```c</span></span><br><span class="line"><span class="code">printf(&quot;Hello World&quot;);</span></span><br><span class="line"><span class="code">```</span></span><br><span class="line"></span><br><span class="line">这是一个行内代码`</span><br></pre></td></tr></table></figure>
+
+<p>将上述内容保存后，就可以<strong>使用如下命令实现文章编译</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>如果你之前已经编译过了，生成新文章或者重新编译的时候，我们一般<strong>使用如下命令清除之前的编译文件</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">该命令清除public文件夹，即删除所有已编译过的文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后让Hexo重新编译新的静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者你可以使用 &amp; 符号来链接两个命令</span></span><br><span class="line">hexo clean &amp;&amp; hexo g</span><br></pre></td></tr></table></figure>
+
+<p>上述执行<code>hexo g</code>编译完成后，如果没有报错，则可以<strong>使用如下命令来本地查看编译效果</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">当然你也可以简写为</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>在本地查看效果无误后，<strong>使用如下命令推送到远程的GitHub仓库，来实现文章的更新</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>完成以上操作，则完成了文章的编写和推送更新发布，<strong>简述来说通过<code>hexo new 文章名称</code>创建文章文件，编写文章文件内容的，保存后，使用<code>hexo g</code>将其编译为静态文件，如果之前已经编译过一遍，一般通过使用<code>hexo clean</code>将之前编译的文件删除，再执行<code>hexo g</code>编译一份新的静态文件，然后使用<code>hexo s</code>来本地查看效果，使用<code>hexo d</code>将新编译的静态文件推送到远程仓库，这样就实现文章的更新</strong>。</p>
+<h1 id="模板文件"><a href="#模板文件" class="headerlink" title="模板文件"></a>模板文件</h1><p>在前面的Hexo文件目录中说明了模板文件的位置，在Hexo安装目录下的<code>scaffolds</code>文件夹下，里面会存在三个文件，如下说明，通过修改这三个文件的<code>yaml</code>内容部分，这样生成的相关类别的文章会默认包含该参数内容。</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>draft.md</code></td>
+<td>草稿文件的模板</td>
+</tr>
+<tr>
+<td><code>page.md</code></td>
+<td>独立页面的模板</td>
+</tr>
+<tr>
+<td><code>psot.md</code></td>
+<td>一般文章的模板</td>
+</tr>
+</tbody></table>
+<h1 id="其他内容"><a href="#其他内容" class="headerlink" title="其他内容"></a>其他内容</h1><h2 id="文章标签和分类"><a href="#文章标签和分类" class="headerlink" title="文章标签和分类"></a>文章标签和分类</h2><p>前面说明了，文章创建的时候自带的<code>yaml</code>参数可以修改其文章的属性，其中有一个给文章分类的参数，如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">测试</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">这是一个标签</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">这又是一个标签</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">这还是一个标签</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">这是一个分类</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">这是一个子分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-06-04 18:02:30</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="comment"># 如果你希望文章可以属于好几个类别，而不是主分类-子分类，则使用如下参数</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="string">这是一个分类</span>,<span class="string">这是一个子分类</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="GitHub使用自定义域名"><a href="#GitHub使用自定义域名" class="headerlink" title="GitHub使用自定义域名"></a>GitHub使用自定义域名</h2><p>如果你希望使用自定义域名来访问自己在GitHub上部署的网站，则可以在GitHub Page下，填写自己的自定义域名，然后解析到GitHub上，需要注意的是，<strong>在你添加自定义域名的时候，会在你的仓库下创建一个<code>CNAME</code>的文件，该文件只有一行内容，就是你的自定义域名</strong>。</p>
+<p><strong>因为每次使用<code>hexo d</code>上传到仓库文件的时候，Hexo的解决办法是将本地<code>public</code>文件夹下的文件去覆盖GitHub仓库，那就意味着你的<code>CNAME</code>文件将会被覆盖消失，那么你配置的自定义域名就会失效。</strong></p>
+<p><strong>你可以通过将<code>CNAME</code>文件创建在你本地的<code>source</code>文件夹下，则再每次使用<code>hexo g</code>编译的时候，<code>source</code>文件夹下的内容都会复制到<code>public</code>文件夹里，这样上传到GitHub上进行覆盖的时候就始终存在<code>CNAME</code>文件。</strong></p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>经过[[技术杂谈&#x2F;Hexo入门（上）|Hexo入门（上）]]和Hexo入门（下）后就可以完全自主的使用Hexo来编写和更新自己的文章了，关于本站的Hexo主题使用说明和插件说明，为了防止我自己忘记，我会写一篇备忘录来记录，内容来源是原主题&#x2F;插件开发者的说明文档。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8B%EF%BC%89/">https://www.helloseraphine.top/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8B%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf2e34cb7c.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/04/%E8%AF%AD%E8%A8%80%E6%A0%91/CSharp/%E3%80%90CSharp%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%91default%E5%92%8Ctypeof%E5%85%B3%E9%94%AE%E8%AF%8D/" title="【CSharp高级编程】default和typeof运算符"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb603adf0f.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【CSharp高级编程】default和typeof运算符</div></div></a></div><div class="next-post pull-right"><a href="/2022/06/04/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/Hexo%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%8A%EF%BC%89/" title="Hexo入门（上）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aaf25a54e16.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hexo入门（上）</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">Hexo文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%82%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">配置文件参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Site"><span class="toc-number">3.1.</span> <span class="toc-text">Site</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL"><span class="toc-number">3.2.</span> <span class="toc-text">URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Directory"><span class="toc-number">3.3.</span> <span class="toc-text">Directory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#theme"><span class="toc-number">3.4.</span> <span class="toc-text">theme</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%92%8C%E4%B8%BB%E9%A2%98%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">插件和主题的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">插件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%BC%96%E5%86%99%E5%92%8C%E5%8F%91%E5%B8%83"><span class="toc-number">5.</span> <span class="toc-text">文章编写和发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">模板文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E5%AE%B9"><span class="toc-number">7.</span> <span class="toc-text">其他内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB"><span class="toc-number">7.1.</span> <span class="toc-text">文章标签和分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-number">7.2.</span> <span class="toc-text">GitHub使用自定义域名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">8.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

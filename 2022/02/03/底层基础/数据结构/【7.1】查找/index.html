@@ -1,0 +1,426 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【7.1】查找 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言查找表：是一种数据集合（记录），可以理解为你要从哪里查找 查找表可以分为静态查找表和动态查找表  静态查找：只需要执行查找操作 动态查找：除了查找之外还需要增&#x2F;删除数据元素  顺序查找顺序查找是我们最开始，也是最熟悉的查找方式，就是一个一个查找（遍历）。 常规顺序查找又称“线性查找”，通常用于线性表。其查找模式是线性的。代码示例： 12345678910111213141516171">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【7.1】查找">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%907.1%E3%80%91%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言查找表：是一种数据集合（记录），可以理解为你要从哪里查找 查找表可以分为静态查找表和动态查找表  静态查找：只需要执行查找操作 动态查找：除了查找之外还需要增&#x2F;删除数据元素  顺序查找顺序查找是我们最开始，也是最熟悉的查找方式，就是一个一个查找（遍历）。 常规顺序查找又称“线性查找”，通常用于线性表。其查找模式是线性的。代码示例： 12345678910111213141516171">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae59ceb1c4.webp">
+<meta property="article:published_time" content="2022-02-03T15:30:01.000Z">
+<meta property="article:modified_time" content="2023-07-14T13:01:29.709Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae59ceb1c4.webp"><link rel="shortcut icon" href="https://img.helloseraphine.top:8089/blog/2023/07/10/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%907.1%E3%80%91%E6%9F%A5%E6%89%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【7.1】查找',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-14 21:01:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.helloseraphine.top:8089/blog/2023/07/10/64aae59ceb1c4.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【7.1】查找</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-03T15:30:01.000Z" title="发表于 2022-02-03 23:30:01">2022-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-14T13:01:29.709Z" title="更新于 2023-07-14 21:01:29">2023-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/">底层基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【7.1】查找"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>查找表：是一种数据集合（记录），可以理解为你要从哪里查找</p>
+<p>查找表可以分为<strong>静态查找</strong>表和<strong>动态查找表</strong></p>
+<ul>
+<li>静态查找：只需要执行查找操作</li>
+<li>动态查找：除了查找之外还需要增&#x2F;删除数据元素</li>
+</ul>
+<h1 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h1><p>顺序查找是我们最开始，也是最熟悉的查找方式，就是一个一个查找（遍历）。</p>
+<h2 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h2><p><strong>顺序查找又称“线性查找”，通常用于线性表</strong>。其查找模式是线性的。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> ElemType int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sTable</span>&#123;</span></span><br><span class="line">	ElemType a[MaxSize];</span><br><span class="line">	<span class="type">int</span> TableLen;</span><br><span class="line">&#125;STable;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顺序查找</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Serach_Seq</span><span class="params">(STable s,ElemType data)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.TableLen; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (data == s.a[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;下标为:%d&quot;</span>, i);</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="哨兵"><a href="#哨兵" class="headerlink" title="哨兵"></a>哨兵</h2><p>哨兵模式查找还是顺序查找，<strong>不过它将数组的 0 号元素空出来填充为需要查找的元素，查找方向改为从后向前查找</strong>。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//顺序查找——哨兵模式</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Serach_Seq2</span><span class="params">(STable s, ElemType data)</span> &#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = s.TableLen; data != s.a[i]; i--);</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="折半查找"><a href="#折半查找" class="headerlink" title="折半查找"></a>折半查找</h1><p>折半查找就是我们常说的<strong>二分查找</strong>，<strong>它只适用于有序的顺序表</strong>。</p>
+<p>二分查找需要借助最高位和最低位的指针，每次根据<code>low+high/2</code>结果向下取整，根据和<code>mid</code>指针指向的值大小比较，获取区间，依次比较到最后。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5a5c4ddd.png" alt="image-20220901082019481" style="zoom: 67%;" />
+
+<p>当比较到最后的时候，如下图所示，<strong>当<code>low</code>指针超过<code>high</code>指针的时候表示查找失败</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5a97e5b5.png" alt="image-20220901082556151" style="zoom: 67%;" />
+
+<p>其代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ElemType int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Maxsize 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span> &#123;</span></span><br><span class="line">	ElemType num;</span><br><span class="line">	ElemType data[Maxsize];</span><br><span class="line">&#125;List;</span><br><span class="line"></span><br><span class="line"><span class="comment">//二分查找——递归查找</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Binary_Serach</span><span class="params">(List l,ElemType sdata,<span class="type">int</span> low,<span class="type">int</span> high)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (low&lt;=high)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid = (high + low) / <span class="number">2</span>;	<span class="comment">//折半</span></span><br><span class="line">		<span class="keyword">if</span> (sdata&gt;l.data[mid])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> Binary_Serach(l, sdata, mid + <span class="number">1</span>, high);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (sdata&lt; l.data[mid])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> Binary_Serach(l, sdata, low, mid - <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	List l;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		l.data[i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	l.num = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;其位置为: %d&quot;</span>, Binary_Serach(l,<span class="number">3</span>,<span class="number">0</span>,<span class="number">9</span>)+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上是通过递归实现的二叉查找，由于递归的效率相对较低，如下使用迭代来实现二叉查找：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉查找——迭代</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Binary_Search2</span><span class="params">(List l,ElemType sdata)</span> &#123;</span><br><span class="line">	<span class="type">int</span> low = <span class="number">0</span>, high = l.num - <span class="number">1</span>, mid;</span><br><span class="line">	<span class="keyword">while</span> (low&lt;=high)</span><br><span class="line">	&#123;</span><br><span class="line">		mid = (high + low) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span> (sdata &lt; l.data[mid])</span><br><span class="line">		&#123;</span><br><span class="line">			high = mid - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(sdata &gt; l.data[mid])</span><br><span class="line">		&#123;</span><br><span class="line">			low = mid + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="分块查找"><a href="#分块查找" class="headerlink" title="分块查找"></a>分块查找</h1><p>分块查找查找思想如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5c04e04c.png" alt="image-20220903085157039" style="zoom:67%;" />
+
+<p>通过将数据分块划分大小，先判断数据区间，然后再到指定的数据区间进行顺序查找。</p>
+<h1 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h1><p>二叉排序树是利用了二叉树的结构，通过根节点来区分排序数据，如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5c40daf7.png" alt="image-20220903085942168" style="zoom: 80%;" />
+
+<p>其结构特点：<strong>左子树结点 &lt; 根节点值 &lt; 右子树结点值</strong></p>
+<blockquote>
+<p>前排提醒：二叉排序树的代码基础是在<a href="httpss://www.helloseraphine.top/2022/08/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%905-1%E3%80%91%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/">【5.1】树与二叉树</a>的基础上编写的</p>
+</blockquote>
+<h2 id="查找操作"><a href="#查找操作" class="headerlink" title="查找操作"></a>查找操作</h2><p>采用<strong>迭代搜索</strong>，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉排序树——迭代搜索</span></span><br><span class="line">TreeNode* <span class="title function_">BST_Serach</span><span class="params">(Tree t,<span class="type">int</span> sdata)</span> &#123;</span><br><span class="line">	TreeNode* tempnode = t;</span><br><span class="line">	<span class="keyword">while</span> (tempnode != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (sdata &lt; tempnode-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			tempnode = tempnode-&gt;lchild;	<span class="comment">//小于往左走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(sdata &gt;tempnode-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			tempnode = tempnode-&gt;rchild;	<span class="comment">//大于往右走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> tempnode;	<span class="comment">//找到了</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;	<span class="comment">//没找到</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>采用<strong>递归搜索</strong>，代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉排序树——递归搜索</span></span><br><span class="line">TreeNode* <span class="title function_">BST_Serach2</span><span class="params">(TreeNode* t, <span class="type">int</span> sdata)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (t!=<span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (sdata &lt;t-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> BST_Serach2(t-&gt;lchild, sdata);	<span class="comment">//小于往左走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(sdata &gt;t-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> BST_Serach2(t-&gt;rchild, sdata);	<span class="comment">//大于往右走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><p>当插入的值相同时则不允许插入，反之则类似于搜索，找到对应的位置插入。代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉树插入——迭代插入</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">BST_Insert</span><span class="params">(Tree* t, <span class="type">int</span> sdata)</span> &#123;</span><br><span class="line">	TreeNode* tempnode = (*t);</span><br><span class="line">	TreeNode* front = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span> (tempnode != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		front = tempnode;</span><br><span class="line">		<span class="keyword">if</span> (sdata &lt; tempnode-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			tempnode = tempnode-&gt;lchild;	<span class="comment">//小于往左走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (sdata &gt; tempnode-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			tempnode = tempnode-&gt;rchild;	<span class="comment">//大于往右走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;插入失败：已存在结点\n&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span> tempnode;	<span class="comment">//找到了</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	tempnode = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TreeNode));</span><br><span class="line">	tempnode-&gt;data = sdata;</span><br><span class="line">	tempnode-&gt;lchild = tempnode-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span> (sdata&lt; front-&gt;data)</span><br><span class="line">	&#123;</span><br><span class="line">		front-&gt;lchild = tempnode;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		front-&gt;rchild = tempnode;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;插入成功\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> tempnode;	<span class="comment">//没找到</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h2><p>二叉树的删除还要保证其二叉排序树的特性，则有三种情况：</p>
+<ul>
+<li><strong>删除的是叶子结点</strong>：直接删除即可</li>
+<li><strong>删除的结点只有左子树或者右子树</strong>：删除结点，然后让其子树替代它的位置即可</li>
+<li><strong>删除的结点存在左右子树</strong><ul>
+<li>选择将右子树的最小值（即删除节点右子结点的左结点）作为删除结点的新结点。</li>
+<li>也可以选择将左子树的最大值（即删除节点左子树的左结点）作为删除结点的新结点</li>
+</ul>
+</li>
+</ul>
+<p>代码示例如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉树删除</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">DeleteNode</span><span class="params">(Tree* t,<span class="type">int</span> ddata)</span> &#123;</span><br><span class="line">	TreeNode* delnode = (*t);	<span class="comment">//要删除的结点</span></span><br><span class="line">	TreeNode* delnodeF = <span class="literal">NULL</span>;	<span class="comment">//要删除的结点的父结点</span></span><br><span class="line">	TreeNode* newnode = <span class="literal">NULL</span>;	<span class="comment">//要替换删除的结点</span></span><br><span class="line">	TreeNode* newnodeF = <span class="literal">NULL</span>;	<span class="comment">//要替换删除的结点的父结点</span></span><br><span class="line">	<span class="keyword">while</span> (delnode !=<span class="literal">NULL</span> &amp;&amp; delnode-&gt;data!=ddata)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ddata &lt; delnode-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			delnodeF = delnode;	<span class="comment">//获取其父结点</span></span><br><span class="line">			delnode = delnode-&gt;lchild;	<span class="comment">//小于往左走</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(ddata &gt; delnode-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			delnodeF = delnode;	<span class="comment">//获取其父结点</span></span><br><span class="line">			delnode = delnode-&gt;rchild;	<span class="comment">//大于往右走</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//如果要删除的结点没找到</span></span><br><span class="line">	<span class="keyword">if</span> (delnode ==<span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;未查找到要删除的结点\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//如果要删除的结点存在左右子树</span></span><br><span class="line">	<span class="keyword">if</span> (delnode-&gt;lchild!=<span class="literal">NULL</span> &amp;&amp; delnode-&gt;rchild !=<span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		newnodeF = delnode-&gt;rchild;	<span class="comment">//让要替换删除结点的结点的父结点是删除结点的右孩子，因为我要用右子树的最小值替换删除结点</span></span><br><span class="line">		newnode = newnodeF-&gt;lchild;	<span class="comment">//暂时设定要替换删除的结点</span></span><br><span class="line">		<span class="keyword">while</span> (newnode-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			newnodeF = newnode;	<span class="comment">//获取其父结点</span></span><br><span class="line">			newnode = newnode-&gt;lchild;	<span class="comment">//一直往左走，直到最后一个</span></span><br><span class="line">		&#125;</span><br><span class="line">		delnode-&gt;data = newnode-&gt;data;	<span class="comment">//新结点替换要删除的结点</span></span><br><span class="line">		newnodeF-&gt;lchild = newnode-&gt;rchild;	<span class="comment">//要替换结点的父结点的左指针指向替换结点的右指针</span></span><br><span class="line">		<span class="built_in">free</span>(newnode);	<span class="comment">//释放结点</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//反之则要删除的结点要么是叶子结点要么存在一个子树</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//如果要删除的结点左子树为空</span></span><br><span class="line">		<span class="keyword">if</span> (delnode-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (delnodeF-&gt;lchild==delnode)</span><br><span class="line">			&#123;</span><br><span class="line">				delnodeF-&gt;lchild = delnode-&gt;lchild;	<span class="comment">//左子树成为替换的结点</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				delnodeF-&gt;rchild = delnode-&gt;lchild;	<span class="comment">//左子树成为替换的结点</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (delnodeF-&gt;lchild == delnode)</span><br><span class="line">			&#123;</span><br><span class="line">				delnodeF-&gt;lchild = delnode-&gt;rchild;	<span class="comment">//左子树成为替换的结点</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				delnodeF-&gt;rchild = delnode-&gt;rchild;	<span class="comment">//左子树成为替换的结点</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">free</span>(delnode);	<span class="comment">//释放结点</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;删除结点成功\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二叉平衡树"><a href="#二叉平衡树" class="headerlink" title="二叉平衡树"></a>二叉平衡树</h1><p>二叉平衡树是在二叉排序树的基础上做了一些改动，这些改动确保了二叉平衡树是“平衡”的，类似于最优哈夫曼树，其规定了：<strong>树上任一结点的左子树和右子树的高度之差不超过1</strong>如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5cad5b08.png" alt="image-20220904081205438" style="zoom:80%;" />
+
+<p><strong>结点的平衡因子 &#x3D; 左子树高 - 右子树高</strong></p>
+<h2 id="插入操作-1"><a href="#插入操作-1" class="headerlink" title="插入操作"></a>插入操作</h2><p>当我们对二叉平衡树做插入操作时，有概率将破坏平衡二叉树的平衡性，例如下图：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5ce8ad6a.png" alt="image-20220904083034248" style="zoom:80%;" />
+
+<p>我们<strong>通过对最小二叉不平衡树进行调整就可以达到二叉平衡树的结果</strong>。</p>
+<p>根据插入位置的不同而引起的“不平衡”，可以分为：</p>
+<ul>
+<li><strong>LL</strong>：新元素插在了某节点左孩子的左子树中</li>
+<li><strong>RR</strong>：新元素插在了某节点右孩子的右子树中</li>
+<li><strong>LR</strong>：新元素插在了某节点左孩子的右子树中</li>
+<li><strong>RL</strong>：新元素插在了某节点右孩子的左子树中</li>
+</ul>
+<p>其上各种情况的调整方法如下：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5d28a9c7.png" alt="image-20220904083519069" style="zoom:80%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>我个人认为可以通过<strong>将二叉树的数据进行排序，再组织二叉平衡树的方法会更加简单</strong>，或者说有规律。</p>
+<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><blockquote>
+<p>408 难民课程（🤣）</p>
+</blockquote>
+<p>红黑树也是一种二叉排序树的优化，它的诞生是<strong>由于对平衡二叉树的插入和删除很容易被破坏其平衡性</strong>，以至于不得不计算其平衡因子，来使其达到平衡，这样就<strong>导致了在插入和删除操作就需要耗费大量的时间开销</strong>。而<strong>对于红黑树来收，插入和删除很多时候不会破坏“红黑”特性</strong>，<strong>无需频繁调整；即使需要调整，也可以在常数级时间内完成</strong>。</p>
+<p><strong>红黑树的特性：</strong></p>
+<ul>
+<li><strong>左子树结点值 $\leqslant$  根节点的值 $\leqslant$ 右子树结点值</strong></li>
+<li><strong>每个结点或是红色，或是黑色</strong></li>
+<li><strong>根节点是黑色的</strong></li>
+<li><strong>叶结点（外部结点，NULL结点，失败结点）均是黑色的</strong></li>
+<li><strong>不存在两个相邻的红结点（即红结点的父结点和孩子结点均是黑色）</strong></li>
+<li><strong>对于每个结点，从该结点到任一叶结点的简单路径上，所含黑结点数目相同</strong></li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5d72c0f5.png" alt="image-20220904094302945" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>其结构体实现如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> ElemType int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">RBnode</span> &#123;</span></span><br><span class="line">	ElemType key;	<span class="comment">//数据</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">RBnode</span>* <span class="title">parent</span>;</span>	<span class="comment">//父结点指针</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">RBnode</span>* <span class="title">lchild</span>;</span>	<span class="comment">//左孩子指针</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">RBnode</span>* <span class="title">rchild</span>;</span>	<span class="comment">//右孩子指针</span></span><br><span class="line">	<span class="type">int</span> color;	<span class="comment">//结点颜色，可用0/1标识</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结点的黑高：从某结点出发（不含）到达任一空叶结点的路径上黑结点总数</li>
+</ul>
+<p>其性质：</p>
+<ul>
+<li><strong>从根结点到叶结点的最长路径不大于最短路径的 2 倍</strong></li>
+<li><strong>有 n 个内部结点的红黑树高度 $h \leq 2 log_2{(n+1)}$</strong></li>
+</ul>
+<p>红黑树还有最要么的<strong>插入和删除操作</strong>，十分繁琐，自行百度，谷歌查询，或者参考<a href="httpss://www.bilibili.com/video/BV1Pp4y1D7u1">【数据结构】红 黑 树</a> 。</p>
+<h1 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h1><p>B 树原理上和二叉排序树类似，例如如下图的 5 叉查找树所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5dc28be7.png" alt="image-20220905080219195" style="zoom: 67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>B 树，又称<strong>多路平衡查找树</strong>，与二叉平衡树不同的是，对于一棵 m 阶 B 树或者为空树，或者满足如下条件：</p>
+<ul>
+<li>树种<strong>每个结点最多有 m 棵子树</strong>，即<strong>至多含有 m-1 个关键字</strong>。</li>
+<li>若根结点不是终端结点，则至少有两颗子树（平衡）。</li>
+<li><strong>除根结点外所有非叶子结点至少有 $\frac{m}{2}$ 棵子树</strong>，即<strong>至少含有 $\frac{m}{2} -1$ 个关键字</strong>（向上取整）</li>
+<li><strong>所有叶子结点都出现在同一层上</strong>，且不携带信息（空结点，或者说失败结点）。</li>
+</ul>
+<h1 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h1><p>B+ 树类似于分块查找和 B 树的结合体，如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5e087f6f.png" alt="image-20220905080803627" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<p>一颗 m 阶的 B+ 树需要满足如下条件：</p>
+<ul>
+<li>每个分支结点最多有 m 棵子树</li>
+<li>非叶根结点至少有两颗子树，其他分支结点至少有 $\frac{m}{2}$ 棵子树（向上取整）</li>
+<li><strong>结点子树的个数与关键字相等</strong></li>
+<li><strong>所有叶结点包含全部关键字</strong>以及指向相应记录的指针，叶结点中将关键字按大小顺序排序，并且<strong>相邻叶结点按大小顺序相互连接起来</strong></li>
+</ul>
+<h1 id="散列查找"><a href="#散列查找" class="headerlink" title="散列查找"></a>散列查找</h1><p><strong>散列表（Hash Table），又称哈希表。其特点是：数据元素关键字与其存储地址直接相关</strong>。即通过一个散列函数，将关键字输入，输出其存储地址。</p>
+<p>如果不同关键字，通过散列函数映射到了同一个存储地址，则将这些关键字称为“同义词”。</p>
+<p>其存储地址已经有其他“同义词”存储了，这个情况称为“冲突”。</p>
+<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><h3 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h3><p>解决冲突的方法之一——<strong>拉链法</strong>。如下图所示，通过取余将数据映射在一个数组范围，而数组通过指针来存储数据，这样发生冲突后，将其链接下去即可。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5e4ad68c.png" alt="image-20220905082508256" style="zoom:67%;" />
+
+<blockquote>
+<p>图片来源：王道《数据结构》</p>
+</blockquote>
+<h3 id="开放定址法"><a href="#开放定址法" class="headerlink" title="开放定址法"></a>开放定址法</h3><p><strong>开放定址法是指可存放新关键字的空闲地址向它的同义词表项开放，也向非同义词表项开放</strong>。</p>
+<p>需要注意的是：<strong>使用开放定址法做删除操作的时候，需要进行逻辑上的删除</strong>，而不是物理上的删除</p>
+<h4 id="线性探测法"><a href="#线性探测法" class="headerlink" title="线性探测法"></a>线性探测法</h4><p><strong>即发生冲突时，每次往后探测相邻的下一个单元是否为空</strong>。</p>
+<p>如下图所示，如果散列映射出现冲突了，则向下寻找空位存放</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5e8ed0cf.png" alt="image-20220905084659096" style="zoom:80%;" />
+
+<p>线性探测法很<strong>容易造成同义词，非同义词“聚集（堆积）”现象</strong>，严重影响查找效率。</p>
+<h4 id="平方探测法"><a href="#平方探测法" class="headerlink" title="平方探测法"></a>平方探测法</h4><p>即<strong>当发生冲突的时候，每次寻址存放的时候按照：$d_i &#x3D; 0^2,1^2,-1^2,2^2,-2^2…$</strong> 方式寻址存放。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5ec24b24.png" alt="image-20220905085308600" style="zoom:80%;" />
+
+
+
+<h4 id="伪随机序列法"><a href="#伪随机序列法" class="headerlink" title="伪随机序列法"></a>伪随机序列法</h4><p>即发生冲突的时候，使用伪随机序列进行寻址存放。</p>
+<h3 id="再散列法"><a href="#再散列法" class="headerlink" title="再散列法"></a>再散列法</h3><p><strong>即如果发生冲突，则对散列值进行二次散列计算</strong>，直到不冲突为止。</p>
+<h2 id="常用散列函数"><a href="#常用散列函数" class="headerlink" title="常用散列函数"></a>常用散列函数</h2><h3 id="除留余数法"><a href="#除留余数法" class="headerlink" title="除留余数法"></a>除留余数法</h3><p><strong>即对关键字做取模运算，例如：$H(key) &#x3D; key , %  ,p$</strong> 。要求是：</p>
+<ul>
+<li>散列表长度为 m ，<strong>则取一个不大于 m 但是最接近或者等于 m 的质数 p</strong>。</li>
+</ul>
+<h3 id="直接定址法"><a href="#直接定址法" class="headerlink" title="直接定址法"></a>直接定址法</h3><p>即<strong>直接使用关键字定位存储地址，或者对关键字做线性函数处理再定位存储地址</strong>。例如：**$H(key) &#x3D; key$ 或者 $H(key) &#x3D; a \times key + b$** 。</p>
+<p>它适合<strong>关键字分布基本连续的情况</strong>。</p>
+<h3 id="数字分析法"><a href="#数字分析法" class="headerlink" title="数字分析法"></a>数字分析法</h3><p><strong>即在关键字中选取数码分布比较均匀的若干位作为散列地址</strong>。例如，在记录手机号的散列映射的时候，大部分的手机号的开头都是不尽相似的，178，176等，这个时候如果选取开头的数码作为散列映射，则会出现大量的映射在同一个存储地址内，这个时候我们可以选择手机号的后四位来映射，会相对映射的均匀一些。</p>
+<h4 id="平方取中法"><a href="#平方取中法" class="headerlink" title="平方取中法"></a>平方取中法</h4><p><strong>取关键字的平方值的中间几位作为散列地址</strong>。</p>
+<p><strong>这种方法得到的散列地址与关键字每位都有关系</strong>，因此其分布比较均匀，<strong>适用于关键字每位取值不够均匀或者小于散列地址所需的位数</strong>。</p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>快要结束啦，就剩下排序啦！</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae5f0c6bb9.png" alt="image-20220905085637169" style="zoom: 25%;" />
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%907.1%E3%80%91%E6%9F%A5%E6%89%BE/">https://www.helloseraphine.top/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%907.1%E3%80%91%E6%9F%A5%E6%89%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae59ceb1c4.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/03/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%908.1%E3%80%91%E6%8E%92%E5%BA%8F/" title="【8.1】排序"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae62decdbc.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【8.1】排序</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/11/%E8%AF%AD%E8%A8%80%E6%A0%91/C%E8%AF%AD%E8%A8%80/%E3%80%903.0%E3%80%91%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/" title="【3.0】C-选择结构及其应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abb876696a3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【3.0】C-选择结构及其应用</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/L-Seraphine" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.travellings.cn/go.html" target="_blank" title="开往"><i class="fal fa-subway"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="toc-number">2.</span> <span class="toc-text">顺序查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84"><span class="toc-number">2.1.</span> <span class="toc-text">常规</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A8%E5%85%B5"><span class="toc-number">2.2.</span> <span class="toc-text">哨兵</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE"><span class="toc-number">3.</span> <span class="toc-text">折半查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E6%9F%A5%E6%89%BE"><span class="toc-number">4.</span> <span class="toc-text">分块查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91"><span class="toc-number">5.</span> <span class="toc-text">二叉排序树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C"><span class="toc-number">5.1.</span> <span class="toc-text">查找操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="toc-number">5.2.</span> <span class="toc-text">插入操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">5.3.</span> <span class="toc-text">删除操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="toc-number">6.</span> <span class="toc-text">二叉平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C-1"><span class="toc-number">6.1.</span> <span class="toc-text">插入操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-number">7.</span> <span class="toc-text">红黑树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">B树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-%E6%A0%91"><span class="toc-number">9.</span> <span class="toc-text">B+树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE"><span class="toc-number">10.</span> <span class="toc-text">散列查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">10.1.</span> <span class="toc-text">处理冲突的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E9%93%BE%E6%B3%95"><span class="toc-number">10.1.1.</span> <span class="toc-text">拉链法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="toc-number">10.1.2.</span> <span class="toc-text">开放定址法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B%E6%B3%95"><span class="toc-number">10.1.2.1.</span> <span class="toc-text">线性探测法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E6%8E%A2%E6%B5%8B%E6%B3%95"><span class="toc-number">10.1.2.2.</span> <span class="toc-text">平方探测法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%AA%E9%9A%8F%E6%9C%BA%E5%BA%8F%E5%88%97%E6%B3%95"><span class="toc-number">10.1.2.3.</span> <span class="toc-text">伪随机序列法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%8D%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">10.1.3.</span> <span class="toc-text">再散列法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="toc-number">10.2.</span> <span class="toc-text">常用散列函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%A4%E7%95%99%E4%BD%99%E6%95%B0%E6%B3%95"><span class="toc-number">10.2.1.</span> <span class="toc-text">除留余数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="toc-number">10.2.2.</span> <span class="toc-text">直接定址法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">10.2.3.</span> <span class="toc-text">数字分析法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E5%8F%96%E4%B8%AD%E6%B3%95"><span class="toc-number">10.2.3.1.</span> <span class="toc-text">平方取中法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">11.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/15/64b2b7ea54813.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【4.0】基于概率论的分类方法：朴素贝叶斯"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="【4.0】基于概率论的分类方法：朴素贝叶斯">【4.0】基于概率论的分类方法：朴素贝叶斯</a><time datetime="2023-07-15T15:10:22.000Z" title="发表于 2023-07-15 23:10:22">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/14/64b14a3d10830.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【3.0】决策树"/></a><div class="content"><a class="title" href="/2023/07/12/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/" title="【3.0】决策树">【3.0】决策树</a><time datetime="2023-07-12T13:12:43.000Z" title="发表于 2023-07-12 21:12:43">2023-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aadb6f383a9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【2.0】K-近邻算法"/></a><div class="content"><a class="title" href="/2023/07/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" title="【2.0】K-近邻算法">【2.0】K-近邻算法</a><time datetime="2023-07-08T15:30:01.000Z" title="发表于 2023-07-08 23:30:01">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64aae117310e7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【1.0】机器学习基础"/></a><div class="content"><a class="title" href="/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="【1.0】机器学习基础">【1.0】机器学习基础</a><time datetime="2023-07-07T15:30:01.000Z" title="发表于 2023-07-07 23:30:01">2023-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.helloseraphine.top:8089/blog/2023/07/10/64abbf0e25fc9.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Python的一些工具"/></a><div class="content"><a class="title" href="/2023/07/05/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E5%85%B3%E4%BA%8EPython%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" title="关于Python的一些工具">关于Python的一些工具</a><time datetime="2023-07-05T15:30:01.000Z" title="发表于 2023-07-05 23:30:01">2023-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
