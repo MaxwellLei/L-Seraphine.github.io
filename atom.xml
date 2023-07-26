@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2023-07-22T17:00:34.271Z</updated>
+  <updated>2023-07-26T13:20:12.085Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -17,18 +17,49 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>【6.0】支持向量机</title>
+    <link href="https://www.helloseraphine.top/2023/07/26/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
+    <id>https://www.helloseraphine.top/2023/07/26/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</id>
+    <published>2023-07-26T09:56:27.000Z</published>
+    <updated>2023-07-26T13:20:12.085Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="底层基础" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="机器学习" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="支持向量机" scheme="https://www.helloseraphine.top/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
+    
+    <category term="核函数" scheme="https://www.helloseraphine.top/tags/%E6%A0%B8%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【5.0】Logistic回归</title>
     <link href="https://www.helloseraphine.top/2023/07/23/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%905-0%E3%80%91Logistic%E5%9B%9E%E5%BD%92/"/>
     <id>https://www.helloseraphine.top/2023/07/23/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%905-0%E3%80%91Logistic%E5%9B%9E%E5%BD%92/</id>
     <published>2023-07-22T16:56:59.000Z</published>
-    <updated>2023-07-22T17:00:34.271Z</updated>
+    <updated>2023-07-22T17:07:42.757Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这篇将会是令人激动的一部分，因为我们将首次接触到最优化算法。在我们生活中也会遇到很多最优化问题，例如如何在最短时间内从 A 点到达 B</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -61,7 +92,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -86,7 +117,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -111,7 +142,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -129,14 +160,14 @@
     <link href="https://www.helloseraphine.top/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"/>
     <id>https://www.helloseraphine.top/2023/07/07/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%901.0%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</id>
     <published>2023-07-07T15:30:01.000Z</published>
-    <updated>2023-07-22T13:23:45.228Z</updated>
+    <updated>2023-07-22T17:07:49.138Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -161,7 +192,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -186,7 +217,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;类是一种对象的抽象化描述，它是基于面向对象语言而产生的概念。&lt;strong&gt;类提供了一种组合数据和功能的方法&lt;/strong&gt;。</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -211,7 +242,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -236,7 +267,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -261,7 +292,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -286,7 +317,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;除了上一部分使用的的 &lt;code&gt;while&lt;/code&gt;语句，Python</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -311,7 +342,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Python&lt;/code&gt; 很容易使用，但它是一种真正的编程语言，提供了很多数据结构，也支持大型程序，远超</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -336,8 +367,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;NULL，懒得写了&lt;/p&gt;
-&lt;h1 id=&quot;I-O管理概述&quot;&gt;&lt;a href=&quot;#I-O管理概述&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -362,8 +392,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这部分说明了文件整个系统的原理和底层大概逻辑。&lt;/p&gt;
-&lt;h1 id=&quot;文件系统基础&quot;&gt;&lt;a href=&quot;#文件系统基础&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -388,8 +417,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;内存管理部分内容，解释说明了内存如何对进程进行管理调度，来使得软件可以正常的运行在操作系统之中。&lt;/p&gt;
-&lt;h1</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -414,8 +442,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;NULL，基础部分，很长很多很麻烦&lt;/p&gt;
-&lt;h1 id=&quot;进程与线程&quot;&gt;&lt;a href=&quot;#进程与线程&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -440,8 +467,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;操作系统的基本概述，内容来源自《王道操作系统》并略有补充，此为本人笔记，仅供参考&lt;/p&gt;
-&lt;h1 id=&quot;操作系统的基本概念&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -466,7 +492,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;尝试开发第一个项目，详情可以查看&lt;a</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -491,8 +517,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本来没打算写的，但是考虑到我的开源项目，我决定写一下当作复习了。&lt;/p&gt;
-&lt;p&gt;XAML（EXtensible Application</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;</summary>
         
       
     
@@ -501,36 +526,6 @@
     <category term="微软天坑" scheme="https://www.helloseraphine.top/categories/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/"/>
     
     <category term="WPF" scheme="https://www.helloseraphine.top/categories/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/WPF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【基础 02】构建函数可视化图形</title>
-    <link href="https://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2002%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/"/>
-    <id>https://www.helloseraphine.top/2022/09/18/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike%20Coding/Basics/%E3%80%90%E5%9F%BA%E7%A1%80%2002%E3%80%91%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2/</id>
-    <published>2022-09-18T15:30:01.000Z</published>
-    <updated>2023-07-14T13:02:55.377Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;前排说明：关于本教程目录导航以及说明：&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="游戏开发" scheme="https://www.helloseraphine.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="Unity" scheme="https://www.helloseraphine.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/"/>
-    
-    <category term="Catlike Coding" scheme="https://www.helloseraphine.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike-Coding/"/>
-    
-    <category term="Basics" scheme="https://www.helloseraphine.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/Unity/Catlike-Coding/Basics/"/>
     
     
   </entry>
