@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2023-07-26T13:41:22.394Z</updated>
+  <updated>2023-07-27T15:16:42.762Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>【7.0】利用 AdaBoost 元算法提高分类性能</title>
+    <link href="https://www.helloseraphine.top/2023/07/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%907-0%E3%80%91%E5%88%A9%E7%94%A8-AdaBoost-%E5%85%83%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E5%88%86%E7%B1%BB%E6%80%A7%E8%83%BD/"/>
+    <id>https://www.helloseraphine.top/2023/07/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%907-0%E3%80%91%E5%88%A9%E7%94%A8-AdaBoost-%E5%85%83%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E5%88%86%E7%B1%BB%E6%80%A7%E8%83%BD/</id>
+    <published>2023-07-27T15:14:47.000Z</published>
+    <updated>2023-07-27T15:16:42.762Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="弱分类器" scheme="https://www.helloseraphine.top/tags/%E5%BC%B1%E5%88%86%E7%B1%BB%E5%99%A8/"/>
+    
+    <category term="AdaBoost" scheme="https://www.helloseraphine.top/tags/AdaBoost/"/>
+    
+    <category term="元算法" scheme="https://www.helloseraphine.top/tags/%E5%85%83%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="决策树桩" scheme="https://www.helloseraphine.top/tags/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A1%A9/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【6.0】支持向量机</title>
     <link href="https://www.helloseraphine.top/2023/07/26/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
     <id>https://www.helloseraphine.top/2023/07/26/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</id>
     <published>2023-07-26T09:56:27.000Z</published>
-    <updated>2023-07-26T13:41:22.394Z</updated>
+    <updated>2023-07-26T13:45:38.001Z</updated>
     
     
       
@@ -206,18 +237,18 @@
   </entry>
   
   <entry>
-    <title>【6.0】虚拟环境和包</title>
-    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/"/>
-    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/</id>
+    <title>【5.0】类</title>
+    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/"/>
+    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/</id>
     <published>2023-06-30T15:30:01.000Z</published>
-    <updated>2023-07-14T13:04:34.239Z</updated>
+    <updated>2023-07-14T13:04:31.010Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;类是一种对象的抽象化描述，它是基于面向对象语言而产生的概念。&lt;strong&gt;类提供了一种组合数据和功能的方法&lt;/strong&gt;。</summary>
         
       
     
@@ -231,18 +262,18 @@
   </entry>
   
   <entry>
-    <title>【5.0】类</title>
-    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/"/>
-    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/</id>
+    <title>【6.0】虚拟环境和包</title>
+    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/"/>
+    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/</id>
     <published>2023-06-30T15:30:01.000Z</published>
-    <updated>2023-07-14T13:04:31.010Z</updated>
+    <updated>2023-07-14T13:04:34.239Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;类是一种对象的抽象化描述，它是基于面向对象语言而产生的概念。&lt;strong&gt;类提供了一种组合数据和功能的方法&lt;/strong&gt;。</summary>
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -498,32 +529,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;尝试开发第一个项目，详情可以查看&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="微软天坑" scheme="https://www.helloseraphine.top/categories/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/"/>
-    
-    <category term="WPF" scheme="https://www.helloseraphine.top/categories/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/WPF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【2.0】XAML</title>
-    <link href="https://www.helloseraphine.top/2023/01/05/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/WPF/%E3%80%902.0%E3%80%91XAML/"/>
-    <id>https://www.helloseraphine.top/2023/01/05/%E5%BE%AE%E8%BD%AF%E5%A4%A9%E5%9D%91/WPF/%E3%80%902.0%E3%80%91XAML/</id>
-    <published>2023-01-05T15:30:01.000Z</published>
-    <updated>2023-07-14T13:02:37.227Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本来没打算写的，但是考虑到我的开源项目，我决定写一下当作复习了。&lt;/p&gt;
-&lt;p&gt;XAML（EXtensible Application</summary>
         
       
     
