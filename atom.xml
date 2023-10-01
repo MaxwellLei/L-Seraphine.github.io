@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2023-09-28T15:01:00.395Z</updated>
+  <updated>2023-10-01T09:18:13.003Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python那些糖语法</title>
+    <link href="https://www.helloseraphine.top/2023/10/01/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/Python%E9%82%A3%E4%BA%9B%E7%B3%96%E8%AF%AD%E6%B3%95/"/>
+    <id>https://www.helloseraphine.top/2023/10/01/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/Python%E9%82%A3%E4%BA%9B%E7%B3%96%E8%AF%AD%E6%B3%95/</id>
+    <published>2023-10-01T09:17:03.000Z</published>
+    <updated>2023-10-01T09:18:13.003Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;如果你有掌握过其他计算机语言的话，则你学习 Python</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Python" scheme="https://www.helloseraphine.top/tags/Python/"/>
+    
+    <category term="装饰器" scheme="https://www.helloseraphine.top/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    
+    <category term="Lambda函数" scheme="https://www.helloseraphine.top/tags/Lambda%E5%87%BD%E6%95%B0/"/>
+    
+    <category term="匿名函数" scheme="https://www.helloseraphine.top/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
+    
+    <category term="推导式" scheme="https://www.helloseraphine.top/tags/%E6%8E%A8%E5%AF%BC%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【sklearn】孤立森林</title>
     <link href="https://www.helloseraphine.top/2023/09/28/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E5%AD%A4%E7%AB%8B%E6%A3%AE%E6%9E%97/"/>
     <id>https://www.helloseraphine.top/2023/09/28/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E5%AD%A4%E7%AB%8B%E6%A3%AE%E6%9E%97/</id>
     <published>2023-09-28T14:57:01.000Z</published>
-    <updated>2023-09-28T15:01:00.395Z</updated>
+    <updated>2023-09-28T15:01:36.614Z</updated>
     
     
       
@@ -33,6 +64,10 @@
       
     
     
+    
+    <category term="底层基础" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="机器学习" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
     <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
@@ -167,13 +202,13 @@
     <category term="机器学习" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
+    <category term="Python" scheme="https://www.helloseraphine.top/tags/Python/"/>
+    
     <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     <category term="逻辑回归" scheme="https://www.helloseraphine.top/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
     
     <category term="梯度上升" scheme="https://www.helloseraphine.top/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87/"/>
-    
-    <category term="Python" scheme="https://www.helloseraphine.top/tags/Python/"/>
     
   </entry>
   
@@ -303,18 +338,18 @@
   </entry>
   
   <entry>
-    <title>【5.0】类</title>
-    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/"/>
-    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/</id>
+    <title>【6.0】虚拟环境和包</title>
+    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/"/>
+    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/</id>
     <published>2023-06-30T15:30:01.000Z</published>
-    <updated>2023-07-14T13:04:31.010Z</updated>
+    <updated>2023-07-14T13:04:34.239Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;类是一种对象的抽象化描述，它是基于面向对象语言而产生的概念。&lt;strong&gt;类提供了一种组合数据和功能的方法&lt;/strong&gt;。</summary>
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -328,18 +363,18 @@
   </entry>
   
   <entry>
-    <title>【6.0】虚拟环境和包</title>
-    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/"/>
-    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%906.0%E3%80%91%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/</id>
+    <title>【5.0】类</title>
+    <link href="https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/"/>
+    <id>https://www.helloseraphine.top/2023/06/30/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/%E3%80%905.0%E3%80%91%E7%B1%BB/</id>
     <published>2023-06-30T15:30:01.000Z</published>
-    <updated>2023-07-14T13:04:34.239Z</updated>
+    <updated>2023-07-14T13:04:31.010Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;类是一种对象的抽象化描述，它是基于面向对象语言而产生的概念。&lt;strong&gt;类提供了一种组合数据和功能的方法&lt;/strong&gt;。</summary>
         
       
     
@@ -518,32 +553,6 @@
         
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;内存管理部分内容，解释说明了内存如何对进程进行管理调度，来使得软件可以正常的运行在操作系统之中。&lt;/p&gt;
 &lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="底层基础" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="操作系统" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【2.0】进程和线程</title>
-    <link href="https://www.helloseraphine.top/2023/03/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%902.0%E3%80%91%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/"/>
-    <id>https://www.helloseraphine.top/2023/03/08/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%902.0%E3%80%91%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</id>
-    <published>2023-03-08T15:30:01.000Z</published>
-    <updated>2023-07-14T13:00:31.171Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;NULL，基础部分，很长很多很麻烦&lt;/p&gt;
-&lt;h1 id=&quot;进程与线程&quot;&gt;&lt;a href=&quot;#进程与线程&quot;</summary>
         
       
     
