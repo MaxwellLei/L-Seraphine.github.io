@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2023-11-27T02:15:11.540Z</updated>
+  <updated>2023-11-27T02:16:18.968Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://www.helloseraphine.top/2023/11/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/"/>
     <id>https://www.helloseraphine.top/2023/11/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</id>
     <published>2023-11-27T01:27:34.000Z</published>
-    <updated>2023-11-27T02:15:11.540Z</updated>
+    <updated>2023-11-27T02:16:18.968Z</updated>
     
     
       
@@ -33,6 +33,10 @@
       
     
     
+    
+    <category term="底层基础" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="碎片化知识" scheme="https://www.helloseraphine.top/categories/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/"/>
     
     
     <category term="蒙特卡洛方法" scheme="https://www.helloseraphine.top/tags/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/"/>
