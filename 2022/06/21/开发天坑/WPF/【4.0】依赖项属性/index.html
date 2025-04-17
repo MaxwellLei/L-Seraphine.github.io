@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【4.0】依赖项属性 | Seraphineの小窝</title><meta name="author" content="Seraphine"><meta name="copyright" content="Seraphine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言在我尝试写一部分 WPF 元素绑定的相关内容的时候，写到开头发现我不得不先解释说明一下依赖项属性的相关内容，遂停止元素绑定内容的记录，补写依赖项属性的相关内容。 理解依赖项属性属性和事件是.NET抽象模型的核心部分，如果你懂得 VB 或者 WinForm 相关开发的话会十分了解这点。但是对于 WPF 来说，它在传统的属性基础上做了一层封装，将它变成了更加高级的依赖项属性。同时也不会和传统的属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【4.0】依赖项属性">
+<meta property="og:url" content="https://www.helloseraphine.top/2022/06/21/%E5%BC%80%E5%8F%91%E5%A4%A9%E5%9D%91/WPF/%E3%80%904.0%E3%80%91%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="Seraphineの小窝">
+<meta property="og:description" content="前言在我尝试写一部分 WPF 元素绑定的相关内容的时候，写到开头发现我不得不先解释说明一下依赖项属性的相关内容，遂停止元素绑定内容的记录，补写依赖项属性的相关内容。 理解依赖项属性属性和事件是.NET抽象模型的核心部分，如果你懂得 VB 或者 WinForm 相关开发的话会十分了解这点。但是对于 WPF 来说，它在传统的属性基础上做了一层封装，将它变成了更加高级的依赖项属性。同时也不会和传统的属性">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf5eba839f.webp">
+<meta property="article:published_time" content="2022-06-21T15:30:01.000Z">
+<meta property="article:modified_time" content="2025-04-17T03:08:18.999Z">
+<meta property="article:author" content="Seraphine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf5eba839f.webp"><link rel="shortcut icon" href="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/Seraphine_Image/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2022/06/21/%E5%BC%80%E5%8F%91%E5%A4%A9%E5%9D%91/WPF/%E3%80%904.0%E3%80%91%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":30,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Seraphine","link":"链接: ","source":"来源: Seraphineの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【4.0】依赖项属性',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-17 11:08:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Seraphineの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">33</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf5eba839f.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Seraphineの小窝"><span class="site-name">Seraphineの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【4.0】依赖项属性</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-21T15:30:01.000Z" title="发表于 2022-06-21 23:30:01">2022-06-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-17T03:08:18.999Z" title="更新于 2025-04-17 11:08:18">2025-04-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E5%8F%91%E5%A4%A9%E5%9D%91/">开发天坑</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E5%8F%91%E5%A4%A9%E5%9D%91/WPF/">WPF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【4.0】依赖项属性"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在我尝试写一部分 WPF 元素绑定的相关内容的时候，写到开头发现我不得不先解释说明一下依赖项属性的相关内容，遂停止元素绑定内容的记录，补写依赖项属性的相关内容。</p>
+<h1 id="理解依赖项属性"><a href="#理解依赖项属性" class="headerlink" title="理解依赖项属性"></a>理解依赖项属性</h1><p>属性和事件是<code>.NET</code>抽象模型的核心部分，如果你懂得 VB 或者 WinForm 相关开发的话会十分了解这点。但是对于 WPF 来说，它在传统的属性基础上做了一层封装，将它变成了更加高级的依赖项属性。同时也不会和传统的属性发生冲突。</p>
+<p>这种更高级的依赖项属性使用了效率更高的保存机制，并支持附加功能，例如：更高通知以及属性值的继承。</p>
+<p>依赖项属性是<code>.NET</code>属性的新实现，在 WPF 技术特性中，是及其依赖于依赖项属性的实现，虽然在使用过程中，感觉和普通的属性一致。</p>
+<h1 id="定义依赖项属性"><a href="#定义依赖项属性" class="headerlink" title="定义依赖项属性"></a>定义依赖项属性</h1><p>绝大部分的微软提供的属性都是依赖项属性，但是在某些情况下，我们需要自定义我们自己的依赖项属性，比如我们自定义的控件。</p>
+<h2 id="定义依赖项属性-1"><a href="#定义依赖项属性-1" class="headerlink" title="定义依赖项属性"></a>定义依赖项属性</h2><p>需要注意的是：**自定义的依赖项属性的类，必须继承于<code>DependencyObject</code>**，因为后续需要使用该类的方法来修改依赖项属性的值。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义了 Test 类，该类继承于 DependencyObject</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">Test</span> :<span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//自定义依赖项属性 InfoProperty</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> DependencyProperty InfoProperty;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建依赖项属性的命名规则是最后加上<code>Property</code>来表示其为依赖项属性</p>
+</blockquote>
+<h1 id="注册依赖项属性"><a href="#注册依赖项属性" class="headerlink" title="注册依赖项属性"></a>注册依赖项属性</h1><p>定义好依赖项属性后需要注册依赖项属性来使用该依赖项，注册依赖项需要两个步骤，<strong>第一个步骤是创建<code>FrameworkPropertyMetadata</code>对象来决定依赖项的一些基础属性，然后创建<code>DependencyProperty</code>对象来实现依赖项属性的初始化。</strong></p>
+<p>因为我们需要使用依赖项属性，所以依赖项属性的注册必须在使用代码之前注册，所以<strong>需要在静态构造函数中定义</strong>。又因为为了确保<code>DependencyProperty</code>，即依赖项属性不会在后续的代码中被人更改，所以使用的是<code>readonly</code>关键字。</p>
+<p>同样的，<strong>WPF 确保<code>DependencyProperty</code>不会被直接实例化，所以必须通过静态的<code>DependencyProperty.Register</code>来生成实例对象</strong>；代码示例如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test</span> :<span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//定义依赖项属性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> DependencyProperty InfoProperty;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//初始化注册依赖项属性</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="title">Test</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//初始化依赖项属性的相关参数和功能</span></span><br><span class="line">        FrameworkPropertyMetadata metadata = <span class="keyword">new</span> FrameworkPropertyMetadata(<span class="string">&quot;这是默认值哦&quot;</span>);</span><br><span class="line">		</span><br><span class="line">        <span class="comment">//定义依赖项属性对象</span></span><br><span class="line">        InfoProperty = DependencyProperty.Register(<span class="string">&quot;Anfo&quot;</span>, <span class="keyword">typeof</span>(<span class="built_in">string</span>), <span class="keyword">typeof</span>(Info),metadata);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="FrameworkPropertyMetadata-对象"><a href="#FrameworkPropertyMetadata-对象" class="headerlink" title="FrameworkPropertyMetadata 对象"></a>FrameworkPropertyMetadata 对象</h2><p><strong>该对象规定了所注册依赖项的默认初始值，以及所支持的相关服务（布局影响，数据绑定等）</strong>，它的构造函数有多个重载，如下所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FrameworkPropertyMetadata</span>(<span class="params"><span class="built_in">object</span> defaultValue</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FrameworkPropertyMetadata</span>(<span class="params"><span class="built_in">object</span> defaultValue, FrameworkPropertyMetadataOptions flags, PropertyChangedCallback propertyChangedCallback, CoerceValueCallback coerceValueCallback</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><code>defaultValue</code>：该依赖项属性的默认初始值</strong>‘</p>
+</li>
+<li><p><strong><code>FrameworkPropertyMetadataOptions</code>：该依赖项属性的所支持的服务功能，</strong>参数如下所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     未指定任何选项；依赖属性使用 Windows Presentation Foundation (WPF) 属性系统的默认行为。</span></span><br><span class="line">None = <span class="number">0</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     更改此依赖属性的值会影响布局组合的测量过程。</span></span><br><span class="line">AffectsMeasure = <span class="number">1</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     更改此依赖属性的值会影响布局组合的排列过程。</span></span><br><span class="line">AffectsArrange = <span class="number">2</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     更改此依赖属性的值会影响父元素上的测量过程。</span></span><br><span class="line">AffectsParentMeasure = <span class="number">4</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     更改此依赖属性的值会影响父元素上的排列过程。</span></span><br><span class="line">AffectsParentArrange = <span class="number">8</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     更改此依赖属性的值会影响呈现或布局组合的某一方面（不是测量或排列过程）。</span></span><br><span class="line">AffectsRender = <span class="number">16</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     此依赖属性的值将由子元素继承。</span></span><br><span class="line">Inherits = <span class="number">32</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     此依赖属性的值跨越分隔的树以实现属性值继承。</span></span><br><span class="line">OverridesInheritanceBehavior = <span class="number">64</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     不允许将数据绑定到此依赖属性。</span></span><br><span class="line">NotDataBindable = <span class="number">128</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     此依赖属性上的数据绑定的 System.Windows.Data.BindingMode 默认为 System.Windows.Data.BindingMode.TwoWay。</span></span><br><span class="line">BindsTwoWayByDefault = <span class="number">256</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     此依赖属性的值应由日记记录进程或在由 Uniform resource identifiers (URIs) 导航时进行保存或存储。</span></span><br><span class="line">Journal = <span class="number">1024</span>,</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 摘要:</span></span><br><span class="line"><span class="comment">//     此依赖属性值上的子属性不会影响呈现的任何方面。</span></span><br><span class="line">SubPropertiesDoNotAffectRender = <span class="number">2048</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以传入参数名称，也可以传入参数对应的数值</p>
+</blockquote>
+</li>
+<li><p><strong><code>CoerceValueCallback</code>：该方法在<code>validateValueCallback</code>后执行，可以对依赖项属性进行验证</strong>，详细</p>
+<p>可以查看下面的属性验证部分内容。</p>
+<blockquote>
+<p><code>validateValueCallback</code>是<code>DependencyProperty</code>类型的方法</p>
+</blockquote>
+</li>
+<li><p><strong><code>propertyChangedCallback</code>：当属性值发生改变时会调用</strong></p>
+</li>
+</ul>
+<h2 id="DependencyProperty-对象"><a href="#DependencyProperty-对象" class="headerlink" title="DependencyProperty 对象"></a>DependencyProperty 对象</h2><p><strong><code>DependencyProperty</code>对象的实例化需要通过静态方法<code>DependencyProperty.Register</code>来实现</strong>，该方法同样有多种重载，原型示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DependencyProperty <span class="title">Register</span>(<span class="params"><span class="built_in">string</span> name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata, ValidateValueCallback validateValueCallback</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>name</code>：你所定义的依赖项属性名称</strong>，该名称只会影响该对象的<code>Name</code>属性，不会对代码产生实际影响</li>
+<li><strong><code>propertyType</code>：该依赖项属性的类型</strong>，即该依赖项属性的类型</li>
+<li><strong><code>ownerType</code>：使用该依赖项属性的类型</strong>，即判断该类型对象是否支持该属性</li>
+<li><strong><code>validateValueCallback</code>：</strong>详细查看下面的属性验证部分</li>
+</ul>
+<h1 id="添加属性包装器"><a href="#添加属性包装器" class="headerlink" title="添加属性包装器"></a>添加属性包装器</h1><p>在完成定义和注册依赖项属性后，<strong>需要将其包装成普通的属性</strong>，这样可以做到和普通属性一样的调用，即将其包装成传统的<code>.NET</code>属性，这样就完成依赖项属性的最后一步。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test</span> :<span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> DependencyProperty InfoProperty;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="title">Test</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        FrameworkPropertyMetadata metadata = <span class="keyword">new</span> FrameworkPropertyMetadata(<span class="string">&quot;这是默认值哦&quot;</span>);</span><br><span class="line"></span><br><span class="line">        InfoProperty = DependencyProperty.Register(<span class="string">&quot;Anfo&quot;</span>, <span class="keyword">typeof</span>(<span class="built_in">string</span>), <span class="keyword">typeof</span>(Info),metadata);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String Info</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">set</span> &#123; SetValue(InfoProperty, <span class="keyword">value</span>); &#125;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> (String)GetValue(InfoProperty); &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在就以及拥有了一个功能完备的依赖项属性了，可以像使用其他依赖项属性一样使用它。</p>
+<p>另外，需要注意的是，依赖项属性值的确定是根据优先规则来确定的，即使你并没有直接设置它的值，它也可能通过数值绑定，样式等提供获取，也可能是元素树中继承而来。<strong>如果你希望删除本地值设置，像从来没有设置过一样，需要使用另一个继承自<code>DependencyProperty</code>的方法<code>ClearValue()</code>来实现</strong>。</p>
+<h1 id="WPF-使用依赖项属性的方式"><a href="#WPF-使用依赖项属性的方式" class="headerlink" title="WPF 使用依赖项属性的方式"></a>WPF 使用依赖项属性的方式</h1><p>WPF 的许多行为功能都需要使用依赖项属性，所有的功能都是<strong>通过每个依赖项属性都支持的两个关键行为进行工作的——更改通知和动态值识别</strong>。</p>
+<h2 id="更改通知"><a href="#更改通知" class="headerlink" title="更改通知"></a>更改通知</h2><p><strong>即当属性值发生变化时所进行的相关操作</strong>。</p>
+<p><strong>当属性值发生变化时，依赖项属性会触发受保护的名为<code>OnPropertyChangedCallback()</code>的方法，该方法通过了数据绑定和触发器来传递信息，并调用<code>PropertyChangedCallback()</code>回调方法。</strong></p>
+<p>换句话所，当属性发生变化时，如果希望进行响应，有两种选择：</p>
+<ul>
+<li><strong>使用属性值创建绑定</strong></li>
+<li><strong>使用触发器</strong></li>
+</ul>
+<p>但是对于通用方法触发一些代码，WPF 处于性能考虑并没有给出，相反的可以将代码定义在回调函数<code>PropertyChangedCallback()</code>来替代实现。</p>
+<h2 id="动态值识别"><a href="#动态值识别" class="headerlink" title="动态值识别"></a>动态值识别</h2><p><strong>即判定依赖项属性值的赋值问题。</strong></p>
+<p>本质上依赖项属性，依赖于多个对象来获取属性值，每个提供者的优先级不同。WPF 会通过一系列检索，获取最终的属性值，相关检索因素如下（<strong>优先级从低到高</strong>）：</p>
+<ol>
+<li><strong>默认值（即注册依赖项属性的时候<code>FrameworkPropertyMetadata</code>对象定义的初始值）</strong></li>
+<li><strong>继承了原来的值</strong></li>
+<li><strong>来自主题样式的值</strong></li>
+<li><strong>来自项目样式的值</strong></li>
+<li><strong>本地值（通过 XAML 或者 CS代码直接设置的值）</strong></li>
+</ol>
+<p>如上所示，通过设置优先级高的依赖项提供者，来改变依赖项属性的值。</p>
+<blockquote>
+<p>这样做的好处是可以节省内存，；例如：对于一个窗口的多个<code>Button</code>控件，如果每个<code>Button</code>都可以使用主题或者其父级的样式，就可以少存储一份单独的样式值</p>
+</blockquote>
+<p>当然，在进行上述的值确定后，还需要考虑其他的可改变属性值的提供者，总结来说，WPF 确定属性值的步骤如下：</p>
+<ol>
+<li><p><strong>确定基本值（即上面的步骤）</strong></p>
+</li>
+<li><p><strong>如果属性使用的表达式设置，则对表达式进行求值。</strong></p>
+<blockquote>
+<p>WPF 支持两种表达式：<strong>数据绑定和资源</strong></p>
+</blockquote>
+</li>
+<li><p><strong>如果属性是动画的目标，则应用动画</strong></p>
+</li>
+<li><p><strong>运行<code>CoerceValueCallBack</code>回调函数来修正属性值</strong></p>
+</li>
+</ol>
+<h1 id="共享依赖项属性"><a href="#共享依赖项属性" class="headerlink" title="共享依赖项属性"></a>共享依赖项属性</h1><p>尽管一些类具有不同的继承层次，但是可以通过<code>DependencyProperty.AddOwner()</code>来共享同一个依赖项属性。</p>
+<p>代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Apple</span> :<span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> DependencyProperty SizeProperty;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="title">Apple</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        FrameworkPropertyMetadata metadata = <span class="keyword">new</span> FrameworkPropertyMetadata(<span class="string">&quot;这是默认值哦&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SizeProperty = DependencyProperty.Register(<span class="string">&quot;Size&quot;</span>, <span class="keyword">typeof</span>(<span class="built_in">string</span>), <span class="keyword">typeof</span>(Apple),metadata);</span><br><span class="line">        TextBlock textBlock = <span class="keyword">new</span> TextBlock();</span><br><span class="line">        Control control = <span class="keyword">new</span> Control();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String Info</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">set</span> &#123; SetValue(SizeProperty, <span class="keyword">value</span>); &#125;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> (String)GetValue(SizeProperty); &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Car</span> : <span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">readonly</span> <span class="keyword">static</span> DependencyProperty SizeProperty;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="title">Car</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//共享Apple的依赖项属性</span></span><br><span class="line">        SizeProperty = Apple.SizeProperty.AddOwner(<span class="keyword">typeof</span>(Car));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String Size</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">set</span> &#123; SetValue(SizeProperty, <span class="keyword">value</span>); &#125;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> (String)GetValue(SizeProperty); &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="附加的依赖项属性"><a href="#附加的依赖项属性" class="headerlink" title="附加的依赖项属性"></a>附加的依赖项属性</h1><p><strong>附加属性被应用到的类并非定义附加属性的类</strong>，例如，<code>Grid</code>类定义的<code>Row</code>和<code>Column</code>属性是在其嵌套的元素中应用的。</p>
+<p><strong>定义附加属性，需要使用<code>RegisterAttached()</code>方法</strong>，而不是<code>Register()</code>方法。代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">Apple</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        FrameworkPropertyMetadata metadata = <span class="keyword">new</span> FrameworkPropertyMetadata(<span class="string">&quot;这是默认值哦&quot;</span>);</span><br><span class="line">		</span><br><span class="line">        <span class="comment">//注册依赖项属性</span></span><br><span class="line">        SizeProperty = DependencyProperty.RegisterAttached(<span class="string">&quot;Size&quot;</span>, <span class="keyword">typeof</span>(<span class="built_in">string</span>), <span class="keyword">typeof</span>(Apple),metadata);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>与普通依赖属性一样，可以设置其回调函数。</p>
+<p><strong>当创建附加属性时，不需要定义<code>.NET</code>属性封装器，这是因为附加属性可以被用于任何依赖对象</strong>。例如：<code>Grid.Row</code>属性可以被用在任何对象上。</p>
+<p>不使用<code>.NET</code>属性封装器，反而附加属性因为需要满足被所有对象调用，所以<strong>需要两个静态方法来设置和获取属性值，这样来替代属性封装器。</strong>代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">GetValue</span>(<span class="params">Car car</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">string</span>)car.GetValue(Apple.SizeProperty);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetValue</span>(<span class="params">Car car,<span class="built_in">string</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    car.SetValue(Apple.SizeProperty,<span class="keyword">value</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然<strong>你也可以通过直接使用<code>GetValue</code>和<code>SetValue</code>方法来绕过这两个静态方法直接获取和设置值</strong>，代码示例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">car2.SetValue(Apple.SizeProperty, <span class="string">&quot;这是car2的属性值&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上示例完整<code>CS</code>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Apple</span> :<span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//声明附加属性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> DependencyProperty SizeProperty;</span><br><span class="line">	<span class="comment">//初始化对象</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="title">Apple</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//设置附加属性的相关服务</span></span><br><span class="line">        FrameworkPropertyMetadata metadata = <span class="keyword">new</span> FrameworkPropertyMetadata(<span class="string">&quot;这是默认值哦&quot;</span>);</span><br><span class="line">		<span class="comment">//注册附加属性</span></span><br><span class="line">        SizeProperty = DependencyProperty.RegisterAttached(<span class="string">&quot;Size&quot;</span>, <span class="keyword">typeof</span>(<span class="built_in">string</span>), <span class="keyword">typeof</span>(Apple),metadata);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//附加属性获取方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">GetValue</span>(<span class="params">Car car</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">string</span>)car.GetValue(Apple.SizeProperty);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//附加属性设置方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetValue</span>(<span class="params">Car car,<span class="built_in">string</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        car.SetValue(Apple.SizeProperty,<span class="keyword">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Car</span> : <span class="title">DependencyObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//空内容，只是单独表示一个要使用附加属性但自己没定义该附加属性的类</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//这里是调用验证附加属性的过程，我采用的是WPF的项目，写在了窗口初始化的事件里面</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Window_Initialized</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//定义两个Car对象</span></span><br><span class="line">    Car car1 = <span class="keyword">new</span> Car();</span><br><span class="line">    Car car2 = <span class="keyword">new</span> Car();</span><br><span class="line">    <span class="comment">//查看两个对象附加属性的初始值</span></span><br><span class="line">    Console.WriteLine(Apple.GetValue(car1)+ Apple.GetValue(car2));</span><br><span class="line">    <span class="comment">//通过定义的附加属性静态方法设置 car1 对象的附加属性值</span></span><br><span class="line">    Apple.SetValue(car1, <span class="string">&quot;这是car1的属性值&quot;</span>);</span><br><span class="line">    <span class="comment">//查看两个对象现在的附加属性初始值</span></span><br><span class="line">    Console.WriteLine(Apple.GetValue(car1)+ Apple.GetValue(car2));</span><br><span class="line">    <span class="comment">//采用SetValue直接绕过定义的静态方法修改附加属性的值</span></span><br><span class="line">    car2.SetValue(Apple.SizeProperty, <span class="string">&quot;这是car2的属性值&quot;</span>);</span><br><span class="line">    <span class="comment">//查看两个对象的附加属性初始值</span></span><br><span class="line">    Console.WriteLine(Apple.GetValue(car1) + Apple.GetValue(car2));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf5fe20c4c.png" alt="image-20220621123310797"  />
+
+<h1 id="属性验证"><a href="#属性验证" class="headerlink" title="属性验证"></a>属性验证</h1><p><strong>在定义任何类型的属性的时候，都需要面对错误设置属性的可能性</strong>。对于传统的<code>.NET</code>可以直接在属性设置器中捕获验证这些问题。但是对于依赖项属性来说，它是通过静态方法<code>SetValue</code>来设置的，所以并不适用。</p>
+<p>不过，<strong>WPF 对此提供了两种替代方法来阻止非法值</strong>：</p>
+<ul>
+<li><strong><code>ValidateValueCallback</code>：该回调函数可接受或拒绝新值。</strong>通常，该回调函数用于捕获违反属性约束的明显错误。作为<code>DependencyProperty.Register()</code>方法的一个参数。</li>
+<li><strong><code>CoerceValueCallback</code>：该回调函数可将新值修改为更能被接受的值。</strong>该回调函数通常用于处理为相同对象设置的依赖项属性值相互冲突的问题。这些值本身可能是合法的，但是同时应用时它们时是相互冲突的。作为<code>FrameworkPropertyMetadata</code>对象的参数。</li>
+</ul>
+<p>当应用程序试图更改设置依赖项属性时，如下时这些内容的作用过程：</p>
+<ol>
+<li>首先，<code>CoerceValueCallback</code>方法有机会修改提供的值（通常使提供的值和其他属性值相容，即做一层映射），或者返回<code>DependencyProperty.UnsetValue</code>，来拒绝修改。【强制回调】</li>
+<li>接下来激活<code>ValidateValueCallback</code>方法，该方法返回<code>true</code>接受一个值作为合法值，或者返回<code>false</code>来拒绝值。与上面方法不同的是，<strong>该方法不能访问设置属性的实际对象，这意味着不能检查其他属性</strong>。【验证回调】</li>
+<li>最后，**如果上面两个阶段都成功，则触发<code>PropertyChangedCallback</code>**。</li>
+</ol>
+<p>通俗来所，对于需要映射来兼容其他方法参数或者需要对参数进行约束，例如：对于<code>ScrollBar</code>有最大值和最小值，则需要通过<code>CoerceValueCallback</code>方法来判断最大值是否小于最小值做一次冲突验证。而对于<code>Margin</code>属性来说，如果传入参数为<code>-1</code>，则可以通过<code>ValidateValueCallback</code>来验证传入参数是否合法。最后两个都通过了，则触发<code>PropertyChangedCallback</code>。</p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>如果你只是想使用依赖项属性，则只需要查看如何定义注册使用，比葫芦画瓢即可，如果你想要了解它的工作原理，则需要理解去了解。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Seraphine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2022/06/21/%E5%BC%80%E5%8F%91%E5%A4%A9%E5%9D%91/WPF/%E3%80%904.0%E3%80%91%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7/">https://www.helloseraphine.top/2022/06/21/%E5%BC%80%E5%8F%91%E5%A4%A9%E5%9D%91/WPF/%E3%80%904.0%E3%80%91%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Seraphineの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf5eba839f.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/15/%E8%A7%86%E8%A7%89%E5%8A%A8%E7%94%BB/Manim/%E3%80%901.0%E3%80%91%E5%88%9D%E8%AF%86Mainm/" title="【1.0】初识Mainm"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf4f4e5c49.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【1.0】初识Mainm</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/22/NAS%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%99%A8/NAS%E5%85%A5%E9%97%A8/" title="NAS入门"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/07/10/64aaf451322ba.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">NAS入门</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Seraphine</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">33</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MaxwellLei"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MaxwellLei" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://afdian.com/a/fastgpt" target="_blank" title="每天给生活来一拳"><i class="fas fa-coffee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">理解依赖项属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">定义依赖项属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7-1"><span class="toc-number">3.1.</span> <span class="toc-text">定义依赖项属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">注册依赖项属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FrameworkPropertyMetadata-%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.1.</span> <span class="toc-text">FrameworkPropertyMetadata 对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DependencyProperty-%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.2.</span> <span class="toc-text">DependencyProperty 对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7%E5%8C%85%E8%A3%85%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">添加属性包装器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WPF-%E4%BD%BF%E7%94%A8%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">WPF 使用依赖项属性的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E9%80%9A%E7%9F%A5"><span class="toc-number">6.1.</span> <span class="toc-text">更改通知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%80%BC%E8%AF%86%E5%88%AB"><span class="toc-number">6.2.</span> <span class="toc-text">动态值识别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">共享依赖项属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%8A%A0%E7%9A%84%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%B1%9E%E6%80%A7"><span class="toc-number">8.</span> <span class="toc-text">附加的依赖项属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E9%AA%8C%E8%AF%81"><span class="toc-number">9.</span> <span class="toc-text">属性验证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">10.</span> <span class="toc-text">End</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Pytorch%E6%A1%86%E6%9E%B6/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E6%A6%82%E8%A6%81/" title="深度学习入门概要"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/11/28/6565b0cf0325a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深度学习入门概要"/></a><div class="content"><a class="title" href="/2023/11/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Pytorch%E6%A1%86%E6%9E%B6/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E6%A6%82%E8%A6%81/" title="深度学习入门概要">深度学习入门概要</a><time datetime="2023-11-28T01:59:36.000Z" title="发表于 2023-11-28 09:59:36">2023-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" title="蒙特卡洛方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/11/27/6563fba9bff1e.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蒙特卡洛方法"/></a><div class="content"><a class="title" href="/2023/11/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" title="蒙特卡洛方法">蒙特卡洛方法</a><time datetime="2023-11-27T01:27:34.000Z" title="发表于 2023-11-27 09:27:34">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/07/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E5%B8%B8%E8%A7%81%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98/" title="【sklearn】常见监督分类算法实战"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/10/07/65214c398f05c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【sklearn】常见监督分类算法实战"/></a><div class="content"><a class="title" href="/2023/10/07/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E5%B8%B8%E8%A7%81%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98/" title="【sklearn】常见监督分类算法实战">【sklearn】常见监督分类算法实战</a><time datetime="2023-10-07T12:15:37.000Z" title="发表于 2023-10-07 20:15:37">2023-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/06/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="【sklearn】机器学习环境搭建"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/10/06/651f6d3f2c5be.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【sklearn】机器学习环境搭建"/></a><div class="content"><a class="title" href="/2023/10/06/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="【sklearn】机器学习环境搭建">【sklearn】机器学习环境搭建</a><time datetime="2023-10-06T02:10:32.000Z" title="发表于 2023-10-06 10:10:32">2023-10-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/01/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/Python%E9%82%A3%E4%BA%9B%E7%B3%96%E8%AF%AD%E6%B3%95/" title="Python那些糖语法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/blog/2023/10/01/65195f7c7c1cf.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python那些糖语法"/></a><div class="content"><a class="title" href="/2023/10/01/%E8%AF%AD%E8%A8%80%E6%A0%91/Python/Python%E9%82%A3%E4%BA%9B%E7%B3%96%E8%AF%AD%E6%B3%95/" title="Python那些糖语法">Python那些糖语法</a><time datetime="2023-10-01T09:17:03.000Z" title="发表于 2023-10-01 17:17:03">2023-10-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Seraphine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://app.helloseraphine.top:8460/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
