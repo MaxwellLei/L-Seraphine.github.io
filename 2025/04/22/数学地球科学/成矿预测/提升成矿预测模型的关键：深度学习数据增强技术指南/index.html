@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>提升成矿预测模型的关键：深度学习数据增强技术指南 | Maxwell_Leiの小窝</title><meta name="author" content="Maxwell Lei"><meta name="copyright" content="Maxwell Lei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言这部分内容可能和之前有些跨越，我会在后面慢慢补全一些深度学习成矿预测的其他内容。这篇文章的内容涉及在成矿预测，或者成矿远景区预测，成矿远景图预测，或者地球化学异常识别都是一样类似的道理。我们在做成矿预测图（Mineral Prospectivity Mapping, MPM）的时候会不得不面临数据少的问题，对于第一次接触这个的研究人员而言更是头疼。这部分内容将会尽我个人所能去说明这个事情。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提升成矿预测模型的关键：深度学习数据增强技术指南">
+<meta property="og:url" content="https://www.helloseraphine.top/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E6%8F%90%E5%8D%87%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Maxwell_Leiの小窝">
+<meta property="og:description" content="前言这部分内容可能和之前有些跨越，我会在后面慢慢补全一些深度学习成矿预测的其他内容。这篇文章的内容涉及在成矿预测，或者成矿远景区预测，成矿远景图预测，或者地球化学异常识别都是一样类似的道理。我们在做成矿预测图（Mineral Prospectivity Mapping, MPM）的时候会不得不面临数据少的问题，对于第一次接触这个的研究人员而言更是头疼。这部分内容将会尽我个人所能去说明这个事情。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/image-20250422170300572-273cba575796a988364fcae203a91775.png">
+<meta property="article:published_time" content="2025-04-22T07:29:14.000Z">
+<meta property="article:modified_time" content="2025-05-07T13:26:18.603Z">
+<meta property="article:author" content="Maxwell Lei">
+<meta property="article:tag" content="成矿预测,卷积神经网络,数据增强,深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/image-20250422170300572-273cba575796a988364fcae203a91775.png"><link rel="shortcut icon" href="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/Seraphine_Image/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E6%8F%90%E5%8D%87%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":30,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Maxwell Lei","link":"链接: ","source":"来源: Maxwell_Leiの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '提升成矿预测模型的关键：深度学习数据增强技术指南',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-07 21:26:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Maxwell_Leiの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">86</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/image-20250422170300572-273cba575796a988364fcae203a91775.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Maxwell_Leiの小窝"><span class="site-name">Maxwell_Leiの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">提升成矿预测模型的关键：深度学习数据增强技术指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-22T07:29:14.000Z" title="发表于 2025-04-22 15:29:14">2025-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-07T13:26:18.603Z" title="更新于 2025-05-07 21:26:18">2025-05-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="提升成矿预测模型的关键：深度学习数据增强技术指南"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这部分内容可能和之前有些跨越，我会在后面慢慢补全一些深度学习成矿预测的其他内容。这篇文章的内容涉及在<strong>成矿预测，或者成矿远景区预测，成矿远景图预测，或者地球化学异常识别</strong>都是一样类似的道理。我们在做成矿预测图（Mineral Prospectivity Mapping, MPM）的时候会不得不面临数据少的问题，对于第一次接触这个的研究人员而言更是头疼。这部分内容将会尽我个人所能去说明这个事情。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507193450408-47fccd8a93a21aa12b98c9d54d6a5938.png" alt="image-20250507193450408" style="zoom: 50%;" />
+
+<p>本文将围绕如下几点讲述：</p>
+<ul>
+<li><strong>什么是数据增强？</strong> </li>
+<li>**为什么要进行数据增强？ ** </li>
+<li><strong>现在主流的数据增强方法有哪些？</strong></li>
+</ul>
+<blockquote>
+<p>需要注意的是，<strong>这部分内容是基于”图像“级别的成矿预测数据</strong>，而不是”像素“级别的成矿预测。关于更多的”图像“和”像素“级别的内容可以关注我的个人公众号：<strong>码上地球</strong>。我会在后续讲述这部分内容。</p>
+</blockquote>
+<h1 id="什么是数据增强"><a href="#什么是数据增强" class="headerlink" title="什么是数据增强"></a>什么是数据增强</h1><p>数据增强，有的人叫他数据扩增或者数据扩充，他们表达的都是一个意思。指的是一种通过人工生成或变换现有数据来<strong>扩大训练数据集规模和质量</strong>的技术。</p>
+<h1 id="为什么要进行数据增强"><a href="#为什么要进行数据增强" class="headerlink" title="为什么要进行数据增强"></a>为什么要进行数据增强</h1><p>数据增强终归是因为正&#x2F;负样本数量不足，导致模型训练效果不佳或者无法训练。更多的问题集中于如下几点：</p>
+<ul>
+<li><p><strong>对于成矿而言，成矿是罕见事件，已知矿床数量有限</strong>，导致可用于训练深度学习模型的样本远远不足。</p>
+</li>
+<li><p><strong>监督深度学习</strong>方法（如卷积神经网络，CNN）通常<strong>需要大量样本才能有效学习数据中的复杂模式和非线性关系</strong>。</p>
+</li>
+<li><p><strong>样本不足会导致模型预测精度下降、泛化能力弱，容易出现过拟合现象</strong>。</p>
+</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/image-20250422161650485-556f801e081fdca606181c609fe8f45c.png" alt="image-20250422161650485" style="zoom: 15%;" />
+
+<p>即“小样本数据限制”是成矿预测中常见的挑战，我们需要对正&#x2F;负样本进行数据增强。</p>
+<blockquote>
+<p>注：所有的增强都是基于一些原因而进行的，请不要为了数据增强而增强</p>
+</blockquote>
+<h1 id="数据增强方法"><a href="#数据增强方法" class="headerlink" title="数据增强方法"></a>数据增强方法</h1><p>目前主流的数据增强方法可以分为两类：<strong>噪声注入</strong>和<strong>合成数据</strong>，这不难理解对吧？</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507192808577-f1c610c005f364529bb75da11af85252.png" alt="image-20250507192808577" style="zoom:50%;" />
+
+<h2 id="合成数据"><a href="#合成数据" class="headerlink" title="合成数据"></a>合成数据</h2><p>我们来先说明合成数据，因为合成数据由于适用性进而分为两个类别：<strong>传统方法</strong>和<strong>其他方法</strong>（个人理解）。</p>
+<p><strong>对于传统方法而言</strong>，都是针对图像类地质数据的<strong>几何与光度变换</strong>，这种方法在计算机视觉中很常见，例如，自家学校或者研究生门口的人脸识别机器的训练数据。几何与光度变换具体包括：</p>
+<ul>
+<li><strong>旋转，翻转，缩放，裁切，平移，错切</strong>等</li>
+<li><strong>亮度&#x2F;对比度&#x2F;饱和度&#x2F;色调调整，颜色抖动</strong>等</li>
+</ul>
+<p>不难理解，对于计算机视觉任务而言，比如人脸识别，输入的人脸由于环境关照的不同，相机的性能参数差异，遮挡，人物的抖动，方向等各种原因，我们通过数据增强来大量的模拟这种情况是非常合理的。</p>
+<p>这种方法实现简单，成本低，但是它对<strong>地质数据而言适用性非常有限</strong>。<strong>对于网格化的地球物理或地球化学图，简单的几何变换（如旋转）可能会改变固有的空间意义或方向依赖性特征（例如磁异常、构造线理）</strong>。并且有不少的研究证明了，这些传统的数据增强方法对地质勘探的数据无效，甚至是导致地质意义是错误的。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507192449276-36f420b5f74c258d6c2fc12fe3072eba.png" alt="image-20250507192449276" style="zoom:50%;" />
+
+<p>这就很麻烦了，<strong>我们迫切需要一些“地质感知”或“地质约束”的增强方法</strong>。很幸运的是，人类的智慧是无穷的，我们拥有了更多<strong>其他方法</strong>，包括：<strong>滑动窗口法，基于限定区域的滑动窗口法，像素对特征法，自编码器和对抗生成网络</strong>。</p>
+<blockquote>
+<p>当然也可能有其他方法，主流上或者常见的方法大概就这些了。</p>
+</blockquote>
+<p><strong>滑动窗口法(Sliding Window)<strong>，顾名思义，就是我们通过一个更小尺寸的窗口对底图进行裁切以“生成”更多新样本。如下图所示，尽管这个图不是很标准，但是实际上我们是通过</strong>围绕矿点&#x2F;矿体按照一定的步长进行滑动裁切</strong>以最终合成大量的<strong>正样本</strong>。这不难理解对吧？这也是目前最常用的一种数据增强方法。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507195136278-a0f19fea91eba2bb1999b24afd7c8af8.png" alt="image-20250507195136278" style="zoom:67%;" />
+
+<p><strong>基于限定区域的滑动窗口法</strong>，这是一种滑动窗口方法的变体，他和滑动窗口法的区别在于，<strong>先使用一个比滑动窗口更大的窗口选定矿点&#x2F;矿体，然后在限定区域的窗体里面用更小尺寸的窗体以一定步长进行滑动采样</strong>。最终形成大量的正样本。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507195625202-785439188ad14b5dc0db3831be72d15e.png" alt="image-20250507195625202" style="zoom:80%;" />
+
+<blockquote>
+<p>注：图像来源 (Yang et. al., 2022)</p>
+</blockquote>
+<p><strong>像素对特征法(Pixel-pair feature, PPF)<strong>，首先要说明的是这个中文不一定官方，也有的地方译作</strong>像素到特征法</strong>，请注意辨别，这是指的同一种方法。这种方法通过另一种思路来完成的数据增强。即<strong>通过匹配像素对是否相似来实现的</strong>。举例而言：通过在正样本和负样本之间随机匹配大量的像素对，如果是两个正样本则输出 <code>True</code>，如果是两个不一样的样本，则输出<code>False</code>。基于这种方法可以在少量数据基础的情况下，快速生成大量的样本。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507200738218-8fa391f5f8581defbd4c911228a4435b.png" alt="image-20250507200738218" style="zoom:80%;" />
+
+<blockquote>
+<p>注：图像来源 (Zhang et. al., 2021)</p>
+</blockquote>
+<p><strong>自编码器(AutoEncoder)<strong>，自编码器是一种无监督学习的神经网络模型，它由两部分组成：</strong>编码器（Encoder）和解码器（Decoder）</strong>。</p>
+<ul>
+<li><p>编码器：<strong>将高维的输入数据压缩成一个低维的潜在空间表示</strong>。</p>
+</li>
+<li><p>解码器：<strong>尝试从潜在空间的表示中重建原始输入数据</strong>。</p>
+</li>
+</ul>
+<p>训练的目标是最小化输入数据与其重建数据之间的差异。通过这个过程，自编码器学习到了数据的内在结构和重要特征的压缩表示。</p>
+<p>在了解自编码器的基本原理后，我们可以<strong>首先，将多源地球科学数据（地球化学，地球物理，地质数据，遥感数据）等作为自编码器的输入，通过自编码器学习数据的潜空间分布和模式，进而通过将正&#x2F;负样本在潜空间里面的进行微小的随机扰动或插值采样。最后利用解码器最终生成新合成的样本</strong>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507201616140-6a67871d98287bd8bbd5e5844bf9027d.png" alt="image-20250507201616140" style="zoom:80%;" />
+
+<p><strong>对抗生成网络(Generative Adversarial Network, GAN)<strong>，对抗生成网络</strong>由一个生成器（Generator）和一个判别器（Discriminator）组成</strong>。<strong>生成器试图生成逼真的假数据，而判别器试图区分真实数据和假数据</strong>。通过这种对抗训练，生成器学习生成与真实数据在分布上相似的合成数据。</p>
+<p>相信你在看到上面简短的原理可以理解到了他是如何进行的数据增强（合成数据），我们只需要<strong>将训练目标定义为训练生成器来生成看起来像真实地质、地球物理等数据的合成样本</strong>（例如，生成反映矿化异常的地球化学或地球物理图像、生成符合特定地质背景的组合特征）。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507202136314-bb4cb3176d30a85fb88700bfc60c067a.png" alt="image-20250507202136314" style="zoom: 60%;" />
+
+<h2 id="噪声注入"><a href="#噪声注入" class="headerlink" title="噪声注入"></a>噪声注入</h2><p><strong>添加随机零噪声</strong>（也有的用的是<strong>高斯噪声</strong>是指的一个意思）是一种噪声注入的方法，通过<strong>向证据层添加零值噪声点以增加数据集大小</strong>，同时保持位置和相关性。这很容易理解，如下图所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507204322115-5c866797776f99559f8e3cdaceb16441.png" alt="image-20250507204322115" style="zoom: 67%;" />
+
+<blockquote>
+<p>注：图像来源 (Li et. al., 2021)</p>
+</blockquote>
+<p>另一种方法是<strong>数据扰动</strong>，就目前而言，我见到的使用的不多。他是通过<strong>在原来数据的基础上，进行微小的抖动</strong>。这种方法一定程度上受限于数据类型和实际地质意义。</p>
+<h1 id="非均衡样本"><a href="#非均衡样本" class="headerlink" title="非均衡样本"></a>非均衡样本</h1><p>说点题外话，从机器学习的特征工程的角度来看，我们增强数据的目的一方面是解决训练量不足的问题，另一方面而言是<strong>从根本上解决非均衡样本分类的问题</strong>。从非均衡样本的角度来看，我们的解决方案主要是两种：<strong>过采样和欠采样</strong>。</p>
+<p>当然，关于非均衡分类的问题有很多指的说明讨论的，但是我们这部分内容并不专注于讨论这个，只是尝试从另一个角度来启发不同的研究思路。</p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>回收开头的情况，对于数据增强方法的选择，至于是<strong>合成数据</strong>好还是<strong>噪声注入</strong>好而言，各有优势，有句话说得好，小孩才做选择，我全都要（😂笑）。开玩笑，做研究嘛，还是要根据具体情况来定夺的。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/07/image-20250507205813420-3bb0510a2fe6c20e5492c33122a2ee56.png" alt="image-20250507205813420" style="zoom:50%;" />
+
+<p>总而言之，言而总之，对于成矿预测任务进行的数据增强方法大概如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>数据增强方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>裁切，旋转，缩放，错切，亮度&#x2F;对比度调整，颜色抖动等</td>
+<td>对于计算机视觉任务是常用的，但是对于成矿预测而言，这种增强变换方法会破坏地质意义，不推荐使用。</td>
+</tr>
+<tr>
+<td>滑动窗口法(Sliding Window)</td>
+<td>目前主流的方法，通用万金油。通过围绕正样本（矿点）做循环滑动裁切。</td>
+</tr>
+<tr>
+<td>零噪声添加法(Adding random zero noise)</td>
+<td>创新方法，增强模型的鲁棒性，不过有些学者认为这种方法会一定程度上影响地质事实。</td>
+</tr>
+<tr>
+<td>数据扰动</td>
+<td>有一定的局限性</td>
+</tr>
+<tr>
+<td>基于限定区域的滑动窗口法</td>
+<td>滑动窗口法的变体，先选定大区域，然后在里面用小尺寸窗口滑动裁切。</td>
+</tr>
+<tr>
+<td>像素对特征法(Pixel-pair feature)</td>
+<td>利用逆向思维，通过匹配两个数据样本是否相似来抽样组合大量样本</td>
+</tr>
+<tr>
+<td>自编码器(AutoEncoder)</td>
+<td>深度学习方法，有一些学者在使用</td>
+</tr>
+<tr>
+<td>对抗生成网络(Generative Adversarial Network)</td>
+<td>深度学习方法，效果更多的依赖于大量的高质量数据样本</td>
+</tr>
+</tbody></table>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li>文中所有表情包出自互联网网友，包括但是不限于知乎，小红书等平台。感谢友情提供🌹</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jsnsnsb/article/details/147001392">什么是数据增强</a></li>
+<li>Zhang, C., Zuo, R., Xiong, Y., 2021. Detection of the multivariate geochemical anomalies associated with mineralization using a deep convolutional neural network and a pixel-pair feature method. Applied Geochemistry 130, 104994.</li>
+<li>Liu, Y., Sun, T., Wu, K., Xiang, W., Zhang, J., Zhang, H., &amp; Feng, M. (2025). Interpretability Analysis of Data Augmented Convolutional Neural Network in Mineral Prospectivity Mapping Using Black-Box Visualization Tools. Natural Resources Research, 1-25.</li>
+<li>Yang N., Zhang Z.K., Yang J.H., Hong Z.L., 2022. Applications of data augmentation in mineral prospectivity prediction based on convolutional neural networks. Computers &amp; Geosciences 161, 105075.</li>
+<li>Yang, F., Zuo, R., Kreuzer, O.P., 2024. Artificial intelligence for mineral exploration: A review and perspectives on future directions from data science. Earth-Science Reviews, 104941.</li>
+<li>Sun, K., Chen, Y., Geng, G., Lu, Z., Zhang, W., Song, Z., Guan, Y., Zhang, Z., 2024. A Review of Mineral Prospectivity Map Using Deep Learning. Minerals 14, 1021.</li>
+<li>Li, T., Zuo, R., Xiong, Y., Peng, Y., 2021. Random-Drop Data  Augmentation of Deep Convolutional Neural Network for Mineral  Prospectivity Mapping. Natural Resources Research 30, 27–38.</li>
+<li>Zuo, R., Xu, Y., 2023. Graph deep learning model for mapping mineral prospectivity. Mathematical Geosciences, 55, 1-21.</li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@tejpal.abhyuday/every-thing-about-autoencoders-efad99fdb8ba">EveryThing about AutoEncoders, Tejpal Kumawat.</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/what-generative-adversarial-networks-gans-sushant-babbar-qpc9c">Adversarial Networks (GANs)? Understanding and Implications, Sushant Babbar.</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Maxwell Lei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E6%8F%90%E5%8D%87%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/">https://www.helloseraphine.top/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E6%8F%90%E5%8D%87%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Maxwell_Leiの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">成矿预测,卷积神经网络,数据增强,深度学习</a></div><div class="post_share"><div class="social-share" data-image="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/image-20250422170300572-273cba575796a988364fcae203a91775.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Pytorch%E6%A1%86%E6%9E%B6/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E6%A6%82%E8%A6%81/" title="深度学习入门概要"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2023/11/28/6565b0cf0325a.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">深度学习入门概要</div></div></a></div><div class="next-post pull-right"><a href="/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%9A%84%E5%B0%81%E9%97%AD%E6%95%88%E5%BA%94/" title="地球化学数据的封闭效应"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/%E4%B8%8B%E8%BD%BD%20-2--a07824441018abfd3eadb8ac26e77787.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">地球化学数据的封闭效应</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxwell Lei</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">86</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MaxwellLei"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MaxwellLei" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://afdian.com/a/fastgpt" target="_blank" title="每天给生活来一拳"><i class="fas fa-coffee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA"><span class="toc-number">2.</span> <span class="toc-text">什么是数据增强</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA"><span class="toc-number">3.</span> <span class="toc-text">为什么要进行数据增强</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">数据增强方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E6%88%90%E6%95%B0%E6%8D%AE"><span class="toc-number">4.1.</span> <span class="toc-text">合成数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E6%B3%A8%E5%85%A5"><span class="toc-number">4.2.</span> <span class="toc-text">噪声注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9E%E5%9D%87%E8%A1%A1%E6%A0%B7%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">非均衡样本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">6.</span> <span class="toc-text">End</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">7.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/04/30/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A0%94%E7%A9%B6%E7%94%9F%E5%9F%BA%E7%A1%80%E6%8C%87%E5%8D%97/%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE%E7%A5%9E%E5%99%A8%E6%8E%A8%E8%8D%90%EF%BC%9A%E8%BD%BB%E6%9D%BE%E7%94%BB%E5%87%BA%E4%B8%93%E4%B8%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E5%9B%BE/" title="科研绘图神器推荐：轻松画出专业神经网络结构图"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/05/06/image-20250506194616870-7baa546bb956c8e08f5646878a337ccf.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="科研绘图神器推荐：轻松画出专业神经网络结构图"/></a><div class="content"><a class="title" href="/2025/04/30/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A0%94%E7%A9%B6%E7%94%9F%E5%9F%BA%E7%A1%80%E6%8C%87%E5%8D%97/%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE%E7%A5%9E%E5%99%A8%E6%8E%A8%E8%8D%90%EF%BC%9A%E8%BD%BB%E6%9D%BE%E7%94%BB%E5%87%BA%E4%B8%93%E4%B8%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E5%9B%BE/" title="科研绘图神器推荐：轻松画出专业神经网络结构图">科研绘图神器推荐：轻松画出专业神经网络结构图</a><time datetime="2025-04-30T12:28:11.000Z" title="发表于 2025-04-30 20:28:11">2025-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%9A%84%E5%B0%81%E9%97%AD%E6%95%88%E5%BA%94/" title="地球化学数据的封闭效应"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/%E4%B8%8B%E8%BD%BD%20-2--a07824441018abfd3eadb8ac26e77787.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="地球化学数据的封闭效应"/></a><div class="content"><a class="title" href="/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%9A%84%E5%B0%81%E9%97%AD%E6%95%88%E5%BA%94/" title="地球化学数据的封闭效应">地球化学数据的封闭效应</a><time datetime="2025-04-22T09:05:21.000Z" title="发表于 2025-04-22 17:05:21">2025-04-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E6%8F%90%E5%8D%87%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" title="提升成矿预测模型的关键：深度学习数据增强技术指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/04/22/image-20250422170300572-273cba575796a988364fcae203a91775.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提升成矿预测模型的关键：深度学习数据增强技术指南"/></a><div class="content"><a class="title" href="/2025/04/22/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E6%8F%90%E5%8D%87%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" title="提升成矿预测模型的关键：深度学习数据增强技术指南">提升成矿预测模型的关键：深度学习数据增强技术指南</a><time datetime="2025-04-22T07:29:14.000Z" title="发表于 2025-04-22 15:29:14">2025-04-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Pytorch%E6%A1%86%E6%9E%B6/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E6%A6%82%E8%A6%81/" title="深度学习入门概要"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2023/11/28/6565b0cf0325a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深度学习入门概要"/></a><div class="content"><a class="title" href="/2023/11/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Pytorch%E6%A1%86%E6%9E%B6/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E6%A6%82%E8%A6%81/" title="深度学习入门概要">深度学习入门概要</a><time datetime="2023-11-28T01:59:36.000Z" title="发表于 2023-11-28 09:59:36">2023-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" title="蒙特卡洛方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2023/11/27/6563fba9bff1e.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蒙特卡洛方法"/></a><div class="content"><a class="title" href="/2023/11/27/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" title="蒙特卡洛方法">蒙特卡洛方法</a><time datetime="2023-11-27T01:27:34.000Z" title="发表于 2023-11-27 09:27:34">2023-11-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Maxwell Lei</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
