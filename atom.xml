@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2025-09-26T14:45:21.087Z</updated>
+  <updated>2025-10-01T12:44:20.411Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -17,29 +17,62 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生</title>
-    <link href="https://www.helloseraphine.top/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E4%BC%A0%E7%BB%9F%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%96%B9%E6%B3%95/"/>
-    <id>https://www.helloseraphine.top/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E4%BC%A0%E7%BB%9F%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E6%96%B9%E6%B3%95/</id>
-    <published>2025-09-26T03:18:01.000Z</published>
-    <updated>2025-09-26T14:45:21.087Z</updated>
+    <title>大数据成矿预测系列(二) | 证据权重法如何克服自身局限？</title>
+    <link href="https://www.helloseraphine.top/2025/10/01/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%8C)%20%20%E6%91%86%E8%84%B1%E6%9D%9F%E7%BC%9A%EF%BC%8C%E6%8B%A5%E6%8A%B1%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E8%87%AA%E8%BA%AB%E5%B1%80%E9%99%90%EF%BC%9F/"/>
+    <id>https://www.helloseraphine.top/2025/10/01/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%8C)%20%20%E6%91%86%E8%84%B1%E6%9D%9F%E7%BC%9A%EF%BC%8C%E6%8B%A5%E6%8A%B1%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E8%87%AA%E8%BA%AB%E5%B1%80%E9%99%90%EF%BC%9F/</id>
+    <published>2025-10-01T10:01:16.000Z</published>
+    <updated>2025-10-01T12:44:20.411Z</updated>
     
     
-    <summary type="html">本文作为“大数据成矿预测”系列的首篇，系统回顾了数据驱动方法中的经典模型——证据权重法（Weights of Evidence）。文章追溯了该方法从医学诊断跨界应用于地质勘查的演进历程，阐明了其如何将传统的、依赖专家经验的定性叠图分析，转变为一种基于贝叶斯统计的、客观且可复现的定量预测范式。通过对数据准备、权重计算、独立性检验及后验概率生成等核心步骤的详细拆解与实例说明，本文旨在帮助读者深入理解证据权重法的原理与实践，为掌握现代成矿预测技术奠定坚实基础。</summary>
+    <summary type="html">证据权重法 (WofE) 曾是成矿预测的革命性工具，但其与生俱来的理论缺陷犹如“阿喀琉斯之踵”，让无数预测结果“过于乐观”。本文将带你踏上一段为经典模型“打补丁”的征程，从根源上剖析其致命弱点，并探索模糊数学、机器学习等思想如何催生出更强大的改进算法，让成矿预测变得更加智能和可靠。</summary>
     
     
+    
+    <category term="数学地球科学" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="成矿预测" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
     
     
     <category term="大数据" scheme="https://www.helloseraphine.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     <category term="成矿预测" scheme="https://www.helloseraphine.top/tags/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
     
-    <category term="贝叶斯" scheme="https://www.helloseraphine.top/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/"/>
+    <category term="数据驱动" scheme="https://www.helloseraphine.top/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/"/>
+    
+    <category term="地球科学" scheme="https://www.helloseraphine.top/tags/%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="证据权重法" scheme="https://www.helloseraphine.top/tags/%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生</title>
+    <link href="https://www.helloseraphine.top/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%80)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E2%80%9D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/"/>
+    <id>https://www.helloseraphine.top/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%80)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E2%80%9D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</id>
+    <published>2025-09-26T03:18:01.000Z</published>
+    <updated>2025-09-26T14:49:51.280Z</updated>
+    
+    
+    <summary type="html">本文作为“大数据成矿预测”系列的首篇，系统回顾了数据驱动方法中的经典模型——证据权重法（Weights of Evidence）。文章追溯了该方法从医学诊断跨界应用于地质勘查的演进历程，阐明了其如何将传统的、依赖专家经验的定性叠图分析，转变为一种基于贝叶斯统计的、客观且可复现的定量预测范式。通过对数据准备、权重计算、独立性检验及后验概率生成等核心步骤的详细拆解与实例说明，本文旨在帮助读者深入理解证据权重法的原理与实践，为掌握现代成矿预测技术奠定坚实基础。</summary>
+    
+    
+    
+    <category term="数学地球科学" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="成矿预测" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
+    
+    
+    <category term="大数据" scheme="https://www.helloseraphine.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    <category term="成矿预测" scheme="https://www.helloseraphine.top/tags/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
     
     <category term="数据驱动" scheme="https://www.helloseraphine.top/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/"/>
     
     <category term="地球科学" scheme="https://www.helloseraphine.top/tags/%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
     
     <category term="证据权重法" scheme="https://www.helloseraphine.top/tags/%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95/"/>
+    
+    <category term="贝叶斯" scheme="https://www.helloseraphine.top/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/"/>
     
   </entry>
   
@@ -280,7 +313,7 @@
     <link href="https://www.helloseraphine.top/2023/10/07/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E5%B8%B8%E8%A7%81%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98/"/>
     <id>https://www.helloseraphine.top/2023/10/07/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%90sklearn%E3%80%91%E5%B8%B8%E8%A7%81%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98/</id>
     <published>2023-10-07T12:15:37.000Z</published>
-    <updated>2025-04-17T03:44:24.017Z</updated>
+    <updated>2025-05-09T12:30:01.866Z</updated>
     
     
       
@@ -572,31 +605,6 @@
     <id>https://www.helloseraphine.top/2023/07/12/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%903-0%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91/</id>
     <published>2023-07-12T13:12:43.000Z</published>
     <updated>2025-04-17T03:44:23.845Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="人工智能" scheme="https://www.helloseraphine.top/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="机器学习" scheme="https://www.helloseraphine.top/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【2.0】K-近邻算法</title>
-    <link href="https://www.helloseraphine.top/2023/07/08/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/"/>
-    <id>https://www.helloseraphine.top/2023/07/08/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%902.0%E3%80%91K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/</id>
-    <published>2023-07-08T15:30:01.000Z</published>
-    <updated>2025-04-17T03:44:23.820Z</updated>
     
     
       
