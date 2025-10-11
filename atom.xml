@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2025-10-06T08:04:36.440Z</updated>
+  <updated>2025-10-11T13:00:15.475Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -17,16 +17,49 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析</title>
+    <link href="https://www.helloseraphine.top/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/"/>
+    <id>https://www.helloseraphine.top/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</id>
+    <published>2025-10-11T11:10:26.000Z</published>
+    <updated>2025-10-11T13:00:15.475Z</updated>
+    
+    
+    <summary type="html">本文对比了随机森林(RF)和支持向量机(SVM)在矿产预测中的应用。随机森林通过集成决策树和双重随机化机制，表现出优异的抗过拟合能力、小样本学习能力和特征重要性解释能力，更适合矿产勘查中常见的有限、噪声数据场景。而SVM虽然理论优美，但存在过拟合风险高、黑箱特性等局限。文章建议在矿产预测任务中优先采用随机森林算法，因其能提供更可靠、可解释的预测结果，特别适用于勘探程度低的区域。两种算法的核心差异体现在处理非线性关系、数据解释性和实际应用效果等方面。</summary>
+    
+    
+    
+    
+    <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="支持向量机" scheme="https://www.helloseraphine.top/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
+    
+    <category term="大数据" scheme="https://www.helloseraphine.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    <category term="成矿预测" scheme="https://www.helloseraphine.top/tags/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
+    
+    <category term="数据驱动" scheme="https://www.helloseraphine.top/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/"/>
+    
+    <category term="地球科学" scheme="https://www.helloseraphine.top/tags/%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="随机森林" scheme="https://www.helloseraphine.top/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？</title>
     <link href="https://www.helloseraphine.top/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/"/>
     <id>https://www.helloseraphine.top/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/</id>
     <published>2025-10-06T06:39:20.000Z</published>
-    <updated>2025-10-06T08:04:36.440Z</updated>
+    <updated>2025-10-06T08:04:57.927Z</updated>
     
     
     <summary type="html">本文系统地回顾了证据权重法（WofE）作为数据驱动成矿预测先驱的历史贡献，并深入剖析了其根植于条件独立性假设的根本局限性。通过理论辨析和地质实例论证，我们揭示了这一核心假设与真实成矿系统的复杂性、内在关联性之间存在着不可调和的矛盾。这一矛盾在现代地学大数据环境下被急剧放大，从而宣告了以WofE为代表的传统统计预测范式的终结。</summary>
     
     
+    
+    <category term="数学地球科学" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="成矿预测" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
     
     
     <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
@@ -598,31 +631,6 @@
     <category term="梯度上升" scheme="https://www.helloseraphine.top/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87/"/>
     
     <category term="Python" scheme="https://www.helloseraphine.top/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【4.0】基于概率论的分类方法：朴素贝叶斯</title>
-    <link href="https://www.helloseraphine.top/2023/07/15/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/"/>
-    <id>https://www.helloseraphine.top/2023/07/15/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%904-0%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</id>
-    <published>2023-07-15T15:10:22.000Z</published>
-    <updated>2025-04-17T03:44:23.869Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="人工智能" scheme="https://www.helloseraphine.top/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="机器学习" scheme="https://www.helloseraphine.top/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
     
   </entry>
   

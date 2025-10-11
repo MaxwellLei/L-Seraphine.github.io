@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析 | Maxwell_Leiの小窝</title><meta name="author" content="Maxwell Lei"><meta name="copyright" content="Maxwell Lei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文对比了随机森林(RF)和支持向量机(SVM)在矿产预测中的应用。随机森林通过集成决策树和双重随机化机制，表现出优异的抗过拟合能力、小样本学习能力和特征重要性解释能力，更适合矿产勘查中常见的有限、噪声数据场景。而SVM虽然理论优美，但存在过拟合风险高、黑箱特性等局限。文章建议在矿产预测任务中优先采用随机森林算法，因其能提供更可靠、可解释的预测结果，特别适用于勘探程度低的区域。两种算法的核心差异体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析">
+<meta property="og:url" content="https://www.helloseraphine.top/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="Maxwell_Leiの小窝">
+<meta property="og:description" content="本文对比了随机森林(RF)和支持向量机(SVM)在矿产预测中的应用。随机森林通过集成决策树和双重随机化机制，表现出优异的抗过拟合能力、小样本学习能力和特征重要性解释能力，更适合矿产勘查中常见的有限、噪声数据场景。而SVM虽然理论优美，但存在过拟合风险高、黑箱特性等局限。文章建议在矿产预测任务中优先采用随机森林算法，因其能提供更可靠、可解释的预测结果，特别适用于勘探程度低的区域。两种算法的核心差异体">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/PixPin_2025-10-11_20-59-22-small50-77deb6bd1f88f9bd5636576083671bfa.webp">
+<meta property="article:published_time" content="2025-10-11T11:10:26.000Z">
+<meta property="article:modified_time" content="2025-10-11T13:00:15.475Z">
+<meta property="article:author" content="Maxwell Lei">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="支持向量机">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="成矿预测">
+<meta property="article:tag" content="数据驱动">
+<meta property="article:tag" content="地球科学">
+<meta property="article:tag" content="随机森林">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/PixPin_2025-10-11_20-59-22-small50-77deb6bd1f88f9bd5636576083671bfa.webp"><link rel="shortcut icon" href="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/Seraphine_Image/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":30,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Maxwell Lei","link":"链接: ","source":"来源: Maxwell_Leiの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-11 21:00:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Maxwell_Leiの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">54</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/PixPin_2025-10-11_20-59-22-small50-77deb6bd1f88f9bd5636576083671bfa.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Maxwell_Leiの小窝"><span class="site-name">Maxwell_Leiの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T11:10:26.000Z" title="发表于 2025-10-11 19:10:26">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-11T13:00:15.475Z" title="更新于 2025-10-11 21:00:15">2025-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>随着地球科学进入大数据时代，传统的矿产勘查方法正面临着一场深刻的变革。<strong>从传统的统计学模型到现代的机器学习模型</strong>，成矿预测正经历着范式的转变。<strong>现代勘探工作流需要整合来源多样、结构复杂的海量数据集，包括地质填图、地球物理、地球化学以及高分辨率遥感影像 （当然还有钻孔数据等其他数据）</strong>。在这一背景下，机器学习是将这些海量数据转化为精准成矿预测图（Mineral Prospectivity Mapping, MPM）的核心引擎。  </p>
+<blockquote>
+<p>当然，从数据角度来看，地质大数据可以分为结构化数据，半结构换数据和非结构化数据。数据相关的内容我会在后续专门开一个系列讲述。这并不是这篇文章的重点。欢迎持续关注 <strong>“码上地球——数学地球科学”</strong> 获取后续内容。</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011192040514-aa71955a684d04507b5f7aa4026eb981.png" alt="image-20251011192040514" style="zoom: 67%;" />
+
+<p>在众多算法中，<strong>随机森林（Random Forest, RF）与支持向量机（Support Vector Machine, SVM）已成为该领域应用最广泛、最核心的两大“主力军”</strong> 。它们凭借强大的非线性关系建模能力，在地学数据分析中扮演着举足轻重的角色（<em>论文中随处可见😂</em>）。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011192801508-079d68f76fc2f063b742ec884aa86e11.png" alt="image-20251011192801508" style="zoom:67%;" />
+
+<p>本文旨在简单阐述其工作原理，讨论在成矿预测这一特定场景下，哪种算法更能应对地学数据独有的挑战。</p>
+<h1 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h1><p><strong>随机森林是一种集成学习算法</strong>，其核心思想与古语“三个臭皮匠，顶个诸葛亮”不谋而合。它并不依赖于某一个强大而复杂的单一模型，而是通过<strong>构建并结合数百个相对简单的决策树（Decision Trees）模型</strong>，来获得远超任何个体模型的稳定性和准确性 。  </p>
+<h2 id="核心原理：地质专家的“群策群力”"><a href="#核心原理：地质专家的“群策群力”" class="headerlink" title="核心原理：地质专家的“群策群力”"></a>核心原理：地质专家的“群策群力”</h2><p>可以将<strong>随机森林的工作机制比作一个大型、多元化的地质专家委员会，而非依赖一位全知全能的“宗师”</strong> 。委员会的每一位专家都是一棵决策树，而算法通过精巧的“双重随机”机制来确保专家团队的多样性和独立性，从而实现集体智慧。 而他的算法主要依赖于两个方面：</p>
+<ol>
+<li><strong>数据随机化：算法在训练每一棵决策树时，并非使用全部的训练数据</strong>（例如，所有已知的矿点和非矿点）。相反，它会从原始数据集中进行有放回的随机抽样，生成一个与原始数据集大小相同但内容不同的子集 。这意味着某些矿点样本可能在一棵树的训练集中出现多次，而另一些则可能完全不出现。<strong>这种机制保证了每棵树都是从一个略有不同的“地质视角”去学习成矿规律</strong>，从而避免了所有树都犯同样错误的风险。对于每棵树，大约有三分之一的原始数据未被抽中，这部分数据被称为“袋外数据”（Out-of-Bag, OOB），它们可以被用作一个天然的、无偏的内部验证集，用于评估模型性能而无需额外划分测试集 。  </li>
+<li><strong>特征随机化</strong>：这是随机森林相较于其他集成算法 (Bagging) 的关键创新。在决策树生长的每一个节点需要进行分裂时，算法<strong>并不会在所有的证据图层（如磁异常、重力、地球化学元素、断裂距离等）中寻找最优分裂特征</strong>。它会先随机选择一个特征子集（例如，从全部30个图层中随机挑选5个），然后仅在这个子集内寻找最佳分裂点 。这一机制<strong>强制不同的决策树成为不同地质证据组合的“专家”。它有效防止了少数几个极其强大的预测变量（例如，一个非常显著的与成矿直接相关的地球化学异常）主导整个森林的决策过程</strong>，从而确保了模型的多样性，使得森林能够捕捉到更广泛、更细微的成矿模式 。</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011194654162-ab9bf333b60dfefc2cd1a2dd4cf213aa.png" alt="image-20251011194654162" style="zoom:50%;" />
+
+<p>最终，当需要对一个新区域进行预测时，森林中的每一棵树都会独立地给出一个“有矿”或“无矿”的判断。算法会收集所有树的“投票”，并以少数服从多数的原则，做出最终的预测决策。  </p>
+<h2 id="抗过拟合引擎：为何RF能驾驭地质数据"><a href="#抗过拟合引擎：为何RF能驾驭地质数据" class="headerlink" title="抗过拟合引擎：为何RF能驾驭地质数据"></a>抗过拟合引擎：为何RF能驾驭地质数据</h2><p><strong>在成矿预测中，“过拟合”（Overfitting）是一个致命缺陷</strong>。一个<strong>过拟合的模型，会过度学习训练数据中（即已知矿点）的局部细节和噪声，以至于它能完美地“解释”所有已知矿点，但却失去了对未知区域的预测能力</strong>。用人话来说它记住的是“答案”，而非“规律”。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011200213409-2725428804181fe6cf2b2e493e2faedf.png" alt="image-20251011200213409" style="zoom:50%;" />
+
+<p><strong>随机森林通过数据采样和特征选择的随机化，算法确保了森林中任意两棵树之间的相关性都非常低</strong> 。虽然单一的、深度生长的决策树极易过拟合，因为它会不断分裂以适应训练数据中的每一个微小波动。但是，当我们将数百个这样低偏差、高方差且互不相关的决策树的预测结果进行平均或投票时，它们各自的误差会相互抵消，从而显著降低整体模型的方差，得到一个既准确又稳健的最终模型 。正是这种机制，使得随机森林即使在树的数量很多时也不会出现过拟合问题，表现出极强的泛化能力 。这对于处理本身就充满噪声、复杂且“真理”（已知矿点）稀少的地质数据而言，是一项至关重要的优势 。  </p>
+<h2 id="地学应用的关键优势"><a href="#地学应用的关键优势" class="headerlink" title="地学应用的关键优势"></a>地学应用的关键优势</h2><p>除了强大的抗过拟合能力，随机森林还在三个方面展现出与地质勘查工作流高度契合的优势。</p>
+<ol>
+<li><strong>小样本学习能力</strong>：在勘查的早期阶段，尤其是“绿地”勘探中，可供模型学习的已知矿点（训练样本）往往非常稀少。有学者的研究说明，随机森林即便在训练样本数量极少的情况下，依然能够构建出有效且稳健的预测模型 。这对预算有限、勘探程度低的区域极具价值。  </li>
+<li><strong>处理缺失值</strong>：<strong>地质数据集常常是不完整的，例如某些区域可能缺少某种地球化学采样或地球物理数据</strong>。许多算法无法直接处理这些缺失值，需要进行复杂的数据插补或直接丢弃样本。随机森林内置了高效的缺失值处理机制，能够在不牺牲数据完整性的前提下保持模型的准确性。  </li>
+<li><strong>黑盒解译</strong>：机器学习模型常被诟病为“黑箱”，即它们能给出预测结果，却无法解释原因。<strong>随机森林通过其“特征重要性”评分功能，在很大程度上克服了这一缺陷</strong>。勘探管理者不仅能得到一张高潜力靶区图，还能得到一份数据驱动的报告，解释了<strong>为什么</strong>这些区域具有高潜力。例如，在某金矿成矿预测案例中，特征重要性分析可能揭示出，“与镁铁质火山岩的接触带”和“某特定走向的变形带”是控制成矿的最关键因素 。这种反馈不仅能验证和优化地质学家头脑中的成矿概念模型，甚至可能挑战传统认知，提出全新的、由数据驱动的勘探思路。这使得随机森林不再仅仅是一个圈定靶区的工具，而是成为了地质勘探科学研究流程中一个不可或缺的组成部分。</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011201039000-f0235796902a4662e846833cb00332bb.png" alt="image-20251011201039000" style="zoom: 80%;" />
+
+<blockquote>
+<p>随机森林特征重要性图示例，图片来源：Wen et al., 2024</p>
+</blockquote>
+<h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><p>支持向量机是一种强大的监督学习算法，其核心思想是基于几何和最优化理论，<strong>在数据之间寻找一个最优的分类边界</strong>。它以其数学上的严谨性和处理复杂非线性问题的高效性而著称。</p>
+<blockquote>
+<p>这是数学家最喜欢的模型之一，数学优雅！</p>
+</blockquote>
+<h2 id="核心原理：划分最清晰的“街道”"><a href="#核心原理：划分最清晰的“街道”" class="headerlink" title="核心原理：划分最清晰的“街道”"></a>核心原理：划分最清晰的“街道”</h2><p>支持向量机本质上是一个非概率性的二元线性分类器 。其最基本的目标，是在代表不同类别（如“矿点”与“非矿点”）的数据点之间，找到一个最优的<strong>超平面</strong>（Hyperplane）——在二维空间中是一条直线，在三维空间中是一个平面，以此类推——将它们完美地分离开 。  </p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011201600766-e4cea2882fcfc98d6ead60039af1da77.png" alt="image-20251011201600766" style="zoom:80%;" />
+
+<blockquote>
+<p>支持向量机原理示意图，图片来源：Zhong et al., 2023</p>
+</blockquote>
+<p>在众多可以划分数据的超平面中，SVM 寻找的是那个“最优”的。这个“最优”的定义是：该超平面到两边最近的数据点的距离（即<strong>间隔</strong>，Margin）最大化 。这个概念可以通过一个生动的比喻来理解：想象一下要在代表两个不同社区的房屋（数据点）之间修建一条尽可能宽的街道（分类边界）。最优的街道就是那条在保证不拆迁任何房屋的前提下，路面最宽的街道 。  </p>
+<p>那些位于街道边缘、恰好“顶”在路肩上的房屋，被称为<strong>支持向量</strong>（Support Vectors）。它们是定义街道位置和宽度的关键点。所有其他远离街道的房屋，无论它们在哪里，都对街道的最终规划毫无影响。这使得SVM模型非常高效，因为它只关注那些最难区分、位于分类边界上的样本 。  </p>
+<h2 id="核技巧：通往高维空间的捷径"><a href="#核技巧：通往高维空间的捷径" class="headerlink" title="核技巧：通往高维空间的捷径"></a>核技巧：通往高维空间的捷径</h2><p>在现实世界中，绝大多数地质成矿系统都不是线性可分的。面对这种复杂的非线性问题，SVM 采用了一种被称为“<strong>核技巧</strong>”（Kernel Trick）的精妙策略 。  </p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011201933687-642e3190254bddeb6a2a8cd9def82227.png" alt="image-20251011201933687" style="zoom:80%;" />
+
+<blockquote>
+<p>线性不可分的情况图，图片来源：网络</p>
+</blockquote>
+<p>核技巧的核心思想是：如果在当前维度下数据是线性不可分的，那么就将数据映射到一个更高维度的空间中，使其变得线性可分 。这可以用一个比喻来解释：想象一张平铺在桌面上的纸，上面混杂着红色和蓝色的点，无法用一把直尺分开。但如果你将这张纸拿起并弯曲成三维形状，这些点在三维空间中可能就变得可以用一个平板（即一个超平面）轻易地分开了 。  </p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011202154714-a64078f00b38b6d08eecb77a8af83fbe.png" alt="image-20251011202154714" style="zoom: 67%;" />
+
+<blockquote>
+<p>核函数“升维”图，图片来源：网络</p>
+</blockquote>
+<p>而“技巧”之所以为“技巧”，在于 SVM 算法实际上<strong>无需</strong>真正地计算出每个数据点在这个高维空间中的新坐标。它通过一个<strong>核函数</strong>，如多项式核或高斯径向基函数（RBF）核，来直接计算数据点在高维空间中的內积（点积），而这正是 SVM 优化过程中唯一需要的信息。这种方法的计算成本远低于显式地进行维度转换，使得 SVM 能够以高效的方式处理高度复杂的非线性问题 。  </p>
+<h2 id="地学优势"><a href="#地学优势" class="headerlink" title="地学优势"></a>地学优势</h2><p>凭借核技巧，SVM 在理论上具备了模拟地质证据与成矿作用之间极其复杂的非线性关系的能力 。由于其算法是基于严格的数学最优化理论（寻找最大间隔），SVM 在处理给定的训练数据时，往往能够找到一个“完美”的分类边界，从而在<strong>训练集</strong>上达到非常高的分类精度 。  </p>
+<blockquote>
+<p>如上是理论上来说，现实情况是我在做大部分机器学习的情况下，支持向量机的效果只能说是中规中矩</p>
+</blockquote>
+<h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
+<thead>
+<tr>
+<th align="left">特征</th>
+<th align="left">随机森林</th>
+<th align="left">支持向量机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心原理</strong></td>
+<td align="left"><strong>集成学习</strong>：由大量简单的决策树“投票”形成集体、稳健的预测。</td>
+<td align="left"><strong>最大间隔分类器</strong>：寻找一个能以最大距离将不同数据类别分开的最优超平面（边界）。</td>
+</tr>
+<tr>
+<td align="left"><strong>非线性处理</strong></td>
+<td align="left"><strong>隐式处理</strong>：通过决策树的一系列二元分裂，自然地捕捉复杂的非线性关系。</td>
+<td align="left">**显式处理 (核技巧)**：将数据映射到更高维度，使其线性可分。</td>
+</tr>
+<tr>
+<td align="left"><strong>关键优势 (MPM)</strong></td>
+<td align="left"><strong>稳健性与可解释性</strong>：在小样本、含噪声或数据缺失的情况下表现优异；提供特征重要性排序。</td>
+<td align="left"><strong>高训练精度</strong>：在训练数据上能达到近乎完美的分类效果，对定义明确的问题非常强大。</td>
+</tr>
+<tr>
+<td align="left"><strong>关键劣势 (MPM)</strong></td>
+<td align="left">计算可能较为密集；可能偏向于具有多分类水平的特征。</td>
+<td align="left"><strong>高过拟合风险</strong>：在小样本下极易“记住”训练数据，导致泛化能力差；“黑箱”特性。</td>
+</tr>
+<tr>
+<td align="left"><strong>可解释性</strong></td>
+<td align="left"><strong>高</strong>：内置的特征重要性可直接揭示哪些地质要素是预测的关键驱动力。</td>
+<td align="left"><strong>低</strong>：在高维空间中形成的决策边界无法被直观地地质学解释。</td>
+</tr>
+<tr>
+<td align="left"><strong>稀疏数据性能</strong></td>
+<td align="left"><strong>优越</strong>：被证实即使在训练矿点极少的情况下依然稳定有效。</td>
+<td align="left"><strong>较差</strong>：过拟合风险高，导致对未知区域的预测能力不佳。</td>
+</tr>
+<tr>
+<td align="left"><strong>MPM战略定位</strong></td>
+<td align="left"><strong>发现新矿点</strong>：因其卓越的泛化能力和可解释性带来的战略价值，是大多数MPM任务，尤其是绿地&#x2F;数据贫乏区的首选工具。</td>
+<td align="left"><strong>谨慎使用</strong>：功能强大，但更适用于拥有大量训练数据或定义明确的分类问题，而非预测性勘查。</td>
+</tr>
+</tbody></table>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>成矿预测建模的最终目标，不是构建一个对过去（已知矿床）的完美复刻，而是创造一个对未来（未知矿床）的有效指引。在这一核心目标的指引下，随机森林已被反复证明在有限数据下具有更强的<strong>泛化能力</strong>，这使其成为一个更可靠、更有价值的工具 。  </p>
+<p>所以在对于成矿预测任务，随机森林应该是被推荐或者首先使用的算法。这也是本人所一直推荐的，对于一个快速需要验证可行性结果的任务而言，优先使用随机森林进行训练得到结果能有效提高决策成本。</p>
+<p>最后的最后，欢迎持续关注 <strong>“码上地球——数学地球科学”</strong> 获取更多内容。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/image-20251011203040995-e9323ca81b0c4f6c5d8d613e21988b75.png" alt="image-20251011203040995" style="zoom: 33%;" />
+
+<blockquote>
+<p>科学探索永无止境，本文仅为笔者个人学习总结。因知识所限，文中若有不当之处，敬请方家斧正。</p>
+</blockquote>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><ul>
+<li>Carranza, E. J. M., &amp; Laborte, A. G. (2015). Random forest predictive modeling of mineral prospectivity with small number of prospects and data with missing values in Abra (Philippines). Computers &amp; Geosciences, 74, 60-70.</li>
+<li>Lachaud, A., Adam, M., &amp; Mišković, I. (2023). Comparative study of random forest and support vector machine algorithms in mineral prospectivity mapping with limited training data. Minerals, 13(8), 1073.</li>
+<li>Carranza, E. J. M., &amp; Laborte, A. G. (2016). Data-driven predictive modeling of mineral prospectivity using random forests: A case study in Catanduanes Island (Philippines). Natural Resources Research, 25(1), 35-50.</li>
+<li>Wen, Z. H., Li, L., Kirkland, C. L., Li, S. R., Sun, X. J., Lei, J. L., … &amp; Hou, Z. Q. (2024). A machine learning approach to discrimination of igneous rocks and ore deposits by zircon trace elements. American Mineralogist, 109(6), 1129-1142.</li>
+<li>Zhong, S. H., Liu, Y., Li, S. Z., Bindeman, I. N., Cawood, P. A., Seltmann, R., … &amp; Liu, J. Q. (2023). A machine learning method for distinguishing detrital zircon provenance. Contributions to Mineralogy and Petrology, 178(6), 35.</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/PANSS__/article/details/148094354">【机器学习】支持向量机（SVM）</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Maxwell Lei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">https://www.helloseraphine.top/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Maxwell_Leiの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">支持向量机</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><a class="post-meta__tags" href="/tags/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/">成矿预测</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/">数据驱动</a><a class="post-meta__tags" href="/tags/%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/">地球科学</a><a class="post-meta__tags" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/">随机森林</a></div><div class="post_share"><div class="social-share" data-image="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/PixPin_2025-10-11_20-59-22-small50-77deb6bd1f88f9bd5636576083671bfa.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/" title="大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/06/PixPin_2025-10-06_16-03-33-small50-1ee5e787f8b16f780e9b588d09e664ff.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/" title="大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/06/PixPin_2025-10-06_16-03-33-small50-1ee5e787f8b16f780e9b588d09e664ff.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-06</div><div class="title">大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？</div></div></a></div><div><a href="/2025/10/01/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%8C)%20%20%E6%91%86%E8%84%B1%E6%9D%9F%E7%BC%9A%EF%BC%8C%E6%8B%A5%E6%8A%B1%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E8%87%AA%E8%BA%AB%E5%B1%80%E9%99%90%EF%BC%9F/" title="大数据成矿预测系列(二) | 证据权重法如何克服自身局限？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/01/Gemini_Generated_Image_8y9yok8y9yok8y9y%20-1--a610bd85ac1d712b230b4fbfb85c6513.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-01</div><div class="title">大数据成矿预测系列(二) | 证据权重法如何克服自身局限？</div></div></a></div><div><a href="/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%80)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E2%80%9D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" title="大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/09/26/image-20250926223705437-4ccb11334f7d76257080220a82828c17.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-26</div><div class="title">大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生</div></div></a></div><div><a href="/2023/07/26/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" title="【6.0】支持向量机"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2023/07/26/64c0ee747ef54.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-26</div><div class="title">【6.0】支持向量机</div></div></a></div><div><a href="/2023/07/23/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%905-0%E3%80%91Logistic%E5%9B%9E%E5%BD%92/" title="【5.0】Logistic回归"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2023/07/23/64bc0b2ba3af1.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-23</div><div class="title">【5.0】Logistic回归</div></div></a></div><div><a href="/2023/08/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%907-1%E3%80%91%E9%9D%9E%E5%9D%87%E8%A1%A1%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/" title="【7.1】非均衡分类问题"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2023/08/28/64ecbd20da0d3.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-28</div><div class="title">【7.1】非均衡分类问题</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxwell Lei</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">54</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MaxwellLei"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MaxwellLei" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://afdian.com/a/fastgpt" target="_blank" title="每天给生活来一拳"><i class="fas fa-coffee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="toc-number">2.</span> <span class="toc-text">随机森林</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%EF%BC%9A%E5%9C%B0%E8%B4%A8%E4%B8%93%E5%AE%B6%E7%9A%84%E2%80%9C%E7%BE%A4%E7%AD%96%E7%BE%A4%E5%8A%9B%E2%80%9D"><span class="toc-number">2.1.</span> <span class="toc-text">核心原理：地质专家的“群策群力”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%97%E8%BF%87%E6%8B%9F%E5%90%88%E5%BC%95%E6%93%8E%EF%BC%9A%E4%B8%BA%E4%BD%95RF%E8%83%BD%E9%A9%BE%E9%A9%AD%E5%9C%B0%E8%B4%A8%E6%95%B0%E6%8D%AE"><span class="toc-number">2.2.</span> <span class="toc-text">抗过拟合引擎：为何RF能驾驭地质数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%AD%A6%E5%BA%94%E7%94%A8%E7%9A%84%E5%85%B3%E9%94%AE%E4%BC%98%E5%8A%BF"><span class="toc-number">2.3.</span> <span class="toc-text">地学应用的关键优势</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="toc-number">3.</span> <span class="toc-text">支持向量机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%EF%BC%9A%E5%88%92%E5%88%86%E6%9C%80%E6%B8%85%E6%99%B0%E7%9A%84%E2%80%9C%E8%A1%97%E9%81%93%E2%80%9D"><span class="toc-number">3.1.</span> <span class="toc-text">核心原理：划分最清晰的“街道”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E6%8A%80%E5%B7%A7%EF%BC%9A%E9%80%9A%E5%BE%80%E9%AB%98%E7%BB%B4%E7%A9%BA%E9%97%B4%E7%9A%84%E6%8D%B7%E5%BE%84"><span class="toc-number">3.2.</span> <span class="toc-text">核技巧：通往高维空间的捷径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%AD%A6%E4%BC%98%E5%8A%BF"><span class="toc-number">3.3.</span> <span class="toc-text">地学优势</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#End"><span class="toc-number">5.</span> <span class="toc-text">End</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%86%85%E5%AE%B9"><span class="toc-number">6.</span> <span class="toc-text">参考内容</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/PixPin_2025-10-11_20-59-22-small50-77deb6bd1f88f9bd5636576083671bfa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析"/></a><div class="content"><a class="title" href="/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析">大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析</a><time datetime="2025-10-11T11:10:26.000Z" title="发表于 2025-10-11 19:10:26">2025-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/" title="大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/06/PixPin_2025-10-06_16-03-33-small50-1ee5e787f8b16f780e9b588d09e664ff.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？"/></a><div class="content"><a class="title" href="/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/" title="大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？">大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？</a><time datetime="2025-10-06T06:39:20.000Z" title="发表于 2025-10-06 14:39:20">2025-10-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/01/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%8C)%20%20%E6%91%86%E8%84%B1%E6%9D%9F%E7%BC%9A%EF%BC%8C%E6%8B%A5%E6%8A%B1%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E8%87%AA%E8%BA%AB%E5%B1%80%E9%99%90%EF%BC%9F/" title="大数据成矿预测系列(二) | 证据权重法如何克服自身局限？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/01/Gemini_Generated_Image_8y9yok8y9yok8y9y%20-1--a610bd85ac1d712b230b4fbfb85c6513.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(二) | 证据权重法如何克服自身局限？"/></a><div class="content"><a class="title" href="/2025/10/01/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%8C)%20%20%E6%91%86%E8%84%B1%E6%9D%9F%E7%BC%9A%EF%BC%8C%E6%8B%A5%E6%8A%B1%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E8%87%AA%E8%BA%AB%E5%B1%80%E9%99%90%EF%BC%9F/" title="大数据成矿预测系列(二) | 证据权重法如何克服自身局限？">大数据成矿预测系列(二) | 证据权重法如何克服自身局限？</a><time datetime="2025-10-01T10:01:16.000Z" title="发表于 2025-10-01 18:01:16">2025-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%80)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E2%80%9D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" title="大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/09/26/image-20250926223705437-4ccb11334f7d76257080220a82828c17.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生"/></a><div class="content"><a class="title" href="/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%80)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E2%80%9D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" title="大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生">大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生</a><time datetime="2025-09-26T03:18:01.000Z" title="发表于 2025-09-26 11:18:01">2025-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/18/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E5%B2%AD%E5%9B%9E%E5%BD%92%E5%92%8C%20Lasso%E5%9B%9E%E5%BD%92/" title="岭回归和 Lasso回归"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/09/18/Gemini_Generated_Image_pc3syspc3syspc3s%20-1-%20-1--9906598b7a936291c5f1c5cf814fd38b.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="岭回归和 Lasso回归"/></a><div class="content"><a class="title" href="/2025/09/18/%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86/%E5%B2%AD%E5%9B%9E%E5%BD%92%E5%92%8C%20Lasso%E5%9B%9E%E5%BD%92/" title="岭回归和 Lasso回归">岭回归和 Lasso回归</a><time datetime="2025-09-18T08:36:08.000Z" title="发表于 2025-09-18 16:36:08">2025-09-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Maxwell Lei</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
