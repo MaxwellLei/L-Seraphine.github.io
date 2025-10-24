@@ -6,7 +6,7 @@
   <link href="https://www.helloseraphine.top/atom.xml" rel="self"/>
   
   <link href="https://www.helloseraphine.top/"/>
-  <updated>2025-10-21T09:05:14.433Z</updated>
+  <updated>2025-10-24T05:44:22.740Z</updated>
   <id>https://www.helloseraphine.top/</id>
   
   <author>
@@ -17,16 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>你的模型在“作弊”吗？深度解析机器学习中“数据泄露”的隐蔽陷阱</title>
+    <link href="https://www.helloseraphine.top/2025/10/24/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%BD%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%9C%A8%E2%80%9C%E4%BD%9C%E5%BC%8A%E2%80%9D%E5%90%97%EF%BC%9F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E2%80%9C%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E2%80%9D%E7%9A%84%E9%9A%90%E8%94%BD%E9%99%B7%E9%98%B1/"/>
+    <id>https://www.helloseraphine.top/2025/10/24/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%BD%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%9C%A8%E2%80%9C%E4%BD%9C%E5%BC%8A%E2%80%9D%E5%90%97%EF%BC%9F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E2%80%9C%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E2%80%9D%E7%9A%84%E9%9A%90%E8%94%BD%E9%99%B7%E9%98%B1/</id>
+    <published>2025-10-24T02:31:25.000Z</published>
+    <updated>2025-10-24T05:44:22.740Z</updated>
+    
+    
+    <summary type="html">本文深入探讨了机器学习中一个普遍存在但常被忽视的陷阱——“数据泄露”（Target Leakage）。这种错误指模型在训练时“窥探”到了本应未知的未来信息或测试集信息，导致性能被严重高估，如同“带着答案备考”。文章详细解析了“目标泄露”和“训练-测试污染”这两种主要形式，揭示了其在预处理、特征工程和数据分割等环节的常见“雷区”，并强调了它与过拟合的本质区别。</summary>
+    
+    
+    
+    
+    <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="特征工程" scheme="https://www.helloseraphine.top/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
+    
+    <category term="数据泄露" scheme="https://www.helloseraphine.top/tags/%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/"/>
+    
+  </entry>
+  
+  <entry>
     <title>大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测</title>
     <link href="https://www.helloseraphine.top/2025/10/21/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%94)%20%20%E5%91%8A%E5%88%AB%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C(CNN)%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%AB%AF%E5%88%B0%E7%AB%AF%E2%80%9D%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
     <id>https://www.helloseraphine.top/2025/10/21/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%94)%20%20%E5%91%8A%E5%88%AB%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C(CNN)%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%AB%AF%E5%88%B0%E7%AB%AF%E2%80%9D%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/</id>
     <published>2025-10-21T07:21:45.000Z</published>
-    <updated>2025-10-21T09:05:14.433Z</updated>
+    <updated>2025-10-21T09:05:51.965Z</updated>
     
     
     <summary type="html">本文探讨了传统机器学习（如随机森林）在成矿预测中依赖“特征工程”的局限性——耗时、主观且易丢失信息。作为解决方案，文章详细介绍了卷积神经网络 (CNN) 如何像“智能之眼”一样，通过卷积核自动从原始地质图像中学习和提取复杂模式，实现“端到端”的预测，同时也分析了 CNN 面临的数据依赖和“黑箱”问题等新挑战。</summary>
     
     
+    
+    <category term="数学地球科学" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="成矿预测" scheme="https://www.helloseraphine.top/categories/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/"/>
     
     
     <category term="深度学习" scheme="https://www.helloseraphine.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
@@ -598,37 +623,6 @@
     <category term="元算法" scheme="https://www.helloseraphine.top/tags/%E5%85%83%E7%AE%97%E6%B3%95/"/>
     
     <category term="决策树桩" scheme="https://www.helloseraphine.top/tags/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A1%A9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【6.0】支持向量机</title>
-    <link href="https://www.helloseraphine.top/2023/07/26/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
-    <id>https://www.helloseraphine.top/2023/07/26/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E3%80%906-0%E3%80%91%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</id>
-    <published>2023-07-26T09:56:27.000Z</published>
-    <updated>2025-04-17T03:44:23.918Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;支持向量机（Support Vector Machines），简直就是 21</summary>
-        
-      
-    
-    
-    
-    <category term="人工智能" scheme="https://www.helloseraphine.top/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="机器学习" scheme="https://www.helloseraphine.top/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="机器学习" scheme="https://www.helloseraphine.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="支持向量机" scheme="https://www.helloseraphine.top/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
-    
-    <category term="核函数" scheme="https://www.helloseraphine.top/tags/%E6%A0%B8%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
