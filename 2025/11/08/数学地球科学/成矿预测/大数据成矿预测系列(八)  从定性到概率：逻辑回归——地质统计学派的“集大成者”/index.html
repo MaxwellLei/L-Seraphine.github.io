@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者” | Maxwell_Leiの小窝</title><meta name="author" content="Maxwell Lei"><meta name="copyright" content="Maxwell Lei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言这部分应该和证据权重法放在一起，建议先看证据权重法再看这个。 在众多早期的概率性方法中，证据权重法（Weights of Evidence, WofE）是应用最广泛、最被地质学家所接受的方法之一。WofE基于贝叶斯定理的对数线性形式，通过计算权重（$W^+$ 和 $W^-$）来衡量每一个证据层（如“靠近断层”）与已知矿床点之间的空间关联强度。 然而，WofE方法的有效性建立在一个极其严苛且关键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”">
+<meta property="og:url" content="https://www.helloseraphine.top/2025/11/08/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AB)%20%20%E4%BB%8E%E5%AE%9A%E6%80%A7%E5%88%B0%E6%A6%82%E7%8E%87%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E5%9C%B0%E8%B4%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%B4%BE%E7%9A%84%E2%80%9C%E9%9B%86%E5%A4%A7%E6%88%90%E8%80%85%E2%80%9D/index.html">
+<meta property="og:site_name" content="Maxwell_Leiの小窝">
+<meta property="og:description" content="前言这部分应该和证据权重法放在一起，建议先看证据权重法再看这个。 在众多早期的概率性方法中，证据权重法（Weights of Evidence, WofE）是应用最广泛、最被地质学家所接受的方法之一。WofE基于贝叶斯定理的对数线性形式，通过计算权重（$W^+$ 和 $W^-$）来衡量每一个证据层（如“靠近断层”）与已知矿床点之间的空间关联强度。 然而，WofE方法的有效性建立在一个极其严苛且关键">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/PixPin_2025-11-08_21-56-32-df3a2f83d2861625a1439068a5033422.webp">
+<meta property="article:published_time" content="2025-11-08T12:48:22.000Z">
+<meta property="article:modified_time" content="2025-11-08T13:57:15.769Z">
+<meta property="article:author" content="Maxwell Lei">
+<meta property="article:tag" content="逻辑回归">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="成矿预测">
+<meta property="article:tag" content="数据驱动">
+<meta property="article:tag" content="地球科学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/PixPin_2025-11-08_21-56-32-df3a2f83d2861625a1439068a5033422.webp"><link rel="shortcut icon" href="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/Seraphine_Image/64abfad3db52f.ico"><link rel="canonical" href="https://www.helloseraphine.top/2025/11/08/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AB)%20%20%E4%BB%8E%E5%AE%9A%E6%80%A7%E5%88%B0%E6%A6%82%E7%8E%87%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E5%9C%B0%E8%B4%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%B4%BE%E7%9A%84%E2%80%9C%E9%9B%86%E5%A4%A7%E6%88%90%E8%80%85%E2%80%9D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e46e337e762e79ae7f939118e01248b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":30,"position":"top","messagePrev":"距离本文的最后一次更新是","messageNext":"天之前, 部分内容可能已经过时了."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":512},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":2048,"languages":{"author":"作者: Maxwell Lei","link":"链接: ","source":"来源: Maxwell_Leiの小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-11-08 21:57:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Maxwell_Leiの小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/PixPin_2025-11-08_21-56-32-df3a2f83d2861625a1439068a5033422.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Maxwell_Leiの小窝"><span class="site-name">Maxwell_Leiの小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/MessageBoard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/updateLog/"><i class="fa-fw fas fa-wrench"></i><span> 更新日志</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-08T12:48:22.000Z" title="发表于 2025-11-08 20:48:22">2025-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-08T13:57:15.769Z" title="更新于 2025-11-08 21:57:15">2025-11-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这部分应该和证据权重法放在一起，建议先看证据权重法再看这个。</p>
+<p>在众多早期的概率性方法中，证据权重法（Weights of Evidence, WofE）是应用最广泛、最被地质学家所接受的方法之一。WofE基于贝叶斯定理的对数线性形式，通过计算权重（$W^+$ 和 $W^-$）来衡量每一个证据层（如“靠近断层”）与已知矿床点之间的空间关联强度。</p>
+<p>然而，WofE方法的有效性建立在一个极其严苛且关键的统计假设之上：<strong>所有证据层相对于矿床的发生是“条件独立的”（Conditional Independence, CI）</strong>。在地质现实中，这一假设几乎总是被违背的。WofE的权重值提供了这样一种直观的度量，使其易于被非统计学专家所接受。这在地质直觉和统计严谨性之间造成了一种长期的紧张关系。</p>
+<p><strong>逻辑回归（Logistic Regression, LR）的出现，正是为了解决WofE模型中“条件独立性”假设这一核心科学难题</strong>。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/image-20251108210255695-dbd2c7bef1355fd659294003ba8ec60a.png" alt="image-20251108210255695" style="zoom: 50%;" />
+
+<h1 id="逻辑回归的兴起：针对相关性证据的稳健解决方案"><a href="#逻辑回归的兴起：针对相关性证据的稳健解决方案" class="headerlink" title="逻辑回归的兴起：针对相关性证据的稳健解决方案"></a>逻辑回归的兴起：针对相关性证据的稳健解决方案</h1><p>逻辑回归（Logistic Regression, LR）是一种强大的多元统计方法，它被引入成矿预测领域，以克服WofE的主要局限性。  LR 最关键的优势在于：作为一个广义线性模型（GLM），它<strong>不需要</strong>预测变量（即证据层）之间满足条件独立性的假设。它允许证据层之间存在相关性，这使其在统计上对复杂的地质数据集更加稳健。  </p>
+<p>从历史背景来看，<strong>早在20世纪80年代末至90年代初，地质统计学家（如Agterberg和Bonham-Carter）就开始在同一数据集上并排应用WofE和LR</strong>。在这些早期研究中，LR常常被用作一种验证或检查工具，用于评估 WofE 模型中因违反条件独立性假设而可能导致的后果和偏差。  </p>
+<p>这种从 WofE 到 LR 的过渡，不仅仅是选择了一个“更新”的算法；它是在定量成矿预测领域中一次<strong>必要的方法论进展</strong>。它解决了由WofE引入的、长期困扰地质学家的核心统计问题（即虚假的CI假设）。学术界普遍认为，逻辑回归是 WofE 方法的<strong>“规范泛化”（canonical generalization）</strong>。这意味着 WofE 模型实际上是 LR 模型在特定（且通常不成立的）条件下的一个特例。LR 为解决同一科学问题（即多元证据融合预测）提供了一个更通用、更具统计有效性的框架。  </p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/image-20251108210606149-65cb643cb6b9c6b672ee5909ec4af7c3.png" alt="image-20251108210606149" style="zoom:50%;" />
+
+<h1 id="科学公式化：逻辑回归作为成矿潜力制图-MPM-的工具"><a href="#科学公式化：逻辑回归作为成矿潜力制图-MPM-的工具" class="headerlink" title="科学公式化：逻辑回归作为成矿潜力制图 (MPM) 的工具"></a>科学公式化：逻辑回归作为成矿潜力制图 (MPM) 的工具</h1><h2 id="定义成矿问题：二元分类"><a href="#定义成矿问题：二元分类" class="headerlink" title="定义成矿问题：二元分类"></a>定义成矿问题：二元分类</h2><p>在成矿预测（MPM）中，核心的科学问题可以被精确地表述为：对于一个给定的空间单元（如一个像素或网格单元），综合其所有的地质、地球物理和地球化学观测数据，该单元存在矿床的“概率”是多少？。</p>
+<p>这在数学上被构建为一个二元分类问题：</p>
+<ol>
+<li><strong>因变量 (Y):</strong> 是一个二元变量，代表矿床的存在与否（例如，$1$ &#x3D; 存在矿床，$0$ &#x3D; 不存在矿床）9。</li>
+<li><strong>自变量 (X):</strong> 是一个向量，包含了所有在该单元上测量的“证据层”数据（例如，到断层的距离、岩性代码、地球化学异常值、遥感蚀变信息等）。</li>
+</ol>
+<p>逻辑回归模型天然地适用于解决此类问题。它本身就是一种为模拟二元事件发生概率而设计的分类算法，这与MPM的目标（预测成矿这一二元事件）完美契合。</p>
+<h2 id="数学模型：连接地质变量与对数几率"><a href="#数学模型：连接地质变量与对数几率" class="headerlink" title="数学模型：连接地质变量与对数几率"></a>数学模型：连接地质变量与对数几率</h2><p>逻辑回归并不直接对概率 $p$ 进行建模，因为它要求输出值在0到1之间，而线性方程的输出是 $(-\infty, +\infty)$。为了解决这个问题，LR模型对概率 $p$ 的 <strong>logit</strong> 变换（即对数几率，log-odds）进行建模。</p>
+<p>Logit 变换的定义是：</p>
+<p>$$logit(p) &#x3D; \ln\left(\frac{p}{1-p}\right)$$</p>
+<p>模型的形式是一个广义线性方程：</p>
+<p>$$logit(p) &#x3D; \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_nx_n$$</p>
+<p>其中，$p$ 是成矿概率，$x_1, \ldots, x_n$ 是 $n$ 个地质证据变量，$\beta_0$ 是截距，$\beta_1, \ldots, \beta_n$ 是模型系数。</p>
+<p>通过求解 $p$，我们可以得到最终的概率预测公式，即Sigmoid函数，它呈现为一条“S形”曲线：</p>
+<p>$$p &#x3D; \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + \ldots + \beta_nx_n)}}$$</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/image-20251108210957542-752537a4055ddc2eebffd36c215fefcd.png" alt="image-20251108210957542" style="zoom: 33%;" />
+
+<p>在这个模型中，系数 $\beta_i$ 具有明确的统计意义：它代表了在控制其他所有变量不变的情况下，地质预测变量 $x_i$ 每增加一个单位时，成矿“对数几率”（log-odds）的预期变化量。</p>
+<h2 id="“大数据”下的工作流：从假设到成图"><a href="#“大数据”下的工作流：从假设到成图" class="headerlink" title="“大数据”下的工作流：从假设到成图"></a>“大数据”下的工作流：从假设到成图</h2><p>在现代 MPM 实践中，应用逻辑回归是一个结合了地质专业知识和数据科学的复杂多步骤工作流。</p>
+<ol>
+<li>矿床系统分析 (MSA) 与数据收集</li>
+<li>数据准备与特征工程</li>
+<li>特征选择与优化</li>
+<li>模型训练与验证</li>
+<li>生成成矿概率图 (MPM)</li>
+</ol>
+<p>一旦模型被验证为有效，就将训练好的LR方程（即 $p &#x3D; 1 &#x2F; (1 + e^{-z})$）应用于研究区的每一个像素。计算机会为每个像素生成一个0到1之间的成矿概率值。最终，将这些概率值渲染成一张“热图”（Heat Map）。这张图（MPM）随后可以根据概率阈值被划分为“低、中、高”潜力区，为后续的野外勘查工作提供直接指导。</p>
+<h1 id="逻辑回归的核心价值"><a href="#逻辑回归的核心价值" class="headerlink" title="逻辑回归的核心价值"></a>逻辑回归的核心价值</h1><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/image-20251108211721643-380723524674d49ae1d6e38fa091177f.png" alt="image-20251108211721643" style="zoom: 33%;" />
+
+<h2 id="系数的可解释性"><a href="#系数的可解释性" class="headerlink" title="系数的可解释性"></a>系数的可解释性</h2><p>逻辑回归拥有<strong>“易于理解的统计基础”</strong>，并产生一个<strong>“显式模型”（Explicit Model）</strong>——即一个清晰的数学方程。这带来了巨大的实践价值：</p>
+<ol>
+<li><strong>量化重要性：</strong> 地质学家和数据科学家可以检查模型的系数（$\beta_i$），以获取关于潜在现象（成矿过程）的知识。</li>
+<li><strong>验证地质假设：</strong> 系数（$\beta_i$）量化了每个地质因素（如“断层接近度”或“特定岩性”）对成矿的贡献（正向或负向关联）3。这使得领域专家能够验证模型结果是否“符合地质常理”。如果一个模型在统计上表现良好，但其系数暗示了与既定地质理论相悖的结论，那么这个模型也可能是不可靠的。</li>
+</ol>
+<p>在“大数据”和人工智能日益重要的今天，地质勘探领域对“数学严谨且仍能被专家解释”的机器学习方法的需求正在不断增长。逻辑回归完美地填补了这一生态位。它的价值不仅在于预测，更在于推断和知识发现。</p>
+<h2 id="概率化输出"><a href="#概率化输出" class="headerlink" title="概率化输出"></a>概率化输出</h2><p>与一些仅输出“是&#x2F;否”分类标签的算法不同，逻辑回归的输出是一个介于0.0到1.0之间的<strong>概率估计值</strong>。  </p>
+<p>这个特性在资源勘探中极其有用。勘探决策涉及高昂的成本和风险。一个概率图允许管理者不仅仅是识别“有潜力”的区域，而是能够对所有区域进行排序，并结合勘探成本和预期收益进行复杂的成本-效益分析。  </p>
+<p>此外，逻辑回归模型相对简单，训练速度快（与深度学习相比），并且通常能提供一个强大的<strong>“基线性能”</strong>。任何更复杂的模型都必须证明其性能显著优于这个简单、可解释的基线模型，才能证明其应用的合理性。  </p>
+<h1 id="标准逻辑回归在地质“大数据”中的关键挑战与局限性"><a href="#标准逻辑回归在地质“大数据”中的关键挑战与局限性" class="headerlink" title="标准逻辑回归在地质“大数据”中的关键挑战与局限性"></a>标准逻辑回归在地质“大数据”中的关键挑战与局限性</h1><p>尽管逻辑回归具有显著优势，但标准（或称全局）逻辑回归模型在应用于复杂的地质空间“大数据”时，会遇到几个严重的局限性。这些局限性不仅是技术问题，它们代表了模型假设与地质现实之间的根本性<strong>科学冲突</strong>。</p>
+<h2 id="线性假设-vs-非线性的成矿过程"><a href="#线性假设-vs-非线性的成矿过程" class="headerlink" title="线性假设 vs. 非线性的成矿过程"></a>线性假设 vs. 非线性的成矿过程</h2><ul>
+<li><strong>模型假设：</strong> 逻辑回归假设自变量（$X$）与对数几率（Log-Odds）之间存在线性关系。</li>
+<li><strong>地质现实：</strong> <strong>成矿过程几乎总是复杂的、非线性的</strong>。例如，矿床与某个断层的关系可能不是“越近越好”。相反，可能存在一个“最佳距离”范围：<strong>太近</strong>（如在断层破碎带核心）可能不利于矿质沉淀，<strong>太远</strong>则超出了流体影响范围。标准的 LR 模型难以捕捉这种复杂的关系。</li>
+<li><strong>后果：</strong> 当数据本质上是非线性时，LR的性能会受到限制，并且可能被那些设计用于处理非线性关系的算法（如随机森林、支持向量机或神经网络）所超越。</li>
+</ul>
+<h2 id="“罕见事件”问题：处理极端不平衡数据"><a href="#“罕见事件”问题：处理极端不平衡数据" class="headerlink" title="“罕见事件”问题：处理极端不平衡数据"></a>“罕见事件”问题：处理极端不平衡数据</h2><ul>
+<li><strong>地质现实：</strong> 矿床在地理空间上是<strong>极端罕见的事件</strong>。在一个MPM数据集中，代表“非矿床”的像素（负样本）可能占到总数据的99.9%甚至更多，而代表“矿床”的像素（正样本）则极其稀少。</li>
+<li><strong>统计问题：</strong> 这是数据驱动MPM面临的最大挑战之一。标准的逻辑回归算法（以及许多其他算法）以最大化总体准确率为目标。在数据极端不平衡时，模型会产生严重的偏差，倾向于预测占主导地位的“非矿床”类别（<strong>因为它总是预测“无矿”就能达到99.9%的准确率</strong>）。</li>
+<li><strong>后果：</strong> 模型会系统性地<strong>低估</strong>那些罕见但极其重要的“成矿”事件的发生概率。这使得标准的准确率指标失去意义，并要求使用专门的采样技术或算法来解决。</li>
+</ul>
+<h2 id="多源地质空间数据中的“多重共线性”问题"><a href="#多源地质空间数据中的“多重共线性”问题" class="headerlink" title="多源地质空间数据中的“多重共线性”问题"></a>多源地质空间数据中的“多重共线性”问题</h2><ul>
+<li><strong>“大数据”现实：</strong> MPM 中的“大数据”意味着<strong>整合大量的证据图层</strong>。这些图层（变量）之间往往<strong>存在高度相关性，即“多重共线性”</strong>。例如：航磁异常高值、特定的侵入岩岩性、以及相应的钾异常（来自放射性测量），可能都在描述同一个地质体或成矿事件。</li>
+<li><strong>统计问题：</strong> 逻辑回归的一个基本假设是自变量之间不存在严重的多重共线性。</li>
+<li><strong>后果：</strong> 当多重共线性存在时，虽然模型的整体预测能力不一定会显著下降，但它会导致模型系数（$\beta_i$）的估计变得极不稳定（即标准误增大）。这使得研究人员无法再信任这些系数来评估单个预测变量的独立重要性。</li>
+<li><strong>意义：</strong> 这一问题直接削弱了逻辑回归的核心优势——即可解释性。“大数据”的引入加剧了这个问题，使得特征选择或正则化成为必要步骤，以减少数据冗余。</li>
+</ul>
+<h2 id="根本性缺陷：空间自相关与空间非平稳性"><a href="#根本性缺陷：空间自相关与空间非平稳性" class="headerlink" title="根本性缺陷：空间自相关与空间非平稳性"></a>根本性缺陷：空间自相关与空间非平稳性</h2><p>这是对标准LR模型最深刻的<strong>地质统计学</strong>挑战，因为它忽略了空间数据的两个本质属性。</p>
+<ul>
+<li><strong>问题 1 (空间自相关):</strong> 包括LR在内的标准回归模型都假设观测值（即像素）是相互独立的。这在地质科学中是<strong>根本错误</strong>的。根据“地理学第一定律”：空间上邻近的事物总是比远离的事物更相似。这种“空间自相关”特性违反了模型的独立性假设。</li>
+<li><strong>问题 2 (空间非平稳性):</strong> 标准LR是一个<strong>“全局模型”</strong>。它在整个研究区域上只估计一组系数（$\beta_i$），并假设这些系数（即变量间的关系）在任何地方都是恒定不变的。</li>
+<li><strong>地质现实：</strong> 地质过程是<strong>“空间非平稳的”</strong>。断层与成矿之间的关系，在研究区的一个地方（例如，发育在脆性岩石中）可能非常强烈，但在另一个地方（例如，发育在塑性岩石中）可能毫无关系。</li>
+<li><strong>后果：</strong> 一个“全局”的LR模型只能提供一个“平均化”的、模糊的，甚至可能是误导性的关系描述，从而导致偏差。这是应用非空间模型（LR）于空间数据时所面临的最严重的方法论缺陷。</li>
+</ul>
+<blockquote>
+<p>当然了，有研究人员通过地理加权逻辑回归 (GWLR)来解决解决空间非平稳性的问题，GWLR通过每一个空间位置（像素）计算一个独一无二的LR模型。使用一个“移动窗口”实现这一目标。具体细节感兴趣查看原文吧。我就不在这里赘述了。  </p>
+</blockquote>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>我所想要的表格对比终于是在下面完成了。</p>
+<p>一个坏消息是这个系列将会很快完结了，好消息是我会在后续出实战教程，手把手教你如何去做（如果我有足够精力的话）。</p>
+<table>
+<thead>
+<tr>
+<th align="left">特征</th>
+<th align="left">信息量法 (IVM)</th>
+<th align="left">证据权法 (WofE)</th>
+<th align="left">逻辑回归 (LR)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心假设</strong></td>
+<td align="left">矿点密度比值可衡量信息量</td>
+<td align="left">基于贝叶斯定理，权重(W)代表证据强度</td>
+<td align="left">成矿概率的Logit（对数几率）是预测变量的线性组合</td>
+</tr>
+<tr>
+<td align="left"><strong>条件独立性</strong></td>
+<td align="left"><strong>是</strong>，隐性假设（简单相加）</td>
+<td align="left"><strong>是</strong>，方法的关键假设（权重相加）</td>
+<td align="left"><strong>否</strong>，可以处理相关性强的变量</td>
+</tr>
+<tr>
+<td align="left"><strong>透明性</strong></td>
+<td align="left"><strong>高</strong> (白箱) <br> 计算简单直观</td>
+<td align="left"><strong>高</strong> (白箱) <br> 计算和地质意义明确</td>
+<td align="left"><strong>中等</strong> (灰箱) <br> 系数可解释，但模型拟合复杂</td>
+</tr>
+<tr>
+<td align="left"><strong>处理非线性</strong></td>
+<td align="left"><strong>能 (间接)</strong> <br> 通过数据离散化（分箱）</td>
+<td align="left"><strong>能 (间接)</strong> <br> 通过数据离散化（分箱）</td>
+<td align="left"><strong>能 (显式)</strong> <br> 可引入多项式项或进行分箱</td>
+</tr>
+<tr>
+<td align="left"><strong>处理因素交互</strong></td>
+<td align="left"><strong>差</strong> <br> 传统模型不考虑交互</td>
+<td align="left"><strong>差</strong> <br> 传统模型不考虑交互</td>
+<td align="left"><strong>能 (显式)</strong> <br> 可在模型中主动添加交互项</td>
+</tr>
+<tr>
+<td align="left"><strong>数据需求</strong></td>
+<td align="left">离散化图层 (二元或多元) <br> 矿点位置</td>
+<td align="left">离散化图层 (二元或多元) <br> 矿点位置；可处理缺失数据</td>
+<td align="left">可处理连续和离散变量 <br> 矿点和非矿点位置 (Non-deposits)</td>
+</tr>
+<tr>
+<td align="left"><strong>主要优势</strong></td>
+<td align="left">1. 极其简单，易于计算和理解 <br> 2. 透明度高</td>
+<td align="left">1. 理论基础坚实 (贝叶斯) <br> 2. 透明度高，地质意义明确 <br> 3. 稳健，被广泛验证和接受</td>
+<td align="left">1. <strong>不要求条件独立性</strong> <br> 2. 可处理连续变量 <br> 3. 可显式处理因素交互作用</td>
+</tr>
+<tr>
+<td align="left"><strong>主要劣势</strong></td>
+<td align="left">1. 依赖条件独立性假设 <br> 2. 传统模型假设因素同等重要 <br> 3. 统计上不如WofE稳健</td>
+<td align="left">1. <strong>严格依赖条件独立性假设</strong> <br> 2. 无法处理因素交互 <br> 3. 需将连续数据二元化，损失信息</td>
+<td align="left">1. 需要非矿点样本 <br> 2. 透明性稍差 <br> 3. 易受“共线性”问题干扰</td>
+</tr>
+</tbody></table>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/image-20251108214758111-b857f2431a187ac8fbbacc00c1cc851a.png" alt="image-20251108214758111" style="zoom:33%;" />
+
+<blockquote>
+<p>科学探索永无止境，本文仅为笔者个人学习总结。因知识所限，文中若有不当之处，敬请方家斧正。</p>
+</blockquote>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><ul>
+<li>Zhang, D., Ren, N., &amp; Hou, X. (2018). An improved logistic regression model based on a spatially weighted technique (ILRBSWT v1. 0) and its application to mineral prospectivity mapping. Geoscientific Model Development, 11(6), 2525-2539.</li>
+<li>Kost, S., Rheinbach, O., &amp; Schaeben, H. (2021). Using logistic regression model selection towards interpretable machine learning in mineral prospectivity modeling. Geochemistry, 81(4), 125826.</li>
+<li>Fu, Z., Zheng, X., Yan, Y., Xu, X., Zhou, F., Li, X., … &amp; Mai, W. (2025). The Evolution of Machine Learning in Large-Scale Mineral Prospectivity Prediction: A Decade of Innovation (2016–2025). Minerals.</li>
+<li>Xiong, Y., &amp; Zuo, R. (2018). GIS-based rare events logistic regression for mineral prospectivity mapping. Computers &amp; Geosciences, 111, 18-25.</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top">Maxwell Lei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.helloseraphine.top/2025/11/08/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AB)%20%20%E4%BB%8E%E5%AE%9A%E6%80%A7%E5%88%B0%E6%A6%82%E7%8E%87%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E5%9C%B0%E8%B4%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%B4%BE%E7%9A%84%E2%80%9C%E9%9B%86%E5%A4%A7%E6%88%90%E8%80%85%E2%80%9D/">https://www.helloseraphine.top/2025/11/08/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AB)%20%20%E4%BB%8E%E5%AE%9A%E6%80%A7%E5%88%B0%E6%A6%82%E7%8E%87%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E5%9C%B0%E8%B4%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%B4%BE%E7%9A%84%E2%80%9C%E9%9B%86%E5%A4%A7%E6%88%90%E8%80%85%E2%80%9D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.helloseraphine.top" target="_blank">Maxwell_Leiの小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">逻辑回归</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><a class="post-meta__tags" href="/tags/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/">成矿预测</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/">数据驱动</a><a class="post-meta__tags" href="/tags/%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/">地球科学</a></div><div class="post_share"><div class="social-share" data-image="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/PixPin_2025-11-08_21-56-32-df3a2f83d2861625a1439068a5033422.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/11/05/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%83)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E7%9A%84%E2%80%9C%E5%AD%AA%E7%94%9F%E5%85%84%E5%BC%9F%E2%80%9D%EF%BC%9A%E4%BF%A1%E6%81%AF%E9%87%8F%E6%B3%95%20(IVM)%20%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/06/PixPin_2025-11-06_20-18-42-1c6e73d2a82b9ec74479fe3daed1ed92.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/10/01/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%8C)%20%20%E6%91%86%E8%84%B1%E6%9D%9F%E7%BC%9A%EF%BC%8C%E6%8B%A5%E6%8A%B1%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E8%87%AA%E8%BA%AB%E5%B1%80%E9%99%90%EF%BC%9F/" title="大数据成矿预测系列(二) | 证据权重法如何克服自身局限？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/01/Gemini_Generated_Image_8y9yok8y9yok8y9y%20-1--a610bd85ac1d712b230b4fbfb85c6513.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-01</div><div class="title">大数据成矿预测系列(二) | 证据权重法如何克服自身局限？</div></div></a></div><div><a href="/2025/09/26/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%80)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E2%80%9C%E8%AF%81%E6%8D%AE%E6%9D%83%E9%87%8D%E6%B3%95%E2%80%9D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" title="大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/09/26/image-20250926223705437-4ccb11334f7d76257080220a82828c17.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-26</div><div class="title">大数据成矿预测系列(一) | 经典模型“证据权重法”的前世今生</div></div></a></div><div><a href="/2025/10/06/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%89)%20%E4%BB%8E%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%BA%E4%BD%95%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%96%B0%E5%89%8D%E6%B2%BF%EF%BC%9F/" title="大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/06/PixPin_2025-10-06_16-03-33-small50-1ee5e787f8b16f780e9b588d09e664ff.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-06</div><div class="title">大数据成矿预测系列(三) | 从统计模型到机器学习：为何机器学习是成矿预测的新前沿？</div></div></a></div><div><a href="/2025/10/11/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%9B%9B)%20%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%9A%84%E2%80%9C%E4%B8%BB%E5%8A%9B%E5%86%9B%E2%80%9D%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%B8%8E%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/11/PixPin_2025-10-11_20-59-22-small50-77deb6bd1f88f9bd5636576083671bfa.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-11</div><div class="title">大数据成矿预测系列(四) | 成矿预测的“主力军”：随机森林与支持向量机深度解析</div></div></a></div><div><a href="/2025/10/21/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%94)%20%20%E5%91%8A%E5%88%AB%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C(CNN)%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%AB%AF%E5%88%B0%E7%AB%AF%E2%80%9D%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/" title="大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/21/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251021170410-small50-199e8733f04206b541f876ef07ee9e64.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-21</div><div class="title">大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测</div></div></a></div><div><a href="/2025/11/05/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%83)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E7%9A%84%E2%80%9C%E5%AD%AA%E7%94%9F%E5%85%84%E5%BC%9F%E2%80%9D%EF%BC%9A%E4%BF%A1%E6%81%AF%E9%87%8F%E6%B3%95%20(IVM)%20%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/06/PixPin_2025-11-06_20-18-42-1c6e73d2a82b9ec74479fe3daed1ed92.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-05</div><div class="title">大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://thirdqq.qlogo.cn/g?b=qq&amp;nk=738232585&amp;s=100" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxwell Lei</div><div class="author-info__description">如果有一天我可以在海里翱翔，就像一只小魔鬼鱼</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">32</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MaxwellLei"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MaxwellLei" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:738232585@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://afdian.com/a/fastgpt" target="_blank" title="每天给生活来一拳"><i class="fas fa-coffee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">活着就是能与别人彼此相知，心意相通，人生在世的意义不就是希望有那种与自己有默契的人存在吗，欣赏认可别人，喜欢爱恋别人，厌烦憎恶别人，因为和别人在一起而感到快乐，可以和别人牵着手并肩前行，这个过程就是活着。如果世界里只有自己，我们就无法感受到存在是什么，我们与别人的关系就是我们自己活着的证明。我的灵魂之所以存在，是因为有你们的关注，我的身体之所以存在，则是因为有你们的碰触，所以啊，只要人活在世上，就一定是有意义的。怎么活是自己选的，就像你和我就都选择了像现在这样活着。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E5%85%B4%E8%B5%B7%EF%BC%9A%E9%92%88%E5%AF%B9%E7%9B%B8%E5%85%B3%E6%80%A7%E8%AF%81%E6%8D%AE%E7%9A%84%E7%A8%B3%E5%81%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">逻辑回归的兴起：针对相关性证据的稳健解决方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%91%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%8C%96%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E4%BD%9C%E4%B8%BA%E6%88%90%E7%9F%BF%E6%BD%9C%E5%8A%9B%E5%88%B6%E5%9B%BE-MPM-%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-number">3.</span> <span class="toc-text">科学公式化：逻辑回归作为成矿潜力制图 (MPM) 的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%88%90%E7%9F%BF%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BA%8C%E5%85%83%E5%88%86%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">定义成矿问题：二元分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B%EF%BC%9A%E8%BF%9E%E6%8E%A5%E5%9C%B0%E8%B4%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E5%AF%B9%E6%95%B0%E5%87%A0%E7%8E%87"><span class="toc-number">3.2.</span> <span class="toc-text">数学模型：连接地质变量与对数几率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E2%80%9D%E4%B8%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%9A%E4%BB%8E%E5%81%87%E8%AE%BE%E5%88%B0%E6%88%90%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">“大数据”下的工作流：从假设到成图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC"><span class="toc-number">4.</span> <span class="toc-text">逻辑回归的核心价值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E6%95%B0%E7%9A%84%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">系数的可解释性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-number">4.2.</span> <span class="toc-text">概率化输出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%9C%A8%E5%9C%B0%E8%B4%A8%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E2%80%9D%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E6%8C%91%E6%88%98%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">标准逻辑回归在地质“大数据”中的关键挑战与局限性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%81%87%E8%AE%BE-vs-%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%9A%84%E6%88%90%E7%9F%BF%E8%BF%87%E7%A8%8B"><span class="toc-number">5.1.</span> <span class="toc-text">线性假设 vs. 非线性的成矿过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E7%BD%95%E8%A7%81%E4%BA%8B%E4%BB%B6%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A4%84%E7%90%86%E6%9E%81%E7%AB%AF%E4%B8%8D%E5%B9%B3%E8%A1%A1%E6%95%B0%E6%8D%AE"><span class="toc-number">5.2.</span> <span class="toc-text">“罕见事件”问题：处理极端不平衡数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%BA%90%E5%9C%B0%E8%B4%A8%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E4%B8%AD%E7%9A%84%E2%80%9C%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7%E2%80%9D%E9%97%AE%E9%A2%98"><span class="toc-number">5.3.</span> <span class="toc-text">多源地质空间数据中的“多重共线性”问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%9C%AC%E6%80%A7%E7%BC%BA%E9%99%B7%EF%BC%9A%E7%A9%BA%E9%97%B4%E8%87%AA%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%A9%BA%E9%97%B4%E9%9D%9E%E5%B9%B3%E7%A8%B3%E6%80%A7"><span class="toc-number">5.4.</span> <span class="toc-text">根本性缺陷：空间自相关与空间非平稳性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%86%85%E5%AE%B9"><span class="toc-number">7.</span> <span class="toc-text">参考内容</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/11/08/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AB)%20%20%E4%BB%8E%E5%AE%9A%E6%80%A7%E5%88%B0%E6%A6%82%E7%8E%87%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E5%9C%B0%E8%B4%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%B4%BE%E7%9A%84%E2%80%9C%E9%9B%86%E5%A4%A7%E6%88%90%E8%80%85%E2%80%9D/" title="大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/08/PixPin_2025-11-08_21-56-32-df3a2f83d2861625a1439068a5033422.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”"/></a><div class="content"><a class="title" href="/2025/11/08/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AB)%20%20%E4%BB%8E%E5%AE%9A%E6%80%A7%E5%88%B0%E6%A6%82%E7%8E%87%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E5%9C%B0%E8%B4%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%B4%BE%E7%9A%84%E2%80%9C%E9%9B%86%E5%A4%A7%E6%88%90%E8%80%85%E2%80%9D/" title="大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”">大数据成矿预测系列(八) | 从定性到概率：逻辑回归——地质统计学派的“集大成者”</a><time datetime="2025-11-08T12:48:22.000Z" title="发表于 2025-11-08 20:48:22">2025-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/05/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%83)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E7%9A%84%E2%80%9C%E5%AD%AA%E7%94%9F%E5%85%84%E5%BC%9F%E2%80%9D%EF%BC%9A%E4%BF%A1%E6%81%AF%E9%87%8F%E6%B3%95%20(IVM)%20%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/06/PixPin_2025-11-06_20-18-42-1c6e73d2a82b9ec74479fe3daed1ed92.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析"/></a><div class="content"><a class="title" href="/2025/11/05/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%B8%83)%20%20%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E7%9A%84%E2%80%9C%E5%AD%AA%E7%94%9F%E5%85%84%E5%BC%9F%E2%80%9D%EF%BC%9A%E4%BF%A1%E6%81%AF%E9%87%8F%E6%B3%95%20(IVM)%20%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" title="大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析">大数据成矿预测系列(七) | 经典模型的“孪生兄弟”：信息量法 (IVM) 深度解析</a><time datetime="2025-11-05T11:56:40.000Z" title="发表于 2025-11-05 19:56:40">2025-11-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/03/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AD)%20%E4%BB%8E%E2%80%9C%E7%9C%8B%E5%9B%BE%E5%83%8F%E2%80%9D%E5%88%B0%E2%80%9C%E8%AF%BB%E7%BB%93%E6%9E%84%E2%80%9D%EF%BC%9AGCN%E5%A6%82%E4%BD%95%E8%B5%8B%E8%83%BD%E5%9C%B0%E8%B4%A8%E2%80%9C%E5%9B%BE%E8%B0%B1%E2%80%9D%E6%8E%A8%E7%90%86/" title="大数据成矿预测系列(六) | 从“看图像”到“读结构”：GCN如何赋能地质“图谱”推理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/11/03/%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%99%BA%E8%83%BD%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD%E5%92%8C%E9%A2%84%E6%B5%8B_1_%E5%BB%BA%E6%A8%A1%E5%85%88%E9%94%8B_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88-e479d345e2071d8476353ee06c6df56a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(六) | 从“看图像”到“读结构”：GCN如何赋能地质“图谱”推理"/></a><div class="content"><a class="title" href="/2025/11/03/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E5%85%AD)%20%E4%BB%8E%E2%80%9C%E7%9C%8B%E5%9B%BE%E5%83%8F%E2%80%9D%E5%88%B0%E2%80%9C%E8%AF%BB%E7%BB%93%E6%9E%84%E2%80%9D%EF%BC%9AGCN%E5%A6%82%E4%BD%95%E8%B5%8B%E8%83%BD%E5%9C%B0%E8%B4%A8%E2%80%9C%E5%9B%BE%E8%B0%B1%E2%80%9D%E6%8E%A8%E7%90%86/" title="大数据成矿预测系列(六) | 从“看图像”到“读结构”：GCN如何赋能地质“图谱”推理">大数据成矿预测系列(六) | 从“看图像”到“读结构”：GCN如何赋能地质“图谱”推理</a><time datetime="2025-11-03T12:45:19.000Z" title="发表于 2025-11-03 20:45:19">2025-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/24/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%BD%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%9C%A8%E2%80%9C%E4%BD%9C%E5%BC%8A%E2%80%9D%E5%90%97%EF%BC%9F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E2%80%9C%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E2%80%9D%E7%9A%84%E9%9A%90%E8%94%BD%E9%99%B7%E9%98%B1/" title="你的模型在“作弊”吗？深度解析机器学习中“数据泄露”的隐蔽陷阱"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/24/PixPin_2025-10-24_13-43-07-small50-285efe101b9f1a05adcd0659f9b6fb72.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="你的模型在“作弊”吗？深度解析机器学习中“数据泄露”的隐蔽陷阱"/></a><div class="content"><a class="title" href="/2025/10/24/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%BD%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%9C%A8%E2%80%9C%E4%BD%9C%E5%BC%8A%E2%80%9D%E5%90%97%EF%BC%9F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E2%80%9C%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E2%80%9D%E7%9A%84%E9%9A%90%E8%94%BD%E9%99%B7%E9%98%B1/" title="你的模型在“作弊”吗？深度解析机器学习中“数据泄露”的隐蔽陷阱">你的模型在“作弊”吗？深度解析机器学习中“数据泄露”的隐蔽陷阱</a><time datetime="2025-10-24T02:31:25.000Z" title="发表于 2025-10-24 10:31:25">2025-10-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/21/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%94)%20%20%E5%91%8A%E5%88%AB%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C(CNN)%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%AB%AF%E5%88%B0%E7%AB%AF%E2%80%9D%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/" title="大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wordpress-serverless-code-ap-beijing-1303234197.cos.ap-beijing.myqcloud.com/blog/2025/10/21/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251021170410-small50-199e8733f04206b541f876ef07ee9e64.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测"/></a><div class="content"><a class="title" href="/2025/10/21/%E6%95%B0%E5%AD%A6%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6/%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B%E7%B3%BB%E5%88%97(%E4%BA%94)%20%20%E5%91%8A%E5%88%AB%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C(CNN)%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%AB%AF%E5%88%B0%E7%AB%AF%E2%80%9D%E6%88%90%E7%9F%BF%E9%A2%84%E6%B5%8B/" title="大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测">大数据成矿预测系列(五) | 告别特征工程：卷积神经网络(CNN)如何实现“端到端”成矿预测</a><time datetime="2025-10-21T07:21:45.000Z" title="发表于 2025-10-21 15:21:45">2025-10-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Maxwell Lei</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://ahqxdttiopbn.ap-northeast-1.clawcloudrun.com/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
